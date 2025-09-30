@@ -1,0 +1,20 @@
+overwrite: true
+schema: 
+  - https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}:
+      headers:
+        Authorization: Bearer ${CONTENTFUL_ACCESS_TOKEN}
+documents: "src/**/*.graphql"
+generates:
+  src/contentful-types.ts:
+    plugins:
+      - "typescript"
+      - "typescript-operations"
+    config:
+      skipTypename: false
+      withHooks: false
+      withComponent: false
+      withHOC: false
+      documentMode: documentNode
+      scalars:
+        DateTime: string
+        JSON: any

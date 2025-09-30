@@ -1,0 +1,12 @@
+query GetEntryCollection {
+  entryCollection(limit: 5) {
+    items {
+      sys {
+        id
+        publishedAt
+        firstPublishedAt
+      }
+      __typename
+    }
+  }
+}

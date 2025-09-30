@@ -1,0 +1,26 @@
+query GetEntries {
+  entryCollection {
+    items {
+      sys {
+        id
+        publishedAt
+        firstPublishedAt
+      }
+      __typename
+    }
+  }
+}
+
+query GetAsset($id: String!) {
+  asset(id: $id) {
+    sys {
+      id
+    }
+    title
+    description
+    url
+    contentType
+    width
+    height
+  }
+}

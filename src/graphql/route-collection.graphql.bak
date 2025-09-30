@@ -1,0 +1,93 @@
+# RouteCollection GraphQL queries for Contentful
+
+query GetRouteCollection($limit: Int, $skip: Int, $where: RouteFilter, $order: [RouteOrder]) {
+  routeCollection(limit: $limit, skip: $skip, where: $where, order: $order) {
+    total
+    skip
+    limit
+    items {
+      sys {
+        id
+        publishedAt
+        firstPublishedAt
+      }
+      __typename
+      title
+      slug
+      description
+      path
+      isActive
+      metadata {
+        title
+        description
+        keywords
+      }
+      seo {
+        title
+        description
+        keywords
+        ogImage {
+          sys {
+            id
+          }
+          title
+          description
+          url
+          width
+          height
+        }
+      }
+    }
+  }
+}
+
+query GetRouteBySlug($slug: String!) {
+  routeCollection(where: { slug: $slug }, limit: 1) {
+    items {
+      sys {
+        id
+        publishedAt
+        firstPublishedAt
+      }
+      __typename
+      title
+      slug
+      description
+      path
+      isActive
+      metadata {
+        title
+        description
+        keywords
+      }
+      seo {
+        title
+        description
+        keywords
+        ogImage {
+          sys {
+            id
+          }
+          title
+          description
+          url
+          width
+          height
+        }
+      }
+    }
+  }
+}
+
+query GetActiveRoutes {
+  routeCollection(where: { isActive: true }, order: [title_ASC]) {
+    items {
+      sys {
+        id
+      }
+      title
+      slug
+      path
+    }
+  }
+}
