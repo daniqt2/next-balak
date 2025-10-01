@@ -2,7 +2,7 @@ import { create } from 'zustand';
 import { Route } from '@/contentful-types';
 import { routeService } from '@/services/route-service';
 
-interface SimpleRouteState {
+interface RouteState {
   routes: Route[];
   total: number;
   loading: boolean;
@@ -13,7 +13,7 @@ interface SimpleRouteState {
   setError: (error: string | null) => void;
 }
 
-export const useSimpleRouteStore = create<SimpleRouteState>((set, get) => ({
+export const useRouteStore = create<RouteState>((set) => ({
   routes: [],
   total: 0,
   loading: false,

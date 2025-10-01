@@ -13,6 +13,11 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/server": "^11.11.0",
+    "@mantine/carousel": "^8.3.2",
+    "@mantine/core": "^8.3.2",
+    "@mantine/hooks": "^8.3.2",
     "next": "15.5.4",
     "react": "19.1.0",
     "react-dom": "19.1.0",

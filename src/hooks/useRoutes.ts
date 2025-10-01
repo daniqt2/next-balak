@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
-import { useSimpleRouteStore } from '@/stores/simpleRouteStore';
+import { useRouteStore } from '@/stores/routeStore';
 
-export function useSimpleRoutes(limit: number = 10) {
-  const { routes, total, loading, error, fetchRoutes } = useSimpleRouteStore();
+export function useRoutes(limit: number = 10) {
+  const { routes, total, loading, error, fetchRoutes } = useRouteStore();
 
   useEffect(() => {
     fetchRoutes(limit);

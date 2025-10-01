@@ -1,0 +1,50 @@
+/* Route Card Styles */
+.route-card {
+  @apply relative w-full h-[350px] 
+         rounded-xl overflow-hidden shadow-md
+         opacity-0 translate-y-4
+         transition-all duration-700 ease-out
+         sm:h-[400px] md:h-[450px];
+
+  &.route-card--visible {
+    @apply opacity-100 translate-y-0;
+  }
+
+  & .skeleton {
+    @apply absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse;
+  }
+
+  & .image {
+    @apply object-cover transition-all duration-700 ease-out;
+
+    &.image--loaded {
+      @apply opacity-100 scale-100;
+    }
+
+    &.image--loading {
+      @apply opacity-0 scale-105;
+    }
+  }
+
+  & .overlay {
+    @apply absolute inset-0 bg-black/30;
+  }
+
+  & .info {
+    @apply absolute inset-0 flex flex-col items-center justify-center text-center p-4 sm:p-6 md:p-8;
+
+    & .title {
+      @apply inline-block font-extrabold text-white shadow-xl
+             bg-gray-950/10 px-3 py-1 text-lg
+             sm:px-4 sm:py-2 sm:text-2xl
+             md:px-6 md:py-3 md:text-3xl;
+    }
+
+    & .subtitle {
+      @apply mt-2 inline-block text-gray-950 rounded-md shadow
+             bg-white/90 px-2 py-1 text-xs
+             sm:px-3 sm:py-1.5 sm:text-sm
+             md:px-4 md:py-2 md:text-base;
+    }
+  }
+}
