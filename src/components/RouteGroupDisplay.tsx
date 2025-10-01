@@ -9,7 +9,7 @@ interface RouteGroupDisplayProps {
 }
 
 export default function RouteGroupDisplay({ routeGroup, index = 0 }: RouteGroupDisplayProps) {
-  const cardRef = useRef<HTMLElement>(null);
+  const cardRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 

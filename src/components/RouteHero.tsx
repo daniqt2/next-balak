@@ -174,7 +174,7 @@ export default function RouteHero({ route }: RouteHeroProps) {
               <div className="flex items-center gap-4 flex-wrap">
                 {route.startLocationName && (
                   <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-green-400 shadow-lg" />
+                    <div className="w-3 h-3 rounded-full bg-balak-400 shadow-lg" />
                     <span className="text-white font-medium text-sm drop-shadow-lg">{route.startLocationName}</span>
                   </div>
                 )}

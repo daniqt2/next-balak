@@ -39,7 +39,7 @@ export default function RouteGroupGrid({ routes, title = "Aventuras de Ciclismo"
       <AnimatedSection delay={200}>
         <div className="text-center py-12">
           <div className="text-balak-400 text-lg mb-4">Cargando aventuras de ciclismo...</div>
-          <p className="text-charcoal-500">Por favor espera mientras cargamos los últimos viajes.</p>
+          <p className="text-gray-500">Por favor espera mientras cargamos los últimos viajes.</p>
         </div>
       </AnimatedSection>
     );
@@ -50,7 +50,7 @@ export default function RouteGroupGrid({ routes, title = "Aventuras de Ciclismo"
       <AnimatedSection delay={200}>
         <div className="text-center py-12">
           <div className="text-red-400 text-lg mb-4">Error cargando aventuras</div>
-          <p className="text-charcoal-500">Por favor intenta de nuevo más tarde.</p>
+          <p className="text-gray-500">Por favor intenta de nuevo más tarde.</p>
         </div>
       </AnimatedSection>
     );
@@ -60,8 +60,8 @@ export default function RouteGroupGrid({ routes, title = "Aventuras de Ciclismo"
     return (
       <AnimatedSection delay={200}>
         <div className="text-center py-12">
-          <div className="text-charcoal-400 text-lg mb-4">No se encontraron aventuras de ciclismo</div>
-          <p className="text-charcoal-500">Las aventuras aparecerán aquí una vez que se agreguen.</p>
+          <div className="text-gray-400 text-lg mb-4">No se encontraron aventuras de ciclismo</div>
+          <p className="text-gray-500">Las aventuras aparecerán aquí una vez que se agreguen.</p>
         </div>
       </AnimatedSection>
     );

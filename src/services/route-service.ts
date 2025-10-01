@@ -115,7 +115,7 @@ export class RouteService {
    */
   async getRoutesOrdered(orderBy: string, orderDirection: 'ASC' | 'DESC' = 'DESC'): Promise<GetRouteCollectionQuery> {
     return this.getRoutes({
-      order: [{ [orderBy]: orderDirection }],
+      order: [{ [orderBy]: orderDirection }] as any,
     });
   }
 }

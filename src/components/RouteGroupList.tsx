@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRouteGroups } from '@/hooks/useRouteGroups';
-import RouteGroupCard from './RouteGroupCard';
+import RouteGroupDisplay from './RouteGroupDisplay';
 
 export function RouteGroupList() {
   const { routeGroups, loading, error, refetch } = useRouteGroups(6);
@@ -29,7 +29,7 @@ export function RouteGroupList() {
     <div className="space-y-6">
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {routeGroups.map((routeGroup, index) => (
-          <RouteGroupCard key={routeGroup?.sys.id} routeGroup={routeGroup} index={index} />
+          <RouteGroupDisplay key={routeGroup?.sys.id} routeGroup={routeGroup} index={index} />
         ))}
       </div>
 

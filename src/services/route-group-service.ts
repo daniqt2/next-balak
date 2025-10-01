@@ -1,7 +1,6 @@
 import { contentfulFetcher } from '@/lib/contentful-fetcher';
 import {
-  GetRouteGroupCollectionQuery,
-  GetRouteGroupBySlugQuery,
+  Query,
   RouteGroupFilter,
   RouteGroupOrder,
 } from '@/contentful-types';
@@ -141,10 +140,10 @@ export class RouteGroupService {
   /**
    * Get a collection of route groups with optional filtering and pagination
    */
-  async getRouteGroups(options: RouteGroupServiceOptions = {}): Promise<GetRouteGroupCollectionQuery> {
+  async getRouteGroups(options: RouteGroupServiceOptions = {}): Promise<Query> {
     const { limit = 10, skip = 0, where, order } = options;
     
-    return contentfulFetcher.query<GetRouteGroupCollectionQuery>(
+    return contentfulFetcher.query<Query>(
       GET_ROUTE_GROUP_COLLECTION,
       {
         variables: {
@@ -157,8 +156,8 @@ export class RouteGroupService {
     );
   }
 
-  async getRouteGroupBySlug(slug: string): Promise<GetRouteGroupBySlugQuery> {
-    return contentfulFetcher.query<GetRouteGroupBySlugQuery>(
+  async getRouteGroupBySlug(slug: string): Promise<Query> {
+    return contentfulFetcher.query<Query>(
       GET_ROUTE_GROUP_BY_SLUG,
       {
         variables: { slug },
@@ -169,7 +168,7 @@ export class RouteGroupService {
   /**
    * Get route groups by location
    */
-  async getRouteGroupsByLocation(location: string): Promise<GetRouteGroupCollectionQuery> {
+  async getRouteGroupsByLocation(location: string): Promise<Query> {
     return this.getRouteGroups({
       where: {
         locationLabel_contains: location,
@@ -180,7 +179,8 @@ export class RouteGroupService {
   /**
    * Search route groups by title or description
    */
-  async searchRouteGroups(searchTerm: string): Promise<GetRouteGroupCollectionQuery> {
+  async searchRouteGroups(searchTerm: string): Promise<Query
+  > {
     return this.getRouteGroups({
       where: {
         OR: [

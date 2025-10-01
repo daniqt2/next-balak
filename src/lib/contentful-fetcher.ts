@@ -4,7 +4,7 @@ import { DocumentNode } from 'graphql';
 export interface ContentfulFetcherOptions {
   variables?: Record<string, unknown>;
   errorPolicy?: 'none' | 'ignore' | 'all';
-  fetchPolicy?: 'cache-first' | 'cache-only' | 'network-only' | 'no-cache' | 'standby';
+  fetchPolicy?: 'cache-first' | 'cache-only' | 'network-only' | 'no-cache';
 }
 
 export class ContentfulFetcher {
@@ -22,11 +22,11 @@ export class ContentfulFetcher {
         fetchPolicy: options.fetchPolicy || 'cache-first',
       });
 
-      if (result.errors && result.errors.length > 0) {
-        console.warn('GraphQL errors:', result.errors);
+      if (result.error) {
+        console.warn('GraphQL error:', result.error);
       }
 
-      return result.data;
+      return result.data as T;
     } catch (error) {
       console.error('Contentful fetch error:', error);
       throw new Error(`Failed to fetch data from Contentful: ${error}`);

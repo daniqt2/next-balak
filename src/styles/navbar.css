@@ -1,5 +1,5 @@
 .navbar {
-  @apply bg-charcoal-800 shadow;
+  @apply bg-gray-800 shadow;
   position: fixed;
   top: 0;
   left: 0;

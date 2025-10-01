@@ -85,13 +85,13 @@ export default async function RouteDetailPage({ params }: RouteDetailPageProps) 
                     <h2 className="text-2xl font-bold text-white mb-4">Route Info</h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {route.startLocationName && (
-                        <div className="bg-charcoal-800 p-4 rounded-lg">
+                        <div className="bg-gray-800 p-4 rounded-lg">
                           <h3 className="text-balak-300 font-semibold mb-2">Start Location</h3>
                           <p className="text-white">{route.startLocationName}</p>
                         </div>
                       )}
                       {route.endLocationName && (
-                        <div className="bg-charcoal-800 p-4 rounded-lg">
+                        <div className="bg-gray-800 p-4 rounded-lg">
                           <h3 className="text-balak-300 font-semibold mb-2">End Location</h3>
                           <p className="text-white">{route.endLocationName}</p>
                         </div>

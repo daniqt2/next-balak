@@ -85,7 +85,7 @@ export function FlexibleGrid({
             return (
               <RouteGroupDisplay 
                 key={item?.sys?.id || index} 
-                routeGroup={item} 
+                routeGroup={item as RouteGroup} 
                 index={index} 
               />
             );
