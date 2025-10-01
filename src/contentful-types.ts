@@ -528,6 +528,7 @@ export type InterestSpot = Entry & _Node & {
   headerImage?: Maybe<Asset>;
   linkedFrom?: Maybe<InterestSpotLinkingCollections>;
   location?: Maybe<Location>;
+  locationName?: Maybe<Scalars['String']['output']>;
   mountainDifficulty?: Maybe<Scalars['String']['output']>;
   mountainElevationGain?: Maybe<Scalars['Float']['output']>;
   mountainLength?: Maybe<Scalars['Float']['output']>;
@@ -559,6 +560,12 @@ export type InterestSpotLinkedFromArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/interestSpot) */
 export type InterestSpotLocationArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/interestSpot) */
+export type InterestSpotLocationNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -618,6 +625,13 @@ export type InterestSpotFilter = {
   description_not_contains?: InputMaybe<Scalars['String']['input']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   headerImage_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  locationName?: InputMaybe<Scalars['String']['input']>;
+  locationName_contains?: InputMaybe<Scalars['String']['input']>;
+  locationName_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  locationName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  locationName_not?: InputMaybe<Scalars['String']['input']>;
+  locationName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  locationName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   location_exists?: InputMaybe<Scalars['Boolean']['input']>;
   location_within_circle?: InputMaybe<Scalars['Circle']['input']>;
   location_within_rectangle?: InputMaybe<Scalars['Rectangle']['input']>;
@@ -728,6 +742,8 @@ export enum InterestSpotLinkingCollectionsRouteCollectionOrder {
 export enum InterestSpotOrder {
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
+  LocationNameAsc = 'locationName_ASC',
+  LocationNameDesc = 'locationName_DESC',
   MountainDifficultyAsc = 'mountainDifficulty_ASC',
   MountainDifficultyDesc = 'mountainDifficulty_DESC',
   MountainElevationGainAsc = 'mountainElevationGain_ASC',
@@ -1083,6 +1099,8 @@ export type RouteCoffeStopsCollection = {
 export enum RouteCoffeStopsCollectionOrder {
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
+  LocationNameAsc = 'locationName_ASC',
+  LocationNameDesc = 'locationName_DESC',
   MountainDifficultyAsc = 'mountainDifficulty_ASC',
   MountainDifficultyDesc = 'mountainDifficulty_DESC',
   MountainElevationGainAsc = 'mountainElevationGain_ASC',
@@ -1459,6 +1477,8 @@ export type RouteInterestSpotsCollection = {
 export enum RouteInterestSpotsCollectionOrder {
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
+  LocationNameAsc = 'locationName_ASC',
+  LocationNameDesc = 'locationName_DESC',
   MountainDifficultyAsc = 'mountainDifficulty_ASC',
   MountainDifficultyDesc = 'mountainDifficulty_DESC',
   MountainElevationGainAsc = 'mountainElevationGain_ASC',
@@ -1582,6 +1602,8 @@ export type RouteMountainsCollection = {
 export enum RouteMountainsCollectionOrder {
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
+  LocationNameAsc = 'locationName_ASC',
+  LocationNameDesc = 'locationName_DESC',
   MountainDifficultyAsc = 'mountainDifficulty_ASC',
   MountainDifficultyDesc = 'mountainDifficulty_DESC',
   MountainElevationGainAsc = 'mountainElevationGain_ASC',
@@ -1709,6 +1731,13 @@ export type CfInterestSpotNestedFilter = {
   description_not_contains?: InputMaybe<Scalars['String']['input']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   headerImage_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  locationName?: InputMaybe<Scalars['String']['input']>;
+  locationName_contains?: InputMaybe<Scalars['String']['input']>;
+  locationName_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  locationName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  locationName_not?: InputMaybe<Scalars['String']['input']>;
+  locationName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  locationName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   location_exists?: InputMaybe<Scalars['Boolean']['input']>;
   location_within_circle?: InputMaybe<Scalars['Circle']['input']>;
   location_within_rectangle?: InputMaybe<Scalars['Rectangle']['input']>;
@@ -1895,7 +1924,7 @@ export type GetRouteBySlugQueryVariables = Exact<{
 }>;
 
 
-export type GetRouteBySlugQuery = { __typename?: 'Query', routeCollection?: { __typename?: 'RouteCollection', items: Array<{ __typename: 'Route', title?: string | null, slug?: string | null, description?: string | null, subTitle?: string | null, length?: number | null, elevation?: number | null, time?: string | null, startLocationName?: string | null, endLocationName?: string | null, stravaLink?: string | null, garminLink?: string | null, stravaId?: string | null, sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null }, mainImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null, mainCarouselCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, coffeStopsCollection?: { __typename?: 'RouteCoffeStopsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, mountainDifficulty?: string | null, mountainLength?: number | null, mountainElevationGain?: number | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, interestSpotsCollection?: { __typename?: 'RouteInterestSpotsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, mountainDifficulty?: string | null, mountainLength?: number | null, mountainElevationGain?: number | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, mountainsCollection?: { __typename?: 'RouteMountainsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, mountainDifficulty?: string | null, mountainLength?: number | null, mountainElevationGain?: number | null, sys: { __typename?: 'Sys', id: string } } | null> } | null } | null> } | null };
+export type GetRouteBySlugQuery = { __typename?: 'Query', routeCollection?: { __typename?: 'RouteCollection', items: Array<{ __typename: 'Route', title?: string | null, slug?: string | null, description?: string | null, subTitle?: string | null, length?: number | null, elevation?: number | null, time?: string | null, startLocationName?: string | null, endLocationName?: string | null, stravaLink?: string | null, garminLink?: string | null, stravaId?: string | null, sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null }, mainImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null, mainCarouselCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, coffeStopsCollection?: { __typename?: 'RouteCoffeStopsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, locationName?: string | null, sys: { __typename?: 'Sys', id: string }, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null } | null> } | null, interestSpotsCollection?: { __typename?: 'RouteInterestSpotsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, locationName?: string | null, mountainDifficulty?: string | null, mountainLength?: number | null, mountainElevationGain?: number | null, sys: { __typename?: 'Sys', id: string }, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null } | null> } | null, mountainsCollection?: { __typename?: 'RouteMountainsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, mountainDifficulty?: string | null, mountainLength?: number | null, mountainElevationGain?: number | null, sys: { __typename?: 'Sys', id: string }, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null } | null> } | null } | null> } | null };
 
 export type GetFeaturedRoutesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;

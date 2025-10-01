@@ -4,6 +4,9 @@ import 'dotenv/config';
 import fs from 'fs';
 import path from 'path';
 import { execSync } from 'child_process';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import yaml from 'js-yaml';
 
 // Check if required environment variables are present
 const spaceId = process.env.NUXT_PUBLIC_SPACE_ID || process.env.CONTENTFUL_SPACE_ID;
@@ -52,8 +55,10 @@ const codegenConfig = {
 };
 
 // Write temporary config file
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const tempConfigPath = path.join(__dirname, '..', 'codegen.temp.yml');
-fs.writeFileSync(tempConfigPath, require('js-yaml').dump(codegenConfig));
+fs.writeFileSync(tempConfigPath, yaml.dump(codegenConfig));
 
 try {
   console.log('🔄 Generating types...');

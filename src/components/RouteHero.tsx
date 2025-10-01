@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { formatRouteMetrics, getDifficultyColor } from '@/lib/route-utils';
 import RouteMetric, { RouteMetricIcons } from './RouteMetric';
@@ -23,9 +23,31 @@ interface RouteHeroProps {
 
 export default function RouteHero({ route }: RouteHeroProps) {
   const metrics = formatRouteMetrics(route);
+  const [isVisible, setIsVisible] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry?.isIntersecting) {
+          setIsVisible(true);
+        }
+      },
+      { threshold: 0.1 }
+    );
+
+    if (heroRef.current) {
+      observer.observe(heroRef.current);
+    }
+
+    return () => observer.disconnect();
+  }, []);
 
   return (
-    <div className="relative w-full h-[70vh] min-h-[500px] max-h-[800px] overflow-hidden">
+    <div 
+      ref={heroRef}
+      className="relative w-full h-[70vh] min-h-[500px] max-h-[800px] overflow-hidden"
+    >
       {/* Hero Image */}
       <div className="relative w-full h-full">
         {route.headerImage?.url ? (
@@ -51,32 +73,59 @@ export default function RouteHero({ route }: RouteHeroProps) {
         {/* Gradient Overlay */}
         <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
         
-        {/* Hero Content */}
-        <div className="absolute inset-0 flex items-end">
-          <div className="w-full px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12 lg:pb-16">
-            {/* Route Title */}
-            <div className="mb-8">
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-2xl leading-tight">
-                {route.title || 'Route Detail'}
-              </h1>
+              {/* Hero Content */}
+              <div className="absolute inset-0 flex items-end">
+                <div className="w-full px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12 lg:pb-16">
+                  {/* Route Title */}
+                  <div 
+                    className="mb-8"
+                    style={{
+                      transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+                      opacity: isVisible ? 1 : 0,
+                      transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
+                    }}
+                  >
+                    <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-2xl leading-tight">
+                      {route.title || 'Route Detail'}
+                    </h1>
               
               {route.subTitle && (
-                <p className="text-lg sm:text-xl lg:text-2xl text-balak-200 mb-6 drop-shadow-lg max-w-3xl">
+                <p 
+                  className="text-lg sm:text-xl lg:text-2xl text-balak-200 mb-6 drop-shadow-lg max-w-3xl"
+                  style={{
+                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                    opacity: isVisible ? 1 : 0,
+                    transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s'
+                  }}
+                >
                   {route.subTitle}
                 </p>
               )}
               
               {/* Difficulty Badge */}
               {metrics && (
-                <div className={`inline-flex items-center gap-3 px-4 py-2 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 shadow-lg ${getDifficultyColor(metrics.difficulty)}`}>
+                <div 
+                  className={`inline-flex items-center gap-3 px-4 py-2 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 shadow-lg ${getDifficultyColor(metrics.difficulty)}`}
+                  style={{
+                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
+                    opacity: isVisible ? 1 : 0,
+                    transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s'
+                  }}
+                >
                   <span className="font-semibold text-sm uppercase tracking-wider">{metrics.difficulty}</span>
-                  <span className="text-xs opacity-80">{metrics.gradient}% avg gradient</span>
                 </div>
               )}
             </div>
             
             {/* Quick Stats */}
-            <div className="flex flex-wrap gap-6 mb-8">
+            <div 
+              className="flex flex-wrap gap-6 mb-8"
+              style={{
+                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
+                opacity: isVisible ? 1 : 0,
+                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s'
+              }}
+            >
               {route.length && (
                 <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-black/30 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-black/40 transition-all duration-200">
                   <div className="w-6 h-6 text-balak-400 flex-shrink-0">

@@ -1,0 +1,69 @@
+/* Coffee Stop Card Styles */
+.coffee-stop-card {
+  @apply bg-charcoal-800 rounded-xl overflow-hidden shadow-lg border border-charcoal-700
+         hover:shadow-xl hover:border-balak-500/30 transition-all duration-300
+         flex flex-col h-[400px] w-full;
+}
+
+.image-section {
+  @apply relative w-full h-48 overflow-hidden;
+}
+
+.coffee-stop-image {
+  @apply object-cover transition-transform duration-300 ease-out
+         hover:scale-105;
+}
+
+.image-placeholder {
+  @apply w-full h-full bg-gradient-to-br from-amber-700 via-amber-800 to-amber-900
+         flex items-center justify-center;
+}
+
+.placeholder-icon {
+  @apply w-16 h-16 text-amber-300 opacity-60;
+}
+
+.content-section {
+  @apply p-4 sm:p-6 flex-1 flex flex-col bg-charcoal-800 min-h-[200px] border-2 border-red-500;
+}
+
+.coffee-stop-title {
+  @apply text-white font-bold text-lg sm:text-xl mb-3 border-2 border-yellow-500 bg-yellow-900 p-2;
+}
+
+.coffee-stop-description {
+  @apply text-charcoal-300 text-sm sm:text-base leading-relaxed mb-4;
+}
+
+.location-info {
+  @apply flex items-center gap-2 mb-4;
+}
+
+.location-icon {
+  @apply w-4 h-4 text-balak-400;
+}
+
+.location-text {
+  @apply text-balak-300 text-sm;
+}
+
+.mountain-stats {
+  @apply flex gap-4 pt-3 border-t border-charcoal-700;
+}
+
+.mountain-stat {
+  @apply flex items-center gap-2;
+}
+
+.stat-icon {
+  @apply w-4 h-4 text-balak-400;
+}
+
+.stat-text {
+  @apply text-white text-sm font-medium;
+}
+
+/* Coffee Stops Section */
+.coffee-stops-section {
+  @apply mb-12;
+}

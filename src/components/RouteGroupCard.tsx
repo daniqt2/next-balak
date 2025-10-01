@@ -1,122 +1,132 @@
-import { useEffect, useRef, useState } from 'react';
-import Link from 'next/link';
+import React from 'react';
 import Image from 'next/image';
-import type { RouteGroup } from '@/contentful-types';
+import Link from 'next/link';
+import { Route, MapPin, Clock, TrendingUp } from 'lucide-react';
+import { formatRouteMetrics, getDifficultyColor } from '@/lib/route-utils';
 
 interface RouteGroupCardProps {
-  routeGroup: RouteGroup;
-  index?: number;
+  route: {
+    sys: {
+      id: string;
+    };
+    title?: string | null;
+    subTitle?: string | null;
+    slug?: string | null;
+    length?: number | null;
+    elevation?: number | null;
+    time?: string | null;
+    startLocationName?: string | null;
+    endLocationName?: string | null;
+    headerImage?: {
+      url?: string | null;
+      title?: string | null;
+    } | null;
+  };
 }
 
-export default function RouteGroupCard({ routeGroup, index = 0 }: RouteGroupCardProps) {
-  const cardRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [imageLoaded, setImageLoaded] = useState(false);
+export default function RouteGroupCard({ route }: RouteGroupCardProps) {
+  if (!route) return null;
 
-  const groupLink = `route-group/${routeGroup.slug}`;
-
-  useEffect(() => {
-    const card = cardRef.current;
-    if (!card) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry?.isIntersecting) {
-          const delay = index * 150;
-          setTimeout(() => {
-            setIsVisible(true);
-          }, delay);
-        }
-      },
-      { threshold: 0.2 }
-    );
-
-    observer.observe(card);
-
-    return () => {
-      observer.unobserve(card);
-    };
-  }, [index]);
-
-  if (!routeGroup) return null;
-
-  if (!routeGroup.headerImage?.url) return null;
+  const metrics = formatRouteMetrics(route);
 
   return (
-    <article
-      ref={cardRef}
-      className={`
-        relative w-full h-[400px]
-        rounded-xl overflow-hidden shadow-md
-        opacity-0 translate-y-4
-        transition-all duration-700 ease-out
-        sm:h-[450px]
-        md:h-[500px]
-        ${isVisible ? 'opacity-100 translate-y-0' : ''}
-      `}
-    >
-      <Link href={groupLink} className="block h-full">
-        {!imageLoaded && (
-          <div className="absolute inset-0 bg-gradient-to-br from-gray-200 to-gray-300 animate-pulse" />
-        )}
-
-        <Image
-          src={routeGroup.headerImage.url}
-          alt={routeGroup.title || 'Route group image'}
-          fill
-          priority={isVisible}
-          quality={85}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          onLoad={() => setImageLoaded(true)}
-          className={`
-            object-cover
-            ${imageLoaded ? 'opacity-100 scale-100' : 'opacity-0 scale-105'}
-            transition-all duration-700 ease-out
-          `}
-        />
-        <div className="absolute inset-0 bg-black/30" aria-hidden="true" />
-
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 sm:p-6 md:p-8">
-          <h2 className="
-            inline-block font-extrabold text-white shadow-xl
-            bg-charcoal-900/60 backdrop-blur-sm px-3 py-1 text-lg
-            sm:px-4 sm:py-2 sm:text-2xl
-            md:px-6 md:py-3 md:text-3xl
-          ">
-            {routeGroup.title}
-          </h2>
-          {routeGroup.subtitle && (
-            <p className="
-              mt-2 inline-block text-balak-200 rounded-md shadow
-              bg-charcoal-800/80 px-2 py-1 text-xs
-              sm:px-3 sm:py-1.5 sm:text-sm
-              md:px-4 md:py-2 md:text-base
-            ">
-              {routeGroup.subtitle}
-            </p>
+    <Link href={`/route/${route.slug}`}>
+      <div 
+        className="group bg-charcoal-800 rounded-xl overflow-hidden shadow-lg border border-charcoal-700 hover:shadow-xl hover:border-balak-500/30 transition-all duration-300 cursor-pointer"
+        style={{
+          height: '100%',
+          display: 'flex',
+          flexDirection: 'column'
+        }}
+      >
+        {/* Image Section */}
+        <div className="relative w-full h-48 overflow-hidden">
+          {route.headerImage?.url ? (
+            <Image
+              src={route.headerImage.url}
+              alt={route.headerImage.title || route.title || 'Route image'}
+              fill
+              quality={85}
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              className="object-cover transition-transform duration-300 group-hover:scale-105"
+            />
+          ) : (
+            <div className="w-full h-full bg-gradient-to-br from-amber-700 via-amber-800 to-amber-900 flex items-center justify-center">
+              <Route size={48} color="#f59e0b" style={{ opacity: 0.6 }} />
+            </div>
           )}
-          {routeGroup.locationLabel && (
-            <p className="
-              mt-1 inline-block text-white/90 rounded-md shadow
-              bg-charcoal-700/60 px-2 py-1 text-xs
-              sm:px-3 sm:py-1 sm:text-sm
-              md:px-4 md:py-1.5 md:text-base
-            ">
-              📍 {routeGroup.locationLabel}
-            </p>
-          )}
-          {routeGroup.routesCollection?.total && (
-            <p className="
-              mt-1 inline-block text-balak-300 rounded-md shadow
-              bg-charcoal-800/60 px-2 py-1 text-xs
-              sm:px-3 sm:py-1 sm:text-sm
-              md:px-4 md:py-1.5 md:text-base
-            ">
-              {routeGroup.routesCollection.total} route{routeGroup.routesCollection.total !== 1 ? 's' : ''}
-            </p>
+          
+          {/* Gradient Overlay */}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+          
+          {/* Difficulty Badge */}
+          {metrics && (
+            <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm border ${getDifficultyColor(metrics.difficulty)}`}>
+              {metrics.difficulty}
+            </div>
           )}
         </div>
-      </Link>
-    </article>
+
+        {/* Content Section */}
+        <div className="p-6 flex-1 flex flex-col">
+          {/* Title */}
+          <h3 className="text-white font-bold text-xl mb-2 line-clamp-2 group-hover:text-balak-300 transition-colors">
+            {route.title || 'Untitled Route'}
+          </h3>
+          
+          {/* Subtitle */}
+          {route.subTitle && (
+            <p className="text-charcoal-300 text-sm mb-4 line-clamp-2">
+              {route.subTitle}
+            </p>
+          )}
+
+          {/* Route Stats */}
+          <div className="grid grid-cols-2 gap-4 mb-4">
+            {route.length && (
+              <div className="flex items-center gap-2 text-charcoal-400">
+                <Route size={16} color="currentColor" />
+                <span className="text-sm">{route.length} km</span>
+              </div>
+            )}
+            
+            {route.elevation && (
+              <div className="flex items-center gap-2 text-charcoal-400">
+                <TrendingUp size={16} color="currentColor" />
+                <span className="text-sm">{route.elevation} m</span>
+              </div>
+            )}
+          </div>
+
+          {/* Location Info */}
+          {(route.startLocationName || route.endLocationName) && (
+            <div className="flex items-center gap-2 text-charcoal-400 mb-4">
+              <MapPin size={16} color="currentColor" />
+              <span className="text-sm truncate">
+                {route.startLocationName && route.endLocationName 
+                  ? `${route.startLocationName} → ${route.endLocationName}`
+                  : route.startLocationName || route.endLocationName
+                }
+              </span>
+            </div>
+          )}
+
+          {/* Time */}
+          {route.time && (
+            <div className="flex items-center gap-2 text-charcoal-400">
+              <Clock size={16} color="currentColor" />
+              <span className="text-sm">{route.time}</span>
+            </div>
+          )}
+
+          {/* View Route Button */}
+          <div className="mt-auto pt-4">
+            <div className="text-balak-400 text-sm font-medium group-hover:text-balak-300 transition-colors">
+              View Route →
+            </div>
+          </div>
+        </div>
+      </div>
+    </Link>
   );
 }

@@ -1,0 +1,352 @@
+import { gql } from '@apollo/client';
+
+export const GET_ROUTE_COLLECTION = gql`
+  query GetRouteCollection($limit: Int, $skip: Int, $where: RouteFilter, $order: [RouteOrder]) {
+    routeCollection(limit: $limit, skip: $skip, where: $where, order: $order) {
+      total
+      skip
+      limit
+      items {
+        sys {
+          id
+          publishedAt
+          firstPublishedAt
+        }
+        __typename
+        title
+        slug
+        description
+        subTitle
+        length
+        elevation
+        time
+        startLocationName
+        endLocationName
+        stravaLink
+        garminLink
+        stravaId
+        mainImage {
+          sys {
+            id
+          }
+          title
+          description
+          url
+          width
+          height
+          contentType
+        }
+        headerImage {
+          sys {
+            id
+          }
+          title
+          description
+          url
+          width
+          height
+          contentType
+        }
+        mainCarouselCollection {
+          items {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+            contentType
+          }
+        }
+        coffeStopsCollection {
+          items {
+            sys {
+              id
+            }
+            title
+            description
+            locationName
+            location {
+              lat
+              lon
+            }
+            headerImage {
+              sys {
+                id
+              }
+              title
+              description
+              url
+              width
+              height
+              contentType
+            }
+          }
+        }
+        interestSpotsCollection {
+          items {
+            sys {
+              id
+            }
+            title
+            description
+            locationName
+            location {
+              lat
+              lon
+            }
+            mountainDifficulty
+            mountainLength
+            mountainElevationGain
+            headerImage {
+              sys {
+                id
+              }
+              title
+              description
+              url
+              width
+              height
+              contentType
+            }
+          }
+        }
+        mountainsCollection {
+          items {
+            sys {
+              id
+            }
+            title
+            description
+            locationName
+            location {
+              lat
+              lon
+            }
+            mountainDifficulty
+            mountainLength
+            mountainElevationGain
+            headerImage {
+              sys {
+                id
+              }
+              title
+              description
+              url
+              width
+              height
+              contentType
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_ROUTE_BY_SLUG = gql`
+  query GetRouteBySlug($slug: String!) {
+    routeCollection(where: { slug: $slug }, limit: 1) {
+      items {
+        sys {
+          id
+          publishedAt
+          firstPublishedAt
+        }
+        __typename
+        title
+        slug
+        description
+        subTitle
+        length
+        elevation
+        time
+        startLocationName
+        endLocationName
+        stravaLink
+        garminLink
+        stravaId
+        mainImage {
+          sys {
+            id
+          }
+          title
+          description
+          url
+          width
+          height
+          contentType
+        }
+        headerImage {
+          sys {
+            id
+          }
+          title
+          description
+          url
+          width
+          height
+          contentType
+        }
+        mainCarouselCollection {
+          items {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+            contentType
+          }
+        }
+        coffeStopsCollection {
+          items {
+            sys {
+              id
+            }
+            title
+            description
+            locationName
+            location {
+              lat
+              lon
+            }
+            headerImage {
+              sys {
+                id
+              }
+              title
+              description
+              url
+              width
+              height
+              contentType
+            }
+          }
+        }
+        interestSpotsCollection {
+          items {
+            sys {
+              id
+            }
+            title
+            description
+            locationName
+            location {
+              lat
+              lon
+            }
+            mountainDifficulty
+            mountainLength
+            mountainElevationGain
+            headerImage {
+              sys {
+                id
+              }
+              title
+              description
+              url
+              width
+              height
+              contentType
+            }
+          }
+        }
+        mountainsCollection {
+          items {
+            sys {
+              id
+            }
+            title
+            description
+            locationName
+            location {
+              lat
+              lon
+            }
+            mountainDifficulty
+            mountainLength
+            mountainElevationGain
+            headerImage {
+              sys {
+                id
+              }
+              title
+              description
+              url
+              width
+              height
+              contentType
+            }
+          }
+        }
+      }
+    }
+  }
+`;
+
+export const GET_FEATURED_ROUTES = gql`
+  query GetFeaturedRoutes($limit: Int = 6) {
+    routeCollection(limit: $limit, order: [sys_publishedAt_DESC]) {
+      items {
+        sys {
+          id
+          publishedAt
+          firstPublishedAt
+        }
+        __typename
+        title
+        slug
+        description
+        subTitle
+        length
+        elevation
+        time
+        startLocationName
+        endLocationName
+        stravaLink
+        garminLink
+        stravaId
+        mainImage {
+          sys {
+            id
+          }
+          title
+          description
+          url
+          width
+          height
+          contentType
+        }
+        headerImage {
+          sys {
+            id
+          }
+          title
+          description
+          url
+          width
+          height
+          contentType
+        }
+        mainCarouselCollection {
+          items {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+            contentType
+          }
+        }
+      }
+    }
+  }
+`;

@@ -110,9 +110,22 @@ query GetRouteBySlug($slug: String!) {
           }
           title
           description
-          mountainDifficulty
-          mountainLength
-          mountainElevationGain
+          locationName
+          location {
+            lat
+            lon
+          }
+          headerImage {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+            contentType
+          }
         }
       }
       interestSpotsCollection {
@@ -122,9 +135,30 @@ query GetRouteBySlug($slug: String!) {
           }
           title
           description
+          locationName
+          location {
+            lat
+            lon
+          }
           mountainDifficulty
           mountainLength
           mountainElevationGain
+          locationName
+          location {
+            lat
+            lon
+          }
+          headerImage {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+            contentType
+          }
         }
       }
       mountainsCollection {
@@ -137,6 +171,17 @@ query GetRouteBySlug($slug: String!) {
           mountainDifficulty
           mountainLength
           mountainElevationGain
+          headerImage {
+            sys {
+              id
+            }
+            title
+            description
+            url
+            width
+            height
+            contentType
+          }
         }
       }
     }

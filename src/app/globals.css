@@ -6,7 +6,7 @@
 @import "../styles/routeGroupDisplay.css";
 @import "../styles/routeGroupResults.css";
 
-@theme static {
+@theme {
   --font-sans: 'Public Sans', sans-serif;
 
    /* BALAK lime (primary) */

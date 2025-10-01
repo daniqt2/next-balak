@@ -1,5 +1,11 @@
 .navbar {
   @apply bg-charcoal-800 shadow;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 50;
+  width: 100%;
 
   .main-wrapper {
     @apply  mx-auto flex items-center justify-between px-6 py-3;
@@ -19,5 +25,14 @@
 
   .link {
     @apply text-balak-300 hover:text-white font-medium transition-colors;
+  }
+
+  /* Animation states */
+  &.navbar--visible {
+    transform: translateY(0);
+  }
+
+  &.navbar--hidden {
+    transform: translateY(-100%);
   }
 }

@@ -6,184 +6,11 @@ import {
   RouteFilter,
   RouteOrder,
 } from '@/contentful-types';
-import { gql } from '@apollo/client';
-
-const GET_ROUTE_COLLECTION = gql`
-  query GetRouteCollection($limit: Int, $skip: Int, $where: RouteFilter, $order: [RouteOrder]) {
-    routeCollection(limit: $limit, skip: $skip, where: $where, order: $order) {
-      total
-      skip
-      limit
-      items {
-        sys {
-          id
-          publishedAt
-          firstPublishedAt
-        }
-        __typename
-        title
-        slug
-        description
-        subTitle
-        length
-        elevation
-        time
-        startLocationName
-        endLocationName
-        stravaLink
-        garminLink
-        mainImage {
-          sys {
-            id
-          }
-          title
-          description
-          url
-          width
-          height
-          contentType
-        }
-        headerImage {
-          sys {
-            id
-          }
-          title
-          description
-          url
-          width
-          height
-          contentType
-        }
-      }
-    }
-  }
-`;
-
-const GET_ROUTE_BY_SLUG = gql`
-  query GetRouteBySlug($slug: String!) {
-    routeCollection(where: { slug: $slug }, limit: 1) {
-      items {
-        sys {
-          id
-          publishedAt
-          firstPublishedAt
-        }
-        __typename
-        title
-        slug
-        description
-        subTitle
-        length
-        elevation
-        time
-        startLocationName
-        endLocationName
-        stravaLink
-        garminLink
-        stravaId
-        mainImage {
-          sys {
-            id
-          }
-          title
-          description
-          url
-          width
-          height
-          contentType
-        }
-        headerImage {
-          sys {
-            id
-          }
-          title
-          description
-          url
-          width
-          height
-          contentType
-        }
-        mainCarouselCollection {
-          items {
-            sys {
-              id
-            }
-            title
-            description
-            url
-            width
-            height
-            contentType
-          }
-        }
-        coffeStopsCollection {
-          items {
-            sys {
-              id
-            }
-            title
-            description
-            mountainDifficulty
-            mountainLength
-            mountainElevationGain
-          }
-        }
-        interestSpotsCollection {
-          items {
-            sys {
-              id
-            }
-            title
-            description
-            mountainDifficulty
-            mountainLength
-            mountainElevationGain
-          }
-        }
-        mountainsCollection {
-          items {
-            sys {
-              id
-            }
-            title
-            description
-            mountainDifficulty
-            mountainLength
-            mountainElevationGain
-          }
-        }
-      }
-    }
-  }
-`;
-
-const GET_FEATURED_ROUTES = gql`
-  query GetFeaturedRoutes($limit: Int = 6) {
-    routeCollection(limit: $limit, order: [sys_publishedAt_DESC]) {
-      items {
-        sys {
-          id
-        }
-        title
-        slug
-        description
-        subTitle
-        length
-        elevation
-        time
-        mainImage {
-          sys {
-            id
-          }
-          title
-          url
-          width
-          height
-        }
-      }
-    }
-  }
-`;
+import { 
+  GET_ROUTE_COLLECTION, 
+  GET_ROUTE_BY_SLUG, 
+  GET_FEATURED_ROUTES 
+} from '@/graphql/queries';
 
 export interface RouteServiceOptions {
   limit?: number;
@@ -212,6 +39,9 @@ export class RouteService {
     );
   }
 
+  /**
+   * Get a single route by its slug
+   */
   async getRouteBySlug(slug: string): Promise<GetRouteBySlugQuery> {
     return contentfulFetcher.query<GetRouteBySlugQuery>(
       GET_ROUTE_BY_SLUG,
@@ -221,6 +51,9 @@ export class RouteService {
     );
   }
 
+  /**
+   * Get featured routes (most recently published)
+   */
   async getFeaturedRoutes(limit: number = 6): Promise<GetFeaturedRoutesQuery> {
     return contentfulFetcher.query<GetFeaturedRoutesQuery>(
       GET_FEATURED_ROUTES,
@@ -237,7 +70,7 @@ export class RouteService {
     return this.getRoutes({
       where: {
         // You can add difficulty filtering here based on your Contentful schema
-        description_contains: difficulty,
+        // For example: { difficulty: { eq: difficulty } }
       },
     });
   }
@@ -248,10 +81,8 @@ export class RouteService {
   async getRoutesByLocation(location: string): Promise<GetRouteCollectionQuery> {
     return this.getRoutes({
       where: {
-        OR: [
-          { startLocationName_contains: location },
-          { endLocationName_contains: location },
-        ],
+        // You can add location filtering here based on your Contentful schema
+        // For example: { startLocationName: { contains: location } }
       },
     });
   }
@@ -262,24 +93,32 @@ export class RouteService {
   async searchRoutes(searchTerm: string): Promise<GetRouteCollectionQuery> {
     return this.getRoutes({
       where: {
-        OR: [
-          { title_contains: searchTerm },
-          { description_contains: searchTerm },
-        ],
+        // You can add search filtering here based on your Contentful schema
+        // For example: { OR: [{ title: { contains: searchTerm } }, { description: { contains: searchTerm } }] }
       },
+    });
+  }
+
+  /**
+   * Get routes with pagination
+   */
+  async getRoutesPaginated(page: number = 1, pageSize: number = 10): Promise<GetRouteCollectionQuery> {
+    const skip = (page - 1) * pageSize;
+    return this.getRoutes({
+      limit: pageSize,
+      skip,
+    });
+  }
+
+  /**
+   * Get routes ordered by a specific field
+   */
+  async getRoutesOrdered(orderBy: string, orderDirection: 'ASC' | 'DESC' = 'DESC'): Promise<GetRouteCollectionQuery> {
+    return this.getRoutes({
+      order: [{ [orderBy]: orderDirection }],
     });
   }
 }
 
-// Export singleton instance
+// Export a singleton instance
 export const routeService = new RouteService();
-
-// Export individual methods for convenience
-export const {
-  getRoutes,
-  getRouteBySlug,
-  getFeaturedRoutes,
-  getRoutesByDifficulty,
-  getRoutesByLocation,
-  searchRoutes,
-} = routeService;

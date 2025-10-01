@@ -3,7 +3,9 @@ schema:
   - https://graphql.contentful.com/content/v1/spaces/${CONTENTFUL_SPACE_ID}:
       headers:
         Authorization: Bearer ${CONTENTFUL_ACCESS_TOKEN}
-documents: "src/**/*.graphql"
+documents: 
+  - "src/**/*.graphql"
+  - "src/**/*.ts"
 generates:
   src/contentful-types.ts:
     plugins:
