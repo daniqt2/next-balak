@@ -2,8 +2,8 @@
 
 import React from 'react';
 import { Route, RouteGroup } from '@/contentful-types';
-import RouteCard from './RouteCard';
-import RouteGroupDisplay from './RouteGroupDisplay';
+import RouteCard from '../cards/RouteCard';
+import RouteGroupDisplay from '../lists/RouteGroupDisplay';
 
 interface FlexibleGridProps {
   title?: string;

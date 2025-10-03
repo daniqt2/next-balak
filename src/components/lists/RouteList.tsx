@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRoutes } from '@/hooks/useRoutes';
-import RouteCard from './RouteCard';
+import RouteCard from '../cards/RouteCard';
 
 export function RouteList() {
   const { routes, loading, error, refetch } = useRoutes(6);

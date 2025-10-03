@@ -1,8 +1,8 @@
 import { routeGroupService } from '@/services/route-group-service';
 import { notFound } from 'next/navigation';
-import RouteGroupHero from '@/components/RouteGroupHero';
-import RouteGroupRoutesGrid from '@/components/RouteGroupRoutesGrid';
-import AnimatedSection from '@/components/AnimatedSection';
+import RouteGroupHero from '@/components/heroes/RouteGroupHero';
+import RouteGroupRoutesGrid from '@/components/grids/RouteGroupRoutesGrid';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import type { Route } from '@/contentful-types';
 
 interface RouteGroupDetailPageProps {

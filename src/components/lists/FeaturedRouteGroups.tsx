@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import RouteGroupGrid from './RouteGroupGrid';
-import SectionTitle from './SectionTitle';
-import AnimatedSection from './AnimatedSection';
+import RouteGroupGrid from '../grids/RouteGroupGrid';
+import SectionTitle from '../ui/SectionTitle';
+import AnimatedSection from '../ui/AnimatedSection';
 
 interface FeaturedRouteGroupsProps {
   routeGroups?: unknown[];

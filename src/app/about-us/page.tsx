@@ -3,7 +3,7 @@
 import React from 'react';
 import { Mountain, Users, Heart, MapPin, Award, Coffee, Instagram, Mail, Camera } from 'lucide-react';
 import Image from 'next/image';
-import AnimatedSection from '@/components/AnimatedSection';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import { useRouteCount } from '@/hooks/useRouteCount';
 
 export default function AboutUsPage() {

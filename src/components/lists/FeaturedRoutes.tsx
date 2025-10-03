@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import FeaturedRoutesGrid from './FeaturedRoutesGrid';
-import SectionTitle from './SectionTitle';
-import AnimatedSection from './AnimatedSection';
+import FeaturedRoutesGrid from '../grids/FeaturedRoutesGrid';
+import SectionTitle from '../ui/SectionTitle';
+import AnimatedSection from '../ui/AnimatedSection';
 
 interface FeaturedRoutesProps {
   routes?: unknown[];

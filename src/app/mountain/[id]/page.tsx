@@ -1,8 +1,8 @@
 import { mountainService } from '@/services/mountain-service';
 import { notFound } from 'next/navigation';
-import MountainHero from '@/components/MountainHero';
-import MountainImageGrid from '@/components/MountainImageGrid';
-import AnimatedSection from '@/components/AnimatedSection';
+import MountainHero from '@/components/heroes/MountainHero';
+import MountainImageGrid from '@/components/grids/MountainImageGrid';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import Link from 'next/link';
 import { Mountain, MapPin, BarChart3, TrendingUp, Clock, Route, ArrowRight } from 'lucide-react';
 import type { Route as RouteType } from '@/contentful-types';

@@ -1,6 +1,6 @@
-import HomeHero from '@/components/HomeHero';
-import FeaturedRoutes from '@/components/FeaturedRoutes';
-import FeaturedRouteGroups from '@/components/FeaturedRouteGroups';
+import HomeHero from '@/components/heroes/HomeHero';
+import FeaturedRoutes from '@/components/lists/FeaturedRoutes';
+import FeaturedRouteGroups from '@/components/lists/FeaturedRouteGroups';
 
 export default function Home() {
   return (

@@ -3,8 +3,8 @@
 import React from 'react';
 import { useRoutes } from '@/hooks/useRoutes';
 import { getDifficultyColor, calculateDifficulty } from '@/lib/route-utils';
-import SmallElevationGraph from './SmallElevationGraph';
-import AnimatedSection from './AnimatedSection';
+import SmallElevationGraph from '../ui/SmallElevationGraph';
+import AnimatedSection from '../ui/AnimatedSection';
 import Link from 'next/link';
 import Image from 'next/image';
 import { Route, Clock, TrendingUp, MapPin } from 'lucide-react';

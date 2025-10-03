@@ -1,8 +1,8 @@
 'use client';
 
 import React from 'react';
-import { RouteGrid } from '@/components/RouteGrid';
-import AnimatedSection from '@/components/AnimatedSection';
+import { RouteGrid } from '@/components/grids/RouteGrid';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 
 export default function RoutesPage() {
   return (

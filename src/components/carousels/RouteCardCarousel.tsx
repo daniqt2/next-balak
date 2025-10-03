@@ -2,16 +2,16 @@
 
 import React from 'react';
 import { Carousel } from '@mantine/carousel';
-import { useRouteGroups } from '@/hooks/useRouteGroups';
-import RouteGroupDisplay from './RouteGroupDisplay';
+import { useRoutes } from '@/hooks/useRoutes';
+import RouteCard from '../cards/RouteCard';
 
-export function RouteCarousel() {
-  const { routeGroups, loading, error, refetch } = useRouteGroups(10);
+export function RouteCardCarousel() {
+  const { routes, loading, error, refetch } = useRoutes(10);
 
   if (loading) {
     return (
       <div className="text-center py-12">
-        <div className="text-balak-300 text-lg">Loading route groups...</div>
+        <div className="text-balak-300 text-lg">Loading routes...</div>
       </div>
     );
   }
@@ -30,10 +30,10 @@ export function RouteCarousel() {
     );
   }
 
-  if (routeGroups.length === 0) {
+  if (routes.length === 0) {
     return (
       <div className="text-center py-12">
-        <p className="text-charcoal-400 text-lg">No route groups found</p>
+        <p className="text-charcoal-400 text-lg">No routes found</p>
       </div>
     );
   }
@@ -41,13 +41,14 @@ export function RouteCarousel() {
   return (
     <div className="space-y-6">
       <div className="text-center mb-8">
-        <h2 className="text-2xl font-bold text-white mb-2">Route Groups</h2>
-        <p className="text-charcoal-400">Discover cycling routes by location</p>
+        <h2 className="text-2xl font-bold text-white mb-2">Featured Routes</h2>
+        <p className="text-charcoal-400">Explore our cycling routes</p>
       </div>
       
       <Carousel
         withIndicators
-        withControls={routeGroups.length > 3}
+        withControls={routes.length > 3}
+        initialSlide={2}
         slideSize={{ base: '100%', sm: '50%', md: '33.333333%' }}
         styles={{
           root: {
@@ -62,9 +63,9 @@ export function RouteCarousel() {
           },
         }}
       >
-        {routeGroups.map((routeGroup, index) => (
-          <Carousel.Slide key={routeGroup?.sys.id}>
-            <RouteGroupDisplay routeGroup={routeGroup} index={index} />
+        {routes.map((route, index) => (
+          <Carousel.Slide key={route?.sys.id}>
+            <RouteCard route={route} index={index} />
           </Carousel.Slide>
         ))}
       </Carousel>

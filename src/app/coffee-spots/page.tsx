@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { coffeeService } from '@/services/coffee-service';
-import CoffeeStopCard from '@/components/CoffeeStopCard';
-import AnimatedSection from '@/components/AnimatedSection';
+import CoffeeStopCard from '@/components/cards/CoffeeStopCard';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import { Coffee, Search, MapPin } from 'lucide-react';
 import type { InterestSpot } from '@/contentful-types';
 

@@ -1,7 +1,7 @@
 import { coffeeService } from '@/services/coffee-service';
 import { notFound } from 'next/navigation';
-import CoffeeSpotHero from '@/components/CoffeeSpotHero';
-import AnimatedSection from '@/components/AnimatedSection';
+import CoffeeSpotHero from '@/components/heroes/CoffeeSpotHero';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import Link from 'next/link';
 import { Coffee, MapPin, Route, ArrowRight, Clock, BarChart3, TrendingUp } from 'lucide-react';
 import '@/styles/coffeeSpotHero.css';

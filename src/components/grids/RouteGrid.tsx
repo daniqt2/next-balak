@@ -3,7 +3,7 @@
 import React from 'react';
 import { useRoutes } from '@/hooks/useRoutes';
 import { SlotGrid } from './SlotGrid';
-import RouteCard from './RouteCard';
+import RouteCard from '../cards/RouteCard';
 import type { Route } from '@/contentful-types';
 
 export function RouteGrid({ title, subtitle }: { title?: string, subtitle?: string }) {

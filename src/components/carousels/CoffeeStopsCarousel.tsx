@@ -3,8 +3,8 @@
 import React, { useRef } from 'react';
 import { Carousel } from '@mantine/carousel';
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import CoffeeStopCard from './CoffeeStopCard';
-import SectionTitle from './SectionTitle';
+import CoffeeStopCard from '../cards/CoffeeStopCard';
+import SectionTitle from '../ui/SectionTitle';
 import type { InterestSpot } from '@/contentful-types';
 import '@/styles/coffeeStopCard.css';
 

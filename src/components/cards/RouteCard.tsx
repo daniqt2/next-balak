@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import type { Route } from '@/contentful-types';
 import { formatRouteMetrics, getDifficultyColor } from '@/lib/route-utils';
-import SmallElevationGraph from './SmallElevationGraph';
+import SmallElevationGraph from '../ui/SmallElevationGraph';
 
 interface RouteCardProps {
   route: Route;

@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { SlotGrid } from './SlotGrid';
-import RouteCard from './RouteCard';
+import RouteCard from '../cards/RouteCard';
 import type { Route } from '@/contentful-types';
 
 interface RouteGroupRoutesGridProps {

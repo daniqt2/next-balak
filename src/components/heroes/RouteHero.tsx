@@ -3,7 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { formatRouteMetrics, getDifficultyColor } from '@/lib/route-utils';
-import RouteMetric, { RouteMetricIcons } from './RouteMetric';
+import RouteMetric, { RouteMetricIcons } from '../ui/RouteMetric';
 
 interface RouteHeroProps {
   route: {

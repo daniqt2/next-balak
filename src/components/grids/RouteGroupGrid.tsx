@@ -1,9 +1,9 @@
 'use client';
 
 import React from 'react';
-import RouteGroupDisplay from './RouteGroupDisplay';
-import SectionTitle from './SectionTitle';
-import AnimatedSection from './AnimatedSection';
+import RouteGroupDisplay from '../lists/RouteGroupDisplay';
+import SectionTitle from '../ui/SectionTitle';
+import AnimatedSection from '../ui/AnimatedSection';
 import { useRouteGroups } from '@/hooks/useRouteGroups';
 import type { RouteGroup } from '@/contentful-types';
 

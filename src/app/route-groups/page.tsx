@@ -1,7 +1,7 @@
 'use client';
 
-import AnimatedSection from "@/components/AnimatedSection";
-import RouteGroupGrid from "@/components/RouteGroupGrid";
+import AnimatedSection from "@/components/ui/AnimatedSection";
+import RouteGroupGrid from "@/components/grids/RouteGroupGrid";
 
 
 export default function RouteGroupsPage() {

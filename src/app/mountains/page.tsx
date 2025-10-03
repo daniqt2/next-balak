@@ -2,8 +2,8 @@
 
 import { useEffect, useState } from 'react';
 import { mountainService } from '@/services/mountain-service';
-import MountainCard from '@/components/MountainCard';
-import AnimatedSection from '@/components/AnimatedSection';
+import MountainCard from '@/components/cards/MountainCard';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import { Mountain, Search, Filter } from 'lucide-react';
 import type { InterestSpot } from '@/contentful-types';
 
