@@ -7,7 +7,6 @@ import MountainCard from './MountainCard';
 import SectionTitle from './SectionTitle';
 import type { InterestSpot } from '@/contentful-types';
 import '@/styles/coffeeStopCard.css';
-import '@/styles/sectionTitle.css';
 
 interface MountainsCarouselProps {
   mountains: InterestSpot[];
@@ -22,25 +21,31 @@ export default function MountainsCarousel({ mountains }: MountainsCarouselProps)
 
   const handleNext = () => {
     if (embla) {
-      // Move 2 slides at once
+      // On mobile (base), move 1 slide. On larger screens, move 2 slides
+      const isMobile = window.innerWidth < 640; // sm breakpoint
       embla.scrollNext();
-      setTimeout(() => embla.scrollNext(), 100);
+      if (!isMobile) {
+        setTimeout(() => embla.scrollNext(), 100);
+      }
     }
   };
 
   const handlePrevious = () => {
     if (embla) {
-      // Move 2 slides at once
+      // On mobile (base), move 1 slide. On larger screens, move 2 slides
+      const isMobile = window.innerWidth < 640; // sm breakpoint
       embla.scrollPrev();
-      setTimeout(() => embla.scrollPrev(), 100);
+      if (!isMobile) {
+        setTimeout(() => embla.scrollPrev(), 100);
+      }
     }
   };
 
   return (
     <div className="coffee-stops-section">
       <SectionTitle
-        title="Mountains"
-        subtitle="Challenging peaks along your route"
+        variant="tertiary"
+        title="Puertos"
         className="section-title--mountains"
       />
       
@@ -49,7 +54,7 @@ export default function MountainsCarousel({ mountains }: MountainsCarouselProps)
         getEmblaApi={setEmbla}
         withIndicators={mountains.length > 1}
         withControls={false}
-        slideSize="35%"
+        slideSize={{ base: '100%', sm: '50%', md: '35%' }}
         slideGap="sm"
         withKeyboardEvents={false}
         styles={{
@@ -61,7 +66,7 @@ export default function MountainsCarousel({ mountains }: MountainsCarouselProps)
           },
           slide: {
             padding: '0 0.5rem',
-            height: '400px',
+            height: '280px',
           },
           control: {
             backgroundColor: 'var(--mantine-color-charcoal-8)',
@@ -82,7 +87,7 @@ export default function MountainsCarousel({ mountains }: MountainsCarouselProps)
       >
         {mountains.map((mountain, index) => (
           <Carousel.Slide key={mountain?.sys?.id || index}>
-            <MountainCard mountain={mountain} index={index} />
+            <MountainCard mountain={mountain} index={index} compact={true} />
           </Carousel.Slide>
         ))}
         </Carousel>

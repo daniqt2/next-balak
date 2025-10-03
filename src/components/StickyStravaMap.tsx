@@ -17,10 +17,6 @@ interface StickyStravaMapProps {
   height?: number | string;
 }
 
-/**
- * Sticky Strava Map Component
- * Displays route map and links in a sticky sidebar
- */
 export default function StickyStravaMap({ 
   route, 
   units = "metric",
@@ -63,7 +59,6 @@ export default function StickyStravaMap({
     renderPlaceholder();
     await ensureScript();
     
-    // Some builds auto-initialize on load; if Strava exposes a global re-render, try it:
     if ((window as any).renderStravaEmbeds) {
       (window as any).renderStravaEmbeds();
     }
@@ -76,7 +71,6 @@ export default function StickyStravaMap({
   return (
     <div className="sticky-map-container">
       <div className="sticky-map-content">
-        {/* Strava Embed */}
         {route.stravaId ? (
           <div 
             ref={containerRef}
@@ -90,12 +84,13 @@ export default function StickyStravaMap({
           <div className="map-placeholder">
             <div className="map-placeholder-content">
               <div className="map-icon">
-                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                <svg fill="none" stroke="currentColor" viewBox="0 0 24 24" className="w-16 h-16">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M9 20l-5.447-2.724A1 1 0 013 16.382V5.618a1 1 0 011.447-.894L9 7m0 13l6-3m-6 3V7m6 10l4.553 2.276A1 1 0 0021 18.382V7.618a1 1 0 00-.553-.894L15 4m0 13V4m0 0L9 7" />
+                  <circle cx="12" cy="12" r="3" fill="none" stroke="currentColor" strokeWidth={1.5} />
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M12 9v6m-3-3h6" />
                 </svg>
               </div>
-              <p className="map-placeholder-text">No Strava Map Available</p>
-              <p className="map-placeholder-subtitle">Strava ID not found for this route</p>
+              <p className="map-placeholder-text">No hay mapa disponible</p>
             </div>
           </div>
         )}

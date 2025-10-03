@@ -1,10 +1,11 @@
 'use client';
 
 import React from 'react';
-import RouteGroupCard from './RouteGroupCard';
+import RouteGroupDisplay from './RouteGroupDisplay';
 import SectionTitle from './SectionTitle';
 import AnimatedSection from './AnimatedSection';
 import { useRouteGroups } from '@/hooks/useRouteGroups';
+import type { RouteGroup } from '@/contentful-types';
 
 interface RouteGroupGridProps {
   routes?: Array<{
@@ -31,6 +32,7 @@ interface RouteGroupGridProps {
 
 export default function RouteGroupGrid({ routes, title = "Aventuras de Ciclismo", subtitle = "Explora viajes completos de ciclismo y aventuras de varios días", fetchData = false }: RouteGroupGridProps) {
   const { routeGroups, loading, error } = useRouteGroups(fetchData ? 20 : 0);
+
   
   // Use fetched data if fetchData is true, otherwise use passed routes
   const displayRoutes = fetchData ? routeGroups : routes;
@@ -71,19 +73,20 @@ export default function RouteGroupGrid({ routes, title = "Aventuras de Ciclismo"
     <AnimatedSection delay={200}>
       <div className="mb-12">
         <SectionTitle
+          variant="primary"
           title={title}
           subtitle={subtitle}
           className="section-title--routes"
         />
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayRoutes.map((route, index) => (
+          {displayRoutes.map((routeGroup, index) => (
             <AnimatedSection 
-              key={route?.sys?.id || index} 
+              key={routeGroup?.sys?.id || index} 
               delay={300 + (index * 100)}
               direction="up"
             >
-              <RouteGroupCard route={route} />
+              <RouteGroupDisplay routeGroup={routeGroup as RouteGroup} />
             </AnimatedSection>
           ))}
         </div>

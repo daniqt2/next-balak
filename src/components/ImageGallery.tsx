@@ -26,8 +26,8 @@ export function ImageGallery({
 
   if (!images || images.length === 0) {
     return (
-      <div className="flex items-center justify-center bg-charcoal-800 rounded-lg" style={{ height }}>
-        <p className="text-charcoal-400">No images available</p>
+      <div className="flex items-center justify-center bg-gray-800 rounded-lg" style={{ height }}>
+        <p className="text-gray-400">No images available</p>
       </div>
     );
   }
@@ -170,19 +170,19 @@ export function ImageGallery({
               {/* Navigation Arrows */}
               <button
                 onClick={prevImage}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-charcoal-800/80 hover:bg-charcoal-700/80 text-balak-300 hover:text-balak-200 w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800/80 hover:bg-gray-700/80 text-balak-300 hover:text-balak-200 w-12 h-12 rounded-full flex items-center justify-center transition-colors"
               >
                 ←
               </button>
               <button
                 onClick={nextImage}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-charcoal-800/80 hover:bg-charcoal-700/80 text-balak-300 hover:text-balak-200 w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800/80 hover:bg-gray-700/80 text-balak-300 hover:text-balak-200 w-12 h-12 rounded-full flex items-center justify-center transition-colors"
               >
                 →
               </button>
               
               {/* Image Counter */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-charcoal-800/80 text-white px-3 py-1 rounded-full text-sm">
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800/80 text-white px-3 py-1 rounded-full text-sm">
                 {modalImageIndex + 1} / {images.length}
               </div>
             </>

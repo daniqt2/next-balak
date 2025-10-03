@@ -7,7 +7,6 @@ import CoffeeStopCard from './CoffeeStopCard';
 import SectionTitle from './SectionTitle';
 import type { InterestSpot } from '@/contentful-types';
 import '@/styles/coffeeStopCard.css';
-import '@/styles/sectionTitle.css';
 
 interface CoffeeStopsCarouselProps {
   coffeeStops: InterestSpot[];
@@ -15,41 +14,72 @@ interface CoffeeStopsCarouselProps {
 
 export default function CoffeeStopsCarousel({ coffeeStops }: CoffeeStopsCarouselProps) {
   const [embla, setEmbla] = React.useState<any>(null);
+  const [needsNavigation, setNeedsNavigation] = React.useState(false);
   
+  // Check if navigation is needed based on screen size and number of items
+  React.useEffect(() => {
+    if (!coffeeStops || coffeeStops.length === 0) return;
+    const checkNavigation = () => {
+      const width = window.innerWidth;
+      let itemsPerView = 1;
+      
+      if (width >= 1024) { // lg
+        itemsPerView = 4; // 25% each
+      } else if (width >= 640) { // sm
+        itemsPerView = 3; // 33% each
+      } else {
+        itemsPerView = 1; // 100%
+      }
+      
+      setNeedsNavigation(coffeeStops.length > itemsPerView);
+    };
+
+    checkNavigation();
+    window.addEventListener('resize', checkNavigation);
+    return () => window.removeEventListener('resize', checkNavigation);
+  }, [coffeeStops.length]);
+
   if (!coffeeStops || coffeeStops.length === 0) {
     return null;
   }
 
   const handleNext = () => {
     if (embla) {
-      // Move 2 slides at once
+      // On mobile (base), move 1 slide. On larger screens, move 2 slides
+      const isMobile = window.innerWidth < 640; // sm breakpoint
       embla.scrollNext();
-      setTimeout(() => embla.scrollNext(), 100);
+      if (!isMobile) {
+        setTimeout(() => embla.scrollNext(), 100);
+      }
     }
   };
 
   const handlePrevious = () => {
     if (embla) {
-      // Move 2 slides at once
+      // On mobile (base), move 1 slide. On larger screens, move 2 slides
+      const isMobile = window.innerWidth < 640; // sm breakpoint
       embla.scrollPrev();
-      setTimeout(() => embla.scrollPrev(), 100);
+      if (!isMobile) {
+        setTimeout(() => embla.scrollPrev(), 100);
+      }
     }
   };
 
   return (
     <div className="coffee-stops-section">
       <SectionTitle
-        title="Coffee Stops"
-        subtitle="Perfect spots to refuel during your ride"
+        variant="secondary"
+        title="Paradas"
+        subtitle="Lugares perfectos para recargar energía durante tu ruta"
         className="section-title--coffee"
       />
       
       <div className="relative">
         <Carousel
         getEmblaApi={setEmbla}
-        withIndicators={coffeeStops.length > 1}
+        withIndicators={needsNavigation}
         withControls={false}
-        slideSize="35%"
+        slideSize={{ base: '100%', sm: '33%', md: '25%' }}
         slideGap="sm"
         withKeyboardEvents={false}
         styles={{
@@ -57,11 +87,11 @@ export default function CoffeeStopsCarousel({ coffeeStops }: CoffeeStopsCarousel
             width: '100%',
           },
           container: {
-            gap: '1rem',
+            gap: '0.75rem',
           },
           slide: {
-            padding: '0 0.5rem',
-            height: '400px',
+            padding: '0 0.25rem',
+            height: '280px',
           },
           control: {
             backgroundColor: 'var(--mantine-color-charcoal-8)',
@@ -82,13 +112,13 @@ export default function CoffeeStopsCarousel({ coffeeStops }: CoffeeStopsCarousel
       >
         {coffeeStops.map((coffeeStop, index) => (
           <Carousel.Slide key={coffeeStop?.sys?.id || index}>
-            <CoffeeStopCard coffeeStop={coffeeStop} index={index} />
+            <CoffeeStopCard coffeeStop={coffeeStop} index={index} compact={true} />
           </Carousel.Slide>
         ))}
         </Carousel>
         
         {/* Custom Controls for Bigger Steps */}
-        {coffeeStops.length > 1 && (
+        {needsNavigation && (
           <>
             <button
               onClick={handlePrevious}

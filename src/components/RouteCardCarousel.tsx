@@ -49,6 +49,7 @@ export function RouteCardCarousel() {
         withIndicators
         withControls={routes.length > 3}
         initialSlide={2}
+        slideSize={{ base: '100%', sm: '50%', md: '33.333333%' }}
         styles={{
           root: {
             width: '100%',

@@ -1,7 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
-import { Route, MapPin, Clock } from 'lucide-react';
+import { useEffect, useRef, useState } from 'react';
 
 export default function HomeHero() {
   const [isVisible, setIsVisible] = useState(false);
@@ -30,7 +29,6 @@ export default function HomeHero() {
       className="relative w-full h-[80vh] min-h-[600px] max-h-[800px] overflow-hidden"
       style={{ marginTop: '64px' }}
     >
-      {/* Hero Background */}
       <div 
         className="relative w-full h-full"
         style={{
@@ -45,13 +43,7 @@ export default function HomeHero() {
         }}
       >
         {/* Dark Overlay */}
-        <div
-          style={{
-            position: 'absolute',
-            inset: 0,
-            background: 'linear-gradient(135deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.5) 50%, rgba(0,0,0,0.6) 100%)'
-          }}
-        />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/70 via-black/50 to-black/60" />
         
         {/* Balak Pattern Overlay */}
         <div
@@ -72,23 +64,14 @@ export default function HomeHero() {
               transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)'
             }}
           >
-            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white mb-6 drop-shadow-2xl leading-tight">
+            <h1 className="text-5xl sm:text-6xl lg:text-7xl font-bold text-white drop-shadow-2xl leading-tight">
               Nuestras Rutas
-              <span 
-                className="block"
-                style={{
-                  background: 'linear-gradient(135deg, #bfe23a, #a6c92f, #86a827)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
-                }}
-              >
+              <span className="block bg-gradient-to-br from-balak-400 via-balak-500 to-balak-600 bg-clip-text text-transparent">
                 Favoritas
               </span>
             </h1>
           </div>
           
-          {/* Subtitle */}
           <div 
             style={{
               transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
@@ -96,7 +79,7 @@ export default function HomeHero() {
               transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s'
             }}
           >
-            <p className="text-xl sm:text-2xl lg:text-3xl text-balak-200 mb-8 drop-shadow-lg max-w-4xl mx-auto leading-relaxed">
+            <p className="text-l sm:text-xl lg:text-2xl text-balak-200 mb-3 drop-shadow-lg max-w-3xl mx-auto leading-relaxed">
               Un par de amigos compartiendo nuestras rutas favoritas de ciclismo, cafés y puertos
             </p>
           </div>

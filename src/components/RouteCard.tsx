@@ -17,7 +17,7 @@ export default function RouteCard({ route, index = 0 }: RouteCardProps) {
   const [isVisible, setIsVisible] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const cardLink = `route/${route.slug}`;
+  const cardLink = `/route/${route.slug}`;
   const metrics = formatRouteMetrics(route);
 
   useEffect(() => {

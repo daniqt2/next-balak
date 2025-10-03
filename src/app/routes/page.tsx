@@ -6,13 +6,12 @@ import AnimatedSection from '@/components/AnimatedSection';
 
 export default function RoutesPage() {
   return (
-    <div className="min-h-screen bg-charcoal-900" style={{ paddingTop: '64px' }}>
+    <div className="min-h-screen bg-gray-900 pt-[64px]">
       <div className="container mx-auto px-4 py-8">
-        {/* Page Header */}
         <AnimatedSection delay={0}>
           <div className="text-center mb-16">
             <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6">
-              Todas las
+              Todas nuestras
               <span 
                 className="block"
                 style={{
@@ -22,16 +21,15 @@ export default function RoutesPage() {
                   backgroundClip: 'text'
                 }}
               >
-                Rutas de Ciclismo
+                Rutas
               </span>
             </h1>
             <p className="text-xl text-balak-200 max-w-3xl mx-auto">
-              Descubre nuestra colección completa de rutas de ciclismo, desde paseos fáciles y escénicos hasta aventuras desafiantes en montaña.
+            Explora todas las rutas de ciclismo que hemos probado y que recomendamos
             </p>
           </div>
         </AnimatedSection>
 
-        {/* Routes Grid */}
         <AnimatedSection delay={100}>
           <RouteGrid />
         </AnimatedSection>

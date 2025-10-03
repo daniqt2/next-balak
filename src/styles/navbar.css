@@ -24,7 +24,7 @@
   }
 
   .link {
-    @apply text-balak-300 hover:text-white font-medium transition-colors;
+    @apply text-emerald-300 hover:text-white font-medium transition-colors;
   }
 
   /* Animation states */

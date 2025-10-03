@@ -1,47 +1,61 @@
 .route-group-results {
   @apply space-y-6;
+}
 
-  .header {
-    @apply text-center mb-8;
+.route-group-results .header {
+  @apply text-center mb-8;
+}
 
-    .title {
-      @apply text-2xl font-bold text-white mb-2;
-    }
+.route-group-results .header .title {
+  @apply text-2xl font-bold text-white mb-2;
+}
 
-    .subtitle {
-      @apply text-charcoal-400;
-    }
+.route-group-results .header .subtitle {
+  @apply text-gray-400;
+}
+
+.route-group-results .grid {
+  display: grid;
+  grid-template-columns: repeat(1, minmax(0, 1fr));
+  gap: 1.5rem;
+}
+
+@media (min-width: 768px) {
+  .route-group-results .grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
+}
 
-  .grid {
-    @apply grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6;
+@media (min-width: 1024px) {
+  .route-group-results .grid {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
+}
 
-  .loading {
-    @apply text-center py-12;
+.route-group-results .loading {
+  @apply text-center py-12;
+}
 
-    .loading-text {
-      @apply text-balak-300 text-lg;
-    }
-  }
+.route-group-results .loading .loading-text {
+  @apply text-emerald-300 text-lg;
+}
 
-  .error {
-    @apply text-center py-12;
+.route-group-results .error {
+  @apply text-center py-12;
+}
 
-    .error-message {
-      @apply text-red-400 mb-4;
-    }
+.route-group-results .error .error-message {
+  @apply text-red-400 mb-4;
+}
 
-    .retry-button {
-      @apply px-4 py-2 bg-balak-500 text-charcoal-900 rounded hover:bg-balak-600 transition-colors;
-    }
-  }
+.route-group-results .error .retry-button {
+  @apply px-4 py-2 bg-emerald-500 text-gray-900 rounded hover:bg-emerald-600 transition-colors;
+}
 
-  .empty-state {
-    @apply text-center py-12;
+.route-group-results .empty-state {
+  @apply text-center py-12;
+}
 
-    .empty-message {
-      @apply text-charcoal-400 text-lg;
-    }
-  }
+.route-group-results .empty-state .empty-message {
+  @apply text-gray-400 text-lg;
 }

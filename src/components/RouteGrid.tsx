@@ -6,13 +6,14 @@ import { SlotGrid } from './SlotGrid';
 import RouteCard from './RouteCard';
 import type { Route } from '@/contentful-types';
 
-export function RouteGrid() {
+export function RouteGrid({ title, subtitle }: { title?: string, subtitle?: string }) {
+
   const { routes, loading, error, refetch } = useRoutes(6);
 
   return (
     <SlotGrid<Route>
-      title="Featured Routes GRID"
-      subtitle="Discover our cycling routes"
+      title={title}
+      subtitle={subtitle}
       items={routes}
       renderItem={(route, index) => (
         <RouteCard key={route?.sys.id} route={route} index={index} />

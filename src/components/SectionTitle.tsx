@@ -1,20 +1,23 @@
 import React, { useEffect, useRef, useState } from 'react';
-import '@/styles/sectionTitle.css';
 
 interface SectionTitleProps {
   title: string;
+  variant?: Variant;
   subtitle?: string;
   className?: string;
   titleClassName?: string;
   subtitleClassName?: string;
 }
 
+type Variant = 'primary' | 'secondary' | 'tertiary' | 'quaternary';
+
 export default function SectionTitle({ 
   title, 
   subtitle, 
   className = '',
   titleClassName = '',
-  subtitleClassName = ''
+  subtitleClassName = '',
+  variant 
 }: SectionTitleProps) {
   const [isVisible, setIsVisible] = useState(false);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -36,71 +39,65 @@ export default function SectionTitle({
     return () => observer.disconnect();
   }, []);
 
-  const isCoffee = className.includes('coffee');
-  const isMountains = className.includes('mountains');
-  const isRoutes = className.includes('routes');
+  const variantClass = (): string => {
+    if (!variant) return '';
+    switch (variant) {
+      case 'secondary':
+        return 'bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent';
+      case 'tertiary':
+        return 'bg-gradient-to-br from-green-500 via-green-600 to-green-700 bg-clip-text text-transparent';
+      case 'primary':
+        return 'bg-gradient-to-br from-balak-500 via-balak-600 to-balak-700 bg-clip-text text-transparent';
+      case 'quaternary':
+        return 'bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 bg-clip-text text-transparent';
+      default:
+        return 'bg-gradient-to-br from-white via-gray-100 to-gray-200 bg-clip-text text-transparent';
+    }
+  }
+
+  const variantColor = (): string => {
+    if (!variant) return '';
+    switch (variant) {
+      case 'secondary':
+        return '#fbbf24';
+      case 'tertiary':
+        return '#34d399';
+      case 'primary':
+        return '#d0eb66';
+      case 'quaternary':
+        return '#a78bfa';
+    }
+  }
 
   return (
     <div 
       ref={titleRef}
-      className={`section-title ${className}`}
-      style={{
-        marginBottom: '3rem',
-        textAlign: 'left'
-      }}
+      className={`my-12 text-left ${className}`}
     >
-      <div 
-        className="section-title-content"
-        style={{
-          maxWidth: '56rem'
-        }}
-      >
+      <div className="max-w-4xl">
         <div 
-          className="section-title-text"
+          className="flex flex-col gap-1"
           style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '1rem',
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
             opacity: isVisible ? 1 : 0,
             transition: 'all 0.6s ease-out'
           }}
         >
           <h2 
-            className={`section-title-heading ${titleClassName}`}
-                  style={{
-                    fontSize: '2.25rem',
-                    fontWeight: 'bold',
-                    background: isCoffee 
-                      ? 'linear-gradient(135deg, #fbbf24, #f59e0b, #d97706)'
-                      : isMountains
-                      ? 'linear-gradient(135deg, #10b981, #059669, #047857)'
-                      : isRoutes
-                      ? 'linear-gradient(135deg, #f59e0b, #d97706, #b45309)'
-                      : 'white',
-                    WebkitBackgroundClip: 'text',
-                    WebkitTextFillColor: 'transparent',
-                    backgroundClip: 'text',
-                    marginBottom: '1rem',
-                    lineHeight: '1',
-                    letterSpacing: '-0.025em'
-                  }}
+            className={`text-4xl md:text-5xl font-bold leading-tight tracking-tight ${titleClassName} ${variantClass()}`}
           >
             {title}
           </h2>
           
           {subtitle && (
             <p 
-              className={`section-title-subtitle ${subtitleClassName}`}
-                  style={{
-                    fontSize: '1.125rem',
-                    color: isCoffee ? '#fef3c7' : isMountains ? '#a7f3d0' : isRoutes ? '#fef3c7' : '#d1d5db',
-                    lineHeight: '.2',
-                    maxWidth: '48rem',
-                    transform: isVisible ? 'translateX(0)' : 'translateX(-10px)',
-                    opacity: isVisible ? 1 : 0,
-                    transition: 'all 0.6s ease-out 0.2s'
-                  }}
+              className={`text-lg md:text-xl leading-relaxed max-w-3xl  ${subtitleClassName}`}
+              style={{
+                color: variantColor(),
+                transform: isVisible ? 'translateX(0)' : 'translateX(-10px)',
+                opacity: isVisible ? 1 : 0,
+                transition: 'all 0.6s ease-out 0.2s'
+              }}
             >
               {subtitle}
             </p>

@@ -13,7 +13,7 @@ export default function RouteGroupDisplay({ routeGroup, index = 0 }: RouteGroupD
   const [isVisible, setIsVisible] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const groupLink = `route-group/${routeGroup.slug}`;
+  const groupLink = `/route-group/${routeGroup.slug}`;
 
   useEffect(() => {
     const card = cardRef.current;

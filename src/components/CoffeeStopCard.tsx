@@ -2,49 +2,52 @@
 
 import React from 'react';
 import Image from 'next/image';
+import Link from 'next/link';
 import { Coffee, MapPin, BarChart3 } from 'lucide-react';
 import type { InterestSpot } from '@/contentful-types';
 
 interface CoffeeStopCardProps {
   coffeeStop: InterestSpot;
   index?: number;
+  compact?: boolean;
 }
 
-export default function CoffeeStopCard({ coffeeStop, index = 0 }: CoffeeStopCardProps) {
+export default function CoffeeStopCard({ coffeeStop, index = 0, compact = false }: CoffeeStopCardProps) {
   if (!coffeeStop) return null;
 
   return (
-    <div 
-      style={{
-        backgroundColor: '#1f2937',
-        borderRadius: '16px',
-        overflow: 'hidden',
-        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1)',
-        border: '1px solid #374151',
-        display: 'flex',
-        flexDirection: 'column',
-        height: '400px',
-        width: '100%',
-        transition: 'all 0.3s ease',
-        cursor: 'pointer'
-      }}
-      onMouseEnter={(e) => {
-        e.currentTarget.style.transform = 'translateY(-4px)';
-        e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.4)';
-        e.currentTarget.style.borderColor = '#f59e0b';
-      }}
-      onMouseLeave={(e) => {
-        e.currentTarget.style.transform = 'translateY(0)';
-        e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1)';
-        e.currentTarget.style.borderColor = '#374151';
-      }}
-    >
+    <Link href={`/coffee/${coffeeStop.sys.id}`} className="block">
+      <div 
+        style={{
+          backgroundColor: '#1f2937',
+          borderRadius: '16px',
+          overflow: 'hidden',
+          boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1)',
+          border: '1px solid #374151',
+          display: 'flex',
+          flexDirection: 'column',
+          height: compact ? '280px' : '400px',
+          width: '100%',
+          transition: 'all 0.3s ease',
+          cursor: 'pointer'
+        }}
+        onMouseEnter={(e) => {
+          e.currentTarget.style.transform = 'translateY(-4px)';
+          e.currentTarget.style.boxShadow = '0 25px 50px -12px rgba(0, 0, 0, 0.4)';
+          e.currentTarget.style.borderColor = '#f59e0b';
+        }}
+        onMouseLeave={(e) => {
+          e.currentTarget.style.transform = 'translateY(0)';
+          e.currentTarget.style.boxShadow = '0 20px 25px -5px rgba(0, 0, 0, 0.3), 0 10px 10px -5px rgba(0, 0, 0, 0.1)';
+          e.currentTarget.style.borderColor = '#374151';
+        }}
+      >
       {/* Image Section */}
       <div 
         style={{
           position: 'relative',
           width: '100%',
-          height: '200px',
+          height: compact ? '140px' : '200px',
           overflow: 'hidden'
         }}
       >
@@ -99,7 +102,7 @@ export default function CoffeeStopCard({ coffeeStop, index = 0 }: CoffeeStopCard
       {/* Content Section */}
       <div 
         style={{
-          padding: '20px',
+          padding: compact ? '12px' : '20px',
           flex: 1,
           display: 'flex',
           flexDirection: 'column',
@@ -131,8 +134,8 @@ export default function CoffeeStopCard({ coffeeStop, index = 0 }: CoffeeStopCard
           style={{
             color: 'white',
             fontWeight: '700',
-            fontSize: '18px',
-            marginBottom: '8px',
+            fontSize: compact ? '16px' : '18px',
+            marginBottom: compact ? '6px' : '8px',
             lineHeight: '1.3',
             letterSpacing: '-0.025em'
           }}
@@ -144,12 +147,12 @@ export default function CoffeeStopCard({ coffeeStop, index = 0 }: CoffeeStopCard
         <p 
           style={{
             color: '#9ca3af',
-            fontSize: '14px',
+            fontSize: compact ? '12px' : '14px',
             lineHeight: '1.5',
-            marginBottom: '16px',
+            marginBottom: compact ? '12px' : '16px',
             flex: 1,
             display: '-webkit-box',
-            WebkitLineClamp: 3,
+            WebkitLineClamp: compact ? 2 : 3,
             WebkitBoxOrient: 'vertical',
             overflow: 'hidden'
           }}
@@ -196,5 +199,6 @@ export default function CoffeeStopCard({ coffeeStop, index = 0 }: CoffeeStopCard
         </div>
       </div>
     </div>
+    </Link>
   );
 }

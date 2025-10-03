@@ -35,7 +35,19 @@ module.exports = {
           950: '#0f1012',
         },
       },
+      height: {
+        '35': '8.75rem', // 140px
+        '50': '12.5rem', // 200px
+        '70': '17.5rem', // 280px
+        '96': '24rem',   // 384px
+        '15': '3.75rem', // 60px
+      },
+      backgroundImage: {
+        'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
+      },
     },
   },
-  plugins: [],
+  plugins: [
+    require('@tailwindcss/nesting'),
+  ],
 }

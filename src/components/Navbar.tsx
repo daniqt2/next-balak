@@ -45,8 +45,7 @@ export default function Navbar() {
         <ul className="links">
           <li><Link href="/" className="link">Inicio</Link></li>
           <li><Link href="/routes" className="link">Rutas</Link></li>
-          <li><Link href="/spots" className="link">Cafés</Link></li>
-          <li><Link href="/about" className="link">Nosotros</Link></li>
+          <li><Link href="/about-us" className="link">Nosotros</Link></li>
         </ul>
       </div>
     </nav>

@@ -6,7 +6,7 @@ import RouteGroupGrid from "@/components/RouteGroupGrid";
 
 export default function RouteGroupsPage() {
   return (
-    <div className="min-h-screen bg-charcoal-900" style={{ paddingTop: '64px' }}>
+    <div className="min-h-screen bg-gray-900" style={{ paddingTop: '64px' }}>
       <div className="container mx-auto px-4 py-8">
         {/* Page Header */}
         <AnimatedSection delay={0}>

@@ -22,8 +22,8 @@ export function SimpleImageCarousel({
 }: SimpleImageCarouselProps) {
   if (!images || images.length === 0) {
     return (
-      <div className="flex items-center justify-center bg-charcoal-800 rounded-lg" style={{ height }}>
-        <p className="text-charcoal-400">No images available</p>
+      <div className="flex items-center justify-center bg-gray-800 rounded-lg" style={{ height }}>
+        <p className="text-gray-400">No images available</p>
       </div>
     );
   }

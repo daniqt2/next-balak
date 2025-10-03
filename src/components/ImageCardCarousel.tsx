@@ -28,8 +28,8 @@ export function ImageCardCarousel({
 
   if (!images || images.length === 0) {
     return (
-      <div className="flex items-center justify-center bg-charcoal-800 rounded-lg" style={{ height: cardHeight }}>
-        <p className="text-charcoal-400">No images available</p>
+      <div className="flex items-center justify-center bg-gray-800 rounded-lg" style={{ height: cardHeight }}>
+        <p className="text-gray-400">No images available</p>
       </div>
     );
   }
@@ -51,13 +51,13 @@ export function ImageCardCarousel({
     <div className="space-y-6">
       <div className="text-center mb-8">
         <h2 className="text-2xl font-bold text-white mb-2">Image Gallery</h2>
-        <p className="text-charcoal-400">Browse through our collection</p>
+        <p className="text-gray-400">Browse through our collection</p>
       </div>
       
       <Carousel
         withIndicators={showIndicators && images.length > 1}
         withControls={showControls && images.length > 3}
-        slideSize="33.333333%"
+        slideSize={{ base: '100%', sm: '50%', md: '33.333333%' }}
         styles={{
           root: {
             width: '100%',
@@ -89,7 +89,7 @@ export function ImageCardCarousel({
         {images.map((image, index) => (
           <Carousel.Slide key={index}>
             <div 
-              className="relative w-full rounded-xl overflow-hidden shadow-lg border-2 border-charcoal-700/50 hover:border-balak-500/50 transition-all duration-300 hover:shadow-xl cursor-pointer"
+              className="relative w-full rounded-xl overflow-hidden shadow-lg border-2 border-gray-700/50 hover:border-balak-500/50 transition-all duration-300 hover:shadow-xl cursor-pointer"
               style={{ height: cardHeight }}
               onClick={() => openModal(index)}
             >
@@ -158,19 +158,19 @@ export function ImageCardCarousel({
               {/* Navigation Arrows */}
               <button
                 onClick={prevImage}
-                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-charcoal-800/80 hover:bg-charcoal-700/80 text-balak-300 hover:text-balak-200 w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                className="absolute left-4 top-1/2 transform -translate-y-1/2 bg-gray-800/80 hover:bg-gray-700/80 text-balak-300 hover:text-balak-200 w-12 h-12 rounded-full flex items-center justify-center transition-colors"
               >
                 ←
               </button>
               <button
                 onClick={nextImage}
-                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-charcoal-800/80 hover:bg-charcoal-700/80 text-balak-300 hover:text-balak-200 w-12 h-12 rounded-full flex items-center justify-center transition-colors"
+                className="absolute right-4 top-1/2 transform -translate-y-1/2 bg-gray-800/80 hover:bg-gray-700/80 text-balak-300 hover:text-balak-200 w-12 h-12 rounded-full flex items-center justify-center transition-colors"
               >
                 →
               </button>
               
               {/* Image Counter */}
-              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-charcoal-800/80 text-white px-3 py-1 rounded-full text-sm">
+              <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-gray-800/80 text-white px-3 py-1 rounded-full text-sm">
                 {modalImageIndex + 1} / {images.length}
               </div>
             </>
