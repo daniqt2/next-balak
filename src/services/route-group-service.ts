@@ -1,14 +1,20 @@
 import { contentfulFetcher } from '@/lib/contentful-fetcher';
-import {
-  Query,
-  RouteGroupFilter,
-  RouteGroupOrder,
-} from '@/contentful-types';
+import { Query, RouteGroupFilter, RouteGroupOrder } from '@/contentful-types';
 import { gql } from '@apollo/client';
 
 const GET_ROUTE_GROUP_COLLECTION = gql`
-  query GetRouteGroupCollection($limit: Int, $skip: Int, $where: RouteGroupFilter, $order: [RouteGroupOrder]) {
-    routeGroupCollection(limit: $limit, skip: $skip, where: $where, order: $order) {
+  query GetRouteGroupCollection(
+    $limit: Int
+    $skip: Int
+    $where: RouteGroupFilter
+    $order: [RouteGroupOrder]
+  ) {
+    routeGroupCollection(
+      limit: $limit
+      skip: $skip
+      where: $where
+      order: $order
+    ) {
       total
       skip
       limit
@@ -99,6 +105,9 @@ const GET_ROUTE_GROUP_BY_SLUG = gql`
           lat
           lon
         }
+        mapIframe {
+          json
+        }
         routesCollection {
           total
           items {
@@ -142,27 +151,21 @@ export class RouteGroupService {
    */
   async getRouteGroups(options: RouteGroupServiceOptions = {}): Promise<Query> {
     const { limit = 10, skip = 0, where, order } = options;
-    
-    return contentfulFetcher.query<Query>(
-      GET_ROUTE_GROUP_COLLECTION,
-      {
-        variables: {
-          limit,
-          skip,
-          where,
-          order,
-        },
-      }
-    );
+
+    return contentfulFetcher.query<Query>(GET_ROUTE_GROUP_COLLECTION, {
+      variables: {
+        limit,
+        skip,
+        where,
+        order,
+      },
+    });
   }
 
   async getRouteGroupBySlug(slug: string): Promise<Query> {
-    return contentfulFetcher.query<Query>(
-      GET_ROUTE_GROUP_BY_SLUG,
-      {
-        variables: { slug },
-      }
-    );
+    return contentfulFetcher.query<Query>(GET_ROUTE_GROUP_BY_SLUG, {
+      variables: { slug },
+    });
   }
 
   /**
@@ -179,8 +182,7 @@ export class RouteGroupService {
   /**
    * Search route groups by title or description
    */
-  async searchRouteGroups(searchTerm: string): Promise<Query
-  > {
+  async searchRouteGroups(searchTerm: string): Promise<Query> {
     return this.getRouteGroups({
       where: {
         OR: [

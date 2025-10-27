@@ -906,7 +906,7 @@ export type ResourceSys = {
   urn: Scalars['String']['output'];
 };
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type Route = Entry & _Node & {
   __typename?: 'Route';
   _id: Scalars['ID']['output'];
@@ -937,7 +937,7 @@ export type Route = Entry & _Node & {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteCoffeStopsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -948,44 +948,44 @@ export type RouteCoffeStopsCollectionArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteElevationArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteEndLocationArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteEndLocationNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteGarminLinkArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteHeaderImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteInterestSpotsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -996,19 +996,19 @@ export type RouteInterestSpotsCollectionArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteLengthArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteMainCarouselCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1017,20 +1017,20 @@ export type RouteMainCarouselCollectionArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteMainImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteMapEmbedArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteMountainsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1041,49 +1041,49 @@ export type RouteMountainsCollectionArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteSlugArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStartLocationArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStartLocationNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStravaIdArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStravaLinkArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteSubTitleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteTimeArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteTitleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
@@ -1253,11 +1253,13 @@ export type RouteGroup = Entry & _Node & {
   location?: Maybe<Location>;
   locationLabel?: Maybe<Scalars['String']['output']>;
   locationLength?: Maybe<Scalars['Int']['output']>;
+  mapIframe?: Maybe<RouteGroupMapIframe>;
   routesCollection?: Maybe<RouteGroupRoutesCollection>;
   slug?: Maybe<Scalars['String']['output']>;
   subtitle?: Maybe<Scalars['String']['output']>;
   sys: Sys;
   title?: Maybe<Scalars['String']['output']>;
+  type?: Maybe<Scalars['String']['output']>;
 };
 
 
@@ -1299,6 +1301,12 @@ export type RouteGroupLocationLengthArgs = {
 
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/routeGroup) */
+export type RouteGroupMapIframeArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/routeGroup) */
 export type RouteGroupRoutesCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1323,6 +1331,12 @@ export type RouteGroupSubtitleArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/routeGroup) */
 export type RouteGroupTitleArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/routeGroup) */
+export type RouteGroupTypeArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
 };
 
@@ -1365,6 +1379,9 @@ export type RouteGroupFilter = {
   location_exists?: InputMaybe<Scalars['Boolean']['input']>;
   location_within_circle?: InputMaybe<Scalars['Circle']['input']>;
   location_within_rectangle?: InputMaybe<Scalars['Rectangle']['input']>;
+  mapIframe_contains?: InputMaybe<Scalars['String']['input']>;
+  mapIframe_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  mapIframe_not_contains?: InputMaybe<Scalars['String']['input']>;
   routes?: InputMaybe<CfRouteNestedFilter>;
   routesCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   slug?: InputMaybe<Scalars['String']['input']>;
@@ -1389,6 +1406,13 @@ export type RouteGroupFilter = {
   title_not?: InputMaybe<Scalars['String']['input']>;
   title_not_contains?: InputMaybe<Scalars['String']['input']>;
   title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  type?: InputMaybe<Scalars['String']['input']>;
+  type_contains?: InputMaybe<Scalars['String']['input']>;
+  type_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  type_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  type_not?: InputMaybe<Scalars['String']['input']>;
+  type_not_contains?: InputMaybe<Scalars['String']['input']>;
+  type_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 export type RouteGroupLinkingCollections = {
@@ -1402,6 +1426,54 @@ export type RouteGroupLinkingCollectionsEntryCollectionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+};
+
+export type RouteGroupMapIframe = {
+  __typename?: 'RouteGroupMapIframe';
+  json: Scalars['JSON']['output'];
+  links: RouteGroupMapIframeLinks;
+};
+
+export type RouteGroupMapIframeAssets = {
+  __typename?: 'RouteGroupMapIframeAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+};
+
+export type RouteGroupMapIframeEntries = {
+  __typename?: 'RouteGroupMapIframeEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+};
+
+export type RouteGroupMapIframeLinks = {
+  __typename?: 'RouteGroupMapIframeLinks';
+  assets: RouteGroupMapIframeAssets;
+  entries: RouteGroupMapIframeEntries;
+  resources: RouteGroupMapIframeResources;
+};
+
+export type RouteGroupMapIframeResources = {
+  __typename?: 'RouteGroupMapIframeResources';
+  block: Array<RouteGroupMapIframeResourcesBlock>;
+  hyperlink: Array<RouteGroupMapIframeResourcesHyperlink>;
+  inline: Array<RouteGroupMapIframeResourcesInline>;
+};
+
+export type RouteGroupMapIframeResourcesBlock = ResourceLink & {
+  __typename?: 'RouteGroupMapIframeResourcesBlock';
+  sys: ResourceSys;
+};
+
+export type RouteGroupMapIframeResourcesHyperlink = ResourceLink & {
+  __typename?: 'RouteGroupMapIframeResourcesHyperlink';
+  sys: ResourceSys;
+};
+
+export type RouteGroupMapIframeResourcesInline = ResourceLink & {
+  __typename?: 'RouteGroupMapIframeResourcesInline';
+  sys: ResourceSys;
 };
 
 export enum RouteGroupOrder {
@@ -1422,7 +1494,9 @@ export enum RouteGroupOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
+  TitleDesc = 'title_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC'
 }
 
 export type RouteGroupRoutesCollection = {
@@ -1540,7 +1614,9 @@ export enum RouteLinkingCollectionsRouteGroupCollectionOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
   TitleAsc = 'title_ASC',
-  TitleDesc = 'title_DESC'
+  TitleDesc = 'title_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC'
 }
 
 export type RouteMapEmbed = {
@@ -1713,6 +1789,13 @@ export type SysFilter = {
 export type TaxonomyConcept = {
   __typename?: 'TaxonomyConcept';
   id?: Maybe<Scalars['String']['output']>;
+};
+
+export type TimelineFilterInput = {
+  /** Preview content starting from a given release date */
+  release_lte?: InputMaybe<Scalars['String']['input']>;
+  /** Preview content starting from a given timestamp */
+  timestamp_lte?: InputMaybe<Scalars['DateTime']['input']>;
 };
 
 export type _Node = {

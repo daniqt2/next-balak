@@ -26,15 +26,11 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
 
     return (
       <div className="min-h-screen bg-gray-900" style={{ paddingTop: '64px' }}>
-        {/* Hero Section */}
         <CoffeeSpotHero coffeeSpot={coffeeSpot} />
         
         <div className="container mx-auto px-4 py-8">
-          {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main Content Column */}
             <div className="lg:col-span-2 space-y-8">
-              {/* Location Information */}
               {coffeeSpot.locationName && (
                 <AnimatedSection delay={100}>
                   <div className="mb-8">
@@ -55,7 +51,6 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
                 </AnimatedSection>
               )}
 
-              {/* Description */}
               {coffeeSpot.description && (
                 <AnimatedSection delay={200}>
                   <div className="mb-8">
@@ -69,7 +64,6 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
                 </AnimatedSection>
               )}
 
-              {/* Related Routes */}
               {relatedRoutes.length > 0 && (
                 <AnimatedSection delay={300}>
                   <div className="mb-8">

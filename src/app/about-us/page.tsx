@@ -56,8 +56,7 @@ export default function AboutUsPage() {
                 <Mountain className="w-12 h-12 text-balak-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-3">Experiencias Reales</h3>
                 <p className="text-gray-300">
-                  Todas las rutas que compartimos las hemos hecho nosotros. Conocemos cada curva, 
-                  cada repecho y cada cafetería del camino.
+                  Todas las rutas que compartimos las hemos hecho nosotros. Hemos pasado por las cafeterías y los baches de cada ruta.
                 </p>
               </div>
               

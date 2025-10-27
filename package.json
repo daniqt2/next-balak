@@ -13,6 +13,8 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
+    "@contentful/rich-text-html-renderer": "^17.1.5",
+    "@contentful/rich-text-types": "^17.2.4",
     "@emotion/react": "^11.14.0",
     "@emotion/server": "^11.11.0",
     "@mantine/carousel": "^8.3.2",

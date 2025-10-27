@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import RouteGroupHero from '@/components/heroes/RouteGroupHero';
 import RouteGroupRoutesGrid from '@/components/grids/RouteGroupRoutesGrid';
 import AnimatedSection from '@/components/ui/AnimatedSection';
+import RichTextRenderer from '@/components/ui/RichTextRenderer';
 import type { Route } from '@/contentful-types';
 
 interface RouteGroupDetailPageProps {
@@ -15,7 +16,8 @@ export default async function RouteGroupDetailPage({ params }: RouteGroupDetailP
   try {
     const { slug } = await params;
     const data = await routeGroupService.getRouteGroupBySlug(slug);
-    const routeGroup = data.routeGroupCollection?.items?.[0];
+    const routeGroup = data?.routeGroupCollection?.items?.[0];
+
 
     if (!routeGroup) {
       notFound();
@@ -24,11 +26,9 @@ export default async function RouteGroupDetailPage({ params }: RouteGroupDetailP
 
     return (
       <div className="min-h-screen bg-gray-900" style={{ paddingTop: '64px' }}>
-        {/* Hero Section */}
         <RouteGroupHero routeGroup={routeGroup} />
         
         <div className="container mx-auto px-4 py-8">
-          {/* Description Section */}
           {routeGroup.description && (
             <AnimatedSection delay={100}>
               <div className="mb-12">
@@ -36,6 +36,20 @@ export default async function RouteGroupDetailPage({ params }: RouteGroupDetailP
                 <p className="text-gray-300 text-lg leading-relaxed max-w-4xl">
                   {routeGroup.description}
                 </p>
+              </div>
+            </AnimatedSection>
+          )}
+
+          {routeGroup.mapIframe?.json && (
+            <AnimatedSection delay={200}>
+              <div className="mb-12">
+                <h2 className="text-2xl font-bold text-white mb-6">Mapa del Área</h2>
+                <div className="bg-gray-800 rounded-lg overflow-hidden shadow-xl border border-gray-700 max-w-[80%] mx-auto">
+                  <RichTextRenderer 
+                    richTextJson={routeGroup.mapIframe.json}
+                    className="w-full"
+                  />
+                </div>
               </div>
             </AnimatedSection>
           )}

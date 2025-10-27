@@ -1,5 +1,5 @@
 import { create } from 'zustand';
-import { Route } from '@/contentful-types';
+import { Route, RouteOrder } from '@/contentful-types';
 import { routeService } from '@/services/route-service';
 
 interface RouteState {
@@ -13,7 +13,7 @@ interface RouteState {
   setError: (error: string | null) => void;
 }
 
-export const useRouteStore = create<RouteState>((set) => ({
+export const useRouteStore = create<RouteState>(set => ({
   routes: [],
   total: 0,
   loading: false,
@@ -21,23 +21,27 @@ export const useRouteStore = create<RouteState>((set) => ({
 
   fetchRoutes: async (limit = 10) => {
     set({ loading: true, error: null });
-    
+
     try {
-      const data = await routeService.getRoutes({ limit });
-      set({ 
-        routes: data.routeCollection?.items?.filter(Boolean) as Route[] || [],
+      const data = await routeService.getRoutes({
+        limit,
+        order: [RouteOrder.SysPublishedAtDesc],
+      });
+      set({
+        routes: (data.routeCollection?.items?.filter(Boolean) as Route[]) || [],
         total: data.routeCollection?.total || 0,
-        loading: false 
+        loading: false,
       });
     } catch (error) {
-      set({ 
-        error: error instanceof Error ? error.message : 'Failed to fetch routes',
-        loading: false 
+      set({
+        error:
+          error instanceof Error ? error.message : 'Failed to fetch routes',
+        loading: false,
       });
     }
   },
 
   setRoutes: (routes, total) => set({ routes, total }),
-  setLoading: (loading) => set({ loading }),
-  setError: (error) => set({ error }),
+  setLoading: loading => set({ loading }),
+  setError: error => set({ error }),
 }));
