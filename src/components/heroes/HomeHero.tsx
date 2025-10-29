@@ -14,6 +14,7 @@ export default function HomeHero() {
   const mobileLogoRef = useRef<HTMLDivElement>(null);
   const desktopImageRef = useRef<HTMLDivElement>(null);
   const mobileImageRef = useRef<HTMLDivElement>(null);
+  const hasAnimatedRef = useRef(false); // Track if animation has already run
 
   // Set initial state before first paint
   useLayoutEffect(() => {
@@ -87,8 +88,24 @@ export default function HomeHero() {
       });
     };
 
-    // Wait for layout, then animate
+    // Only animate on first load
+    if (hasAnimatedRef.current) {
+      // Animation already ran, just show elements
+      const isDesktop = window.innerWidth >= 1024;
+      if (isDesktop && logoRef.current && desktopImageRef.current) {
+        gsap.set(logoRef.current, { opacity: 1, x: 0, y: 0, scale: 1 });
+        gsap.set(desktopImageRef.current, { opacity: 1 });
+      } else if (!isDesktop && mobileLogoRef.current && mobileImageRef.current) {
+        gsap.set(mobileLogoRef.current, { opacity: 1, x: 0, y: 0, scale: 1 });
+        gsap.set(mobileImageRef.current, { opacity: 1 });
+      }
+      setIsVisible(true);
+      return;
+    }
+
+    // Wait for layout, then animate (only first time)
     const timer = setTimeout(() => {
+      hasAnimatedRef.current = true; // Mark as animated
       if (logoRef.current && desktopImageRef.current && window.innerWidth >= 1024) {
         animateLogo(logoRef.current, desktopImageRef.current, false);
       }
@@ -190,6 +207,7 @@ export default function HomeHero() {
           <div className="relative w-full bg-white flex flex-col px-4 pt-4 pb-2">
             <div 
               ref={mobileLogoRef}
+              data-logo="mobile"
               className="flex flex-col justify-start"
               style={{ opacity: 0 }}
             >
@@ -223,7 +241,7 @@ export default function HomeHero() {
           </div>
 
           {/* Image - Mobile (below logo) */}
-          <div ref={mobileImageRef} className="relative w-full bg-gray-100" style={{ aspectRatio: '16/9', opacity: 0 }}>
+          <div ref={mobileImageRef} data-image="mobile" className="relative w-full bg-gray-100" style={{ aspectRatio: '16/9', opacity: 0 }}>
             <Image
               src="/balak-home.jpg"
               alt="Cycling route landscape"
@@ -257,7 +275,7 @@ export default function HomeHero() {
         {/* Desktop Layout: Split screen with overlay */}
         <div className="hidden lg:block relative w-full h-full">
           {/* Full Width Image Background - Desktop */}
-          <div ref={desktopImageRef} className="relative w-full bg-gray-100" style={{ 
+          <div ref={desktopImageRef} data-image="desktop" className="relative w-full bg-gray-100" style={{ 
             height: '100vh', 
             minHeight: '600px',
             opacity: 0
@@ -287,6 +305,7 @@ export default function HomeHero() {
               {/* Logo Section */}
               <div 
                 ref={logoRef}
+                data-logo="desktop"
                 className="flex flex-col justify-start"
                 style={{ opacity: 0 }}
               >

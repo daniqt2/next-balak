@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import ConditionalNavbar from "../components/layout/ConditionalNavbar";
 import { MantineProvider } from "../components/layout/MantineProvider";
+import PageTransition from "../components/layout/PageTransition";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -31,7 +32,9 @@ export default function RootLayout({
       >
         <MantineProvider>
           <ConditionalNavbar />
-          {children}
+          <PageTransition>
+            {children}
+          </PageTransition>
         </MantineProvider>
       </body>
     </html>
