@@ -4,32 +4,121 @@ import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import Logo from '@/components/ui/Logo';
 import Image from 'next/image';
 import SideMenu from '@/components/ui/SideMenu';
+import HomeScrollIntro from '@/components/sections/HomeScrollIntro';
+import HomeScrollCards from '@/components/sections/HomeScrollCards';
+import HomeScrollAbout from '@/components/sections/HomeScrollAbout';
 import { gsap } from 'gsap';
+// no route change for scroll section test
 
 export default function HomeHero() {
   const [isVisible, setIsVisible] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
+  const overlayRef = useRef<HTMLDivElement>(null);
   const logoRef = useRef<HTMLDivElement>(null);
   const mobileLogoRef = useRef<HTMLDivElement>(null);
   const desktopImageRef = useRef<HTMLDivElement>(null);
   const mobileImageRef = useRef<HTMLDivElement>(null);
-  const hasAnimatedRef = useRef(false); // Track if animation has already run
+  const hasAnimatedRef = useRef(false); // Track if animation has already run (per mount)
+  const hasPlayedOnceRef = useRef(false); // Persist across navigations (session)
+  const hasPulledRef = useRef(false);
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const sectionIds = ['intro', 'coffee', 'about'] as const;
 
-  // Set initial state before first paint
+  // Set initial state before first paint (respect first-load-only behavior)
   useLayoutEffect(() => {
-    if (logoRef.current) {
-      gsap.set(logoRef.current, { opacity: 0 });
+    // Read persisted flag from sessionStorage
+    const played = typeof window !== 'undefined' && sessionStorage.getItem('homeIntroPlayed') === '1';
+    hasPlayedOnceRef.current = played;
+
+    const setVisible = () => {
+      if (logoRef.current) gsap.set(logoRef.current, { opacity: 1, x: 0, y: 0, scale: 1 });
+      if (mobileLogoRef.current) gsap.set(mobileLogoRef.current, { opacity: 1, x: 0, y: 0, scale: 1 });
+      if (desktopImageRef.current) gsap.set(desktopImageRef.current, { opacity: 1 });
+      if (mobileImageRef.current) gsap.set(mobileImageRef.current, { opacity: 1 });
+    };
+
+    const setHidden = () => {
+      if (logoRef.current) gsap.set(logoRef.current, { opacity: 0 });
+      if (mobileLogoRef.current) gsap.set(mobileLogoRef.current, { opacity: 0 });
+      if (desktopImageRef.current) gsap.set(desktopImageRef.current, { opacity: 0 });
+      if (mobileImageRef.current) gsap.set(mobileImageRef.current, { opacity: 0 });
+    };
+
+    if (played) {
+      setVisible();
+      setIsVisible(true);
+      hasAnimatedRef.current = true;
+    } else {
+      setHidden();
     }
-    if (mobileLogoRef.current) {
-      gsap.set(mobileLogoRef.current, { opacity: 0 });
+  }, []);
+
+  useEffect(() => {
+    // Prepare overlay initial state
+    if (overlayRef.current) {
+      gsap.set(overlayRef.current, { yPercent: 100, pointerEvents: 'none' });
     }
-    if (desktopImageRef.current) {
-      gsap.set(desktopImageRef.current, { opacity: 0 });
+
+    const pullUp = (targetIndex?: number) => {
+      if (!overlayRef.current) return;
+      hasPulledRef.current = true;
+      gsap.set(overlayRef.current, { pointerEvents: 'auto' });
+      gsap.to(overlayRef.current, { 
+        yPercent: 0, 
+        duration: 0.8, 
+        ease: 'power3.out',
+        onComplete: () => {
+          const sc = scrollContainerRef.current;
+          if (sc && typeof targetIndex === 'number') {
+            sc.scrollTo({ top: targetIndex * sc.clientHeight, behavior: 'auto' });
+          }
+        }
+      });
+    };
+    const pullDown = () => {
+      if (!overlayRef.current) return;
+      hasPulledRef.current = false;
+      gsap.to(overlayRef.current, { yPercent: 100, duration: 0.8, ease: 'power3.inOut', onComplete: () => { gsap.set(overlayRef.current!, { pointerEvents: 'none' }); window.history.replaceState(null, '', location.pathname); } });
+    };
+
+    const handleWheel = (e: WheelEvent) => {
+      if (e.deltaY > 20 && !hasPulledRef.current) pullUp();
+      // Close only if overlay is open AND inner scroll is at very top
+      if (e.deltaY < -20 && hasPulledRef.current) {
+        const sc = scrollContainerRef.current;
+        if (sc && sc.scrollTop <= 0) pullDown();
+      }
+    };
+    const el = heroRef.current;
+    if (el) el.addEventListener('wheel', handleWheel, { passive: true });
+
+    // Deep link: open overlay if hash corresponds to section
+    const hash = typeof window !== 'undefined' ? window.location.hash.replace('#','') : '';
+    const initialIndex = sectionIds.indexOf(hash as any);
+    if (initialIndex >= 0) {
+      pullUp(initialIndex);
     }
-    if (mobileImageRef.current) {
-      gsap.set(mobileImageRef.current, { opacity: 0 });
-    }
+
+    return () => {
+      if (el) el.removeEventListener('wheel', handleWheel as any);
+    };
+  }, []);
+
+  // Keep hash in sync with current overlay section
+  useEffect(() => {
+    const sc = scrollContainerRef.current;
+    if (!sc) return;
+    const onScroll = () => {
+      const idx = Math.round(sc.scrollTop / sc.clientHeight);
+      const safeIdx = Math.min(Math.max(idx, 0), sectionIds.length - 1);
+      const id = sectionIds[safeIdx];
+      if (hasPulledRef.current) {
+        window.history.replaceState(null, '', `#${id}`);
+      }
+    };
+    sc.addEventListener('scroll', onScroll, { passive: true } as any);
+    return () => sc.removeEventListener('scroll', onScroll as any);
   }, []);
 
   useEffect(() => {
@@ -85,11 +174,15 @@ export default function HomeHero() {
       }, '<')
       .call(() => {
         setIsVisible(true);
+        try {
+          sessionStorage.setItem('homeIntroPlayed', '1');
+          hasPlayedOnceRef.current = true;
+        } catch {}
       });
     };
 
-    // Only animate on first load
-    if (hasAnimatedRef.current) {
+    // Only animate on first app load (skip if already played once in session)
+    if (hasAnimatedRef.current || hasPlayedOnceRef.current) {
       // Animation already ran, just show elements
       const isDesktop = window.innerWidth >= 1024;
       if (isDesktop && logoRef.current && desktopImageRef.current) {
@@ -105,7 +198,7 @@ export default function HomeHero() {
 
     // Wait for layout, then animate (only first time)
     const timer = setTimeout(() => {
-      hasAnimatedRef.current = true; // Mark as animated
+      hasAnimatedRef.current = true; // Mark as animated (this mount)
       if (logoRef.current && desktopImageRef.current && window.innerWidth >= 1024) {
         animateLogo(logoRef.current, desktopImageRef.current, false);
       }
@@ -186,6 +279,16 @@ export default function HomeHero() {
           minHeight: '100vh'
         }}
       >
+        {/* Pull-up overlay for scroll test */}
+        <div ref={overlayRef} className="absolute inset-0 bg-gray-900 z-50">
+          {/* Scrollable stacked sections */}
+          <div ref={scrollContainerRef} className="h-full w-full overflow-y-auto snap-y snap-mandatory">
+            <div id="intro"><HomeScrollIntro /></div>
+            <div id="coffee"><HomeScrollCards /></div>
+            <div id="about"><HomeScrollAbout /></div>
+          </div>
+        </div>
+        
         {/* Menu Button - Desktop: Top Right Corner */}
         <div className="hidden lg:block fixed top-12 right-12 z-50">
           <button
@@ -256,7 +359,6 @@ export default function HomeHero() {
             />
           </div>
 
-          {/* Menu Button - Mobile: Below image, centered */}
           <div className="flex justify-center px-4 py-20">
             <button
               onClick={() => setIsMenuOpen(true)}
@@ -272,9 +374,7 @@ export default function HomeHero() {
           </div>
         </div>
 
-        {/* Desktop Layout: Split screen with overlay */}
         <div className="hidden lg:block relative w-full h-full">
-          {/* Full Width Image Background - Desktop */}
           <div ref={desktopImageRef} data-image="desktop" className="relative w-full bg-gray-100" style={{ 
             height: '100vh', 
             minHeight: '600px',
@@ -294,31 +394,28 @@ export default function HomeHero() {
                 }}
               />
               
-              {/* Subtle gradient overlay for depth */}
               <div className="absolute inset-0 bg-gradient-to-l from-black/[0.02] via-transparent to-transparent" />
             </div>
           </div>
 
-          {/* Left Side - White Background with Logo - Overlay - Desktop */}
-          <div className="absolute inset-0 w-[45%] bg-white flex flex-col justify-between p-12 xl:p-16 z-10 pointer-events-none">
+          <div className="absolute inset-0 w-[25%] bg-white flex flex-col justify-between p-12 xl:p-16 z-10 pointer-events-none overflow-visible">
             <div className="pointer-events-auto">
               {/* Logo Section */}
               <div 
                 ref={logoRef}
                 data-logo="desktop"
-                className="flex flex-col justify-start"
+                className="flex flex-col justify-start relative z-20"
                 style={{ opacity: 0 }}
               >
                 <Logo 
                   width="100%" 
                   height="auto" 
                   color="#111"
-                  className="max-w-5xl xl:max-w-6xl"
+                  className="scale-[2.2] xl:scale-[2.8] origin-left drop-shadow-sm"
                 />
               </div>
             </div>
 
-            {/* Bottom Left Text - Desktop */}
             <div 
               className="flex flex-col gap-2 text-gray-900 pointer-events-auto"
               style={{
@@ -341,7 +438,6 @@ export default function HomeHero() {
         </div>
       </div>
 
-      {/* Side Menu */}
       <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </>
   );

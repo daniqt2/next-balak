@@ -1,0 +1,64 @@
+'use client';
+
+import Image from 'next/image';
+import { Instagram, Mail } from 'lucide-react';
+
+export default function HomeScrollAbout() {
+  return (
+    <section className="min-h-screen snap-start flex items-center px-6">
+      <div className="w-full max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+        {/* Left copy (home-like typography) */}
+        <div>
+          <div className="text-white/70 text-sm tracking-wide">Nosotros</div>
+          <h3 className="mt-2 text-4xl sm:text-5xl font-extrabold leading-tight">
+            <span className="block">Creado por ciclistas</span>
+            <span className="block bg-gradient-to-tr from-[#bfe23a] via-[#a6c92f] to-[#86a827] bg-clip-text text-transparent">para ciclistas</span>
+          </h3>
+          <p className="mt-4 text-white/75 max-w-xl text-xl">
+          Somos un grupo de amigos apasionados por la bici de carretera. Nos encanta subir puertos míticos que todo ciclista sueña con tachar de su lista, pero también descubrir esas carreteras escondidas que casi nadie conoce.
+          </p>
+
+          {/* CTAs + Redes */}
+          <div className="mt-8 flex flex-wrap gap-4 items-center">
+            <a href="/about-us" className="bg-white text-gray-900 px-6 py-3 rounded font-semibold hover:bg-gray-100 transition">Conócenos</a>
+
+            <div className="flex items-center gap-3 ml-2">
+              <a
+                href="https://instagram.com/balak.ride"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white shadow transition"
+                aria-label="Instagram"
+              >
+                <Instagram size={18} />
+              </a>
+              <a
+                href="mailto:balak.ride@gmail.com"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-balak-400 text-balak-400 hover:bg-balak-400 hover:text-white transition"
+                aria-label="Email"
+              >
+                <Mail size={18} />
+              </a>
+            </div>
+          </div>
+        </div>
+
+        {/* Right visual (overlapping images like home) */}
+        <div className="relative w-full max-w-xl mx-auto">
+          <div className="relative h-56 sm:h-72 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+            <Image src="/balak-home.jpg" alt="About main" fill className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
+          </div>
+
+          <div className="absolute -bottom-6 -left-6 w-2/3 h-40 sm:h-44 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+            <Image src="/balak-home.jpg" alt="About secondary" fill className="object-cover" />
+            <div className="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent" />
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+}
+
+
+

@@ -36,15 +36,15 @@
       @apply flex items-center justify-between;
 
       .title {
-        @apply text-white font-bold text-lg mb-1;
+        @apply text-white font-bold text-2xl mb-1;
       }
 
       .subtitle {
-        @apply text-emerald-200 text-sm;
+        @apply text-emerald-200 text-lg;
       }
 
       .route-count-badge {
-        @apply bg-emerald-500 text-gray-900 px-3 py-1 rounded-full text-sm font-bold;
+        @apply bg-balak-700 text-gray-900 px-3 py-1 rounded-full text-sm font-bold;
       }
     }
 

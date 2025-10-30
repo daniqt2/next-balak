@@ -14,7 +14,7 @@ export default function FeaturedRouteGroups({ routeGroups }: FeaturedRouteGroups
     <AnimatedSection delay={200}>
       <div className="mb-16">
         <SectionTitle
-          title="Colecciones de Rutas"
+          title="Areas para explorar"
           subtitle="Rutas agrupadas por área o tema - perfectas para explorar diferentes regiones"
           className="section-title--routes"
         />

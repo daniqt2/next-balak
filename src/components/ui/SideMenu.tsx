@@ -75,14 +75,14 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
             </li>
             <li>
               <Link
-                href="/routes"
+                href="/route-groups"
                 onClick={onClose}
                 className="block px-4 py-3 text-lg text-white hover:bg-gray-800 rounded-lg transition-colors"
               >
                 Rutas
               </Link>
             </li>
-            <li>
+            {/* <li>
               <Link
                 href="/route-groups"
                 onClick={onClose}
@@ -90,7 +90,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               >
                 Colecciones
               </Link>
-            </li>
+            </li> */}
             <li>
               <Link
                 href="/about-us"

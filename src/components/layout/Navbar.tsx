@@ -44,10 +44,18 @@ export default function Navbar() {
             BALAK <span>ride</span>
           </Link>
 
-          {/* Menu Button */}
+          {/* Desktop links */}
+          <div className="hidden lg:flex items-center gap-6">
+            {/* <Link href="/routes" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Rutas</Link> */}
+            <Link href="/route-groups" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Rutas</Link>
+            <Link href="/coffee-spots" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Mapa cafés</Link>
+            <Link href="/about-us" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Nosotros</Link>
+          </div>
+
+          {/* Mobile menu button */}
           <button
             onClick={() => setIsMenuOpen(true)}
-            className="group relative bg-gray-900 text-white px-6 py-3 flex items-center gap-3 hover:bg-gray-800 transition-all duration-200"
+            className="lg:hidden group relative bg-gray-900 text-white px-6 py-3 flex items-center gap-3 hover:bg-gray-800 transition-all duration-200"
             aria-label="Open menu"
           >
             <span className="text-sm font-medium tracking-wide">MENU</span>

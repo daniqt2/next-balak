@@ -24,7 +24,7 @@ export default function FeaturedRoutes({ }: FeaturedRoutesProps) {
         </div>
         
         <div className="text-center mt-8">
-          <a href="/routes" className="inline-flex items-center text-balak-400 hover:text-balak-300 font-medium transition-colors duration-200 group">
+          <a href="/route-groups" className="inline-flex items-center text-balak-400 hover:text-balak-300 font-medium transition-colors duration-200 group">
             Ver Todas las Rutas
             <svg className="ml-2 w-4 h-4 transition-transform group-hover:translate-x-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
