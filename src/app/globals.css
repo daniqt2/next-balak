@@ -44,3 +44,102 @@ body {
   color: #ffffff;
   font-family: 'Public Sans', sans-serif;
 }
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.animate-fade-in {
+  animation: fade-in 0.6s ease-out forwards;
+}
+
+.animate-fade-in-delay {
+  animation: fade-in 0.6s ease-out 0.3s forwards;
+  opacity: 0;
+}
+
+@keyframes title-slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.title-intersect {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+.title-intersect.title-animate-in {
+  opacity: 1;
+  transform: translateY(0);
+  animation: title-slide-up 0.8s ease-out 0.3s forwards;
+}
+
+/* Elegant Navigation Styles */
+.nav-link,
+.nav-link-mobile {
+  position: relative;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  overflow: hidden;
+  opacity: 1; /* Ensure visibility on load */
+}
+
+.nav-link span,
+.nav-link-mobile span {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: inline-block;
+}
+
+.nav-underline {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: linear-gradient(90deg, #111 0%, #666 100%);
+  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+  transform-origin: left;
+}
+
+.nav-link:hover .nav-underline,
+.nav-link-mobile:hover .nav-underline {
+  width: 100%;
+}
+
+.nav-link:hover span,
+.nav-link-mobile:hover span {
+  transform: translateX(4px);
+  letter-spacing: 0.08em;
+  color: #111;
+}
+
+.nav-link:active span,
+.nav-link-mobile:active span {
+  transform: translateX(2px) scale(0.98);
+}
+
+/* Subtle glow effect on hover */
+.nav-link:hover,
+.nav-link-mobile:hover {
+  text-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+/* Elegant spacing and typography */
+.nav-link {
+  padding: 0.5rem 0;
+}
+
+.nav-link-mobile {
+  padding: 0.75rem 0;
+}

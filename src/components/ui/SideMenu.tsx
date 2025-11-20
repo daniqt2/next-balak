@@ -82,6 +82,24 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
                 Rutas
               </Link>
             </li>
+            <li>
+              <Link
+                href="/coffee-spots"
+                onClick={onClose}
+                className="block px-4 py-3 text-lg text-white hover:bg-gray-800 rounded-lg transition-colors"
+              >
+                Cafés
+              </Link>
+            </li>
+            <li>
+              <Link
+                href="/mountains"
+                onClick={onClose}
+                className="block px-4 py-3 text-lg text-white hover:bg-gray-800 rounded-lg transition-colors"
+              >
+                Puertos
+              </Link>
+            </li>
             {/* <li>
               <Link
                 href="/route-groups"

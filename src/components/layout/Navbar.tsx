@@ -48,7 +48,8 @@ export default function Navbar() {
           <div className="hidden lg:flex items-center gap-6">
             {/* <Link href="/routes" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Rutas</Link> */}
             <Link href="/route-groups" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Rutas</Link>
-            <Link href="/coffee-spots" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Mapa cafés</Link>
+            <Link href="/coffee-spots" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Cafés</Link>
+            <Link href="/mountains" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Puertos</Link>
             <Link href="/about-us" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Nosotros</Link>
           </div>
 

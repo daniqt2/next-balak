@@ -43,7 +43,14 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
                       <p className="text-white text-lg">{coffeeSpot.locationName}</p>
                       {coffeeSpot.location?.lat && coffeeSpot.location?.lon && (
                         <p className="text-gray-400 text-sm mt-2">
-                          Coordenadas: {coffeeSpot.location.lat.toFixed(4)}, {coffeeSpot.location.lon.toFixed(4)}
+                          <a 
+                            href={`https://www.google.com/maps?q=${coffeeSpot.location.lat},${coffeeSpot.location.lon}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-balak-400 hover:text-balak-300 underline transition-colors"
+                          >
+                            Ver en Google Maps
+                          </a>
                         </p>
                       )}
                     </div>
@@ -153,12 +160,16 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
                         </div>
                       )}
                       {coffeeSpot.location?.lat && coffeeSpot.location?.lon && (
-                        <div className="flex justify-between items-center">
-                          <span className="text-gray-300">Coordenadas</span>
-                          <span className="text-white font-medium text-xs">
-                            {coffeeSpot.location.lat.toFixed(2)}, {coffeeSpot.location.lon.toFixed(2)}
-                          </span>
-                        </div>
+                        <p className="text-gray-400 text-sm mt-2">
+                          <a 
+                            href={`https://www.google.com/maps?q=${coffeeSpot.location.lat},${coffeeSpot.location.lon}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-balak-400 hover:text-balak-300 underline transition-colors"
+                          >
+                            Ver en Google Maps
+                          </a>
+                        </p>
                       )}
                     </div>
                   </div>

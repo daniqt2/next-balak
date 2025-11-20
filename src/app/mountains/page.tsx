@@ -6,6 +6,8 @@ import MountainCard from '@/components/cards/MountainCard';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import { Mountain, Search, Filter } from 'lucide-react';
 import type { InterestSpot } from '@/contentful-types';
+import AreaMap from '@/components/map/AreaMap';
+import MountainDisplay from '@/components/cards/MountainDisplay';
 
 export default function MountainsPage() {
   const [mountains, setMountains] = useState<InterestSpot[]>([]);
@@ -15,7 +17,7 @@ export default function MountainsPage() {
     async function fetchMountains() {
       try {
         const data = await mountainService.getMountains({ limit: 50 });
-        const mountainData = data.interestSpotCollection?.items?.filter((item): item is InterestSpot => item !== null) || [];
+        const mountainData = data?.interestSpotCollection?.items?.filter((item): item is InterestSpot => item !== null) || [];
         setMountains(mountainData);
       } catch (error) {
         console.error('Error fetching mountains:', error);
@@ -50,30 +52,18 @@ export default function MountainsPage() {
             </div>
           </AnimatedSection>
 
+          <AreaMap
+            coffeePoints={mountains}
+            variant="mountain"
+          />
+
           {/* Stats Section */}
-          <AnimatedSection delay={200}>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 text-center">
+          {/*  TODO - CREAR COMPONENTE PARA ESTADISTICAS */}
+          {/* <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 text-center">
                 <Mountain className="w-8 h-8 text-balak-400 mx-auto mb-3" />
                 <h3 className="text-white font-bold text-xl">{mountains.length}</h3>
                 <p className="text-gray-300">Puertos en ruta</p>
-              </div>
-              <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 text-center">
-                <Filter className="w-8 h-8 text-balak-400 mx-auto mb-3" />
-                <h3 className="text-white font-bold text-xl">
-                  {mountains.filter(m => m?.mountainDifficulty?.toLowerCase().includes('hard')).length}
-                </h3>
-                <p className="text-gray-300">Dificultad Alta</p>
-              </div>
-              <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 text-center">
-                <Search className="w-8 h-8 text-balak-400 mx-auto mb-3" />
-                <h3 className="text-white font-bold text-xl">
-                  {mountains.filter(m => m?.mountainElevationGain && m.mountainElevationGain > 1000).length}
-                </h3>
-                <p className="text-gray-300">1000m+ Desnivel</p>
-              </div>
-            </div>
-          </AnimatedSection>
+              </div> */}
 
           {/* Mountains Grid */}
           <AnimatedSection delay={300}>
@@ -84,14 +74,12 @@ export default function MountainsPage() {
                   {mountains.map((mountain, index) => (
                     <div
                       key={mountain?.sys.id}
+                      className="fade-in-up-item"
                       style={{
                         animationDelay: `${index * 100}ms`,
-                        animation: 'fadeInUp 0.6s ease-out forwards',
-                        opacity: 0,
-                        transform: 'translateY(20px)'
                       }}
                     >
-                     {mountain ? <MountainCard mountain={mountain} index={index} /> : null}
+                     {mountain ? <MountainDisplay mountain={mountain} index={index} /> : null}
                     </div>
                   ))}
                 </div>
@@ -107,6 +95,12 @@ export default function MountainsPage() {
         </div>
 
         <style jsx>{`
+          .fade-in-up-item {
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeInUp 0.6s ease-out forwards;
+          }
+          
           @keyframes fadeInUp {
             to {
               opacity: 1;

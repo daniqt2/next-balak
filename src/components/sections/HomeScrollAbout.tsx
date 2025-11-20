@@ -24,11 +24,9 @@ export default function HomeScrollAbout() {
 
             <div className="flex items-center gap-3 ml-2">
               <a
-                href="https://instagram.com/balak.ride"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center justify-center w-10 h-10 rounded-full bg-gradient-to-r from-pink-500 to-purple-600 hover:from-pink-600 hover:to-purple-700 text-white shadow transition"
-                aria-label="Instagram"
+                 href="https://instagram.com/balak.ride"
+                className="inline-flex items-center justify-center w-10 h-10 rounded-full border border-balak-400 text-balak-400 hover:bg-balak-400 hover:text-white transition"
+                aria-label="Email"
               >
                 <Instagram size={18} />
               </a>

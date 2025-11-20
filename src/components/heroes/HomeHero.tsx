@@ -1,58 +1,23 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useEffect, useRef } from 'react';
 import Logo from '@/components/ui/Logo';
 import Image from 'next/image';
-import SideMenu from '@/components/ui/SideMenu';
 import HomeScrollIntro from '@/components/sections/HomeScrollIntro';
 import HomeScrollCards from '@/components/sections/HomeScrollCards';
 import HomeScrollAbout from '@/components/sections/HomeScrollAbout';
 import { gsap } from 'gsap';
-// no route change for scroll section test
 
 export default function HomeHero() {
-  const [isVisible, setIsVisible] = useState(false);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const heroRef = useRef<HTMLDivElement>(null);
   const overlayRef = useRef<HTMLDivElement>(null);
-  const logoRef = useRef<HTMLDivElement>(null);
-  const mobileLogoRef = useRef<HTMLDivElement>(null);
-  const desktopImageRef = useRef<HTMLDivElement>(null);
-  const mobileImageRef = useRef<HTMLDivElement>(null);
-  const hasAnimatedRef = useRef(false); // Track if animation has already run (per mount)
-  const hasPlayedOnceRef = useRef(false); // Persist across navigations (session)
   const hasPulledRef = useRef(false);
   const scrollContainerRef = useRef<HTMLDivElement>(null);
   const sectionIds = ['intro', 'coffee', 'about'] as const;
-
-  // Set initial state before first paint (respect first-load-only behavior)
-  useLayoutEffect(() => {
-    // Read persisted flag from sessionStorage
-    const played = typeof window !== 'undefined' && sessionStorage.getItem('homeIntroPlayed') === '1';
-    hasPlayedOnceRef.current = played;
-
-    const setVisible = () => {
-      if (logoRef.current) gsap.set(logoRef.current, { opacity: 1, x: 0, y: 0, scale: 1 });
-      if (mobileLogoRef.current) gsap.set(mobileLogoRef.current, { opacity: 1, x: 0, y: 0, scale: 1 });
-      if (desktopImageRef.current) gsap.set(desktopImageRef.current, { opacity: 1 });
-      if (mobileImageRef.current) gsap.set(mobileImageRef.current, { opacity: 1 });
-    };
-
-    const setHidden = () => {
-      if (logoRef.current) gsap.set(logoRef.current, { opacity: 0 });
-      if (mobileLogoRef.current) gsap.set(mobileLogoRef.current, { opacity: 0 });
-      if (desktopImageRef.current) gsap.set(desktopImageRef.current, { opacity: 0 });
-      if (mobileImageRef.current) gsap.set(mobileImageRef.current, { opacity: 0 });
-    };
-
-    if (played) {
-      setVisible();
-      setIsVisible(true);
-      hasAnimatedRef.current = true;
-    } else {
-      setHidden();
-    }
-  }, []);
+  const mobileTitleRef = useRef<HTMLDivElement>(null);
+  const desktopTitleRef = useRef<HTMLDivElement>(null);
+  const desktopNavRef = useRef<HTMLElement>(null);
+  const mobileNavRef = useRef<HTMLElement>(null);
 
   useEffect(() => {
     // Prepare overlay initial state
@@ -121,153 +86,63 @@ export default function HomeHero() {
     return () => sc.removeEventListener('scroll', onScroll as any);
   }, []);
 
+  // Intersection observer for title animation
   useEffect(() => {
-    const animateLogo = (element: HTMLElement, imageElement: HTMLElement | null, isMobile: boolean) => {
-      // Get current position
-      const rect = element.getBoundingClientRect();
-      const centerX = window.innerWidth / 2;
-      const centerY = window.innerHeight / 2;
-      
-      // Calculate offset from center to final position
-      const finalX = rect.left + rect.width / 2;
-      const finalY = rect.top + rect.height / 2;
-      const offsetX = finalX - centerX;
-      const offsetY = finalY - centerY;
+    const observerOptions = {
+      threshold: 0.2,
+      rootMargin: '0px'
+    };
 
-      // Start: centered, invisible, small
-      gsap.set(element, {
-        x: -offsetX,
-        y: -offsetY,
-        opacity: 0,
-        scale: 0.7
-      });
-
-      // Start image invisible
-      if (imageElement) {
-        gsap.set(imageElement, {
-          opacity: 0
-        });
-      }
-
-      const tl = gsap.timeline();
-
-      // 1. Fade in and scale up (at center via transform) - smoother
-      tl.to(element, {
-        opacity: 1,
-        scale: 1,
-        duration: 1,
-        ease: 'power3.out'
-      })
-      // 2. Wait a bit
-      .to({}, { duration: 0.6 })
-      // 3. Slide to final position AND start image fade in simultaneously
-      .to(element, {
-        x: 0,
-        y: 0,
-        duration: 1.4,
-        ease: 'power2.inOut'
-      }, '>')
-      .to(imageElement, {
-        opacity: 1,
-        duration: 1.4,
-        ease: 'power2.inOut'
-      }, '<')
-      .call(() => {
-        setIsVisible(true);
-        try {
-          sessionStorage.setItem('homeIntroPlayed', '1');
-          hasPlayedOnceRef.current = true;
-        } catch {}
+    const observerCallback = (entries: IntersectionObserverEntry[]) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('title-animate-in');
+          // Unobserve after animation to prevent re-triggering
+          observer.unobserve(entry.target);
+        }
       });
     };
 
-    // Only animate on first app load (skip if already played once in session)
-    if (hasAnimatedRef.current || hasPlayedOnceRef.current) {
-      // Animation already ran, just show elements
-      const isDesktop = window.innerWidth >= 1024;
-      if (isDesktop && logoRef.current && desktopImageRef.current) {
-        gsap.set(logoRef.current, { opacity: 1, x: 0, y: 0, scale: 1 });
-        gsap.set(desktopImageRef.current, { opacity: 1 });
-      } else if (!isDesktop && mobileLogoRef.current && mobileImageRef.current) {
-        gsap.set(mobileLogoRef.current, { opacity: 1, x: 0, y: 0, scale: 1 });
-        gsap.set(mobileImageRef.current, { opacity: 1 });
-      }
-      setIsVisible(true);
-      return;
+    const observer = new IntersectionObserver(observerCallback, observerOptions);
+
+    if (mobileTitleRef.current) {
+      observer.observe(mobileTitleRef.current);
+    }
+    if (desktopTitleRef.current) {
+      observer.observe(desktopTitleRef.current);
     }
 
-    // Wait for layout, then animate (only first time)
-    const timer = setTimeout(() => {
-      hasAnimatedRef.current = true; // Mark as animated (this mount)
-      if (logoRef.current && desktopImageRef.current && window.innerWidth >= 1024) {
-        animateLogo(logoRef.current, desktopImageRef.current, false);
-      }
-      if (mobileLogoRef.current && mobileImageRef.current && window.innerWidth < 1024) {
-        animateLogo(mobileLogoRef.current, mobileImageRef.current, true);
-      }
-    }, 100);
-
     return () => {
-      clearTimeout(timer);
-      if (logoRef.current) gsap.killTweensOf(logoRef.current);
-      if (mobileLogoRef.current) gsap.killTweensOf(mobileLogoRef.current);
-      if (desktopImageRef.current) gsap.killTweensOf(desktopImageRef.current);
-      if (mobileImageRef.current) gsap.killTweensOf(mobileImageRef.current);
+      if (mobileTitleRef.current) observer.unobserve(mobileTitleRef.current);
+      if (desktopTitleRef.current) observer.unobserve(desktopTitleRef.current);
     };
   }, []);
 
-  // Handle resize - show/hide elements correctly based on viewport size
+  // Set navigation to final state immediately (no animation)
   useEffect(() => {
-    const handleResize = () => {
-      const isDesktop = window.innerWidth >= 1024;
+    const setNavState = (navElement: HTMLElement | null) => {
+      if (!navElement) return;
       
-      if (isDesktop) {
-        // Desktop: show desktop logo and image, hide mobile
-        if (logoRef.current) {
-          gsap.set(logoRef.current, { opacity: 1, x: 0, y: 0, scale: 1 });
-        }
-        if (desktopImageRef.current) {
-          gsap.set(desktopImageRef.current, { opacity: 1 });
-        }
-        if (mobileLogoRef.current) {
-          gsap.set(mobileLogoRef.current, { opacity: 0 });
-        }
-        if (mobileImageRef.current) {
-          gsap.set(mobileImageRef.current, { opacity: 0 });
-        }
-      } else {
-        // Mobile: show mobile logo and image, hide desktop
-        if (mobileLogoRef.current) {
-          gsap.set(mobileLogoRef.current, { opacity: 1, x: 0, y: 0, scale: 1 });
-        }
-        if (mobileImageRef.current) {
-          gsap.set(mobileImageRef.current, { opacity: 1 });
-        }
-        if (logoRef.current) {
-          gsap.set(logoRef.current, { opacity: 0 });
-        }
-        if (desktopImageRef.current) {
-          gsap.set(desktopImageRef.current, { opacity: 0 });
-        }
-      }
+      const links = navElement.querySelectorAll('a');
+      if (links.length === 0) return;
+
+      // Set final state immediately - no movement, just appear
+      gsap.set(links, { 
+        opacity: 1,
+        y: 0,
+        letterSpacing: '0.05em'
+      });
     };
 
-    // Debounce resize handler
-    let resizeTimer: NodeJS.Timeout;
-    const debouncedResize = () => {
-      clearTimeout(resizeTimer);
-      resizeTimer = setTimeout(handleResize, 150);
-    };
+    // Set desktop nav
+    if (desktopNavRef.current) {
+      setNavState(desktopNavRef.current);
+    }
 
-    window.addEventListener('resize', debouncedResize);
-    
-    // Check initial size
-    handleResize();
-
-    return () => {
-      window.removeEventListener('resize', debouncedResize);
-      clearTimeout(resizeTimer);
-    };
+    // Set mobile nav
+    if (mobileNavRef.current) {
+      setNavState(mobileNavRef.current);
+    }
   }, []);
 
   return (
@@ -289,31 +164,12 @@ export default function HomeHero() {
           </div>
         </div>
         
-        {/* Menu Button - Desktop: Top Right Corner */}
-        <div className="hidden lg:block fixed top-12 right-12 z-50">
-          <button
-            onClick={() => setIsMenuOpen(true)}
-            className="group relative bg-gray-900 text-white px-6 py-3 flex items-center gap-3 hover:bg-gray-800 transition-all duration-200 shadow-lg"
-            aria-label="Open menu"
-          >
-            <span className="text-sm font-medium tracking-wide">MENU</span>
-            <div className="flex flex-col gap-1">
-              <span className="block w-5 h-px bg-white transition-all group-hover:w-6" />
-              <span className="block w-5 h-px bg-white transition-all group-hover:w-6" />
-            </div>
-          </button>
-        </div>
 
         {/* Mobile Layout: Logo on top, Image below */}
         <div className="lg:hidden flex flex-col w-full">
           {/* Logo Section - Mobile (very compact) */}
           <div className="relative w-full bg-white flex flex-col px-4 pt-4 pb-2">
-            <div 
-              ref={mobileLogoRef}
-              data-logo="mobile"
-              className="flex flex-col justify-start"
-              style={{ opacity: 0 }}
-            >
+            <div className="flex flex-col justify-start animate-fade-in">
               <Logo 
                 width="100%" 
                 height="auto" 
@@ -323,15 +179,11 @@ export default function HomeHero() {
             </div>
 
             {/* Bottom Text - Mobile (very compact) */}
-            <div 
-              className="flex flex-col gap-0.5 text-gray-900 my-10"
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s'
-              }}
-            >
-              <div className="text-m font-medium tracking-wide">
+            <div className="flex flex-col gap-0.5 text-gray-900 my-10 animate-fade-in-delay">
+              <div 
+                ref={mobileTitleRef}
+                className="text-m font-medium tracking-wide title-intersect"
+              >
                 BALAK RIDE
               </div>
               <div className="text-m font-light text-gray-700">
@@ -344,7 +196,7 @@ export default function HomeHero() {
           </div>
 
           {/* Image - Mobile (below logo) */}
-          <div ref={mobileImageRef} data-image="mobile" className="relative w-full bg-gray-100" style={{ aspectRatio: '16/9', opacity: 0 }}>
+          <div className="relative w-full bg-gray-100 animate-fade-in" style={{ aspectRatio: '16/9' }}>
             <Image
               src="/balak-home.jpg"
               alt="Cycling route landscape"
@@ -359,26 +211,46 @@ export default function HomeHero() {
             />
           </div>
 
-          <div className="flex justify-center px-4 py-20">
-            <button
-              onClick={() => setIsMenuOpen(true)}
-              className="group relative bg-gray-900 text-white px-6 py-3 flex items-center gap-3 hover:bg-gray-800 transition-all duration-200 shadow-lg"
-              aria-label="Open menu"
-            >
-              <span className="text-sm font-medium tracking-wide">MENU</span>
-              <div className="flex flex-col gap-1">
-                <span className="block w-5 h-px bg-white transition-all group-hover:w-6" />
-                <span className="block w-5 h-px bg-white transition-all group-hover:w-6" />
-              </div>
-            </button>
+          {/* Navigation - Mobile (below image) */}
+          <div className="w-full bg-white px-4 py-12">
+            <nav ref={mobileNavRef} className="flex flex-col gap-4 text-gray-900">
+              <a 
+                href="/route-groups" 
+                className="nav-link-mobile text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+              >
+                <span className="relative z-10">Rutas</span>
+                <span className="nav-underline"></span>
+              </a>
+              <a 
+                href="/mountains" 
+                className="nav-link-mobile text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+              >
+                <span className="relative z-10">Puertos</span>
+                <span className="nav-underline"></span>
+              </a>
+              <a 
+                href="/coffee-spots" 
+                className="nav-link-mobile text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+              >
+                <span className="relative z-10">Cafés</span>
+                <span className="nav-underline"></span>
+              </a>
+              <a 
+                href="/about-us" 
+                className="nav-link-mobile text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+              >
+                <span className="relative z-10">Nosotros</span>
+                <span className="nav-underline"></span>
+              </a>
+            </nav>
           </div>
+
         </div>
 
         <div className="hidden lg:block relative w-full h-full">
-          <div ref={desktopImageRef} data-image="desktop" className="relative w-full bg-gray-100" style={{ 
+          <div className="relative w-full bg-gray-100 animate-fade-in" style={{ 
             height: '100vh', 
-            minHeight: '600px',
-            opacity: 0
+            minHeight: '600px'
           }}>
             <div className="relative w-full h-full">
               <Image
@@ -401,12 +273,7 @@ export default function HomeHero() {
           <div className="absolute inset-0 w-[25%] bg-white flex flex-col justify-between p-12 xl:p-16 z-10 pointer-events-none overflow-visible">
             <div className="pointer-events-auto">
               {/* Logo Section */}
-              <div 
-                ref={logoRef}
-                data-logo="desktop"
-                className="flex flex-col justify-start relative z-20"
-                style={{ opacity: 0 }}
-              >
+              <div className="flex flex-col justify-start relative z-20 animate-fade-in">
                 <Logo 
                   width="100%" 
                   height="auto" 
@@ -416,15 +283,42 @@ export default function HomeHero() {
               </div>
             </div>
 
-            <div 
-              className="flex flex-col gap-2 text-gray-900 pointer-events-auto"
-              style={{
-                opacity: isVisible ? 1 : 0,
-                transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                transition: 'all 1s cubic-bezier(0.4, 0, 0.2, 1) 0.4s'
-              }}
-            >
-              <div className="text-base font-medium tracking-wide">
+            <nav ref={desktopNavRef} className="flex flex-col gap-5 text-gray-900 pointer-events-auto">
+              <a 
+                href="/route-groups" 
+                className="nav-link text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+              >
+                <span className="relative z-10">Rutas</span>
+                <span className="nav-underline"></span>
+              </a>
+              <a 
+                href="/mountains" 
+                className="nav-link text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+              >
+                <span className="relative z-10">Puertos</span>
+                <span className="nav-underline"></span>
+              </a>
+              <a 
+                href="/coffee-spots" 
+                className="nav-link text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+              >
+                <span className="relative z-10">Cafés</span>
+                <span className="nav-underline"></span>
+              </a>
+              <a 
+                href="/about-us" 
+                className="nav-link text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+              >
+                <span className="relative z-10">Nosotros</span>
+                <span className="nav-underline"></span>
+              </a>
+            </nav>
+
+            <div className="flex flex-col gap-2 text-gray-900 pointer-events-auto animate-fade-in-delay">
+              <div 
+                ref={desktopTitleRef}
+                className="text-base font-medium tracking-wide title-intersect"
+              >
                 BALAK RIDE
               </div>
               <div className="text-base font-light text-gray-700">
@@ -437,8 +331,6 @@ export default function HomeHero() {
           </div>
         </div>
       </div>
-
-      <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
     </>
   );
 }

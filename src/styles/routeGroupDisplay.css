@@ -1,16 +1,16 @@
 .route-group-display {
   @apply relative w-full h-[300px]
-         rounded-lg overflow-hidden shadow-lg          border-2 border-emerald-500/20
+         rounded-lg overflow-hidden shadow-lg
          opacity-0 translate-y-4
-         transition-all duration-500 ease-out
-         hover:border-emerald-500/40 hover:shadow-xl;
+         transition-all duration-500 ease-out border border-transparent
+         hover:border-balak-500/40 hover:shadow-xl;
 
   &.route-group-display--visible {
     @apply opacity-100 translate-y-0;
   }
 
   .skeleton {
-    @apply absolute inset-0 bg-gradient-to-br from-emerald-100 to-emerald-200 animate-pulse;
+    @apply absolute inset-0 bg-gradient-to-br  to-balak-300 animate-pulse;
   }
 
   .image {
@@ -26,7 +26,15 @@
   }
 
   .overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-gray-900/80 via-gray-900/20 to-transparent;
+    @apply absolute inset-0;
+    background: linear-gradient(to top, 
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.7) 10%,
+      rgba(0, 0, 0, 0.4) 30%,
+      rgba(0, 0, 0, 0.15) 50%,
+      rgba(0, 0, 0, 0.05) 80%,
+      transparent 100%
+    );
   }
 
   .content {
@@ -40,7 +48,7 @@
       }
 
       .subtitle {
-        @apply text-emerald-200 text-lg;
+        @apply text-balak-700 text-lg;
       }
 
       .route-count-badge {
@@ -49,7 +57,7 @@
     }
 
     .location {
-      @apply mt-2 flex items-center text-emerald-300 text-sm;
+      @apply mt-2 flex items-center text-white text-sm;
     }
   }
 }

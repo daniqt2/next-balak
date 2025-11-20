@@ -41,7 +41,7 @@ export default async function RouteDetailPage({ params }: RouteDetailPageProps) 
             {route.description && (
                 <AnimatedSection delay={100}>
                   <div className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">Description</h2>
+                    <h2 className="text-2xl font-bold text-white mb-4">Descripción</h2>
                     <p className="text-gray-300 text-lg leading-relaxed">
                       {route.description}
                     </p>
@@ -89,13 +89,13 @@ export default async function RouteDetailPage({ params }: RouteDetailPageProps) 
                     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                       {route.startLocationName && (
                         <div className="bg-gray-800 p-4 rounded-lg">
-                          <h3 className="text-balak-300 font-semibold mb-2">Start Location</h3>
+                          <h3 className="text-balak-300 font-semibold mb-2">Inicio</h3>
                           <p className="text-white">{route.startLocationName}</p>
                         </div>
                       )}
                       {route.endLocationName && (
                         <div className="bg-gray-800 p-4 rounded-lg">
-                          <h3 className="text-balak-300 font-semibold mb-2">End Location</h3>
+                          <h3 className="text-balak-300 font-semibold mb-2">Fin</h3>
                           <p className="text-white">{route.endLocationName}</p>
                         </div>
                         

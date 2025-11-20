@@ -7,8 +7,18 @@ import {
 import { gql } from '@apollo/client';
 
 const GET_COFFEE_COLLECTION = gql`
-  query GetCoffeeCollection($limit: Int, $skip: Int, $where: InterestSpotFilter, $order: [InterestSpotOrder]) {
-    interestSpotCollection(limit: $limit, skip: $skip, where: $where, order: $order) {
+  query GetCoffeeCollection(
+    $limit: Int
+    $skip: Int
+    $where: InterestSpotFilter
+    $order: [InterestSpotOrder]
+  ) {
+    interestSpotCollection(
+      limit: $limit
+      skip: $skip
+      where: $where
+      order: $order
+    ) {
       total
       skip
       limit
@@ -18,6 +28,7 @@ const GET_COFFEE_COLLECTION = gql`
           publishedAt
           firstPublishedAt
         }
+        type
         __typename
         title
         description
@@ -136,32 +147,32 @@ export class CoffeeService {
   /**
    * Get a collection of coffee spots with optional filtering and pagination
    */
+
   async getCoffeeSpots(options: CoffeeServiceOptions = {}): Promise<Query> {
     const { limit = 10, skip = 0, where, order } = options;
-    
-    return contentfulFetcher.query<Query>(
-      GET_COFFEE_COLLECTION,
-      {
-        variables: {
-          limit,
-          skip,
-          where,
-          order,
-        },
-      }
-    );
+
+    const finalWhere: InterestSpotFilter = {
+      ...where,
+      type_contains_all: ['coffeStop'],
+    };
+
+    return contentfulFetcher.query<Query>(GET_COFFEE_COLLECTION, {
+      variables: {
+        limit,
+        skip,
+        where: finalWhere,
+        order,
+      },
+    });
   }
 
   /**
    * Get a single coffee spot by its ID
    */
   async getCoffeeSpotById(id: string): Promise<Query> {
-    return contentfulFetcher.query<Query>(
-      GET_COFFEE_BY_ID,
-      {
-        variables: { id },
-      }
-    );
+    return contentfulFetcher.query<Query>(GET_COFFEE_BY_ID, {
+      variables: { id },
+    });
   }
 
   /**

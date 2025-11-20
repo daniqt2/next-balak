@@ -40,19 +40,6 @@ export default async function RouteGroupDetailPage({ params }: RouteGroupDetailP
             </AnimatedSection>
           )}
 
-          {routeGroup.mapIframe?.json && (
-            <AnimatedSection delay={200}>
-              <div className="mb-12">
-                <h2 className="text-2xl font-bold text-white mb-6">Mapa del Área</h2>
-                <div className="bg-gray-800 rounded-lg overflow-hidden shadow-xl border border-gray-700 max-w-[80%] mx-auto">
-                  <RichTextRenderer 
-                    richTextJson={routeGroup.mapIframe.json}
-                    className="w-full"
-                  />
-                </div>
-              </div>
-            </AnimatedSection>
-          )}
 
           {routeGroup.routesCollection?.items && routeGroup.routesCollection.items.length > 0 && (
             <RouteGroupRoutesGrid

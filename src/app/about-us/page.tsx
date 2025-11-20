@@ -93,10 +93,6 @@ export default function AboutUsPage() {
                 <p className="text-gray-300 mb-4">
                 Lo que empezó como salidas de domingo se convirtió en un proyecto para dar a conocer esos lugares que marcan a los ciclistas: las carreteras que te ponen a prueba, los paisajes que se quedan en la memoria y los cafés que saben mejor después de una subida. 
                 </p>
-                <div className="flex items-center gap-4 text-balak-400">
-                  <MapPin className="w-5 h-5" />
-                  <span>{routeCountLoading ? 'Cargando...' : `${routeCount}+ Rutas Documentadas`}</span>
-                </div>
               </div>
               <div className="bg-gray-800 rounded-xl p-8">
                 <div className="text-center">
@@ -126,8 +122,7 @@ export default function AboutUsPage() {
         {/* Team Section */}
         <AnimatedSection delay={400}>
           <div className="mb-16">
-            <h2 className="text-4xl font-bold text-white text-center mb-12">Los Amigos</h2>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-12">
               <div className="text-center">
                 <div className="w-32 h-32 bg-balak-600 rounded-full mx-auto mb-4 flex items-center justify-center">
                   <Users className="w-16 h-16 text-white" />
