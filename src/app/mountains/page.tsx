@@ -1,13 +1,25 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { mountainService } from '@/services/mountain-service';
 import MountainCard from '@/components/cards/MountainCard';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import { Mountain, Search, Filter } from 'lucide-react';
 import type { InterestSpot } from '@/contentful-types';
-import AreaMap from '@/components/map/AreaMap';
 import MountainDisplay from '@/components/cards/MountainDisplay';
+
+// Dynamically import AreaMap with SSR disabled to avoid window is not defined error
+const AreaMap = dynamic(() => import('@/components/map/AreaMap'), {
+  ssr: false,
+  loading: () => (
+    <div className="py-12">
+      <div className="h-[400px] w-full bg-gray-800 rounded-xl flex items-center justify-center">
+        <div className="text-gray-400">Cargando mapa...</div>
+      </div>
+    </div>
+  ),
+});
 
 export default function MountainsPage() {
   const [mountains, setMountains] = useState<InterestSpot[]>([]);

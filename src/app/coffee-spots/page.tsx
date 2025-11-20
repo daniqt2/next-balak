@@ -1,12 +1,24 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import dynamic from 'next/dynamic';
 import { coffeeService } from '@/services/coffee-service';
 import CoffeeStopCard from '@/components/cards/CoffeeStopCard';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import { Coffee, Search, MapPin } from 'lucide-react';
 import type { InterestSpot } from '@/contentful-types';
-import AreaMap from '@/components/map/AreaMap';
+
+// Dynamically import AreaMap with SSR disabled to avoid window is not defined error
+const AreaMap = dynamic(() => import('@/components/map/AreaMap'), {
+  ssr: false,
+  loading: () => (
+    <div className="py-12">
+      <div className="h-[400px] w-full bg-gray-800 rounded-xl flex items-center justify-center">
+        <div className="text-gray-400">Cargando mapa...</div>
+      </div>
+    </div>
+  ),
+});
 
 export default function CoffeeSpotsPage() {
   const [coffeeSpots, setCoffeeSpots] = useState<InterestSpot[]>([]);
