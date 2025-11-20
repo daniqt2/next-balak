@@ -1,6 +1,7 @@
 import React from 'react';
 import Image from 'next/image';
 import { Mountain, MapPin, BarChart3, Clock, TrendingUp } from 'lucide-react';
+import { getMountainDifficultyText } from '@/helpers/mountain';
 
 interface MountainHeroProps {
   mountain: {
@@ -68,7 +69,7 @@ export default function MountainHero({ mountain }: MountainHeroProps) {
                 <div className="hero-difficulty-badge">
                   <Mountain size={20} className="text-white" />
                   <span className="difficulty-text">
-                    {mountain.mountainDifficulty}
+                    {getMountainDifficultyText(mountain.mountainDifficulty)}
                   </span>
                 </div>
               )}

@@ -10,13 +10,13 @@
     }
 
     .hero-image-placeholder {
-      @apply w-full h-full bg-gradient-to-br from-emerald-700 via-emerald-800 to-emerald-900;
+      @apply w-full h-full bg-gradient-to-br from-balak-700 via-balak-800 to-balak-900;
 
       .placeholder-content {
         @apply absolute inset-0 flex items-center justify-center;
 
         .placeholder-icon {
-          @apply text-emerald-400 opacity-50;
+          @apply text-balak-400 opacity-50;
         }
       }
     }
@@ -41,7 +41,7 @@
         }
 
         .hero-subtitle {
-          @apply text-lg sm:text-xl lg:text-2xl text-emerald-200 mb-6
+          @apply text-lg sm:text-xl lg:text-2xl text-balak-200 mb-6
                  drop-shadow-lg max-w-3xl;
         }
 
@@ -65,7 +65,7 @@
                  shadow-lg hover:bg-black/40 transition-all duration-200;
 
           .stat-icon {
-            @apply w-6 h-6 text-emerald-400 flex-shrink-0;
+            @apply w-6 h-6 text-balak-400 flex-shrink-0;
           }
 
           .stat-content {
@@ -76,7 +76,7 @@
             }
 
             .stat-unit {
-              @apply text-emerald-300 text-xs uppercase tracking-wider;
+              @apply text-balak-300 text-xs uppercase tracking-wider;
             }
           }
         }

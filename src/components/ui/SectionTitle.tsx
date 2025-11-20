@@ -39,33 +39,19 @@ export default function SectionTitle({
     return () => observer.disconnect();
   }, []);
 
-  const variantClass = (): string => {
-    if (!variant) return '';
-    switch (variant) {
-      case 'secondary':
-        return 'bg-gradient-to-br from-amber-500 via-amber-600 to-amber-700 bg-clip-text text-transparent';
-      case 'tertiary':
-        return 'bg-gradient-to-br from-green-500 via-green-600 to-green-700 bg-clip-text text-transparent';
-      case 'primary':
-        return 'bg-gradient-to-br from-balak-500 via-balak-600 to-balak-700 bg-clip-text text-transparent';
-      case 'quaternary':
-        return 'bg-gradient-to-br from-purple-500 via-purple-600 to-purple-700 bg-clip-text text-transparent';
-      default:
-        return 'bg-gradient-to-br from-white via-gray-100 to-gray-200 bg-clip-text text-transparent';
-    }
-  }
-
   const variantColor = (): string => {
-    if (!variant) return '';
+    if (!variant) return '#ffffff';
     switch (variant) {
       case 'secondary':
-        return '#fbbf24';
+        return '#ECA74B'; // balak-orange-500
       case 'tertiary':
-        return '#34d399';
+        return '#bfe23a'; // balak-500
       case 'primary':
-        return '#d0eb66';
+        return '#bfe23a'; // balak-500
       case 'quaternary':
-        return '#a78bfa';
+        return '#C37474'; // balak-red-500
+      default:
+        return '#ffffff';
     }
   }
 
@@ -84,16 +70,18 @@ export default function SectionTitle({
           }}
         >
           <h2 
-            className={`text-4xl md:text-5xl font-bold leading-tight tracking-tight ${titleClassName} ${variantClass()}`}
+            className={`text-3xl md:text-5xl font-bold leading-tight tracking-tight ${titleClassName}`}
+            style={{
+              color: variantColor()
+            }}
           >
             {title}
           </h2>
           
           {subtitle && (
             <p 
-              className={`text-lg md:text-xl leading-relaxed max-w-3xl  ${subtitleClassName}`}
+              className={`text-lg md:text-xl leading-relaxed max-w-3xl text-gray-400 ${subtitleClassName}`}
               style={{
-                color: variantColor(),
                 transform: isVisible ? 'translateX(0)' : 'translateX(-10px)',
                 opacity: isVisible ? 1 : 0,
                 transition: 'all 0.6s ease-out 0.2s'

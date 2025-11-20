@@ -54,7 +54,7 @@ export default function MountainsCarousel({ mountains }: MountainsCarouselProps)
         getEmblaApi={setEmbla}
         withIndicators={mountains.length > 1}
         withControls={false}
-        slideSize={{ base: '100%', sm: '50%', md: '35%' }}
+        slideSize={{ base: '100%', sm: '50%', md: '20%' }}
         slideGap="sm"
         withKeyboardEvents={false}
         styles={{
@@ -65,8 +65,8 @@ export default function MountainsCarousel({ mountains }: MountainsCarouselProps)
             gap: '1rem',
           },
           slide: {
-            padding: '0 0.5rem',
-            height: '280px',
+            padding: '0 2rem',
+            height: '290px',
           },
           control: {
             backgroundColor: 'var(--mantine-color-charcoal-8)',
@@ -93,7 +93,7 @@ export default function MountainsCarousel({ mountains }: MountainsCarouselProps)
         </Carousel>
         
         {/* Custom Controls for Bigger Steps */}
-        {mountains.length > 1 && (
+        {mountains.length > 5 && (
           <>
             <button
               onClick={handlePrevious}

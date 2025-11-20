@@ -8,28 +8,20 @@ export default function RoutesPage() {
   return (
     <div className="min-h-screen bg-gray-900 pt-[64px]">
       <div className="container mx-auto px-4 py-8">
-        <AnimatedSection delay={0}>
-          <div className="text-center mb-16">
-            <h1 className="text-5xl sm:text-6xl font-bold text-white mb-6">
-              Todas nuestras
-              <span 
-                className="block"
-                style={{
-                  background: 'linear-gradient(135deg, #bfe23a, #a6c92f, #86a827)',
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text'
-                }}
-              >
-                Rutas
-              </span>
-            </h1>
-            <p className="text-xl text-balak-200 max-w-3xl mx-auto">
-            Explora todas las rutas de ciclismo que hemos probado y que recomendamos
-            </p>
-          </div>
-        </AnimatedSection>
+       <AnimatedSection delay={100}>
+            <div className="text-center mb-12">
+              <h1 className="text-4xl md:text-5xl font-extrabold text-white mb-4">
+                Puertos de montaña
+              </h1>
+              <p className="text-gray-300 text-lg max-w-2xl mx-auto">
+                Descubre los puertos de montaña más desafiantes y espectaculares incluidos en nuestras rutas de ciclismo
+              </p>
+            </div>
+          </AnimatedSection>
+      </div>
+     
 
+      <div className="container mx-auto px-4 pb-8 sm:pb-10 md:pb-12">
         <AnimatedSection delay={100}>
           <RouteGrid />
         </AnimatedSection>

@@ -7,6 +7,7 @@ import Link from 'next/link';
 import { Mountain, MapPin, BarChart3, TrendingUp, Clock, Route, ArrowRight } from 'lucide-react';
 import type { Route as RouteType } from '@/contentful-types';
 import '@/styles/mountainHero.css';
+import { getMountainDifficultyText } from '@/helpers/mountain';
 
 interface MountainDetailPageProps {
   params: {
@@ -49,7 +50,14 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
                       <p className="text-white text-lg">{mountain.locationName}</p>
                       {mountain.location?.lat && mountain.location?.lon && (
                         <p className="text-gray-400 text-sm mt-2">
-                          Coordenadas: {mountain.location.lat.toFixed(4)}, {mountain.location.lon.toFixed(4)}
+                          <a 
+                            href={`https://www.google.com/maps?q=${mountain.location.lat},${mountain.location.lon}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-balak-400 hover:text-balak-300 underline transition-colors"
+                          >
+                            Ver en Google Maps
+                          </a>
                         </p>
                       )}
                     </div>
@@ -162,7 +170,7 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
                       {mountain.mountainDifficulty && (
                         <div className="flex justify-between items-center">
                           <span className="text-gray-300">Dificultad</span>
-                          <span className="text-white font-medium">{mountain.mountainDifficulty}</span>
+                          <span className="text-white font-medium">{getMountainDifficultyText(mountain.mountainDifficulty)}</span>
                         </div>
                       )}
                       {mountain.mountainLength && (
@@ -186,18 +194,7 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
                     </div>
                   </div>
 
-                  {/* Related Routes Count */}
-                  {relatedRoutes.length > 0 && (
-                    <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
-                      <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
-                        <Route className="w-5 h-5 text-balak-400" />
-                        Rutas
-                      </h3>
-                      <p className="text-gray-300">
-                        Este peurto está incluido en <span className="text-balak-400 font-semibold">{relatedRoutes.length}</span> ruta{relatedRoutes.length !== 1 ? 's' : ''}.
-                      </p>
-                    </div>
-                  )}
+                 
                 </div>
               </AnimatedSection>
             </div>

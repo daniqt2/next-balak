@@ -50,6 +50,7 @@ export default function RouteGroupHero({ routeGroup }: RouteGroupHeroProps) {
     return () => observer.disconnect();
   }, []);
 
+
   return (
     <div 
       ref={heroRef}
@@ -138,7 +139,7 @@ export default function RouteGroupHero({ routeGroup }: RouteGroupHeroProps) {
                 <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-black/30 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-black/40 transition-all duration-200">
                   <MapPin size={20} color="#f59e0b" />
                   <div>
-                    <p className="text-balak-200 text-sm font-medium">Location</p>
+                    <p className="text-balak-200 text-sm font-medium">Lugar</p>
                     <p className="text-white text-lg font-semibold">{routeGroup.locationLabel}</p>
                   </div>
                 </div>
@@ -148,7 +149,7 @@ export default function RouteGroupHero({ routeGroup }: RouteGroupHeroProps) {
                 <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-black/30 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-black/40 transition-all duration-200">
                   <Route size={20} color="#f59e0b" />
                   <div>
-                    <p className="text-balak-200 text-sm font-medium">Routes</p>
+                    <p className="text-balak-200 text-sm font-medium">Rutas</p>
                     <p className="text-white text-lg font-semibold">{routeGroup.routesCollection.total} routes</p>
                   </div>
                 </div>
@@ -158,7 +159,7 @@ export default function RouteGroupHero({ routeGroup }: RouteGroupHeroProps) {
                 <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-black/30 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-black/40 transition-all duration-200">
                   <Clock size={20} color="#f59e0b" />
                   <div>
-                    <p className="text-balak-200 text-sm font-medium">Total Distance</p>
+                    <p className="text-balak-200 text-sm font-medium">Distancia total</p>
                     <p className="text-white text-lg font-semibold">{totalDistance} km</p>
                   </div>
                 </div>

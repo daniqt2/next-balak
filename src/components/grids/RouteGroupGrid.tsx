@@ -30,7 +30,7 @@ interface RouteGroupGridProps {
   fetchData?: boolean;
 }
 
-export default function RouteGroupGrid({ routes, title = "Aventuras de Ciclismo", subtitle = "Explora viajes completos de ciclismo y aventuras de varios días", fetchData = false }: RouteGroupGridProps) {
+export default function RouteGroupGrid({ routes, title = "", subtitle = "", fetchData = false }: RouteGroupGridProps) {
   const { routeGroups, loading, error } = useRouteGroups(fetchData ? 20 : 0);
 
   

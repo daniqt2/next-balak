@@ -2,9 +2,11 @@
 
 import Link from 'next/link';
 import { useEffect, useState } from 'react';
+import SideMenu from '@/components/ui/SideMenu';
 
 export default function Navbar() {
   const [isVisible, setIsVisible] = useState(true);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
 
   useEffect(() => {
@@ -28,26 +30,46 @@ export default function Navbar() {
   }, [lastScrollY]);
 
   return (
-    <nav 
-      className={`navbar ${isVisible ? 'navbar--visible' : 'navbar--hidden'}`}
-      style={{
-        transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
-        transition: 'transform 0.3s ease-in-out'
-      }}
-    >
-      <div className="main-wrapper">
-        {/* Logo */}
-        <Link href="/" className="logo">
-          BALAK <span>ride</span>
-        </Link>
+    <>
+      <nav 
+        className={`navbar ${isVisible ? 'navbar--visible' : 'navbar--hidden'}`}
+        style={{
+          transform: isVisible ? 'translateY(0)' : 'translateY(-100%)',
+          transition: 'transform 0.3s ease-in-out'
+        }}
+      >
+        <div className="main-wrapper">
+          {/* Logo */}
+          <Link href="/" className="logo">
+            BALAK <span>ride</span>
+          </Link>
 
-        {/* Links */}
-        <ul className="links">
-          <li><Link href="/" className="link">Inicio</Link></li>
-          <li><Link href="/routes" className="link">Rutas</Link></li>
-          <li><Link href="/about-us" className="link">Nosotros</Link></li>
-        </ul>
-      </div>
-    </nav>
+          {/* Desktop links */}
+          <div className="hidden lg:flex items-center gap-6">
+            {/* <Link href="/routes" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Rutas</Link> */}
+            <Link href="/route-groups" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Rutas</Link>
+            <Link href="/coffee-spots" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Cafés</Link>
+            <Link href="/mountains" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Puertos</Link>
+            <Link href="/about-us" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Nosotros</Link>
+          </div>
+
+          {/* Mobile menu button */}
+          <button
+            onClick={() => setIsMenuOpen(true)}
+            className="lg:hidden group relative bg-gray-900 text-white px-6 py-3 flex items-center gap-3 hover:bg-gray-800 transition-all duration-200"
+            aria-label="Open menu"
+          >
+            <span className="text-sm font-medium tracking-wide">MENU</span>
+            <div className="flex flex-col gap-1">
+              <span className="block w-5 h-px bg-white transition-all group-hover:w-6" />
+              <span className="block w-5 h-px bg-white transition-all group-hover:w-6" />
+            </div>
+          </button>
+        </div>
+      </nav>
+
+      {/* Side Menu */}
+      <SideMenu isOpen={isMenuOpen} onClose={() => setIsMenuOpen(false)} />
+    </>
   );
 }
