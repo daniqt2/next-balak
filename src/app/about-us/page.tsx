@@ -10,7 +10,7 @@ export default function AboutUsPage() {
   const { count: routeCount, loading: routeCountLoading } = useRouteCount();
 
   return (
-    <div className="min-h-screen bg-gray-900" style={{ paddingTop: '64px' }}>
+    <div className="min-h-screen" style={{ paddingTop: '64px' }}>
       {/* Hero Section */}
       <div className="relative h-96 flex items-center justify-center overflow-hidden">
         <Image
@@ -52,7 +52,7 @@ export default function AboutUsPage() {
         <AnimatedSection delay={200}>
           <div className="mb-16">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-              <div className="text-center p-6 bg-gray-800 rounded-xl">
+              <div className="text-center p-6 bg-charcoal-800 rounded-xl">
                 <Mountain className="w-12 h-12 text-balak-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-3">Experiencias Reales</h3>
                 <p className="text-gray-300">
@@ -60,7 +60,7 @@ export default function AboutUsPage() {
                 </p>
               </div>
               
-              <div className="text-center p-6 bg-gray-800 rounded-xl">
+              <div className="text-center p-6 bg-charcoal-800 rounded-xl">
                 <Camera className="w-12 h-12 text-balak-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-3">Postureo</h3>
                 <p className="text-gray-300">
@@ -68,7 +68,7 @@ export default function AboutUsPage() {
                 </p>
               </div>
               
-              <div className="text-center p-6 bg-gray-800 rounded-xl">
+              <div className="text-center p-6 bg-charcoal-800 rounded-xl">
                 <Heart className="w-12 h-12 text-balak-400 mx-auto mb-4" />
                 <h3 className="text-xl font-semibold text-white mb-3">Pasión por sufrir</h3>
                 <p className="text-gray-300">
@@ -79,45 +79,7 @@ export default function AboutUsPage() {
           </div>
         </AnimatedSection>
 
-        {/* Story Section */}
-        <AnimatedSection delay={300}>
-          <div className="mb-16">
-            <h2 className="text-4xl font-bold text-white text-center mb-12">Nuestra Historia</h2>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <h3 className="text-2xl font-semibold text-white mb-4">Desde 2023</h3>
-                <p className="text-gray-300 mb-4">
-                  Todo comenzó con un grupo de amigos ciclistas que querían documentar las mejores 
-                  rutas de bici... y sobre todo el donde para a repooner fuerzas. 
-                </p>
-                <p className="text-gray-300 mb-4">
-                Lo que empezó como salidas de domingo se convirtió en un proyecto para dar a conocer esos lugares que marcan a los ciclistas: las carreteras que te ponen a prueba, los paisajes que se quedan en la memoria y los cafés que saben mejor después de una subida. 
-                </p>
-              </div>
-              <div className="bg-gray-800 rounded-xl p-8">
-                <div className="text-center">
-                  <div className="text-6xl mb-6">
-                    🚴‍♂️ 🏔️ ☕ 🚴‍♀️ 🏔️ ☕ 🚴‍♂️
-                  </div>
-                  <div className="grid grid-cols-3 gap-8 text-center">
-                    <div>
-                      <div className="text-4xl mb-2">🚴‍♂️</div>
-                      <div className="text-gray-300">Pedalear</div>
-                    </div>
-                    <div>
-                      <div className="text-4xl mb-2">🏔️</div>
-                      <div className="text-gray-300">Subir</div>
-                    </div>
-                    <div>
-                      <div className="text-4xl mb-2">☕</div>
-                      <div className="text-gray-300">Recuperar</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </AnimatedSection>
+     
 
         {/* Team Section */}
         <AnimatedSection delay={400}>
@@ -158,7 +120,7 @@ export default function AboutUsPage() {
 
         {/* Contact Section */}
         <AnimatedSection delay={500}>
-          <div className="text-center bg-gray-800 rounded-xl p-12">
+          <div className="text-center bg-charcoal-800 rounded-xl p-12">
             <h2 className="text-3xl font-bold text-white mb-6">¡Conecta con Nosotros!</h2>
             <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
               Síguenos en Instagram para ver nuestras aventuras en tiempo real y 

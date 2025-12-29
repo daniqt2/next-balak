@@ -37,7 +37,7 @@
 
   .info {
     @apply absolute bottom-0 left-0 right-0 p-4 sm:p-6
-           bg-gray-800/90;
+           bg-charcoal-800/90;
 
     .difficulty-tag {
       @apply inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3

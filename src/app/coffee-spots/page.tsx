@@ -13,7 +13,7 @@ const AreaMap = dynamic(() => import('@/components/map/AreaMap'), {
   ssr: false,
   loading: () => (
     <div className="py-12">
-      <div className="h-[400px] w-full bg-gray-800 rounded-xl flex items-center justify-center">
+      <div className="h-[400px] w-full bg-charcoal-800 rounded-xl flex items-center justify-center">
         <div className="text-gray-400">Cargando mapa...</div>
       </div>
     </div>
@@ -43,14 +43,14 @@ export default function CoffeeSpotsPage() {
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-charcoal-900 flex items-center justify-center">
+      <div className="min-h-screen flex items-center justify-center">
         <div className="text-white text-xl">Loading coffee spots...</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gray-900" style={{ paddingTop: '64px' }}>
+    <div className="min-h-screen" style={{ paddingTop: '64px' }}>
         <div className="container mx-auto px-4 py-8">
           {/* Header Section */}
           <AnimatedSection delay={100}>
@@ -68,20 +68,21 @@ export default function CoffeeSpotsPage() {
             coffeePoints={coffeeSpots}
           />
 
-          {/* Stats Section */}
+          {/* USAR PARA OTRA COSAS */}
+{/* 
           <AnimatedSection delay={200}>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
-              <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 text-center">
+              <div className="bg-charcoal-800 p-6 rounded-xl border border-gray-700 text-center">
                 <Coffee className="w-8 h-8 text-amber-400 mx-auto mb-3" />
               </div>
-              <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 text-center">
+              <div className="bg-charcoal-800 p-6 rounded-xl border border-gray-700 text-center">
                 <MapPin className="w-8 h-8 text-amber-400 mx-auto mb-3" />
               </div>
-              <div className="bg-gray-800 p-6 rounded-xl border border-gray-700 text-center">
+              <div className="bg-charcoal-800 p-6 rounded-xl border border-gray-700 text-center">
                 <Search className="w-8 h-8 text-amber-400 mx-auto mb-3" />
               </div>
             </div>
-          </AnimatedSection>
+          </AnimatedSection> */}
 
           {/* Coffee Spots Grid */}
           <AnimatedSection delay={300}>

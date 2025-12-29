@@ -39,9 +39,9 @@ export default function ScrollTestPage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen bg-gray-900 text-white flex items-center justify-center relative overflow-hidden">
+    <div className="min-h-screen text-white flex items-center justify-center relative overflow-hidden">
       {/* Overlay panel that can slide down to reveal previous page */}
-      <div ref={overlayRef} className="absolute inset-0 bg-gray-900 z-50" />
+      <div ref={overlayRef} className="absolute inset-0 z-50" />
 
       <div className="relative z-10 text-center">
         <h1 className="text-5xl font-extrabold">Pulled Up Page</h1>

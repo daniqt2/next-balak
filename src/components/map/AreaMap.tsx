@@ -1,5 +1,6 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import { MapContainer, TileLayer, Polygon, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L, { DivIcon } from 'leaflet';
@@ -78,16 +79,44 @@ const mountainIconSvg = `
 `;
 
 export default function CoffeeMap({ coffeePoints, areas, variant = 'coffee' }: CoffeeMapProps) {
-  const center: [number, number] = coffeePoints[0] 
-    ? [coffeePoints[0].location?.lat || 0, coffeePoints[0].location?.lon || 0] 
-    : [40.4168, -3.7038]; // Default to Madrid
+  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
+  const [locationError, setLocationError] = useState<string | null>(null);
 
+  useEffect(() => {
+    // Get user's current location
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          setUserLocation([position.coords.latitude, position.coords.longitude]);
+        },
+        (error) => {
+          console.warn('Error getting user location:', error);
+          setLocationError(error.message);
+        },
+        {
+          enableHighAccuracy: true,
+          timeout: 10000,
+          maximumAge: 0,
+        }
+      );
+    } else {
+      setLocationError('Geolocation is not supported by this browser.');
+    }
+  }, []);
+
+  // Determine center: user location > default to Spain (Madrid)
+  const center: [number, number] = userLocation 
+    ? userLocation
+    : [40.4168, -3.7038]; // Default to Spain (Madrid)
+
+  // Use higher zoom when showing user location, lower zoom for Spain overview
+  const initialZoom = userLocation ? 15 : 6;
 
   return (
     <div className="py-12">
       <MapContainer 
       center={center} 
-      zoom={13} 
+      zoom={initialZoom} 
       style={{ height: '400px', width: '100%' }}
       className="rounded-xl"
     >

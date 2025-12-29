@@ -54,7 +54,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
           <h2 className="text-xl font-semibold text-white">Menú</h2>
           <button
             onClick={onClose}
-            className="p-2 hover:bg-gray-800 rounded-full transition-colors"
+            className="p-2 hover:bg-charcoal-800 rounded-full transition-colors"
             aria-label="Close menu"
           >
             <X size={24} className="text-white" />
@@ -68,7 +68,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               <Link
                 href="/"
                 onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
               >
                 Inicio
               </Link>
@@ -77,7 +77,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               <Link
                 href="/route-groups"
                 onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
               >
                 Rutas
               </Link>
@@ -86,7 +86,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               <Link
                 href="/coffee-spots"
                 onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
               >
                 Cafés
               </Link>
@@ -95,7 +95,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               <Link
                 href="/mountains"
                 onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
               >
                 Puertos
               </Link>
@@ -104,7 +104,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               <Link
                 href="/route-groups"
                 onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
               >
                 Colecciones
               </Link>
@@ -113,7 +113,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               <Link
                 href="/about-us"
                 onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-gray-800 rounded-lg transition-colors"
+                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
               >
                 Nosotros
               </Link>

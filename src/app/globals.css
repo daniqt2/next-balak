@@ -12,7 +12,7 @@
 @tailwind utilities;
 
 :root {
-  --ui-bg: var(--color-charcoal-900);
+  --ui-bg: #1a1a1a;
   --ui-text: #ffffff;
 
   --ui-border: rgba(255,255,255,0.12);
@@ -40,9 +40,11 @@
 }
 
 body {
-  background: var(--color-charcoal-900);
+  background-color: #1a1a1a;
   color: #ffffff;
   font-family: 'Public Sans', sans-serif;
+  position: relative;
+  min-height: 100vh;
 }
 
 @keyframes fade-in {

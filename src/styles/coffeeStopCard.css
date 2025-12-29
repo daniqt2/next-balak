@@ -1,6 +1,6 @@
 /* Coffee Stop Card Styles */
 .coffee-stop-card {
-  @apply bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700
+  @apply bg-charcoal-800 rounded-xl overflow-hidden shadow-lg border border-gray-700
          hover:shadow-xl hover:border-balak-500 transition-all duration-300
          flex flex-col h-[400px] w-full;
 
@@ -23,7 +23,7 @@
   }
 
   .content-section {
-    @apply p-4 sm:p-6 flex-1 flex flex-col bg-gray-800 min-h-[200px] border-2 border-red-500;
+    @apply p-4 sm:p-6 flex-1 flex flex-col bg-charcoal-800 min-h-[200px] border-2 border-red-500;
 
     .coffee-stop-title {
       @apply text-white font-bold text-lg sm:text-xl mb-3 border-2 border-yellow-500 bg-yellow-900 p-2;

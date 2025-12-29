@@ -25,7 +25,7 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
     const relatedRoutes = coffeeSpot.linkedFrom?.routeCollection?.items?.filter(Boolean) || [];
 
     return (
-      <div className="min-h-screen bg-gray-900" style={{ paddingTop: '64px' }}>
+      <div className="min-h-screen" style={{ paddingTop: '64px' }}>
         <CoffeeSpotHero coffeeSpot={coffeeSpot} />
         
         <div className="container mx-auto px-4 py-8">
@@ -35,7 +35,7 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
                 <AnimatedSection delay={100}>
                   <div className="mb-8">
                     <h2 className="text-2xl font-bold text-white mb-4">Ubicación</h2>
-                    <div className="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                    <div className="bg-charcoal-800 p-6 rounded-xl border border-gray-700">
                       <div className="flex items-center gap-3 mb-3">
                         <MapPin className="w-6 h-6 text-amber-400" />
                         <h3 className="text-amber-300 font-semibold">Área</h3>
@@ -62,7 +62,7 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
                 <AnimatedSection delay={200}>
                   <div className="mb-8">
                     <h2 className="text-2xl font-bold text-white mb-4">Sobre este Punto de Café</h2>
-                    <div className="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                    <div className="bg-charcoal-800 p-6 rounded-xl border border-gray-700">
                       <p className="text-gray-300 text-lg leading-relaxed">
                         {coffeeSpot.description}
                       </p>
@@ -82,7 +82,7 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
                           href={`/route/${route.slug}`}
                           className="group block"
                         >
-                          <div className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 hover:border-amber-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/10 hover:-translate-y-1">
+                          <div className="bg-charcoal-800 rounded-lg overflow-hidden border border-gray-700 hover:border-amber-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-amber-500/10 hover:-translate-y-1">
                             {route.headerImage?.url ? (
                               <div className="relative h-32">
                                 <img
@@ -147,7 +147,7 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
               <AnimatedSection delay={150} direction="right">
                 <div className="sticky top-24 space-y-6">
                   {/* Coffee Spot Info Card */}
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                  <div className="bg-charcoal-800 rounded-xl p-6 border border-gray-700">
                     <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
                       <Coffee className="w-5 h-5 text-amber-400" />
                       Información
@@ -176,7 +176,7 @@ export default async function CoffeeSpotDetailPage({ params }: CoffeeSpotDetailP
 
                   {/* Related Routes Count */}
                   {relatedRoutes.length > 0 && (
-                    <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                    <div className="bg-charcoal-800 rounded-xl p-6 border border-gray-700">
                       <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
                         <Route className="w-5 h-5 text-amber-400" />
                         Rutas

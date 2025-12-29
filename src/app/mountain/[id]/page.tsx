@@ -28,7 +28,7 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
     const relatedRoutes = mountain.linkedFrom?.routeCollection?.items?.filter((item): item is RouteType => item !== null) || [];
 
     return (
-      <div className="min-h-screen bg-gray-900" style={{ paddingTop: '64px' }}>
+      <div className="min-h-screen" style={{ paddingTop: '64px' }}>
         {/* Hero Section */}
         <MountainHero mountain={mountain} />
         
@@ -42,7 +42,7 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
                 <AnimatedSection delay={100}>
                   <div className="mb-8">
                     <h2 className="text-2xl font-bold text-white mb-4">Ubicación</h2>
-                    <div className="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                    <div className="bg-charcoal-800 p-6 rounded-xl border border-gray-700">
                       <div className="flex items-center gap-3 mb-3">
                         <MapPin className="w-6 h-6 text-balak-400" />
                         <h3 className="text-balak-300 font-semibold">Área</h3>
@@ -70,7 +70,7 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
                 <AnimatedSection delay={200}>
                   <div className="mb-8">
                     <h2 className="text-2xl font-bold text-white mb-4">Sobre esta Montaña</h2>
-                    <div className="bg-gray-800 p-6 rounded-xl border border-gray-700">
+                    <div className="bg-charcoal-800 p-6 rounded-xl border border-gray-700">
                       <p className="text-gray-300 text-lg leading-relaxed">
                         {mountain.description}
                       </p>
@@ -96,7 +96,7 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
                           href={`/route/${route.slug}`}
                           className="group block"
                         >
-                          <div className="bg-gray-800 rounded-lg overflow-hidden border border-gray-700 hover:border-balak-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-balak-500/10 hover:-translate-y-1">
+                          <div className="bg-charcoal-800 rounded-lg overflow-hidden border border-gray-700 hover:border-balak-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-balak-500/10 hover:-translate-y-1">
                             {route.headerImage?.url ? (
                               <div className="relative h-32">
                                 <img
@@ -161,7 +161,7 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
               <AnimatedSection delay={150} direction="right">
                 <div className="sticky top-24 space-y-6">
                   {/* Quick Stats Card */}
-                  <div className="bg-gray-800 rounded-xl p-6 border border-gray-700">
+                  <div className="bg-charcoal-800 rounded-xl p-6 border border-gray-700">
                     <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
                       <Mountain className="w-5 h-5 text-balak-400" />
                       Estadísticas Rápidas

@@ -228,7 +228,7 @@ export default function AssetGrid({
                 </div>
               </>
             ) : (
-              <div className="w-full h-full bg-gray-800 flex items-center justify-center">
+              <div className="w-full h-full bg-charcoal-800 flex items-center justify-center">
                 <Camera className="w-8 h-8 text-gray-600" />
               </div>
             )}
@@ -251,7 +251,7 @@ export default function AssetGrid({
             </h3>
             <button
               onClick={closeModal}
-              className="bg-gray-800 hover:bg-gray-700 text-white p-2 rounded-full transition-colors"
+              className="bg-charcoal-800 hover:bg-gray-700 text-white p-2 rounded-full transition-colors"
             >
               <X className="w-6 h-6" />
             </button>
@@ -267,7 +267,7 @@ export default function AssetGrid({
                     e.stopPropagation();
                     prevImage();
                   }}
-                  className="absolute left-6 top-1/2 -translate-y-1/2 z-10 bg-gray-800/80 hover:bg-gray-700/80 text-white p-3 rounded-full transition-colors backdrop-blur-sm"
+                  className="absolute left-6 top-1/2 -translate-y-1/2 z-10 bg-charcoal-800/80 hover:bg-gray-700/80 text-white p-3 rounded-full transition-colors backdrop-blur-sm"
                 >
                   <ChevronLeft className="w-6 h-6" />
                 </button>
@@ -276,7 +276,7 @@ export default function AssetGrid({
                     e.stopPropagation();
                     nextImage();
                   }}
-                  className="absolute right-6 top-1/2 -translate-y-1/2 z-10 bg-gray-800/80 hover:bg-gray-700/80 text-white p-3 rounded-full transition-colors backdrop-blur-sm"
+                  className="absolute right-6 top-1/2 -translate-y-1/2 z-10 bg-charcoal-800/80 hover:bg-gray-700/80 text-white p-3 rounded-full transition-colors backdrop-blur-sm"
                 >
                   <ChevronRight className="w-6 h-6" />
                 </button>

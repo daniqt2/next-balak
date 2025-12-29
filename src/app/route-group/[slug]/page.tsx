@@ -25,7 +25,7 @@ export default async function RouteGroupDetailPage({ params }: RouteGroupDetailP
 
 
     return (
-      <div className="min-h-screen bg-gray-900" style={{ paddingTop: '64px' }}>
+      <div className="min-h-screen" style={{ paddingTop: '64px' }}>
         <RouteGroupHero routeGroup={routeGroup} />
         
         <div className="container mx-auto px-4 py-8">

@@ -6,7 +6,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection';
 
 export default function RoutesPage() {
   return (
-    <div className="min-h-screen bg-gray-900 pt-[64px]">
+    <div className="min-h-screen pt-[64px]">
       <div className="container mx-auto px-4 py-8">
        <AnimatedSection delay={100}>
             <div className="text-center mb-12">

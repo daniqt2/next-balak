@@ -119,7 +119,7 @@ export default function FeaturedRoutesGrid() {
               direction="up"
             >
               <Link href={`/route/${route.slug}`} className="group block">
-                <div className="relative overflow-hidden rounded-xl bg-gray-800 border border-gray-700 hover:border-balak-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-balak-500/5 hover:-translate-y-1">
+                <div className="relative overflow-hidden rounded-xl bg-charcoal-800 border border-gray-700 hover:border-balak-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-balak-500/5 hover:-translate-y-1">
                   {/* Image */}
                   <div className="relative h-48">
                     {route.headerImage?.url ? (

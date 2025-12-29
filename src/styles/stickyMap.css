@@ -3,7 +3,7 @@
   @apply sticky top-8 w-full max-w-md mx-auto lg:mx-0;
 
   .sticky-map-content {
-    @apply bg-gray-800 rounded-xl border border-gray-700 overflow-hidden shadow-lg;
+    @apply bg-charcoal-800 rounded-xl border border-gray-700 overflow-hidden shadow-lg;
 
     .strava-embed-container {
       @apply w-full max-w-full;
@@ -20,7 +20,7 @@
       }
 
       .map-placeholder {
-        @apply relative w-full h-64 bg-gradient-to-br from-gray-700 to-gray-800 bg-gray-800;
+        @apply relative w-full h-64 bg-gradient-to-br from-gray-700 to-gray-800 bg-charcoal-800;
 
         .map-placeholder-content {
           @apply absolute inset-0 flex flex-col items-center justify-center text-center p-6;

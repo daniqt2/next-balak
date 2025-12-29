@@ -27,7 +27,7 @@ export default function MountainCard({ mountain, index = 0, compact = false }: M
     <Link href={`/mountain/${mountain.sys.id}`} className="block">
       <div 
         className={`
-          bg-gray-800 rounded-2xl overflow-hidden border border-gray-700 
+          bg-charcoal-800 rounded-2xl overflow-hidden border border-gray-700 
           flex flex-col w-full transition-all duration-300 cursor-pointer
           hover:-translate-y-1 hover:shadow-2xl hover:border-balak-500
           ${compact ? 'h-70' : 'h-96'}
@@ -65,7 +65,7 @@ export default function MountainCard({ mountain, index = 0, compact = false }: M
       {/* Content Section */}
       <div 
         className={`
-          flex-1 flex flex-col bg-gray-800 relative
+          flex-1 flex flex-col bg-charcoal-800 relative
           ${compact ? 'p-3' : 'p-5'}
         `}
       >

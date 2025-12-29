@@ -32,7 +32,7 @@ export default function RouteGroupCard({ route }: RouteGroupCardProps) {
   return (
     <Link href={`/route-group/${route.slug}`}>
       <div 
-        className="group bg-gray-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:shadow-xl hover:border-balak-500/30 transition-all duration-300 cursor-pointer"
+        className="group bg-charcoal-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:shadow-xl hover:border-balak-500/30 transition-all duration-300 cursor-pointer"
         style={{
           height: '100%',
           display: 'flex',
