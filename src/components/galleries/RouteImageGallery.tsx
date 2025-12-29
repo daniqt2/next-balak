@@ -10,7 +10,7 @@ export function RouteImageGallery() {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <div className="text-balak-300 text-lg">Loading images...</div>
+        <div className="text-balak-300 text-lg">Cargando imágenes...</div>
       </div>
     );
   }
@@ -18,7 +18,7 @@ export function RouteImageGallery() {
   if (error) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-400">Error loading images: {error}</p>
+        <p className="text-red-400">Error al cargar imágenes: {error}</p>
       </div>
     );
   }

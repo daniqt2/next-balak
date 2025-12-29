@@ -11,7 +11,7 @@ export function RouteCarousel() {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <div className="text-balak-300 text-lg">Loading route groups...</div>
+        <div className="text-balak-300 text-lg">Cargando grupos de rutas...</div>
       </div>
     );
   }

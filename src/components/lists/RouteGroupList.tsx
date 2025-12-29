@@ -8,7 +8,7 @@ export function RouteGroupList() {
   const { routeGroups, loading, error, refetch } = useRouteGroups(6);
 
   if (loading) {
-    return <div className="flex justify-center p-8 text-white">Loading route groups...</div>;
+    return <div className="flex justify-center p-8 text-white">Cargando grupos de rutas...</div>;
   }
 
   if (error) {

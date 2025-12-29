@@ -10,7 +10,7 @@ export function RouteGroupResults() {
   if (loading) {
     return (
       <div className="loading">
-        <div className="loading-text">Loading route groups...</div>
+        <div className="loading-text">Cargando grupos de rutas...</div>
       </div>
     );
   }

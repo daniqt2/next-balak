@@ -10,7 +10,7 @@ export function RouteImageCardCarousel() {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <div className="text-balak-300 text-lg">Loading route images...</div>
+        <div className="text-balak-300 text-lg">Cargando imágenes de rutas...</div>
       </div>
     );
   }
@@ -18,7 +18,7 @@ export function RouteImageCardCarousel() {
   if (error) {
     return (
       <div className="text-center py-12">
-        <p className="text-red-400">Error loading images: {error}</p>
+        <p className="text-red-400">Error al cargar imágenes: {error}</p>
       </div>
     );
   }

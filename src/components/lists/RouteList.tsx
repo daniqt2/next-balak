@@ -8,7 +8,7 @@ export function RouteList() {
   const { routes, loading, error, refetch } = useRoutes(6);
 
   if (loading) {
-    return <div className="flex justify-center p-8 text-white">Loading routes...</div>;
+    return <div className="flex justify-center p-8 text-white">Cargando rutas...</div>;
   }
 
   if (error) {

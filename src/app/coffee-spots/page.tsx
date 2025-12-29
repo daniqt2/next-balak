@@ -44,7 +44,7 @@ export default function CoffeeSpotsPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-white text-xl">Loading coffee spots...</div>
+        <div className="text-white text-xl">Cargando puntos de café...</div>
       </div>
     );
   }

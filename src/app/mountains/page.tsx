@@ -44,7 +44,7 @@ export default function MountainsPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-white text-xl">Loading mountains...</div>
+        <div className="text-white text-xl">Cargando puertos de montaña...</div>
       </div>
     );
   }

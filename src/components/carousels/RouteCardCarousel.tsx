@@ -11,7 +11,7 @@ export function RouteCardCarousel() {
   if (loading) {
     return (
       <div className="text-center py-12">
-        <div className="text-balak-300 text-lg">Loading routes...</div>
+        <div className="text-balak-300 text-lg">Cargando...</div>
       </div>
     );
   }
