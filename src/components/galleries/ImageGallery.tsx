@@ -114,7 +114,7 @@ export function ImageGallery({
         <div className="flex gap-2 overflow-x-auto pb-2">
           {images.map((image, index) => (
             <div
-              key={index}
+              key={`${image.url}-${index}`}
               className={`
                 relative w-20 h-20 rounded-lg overflow-hidden cursor-pointer
                 border-2 transition-all duration-200 flex-shrink-0

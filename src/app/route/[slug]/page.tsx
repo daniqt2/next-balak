@@ -12,15 +12,16 @@ import '@/styles/coffeeStopCard.css';
 import { Camera } from 'lucide-react';
 
 interface RouteDetailPageProps {
-  params: {
+  params: Promise<{
     slug: string;
-  };
+  }>;
 }
 
 export default async function RouteDetailPage({ params }: RouteDetailPageProps) {
   try {
-    const data = await routeService.getRouteBySlug(params.slug);
-    const route = data.routeCollection?.items?.[0];
+    const { slug } = await params;
+    const data = await routeService.getRouteBySlug(slug);
+    const route = data?.routeCollection?.items?.[0];
 
     if (!route) {
       notFound();

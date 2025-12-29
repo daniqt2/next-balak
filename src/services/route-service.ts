@@ -6,10 +6,10 @@ import {
   RouteFilter,
   RouteOrder,
 } from '@/contentful-types';
-import { 
-  GET_ROUTE_COLLECTION, 
-  GET_ROUTE_BY_SLUG, 
-  GET_FEATURED_ROUTES 
+import {
+  GET_ROUTE_COLLECTION,
+  GET_ROUTE_BY_SLUG,
+  GET_FEATURED_ROUTES,
 } from '@/graphql/queries';
 
 export interface RouteServiceOptions {
@@ -23,9 +23,11 @@ export class RouteService {
   /**
    * Get a collection of routes with optional filtering and pagination
    */
-  async getRoutes(options: RouteServiceOptions = {}): Promise<GetRouteCollectionQuery> {
+  async getRoutes(
+    options: RouteServiceOptions = {}
+  ): Promise<GetRouteCollectionQuery> {
     const { limit = 10, skip = 0, where, order } = options;
-    
+
     return contentfulFetcher.query<GetRouteCollectionQuery>(
       GET_ROUTE_COLLECTION,
       {
@@ -43,12 +45,10 @@ export class RouteService {
    * Get a single route by its slug
    */
   async getRouteBySlug(slug: string): Promise<GetRouteBySlugQuery> {
-    return contentfulFetcher.query<GetRouteBySlugQuery>(
-      GET_ROUTE_BY_SLUG,
-      {
-        variables: { slug },
-      }
-    );
+    console.log('getRouteBySlug', slug);
+    return contentfulFetcher.query<GetRouteBySlugQuery>(GET_ROUTE_BY_SLUG, {
+      variables: { slug },
+    });
   }
 
   /**
@@ -66,7 +66,9 @@ export class RouteService {
   /**
    * Get routes by difficulty level
    */
-  async getRoutesByDifficulty(difficulty: string): Promise<GetRouteCollectionQuery> {
+  async getRoutesByDifficulty(
+    difficulty: string
+  ): Promise<GetRouteCollectionQuery> {
     return this.getRoutes({
       where: {
         // You can add difficulty filtering here based on your Contentful schema
@@ -78,7 +80,9 @@ export class RouteService {
   /**
    * Get routes by location
    */
-  async getRoutesByLocation(location: string): Promise<GetRouteCollectionQuery> {
+  async getRoutesByLocation(
+    location: string
+  ): Promise<GetRouteCollectionQuery> {
     return this.getRoutes({
       where: {
         // You can add location filtering here based on your Contentful schema
@@ -102,7 +106,10 @@ export class RouteService {
   /**
    * Get routes with pagination
    */
-  async getRoutesPaginated(page: number = 1, pageSize: number = 10): Promise<GetRouteCollectionQuery> {
+  async getRoutesPaginated(
+    page: number = 1,
+    pageSize: number = 10
+  ): Promise<GetRouteCollectionQuery> {
     const skip = (page - 1) * pageSize;
     return this.getRoutes({
       limit: pageSize,
@@ -113,7 +120,10 @@ export class RouteService {
   /**
    * Get routes ordered by a specific field
    */
-  async getRoutesOrdered(orderBy: string, orderDirection: 'ASC' | 'DESC' = 'DESC'): Promise<GetRouteCollectionQuery> {
+  async getRoutesOrdered(
+    orderBy: string,
+    orderDirection: 'ASC' | 'DESC' = 'DESC'
+  ): Promise<GetRouteCollectionQuery> {
     return this.getRoutes({
       order: [{ [orderBy]: orderDirection }] as any,
     });
