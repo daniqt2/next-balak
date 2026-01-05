@@ -1,0 +1,117 @@
+/* Mountain Display Styles */
+.mountain-display {
+  @apply block;
+
+  .mountain-display__card {
+    @apply bg-charcoal-800 rounded-xl overflow-hidden border ;
+    @apply flex flex-col w-full transition-all duration-300 cursor-pointer;
+    @apply hover:-translate-y-1 hover:shadow-2xl hover:border-balak-500;
+
+    &.mountain-display__card--compact {
+      @apply h-70;
+    }
+
+    &.mountain-display__card--full {
+      @apply h-96;
+    }
+
+    .mountain-display__image-container {
+      @apply relative w-full overflow-hidden;
+
+      &.mountain-display__image-container--compact {
+        @apply h-35;
+      }
+
+      &.mountain-display__image-container--full {
+        @apply h-50;
+      }
+
+      .mountain-display__image {
+        @apply object-cover transition-transform duration-300;
+      }
+
+      .mountain-display__image-placeholder {
+        @apply w-full h-full bg-gradient-to-br from-balak-800 via-balak-700 to-balak-600;
+        @apply flex items-center justify-center relative;
+
+        .mountain-display__image-placeholder-overlay {
+          @apply absolute inset-0 bg-gradient-radial from-balak-500/10 to-transparent;
+        }
+
+        .mountain-display__image-placeholder-icon {
+          @apply opacity-80;
+        }
+      }
+
+      .mountain-display__gradient-overlay {
+        @apply absolute bottom-0 left-0 right-0 h-15;
+        @apply bg-gradient-to-t from-gray-800/90 to-transparent;
+      }
+    }
+
+    .mountain-display__content {
+      @apply flex-1 flex flex-col bg-charcoal-800 relative;
+
+      &.mountain-display__content--compact {
+        @apply p-3;
+      }
+
+      &.mountain-display__content--full {
+        @apply p-5;
+      }
+
+      .mountain-display__badge {
+        @apply absolute -top-3 right-5 w-6 h-6 bg-balak-500 rounded-full;
+        @apply flex items-center justify-center shadow-lg;
+      }
+
+      .mountain-display__title {
+        @apply text-white font-bold leading-tight tracking-tight;
+
+        &.mountain-display__title--compact {
+          @apply text-base mb-1.5;
+        }
+
+        &.mountain-display__title--full {
+          @apply text-lg mb-2;
+        }
+      }
+
+      .mountain-display__description {
+        @apply text-gray-400 leading-relaxed flex-1 overflow-hidden line-clamp-1;
+      }
+
+      .mountain-display__stats {
+        @apply flex items-center gap-4 pt-3 border-t border-gray-700;
+
+        .mountain-display__stat {
+          @apply flex items-center gap-1.5 text-xs font-medium;
+
+          &.mountain-display__stat--difficulty {
+            /* Color classes are applied dynamically based on difficulty */
+          }
+
+          &.mountain-display__stat--difficulty-easy {
+            @apply text-lime-300;
+          }
+
+          &.mountain-display__stat--difficulty-medium {
+            @apply text-amber-400;
+          }
+
+          &.mountain-display__stat--difficulty-hard {
+            @apply text-rose-400;
+          }
+
+          &.mountain-display__stat--default {
+            @apply text-gray-400;
+          }
+
+          &.mountain-display__stat--info {
+            @apply text-gray-200;
+          }
+        }
+      }
+    }
+  }
+}

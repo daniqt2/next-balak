@@ -6,8 +6,9 @@ export const getMountainDifficultyColor = (difficulty: string) => {
 };
 
 export const getMountainDifficultyText = (difficulty: string) => {
+  difficulty = difficulty.toLowerCase();
   if (difficulty === 'easy') return 'Fácil';
   if (difficulty === 'medium') return 'Media';
   if (difficulty === 'hard') return 'Difícil';
-  return 'Media';
+  return '?';
 };

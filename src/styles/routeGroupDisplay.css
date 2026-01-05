@@ -1,19 +1,23 @@
 .route-group-display {
-  @apply relative w-full h-[300px]
-         rounded-lg overflow-hidden shadow-lg
-         opacity-0 translate-y-4
-         transition-all duration-500 ease-out border border-transparent
-         hover:border-balak-500/40 hover:shadow-xl;
+    @apply  transition-all duration-500 ease-out;
+    @apply relative w-full h-[300px];
+    @apply rounded-lg overflow-hidden;
+    @apply shadow-lg;
+    @apply opacity-0 translate-y-4;
+    @apply border border-transparent;
+    @apply opacity-50;
+    @apply hover:border-balak-500 hover:border-2 hover:shadow-2xl hover:opacity-100;
 
   &.route-group-display--visible {
     @apply opacity-100 translate-y-0;
   }
 
   .skeleton {
-    @apply absolute inset-0 bg-gradient-to-br  to-balak-300 animate-pulse;
+    @apply absolute inset-0 bg-gradient-to-br to-balak-300 animate-pulse;
   }
 
   .image {
+    @apply opacity-50;
     @apply object-cover transition-all duration-500 ease-out;
 
     &.image--loaded {
@@ -52,7 +56,10 @@
       }
 
       .route-count-badge {
-        @apply bg-balak-700 text-gray-900 px-3 py-1 rounded-full text-sm font-bold;
+        @apply text-gray-900;
+        @apply text-xs font-bold;
+        @apply bg-balak-700  px-3 py-1 rounded-full;
+        @apply mt-auto;
       }
     }
 

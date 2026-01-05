@@ -1,11 +1,11 @@
 'use client';
-
-import React from 'react';
-import RouteGroupDisplay from '../lists/RouteGroupDisplay';
-import SectionTitle from '../ui/SectionTitle';
-import AnimatedSection from '../ui/AnimatedSection';
-import { useRouteGroups } from '@/hooks/useRouteGroups';
 import type { RouteGroup } from '@/contentful-types';
+
+import { useRouteGroups } from '@/hooks/useRouteGroups';
+
+import SectionTitle from '@/components/ui/SectionTitle';
+import AnimatedSection from '@/components/ui/AnimatedSection';
+import RouteGroupDisplay from '@/components/lists/RouteGroupDisplay';
 
 interface RouteGroupGridProps {
   routes?: Array<{
@@ -33,15 +33,13 @@ interface RouteGroupGridProps {
 export default function RouteGroupGrid({ routes, title = "", subtitle = "", fetchData = false }: RouteGroupGridProps) {
   const { routeGroups, loading, error } = useRouteGroups(fetchData ? 20 : 0);
 
-  
-  // Use fetched data if fetchData is true, otherwise use passed routes
   const displayRoutes = fetchData ? routeGroups : routes;
+  
   if (loading) {
     return (
       <AnimatedSection delay={200}>
         <div className="text-center py-12">
-          <div className="text-balak-400 text-lg mb-4">Cargando aventuras de ciclismo...</div>
-          <p className="text-gray-500">Por favor espera mientras cargamos los últimos viajes.</p>
+          <div className="text-balak-400 text-lg mb-4 animate-pulse">Cargando...</div>
         </div>
       </AnimatedSection>
     );
@@ -51,7 +49,7 @@ export default function RouteGroupGrid({ routes, title = "", subtitle = "", fetc
     return (
       <AnimatedSection delay={200}>
         <div className="text-center py-12">
-          <div className="text-red-400 text-lg mb-4">Error cargando aventuras</div>
+          <div className="text-red-400 text-lg mb-4">Error de carga</div>
           <p className="text-gray-500">Por favor intenta de nuevo más tarde.</p>
         </div>
       </AnimatedSection>
@@ -62,8 +60,8 @@ export default function RouteGroupGrid({ routes, title = "", subtitle = "", fetc
     return (
       <AnimatedSection delay={200}>
         <div className="text-center py-12">
-          <div className="text-gray-400 text-lg mb-4">No se encontraron aventuras de ciclismo</div>
-          <p className="text-gray-500">Las aventuras aparecerán aquí una vez que se agreguen.</p>
+          <div className="text-gray-400 text-lg mb-4">No se encontraron rutas</div>
+          <p className="text-gray-500">Las rutas aparecerán aquí una vez que se agreguen.</p>
         </div>
       </AnimatedSection>
     );

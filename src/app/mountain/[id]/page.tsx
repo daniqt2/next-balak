@@ -17,7 +17,8 @@ interface MountainDetailPageProps {
 
 export default async function MountainDetailPage({ params }: MountainDetailPageProps) {
   try {
-    const data = await mountainService.getMountainById(params.id);
+    const { id } = await params;
+    const data = await mountainService.getMountainById(id);
     const mountain = data.interestSpot;
 
     if (!mountain) {

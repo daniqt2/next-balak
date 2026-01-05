@@ -43,9 +43,9 @@ export default function Navbar() {
           {/* Desktop links */}
           <div className="hidden lg:flex items-center gap-6">
             {/* <Link href="/routes" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Rutas</Link> */}
-            <Link href="/route-groups" className="navbar_menu-option">Rutas</Link>
+            <Link href="/rutas" className="navbar_menu-option">Rutas</Link>
             <Link href="/coffee-spots" className="navbar_menu-option">Cafés</Link>
-            <Link href="/mountains" className="navbar_menu-option">Puertos</Link>
+            <Link href="/puertos" className="navbar_menu-option">Puertos</Link>
             <Link href="/about-us" className="navbar_menu-option">Nosotros</Link>
           </div>
 

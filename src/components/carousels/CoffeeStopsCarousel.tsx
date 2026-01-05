@@ -12,25 +12,29 @@ interface CoffeeStopsCarouselProps {
   coffeeStops: InterestSpot[];
 }
 
-export default function CoffeeStopsCarousel({ coffeeStops }: CoffeeStopsCarouselProps) {
+export default function CoffeeStopsCarousel({
+  coffeeStops,
+}: CoffeeStopsCarouselProps) {
   const [embla, setEmbla] = React.useState<any>(null);
   const [needsNavigation, setNeedsNavigation] = React.useState(false);
-  
+
   // Check if navigation is needed based on screen size and number of items
   React.useEffect(() => {
     if (!coffeeStops || coffeeStops.length === 0) return;
     const checkNavigation = () => {
       const width = window.innerWidth;
       let itemsPerView = 1;
-      
-      if (width >= 1024) { // lg
+
+      if (width >= 1024) {
+        // lg
         itemsPerView = 4; // 25% each
-      } else if (width >= 640) { // sm
+      } else if (width >= 640) {
+        // sm
         itemsPerView = 3; // 33% each
       } else {
         itemsPerView = 1; // 100%
       }
-      
+
       setNeedsNavigation(coffeeStops.length > itemsPerView);
     };
 
@@ -67,56 +71,57 @@ export default function CoffeeStopsCarousel({ coffeeStops }: CoffeeStopsCarousel
 
   return (
     <div className="coffee-stops-section">
-      <SectionTitle
-        variant="secondary"
-        title="Paradas"
-        subtitle="Lugares perfectos para recargar energía durante tu ruta"
-        className="section-title--coffee"
-      />
-      
+      <p className="text-lg md:text-xl font-bold text-charcoal-900 mb-4 uppercase">
+        Paradas
+      </p>
+
       <div className="relative">
         <Carousel
-        getEmblaApi={setEmbla}
-        withIndicators={needsNavigation}
-        withControls={false}
-        slideSize={{ base: '100%', sm: '33%', md: '25%' }}
-        slideGap="sm"
-        withKeyboardEvents={false}
-        styles={{
-          root: {
-            width: '100%',
-          },
-          container: {
-            gap: '0.75rem',
-          },
-          slide: {
-            padding: '0 0.25rem',
-            height: '280px',
-          },
-          control: {
-            backgroundColor: 'var(--mantine-color-charcoal-8)',
-            border: '1px solid var(--mantine-color-charcoal-6)',
-            color: 'var(--mantine-color-balak-3)',
-            '&:hover': {
-              backgroundColor: 'var(--mantine-color-charcoal-7)',
-              color: 'var(--mantine-color-balak-2)',
+          getEmblaApi={setEmbla}
+          withIndicators={needsNavigation}
+          withControls={false}
+          slideSize={{ base: '100%', sm: '33%', md: '25%' }}
+          slideGap="sm"
+          withKeyboardEvents={false}
+          styles={{
+            root: {
+              width: '100%',
             },
-          },
-          indicator: {
-            backgroundColor: 'var(--mantine-color-charcoal-6)',
-            '&[data-active]': {
-              backgroundColor: 'var(--mantine-color-balak-5)',
+            container: {
+              gap: '0.75rem',
             },
-          },
-        }}
-      >
-        {coffeeStops.map((coffeeStop, index) => (
-          <Carousel.Slide key={coffeeStop?.sys?.id || index}>
-            <CoffeeStopCard coffeeStop={coffeeStop} index={index} compact={true} />
-          </Carousel.Slide>
-        ))}
+            slide: {
+              padding: '0 0.25rem',
+              height: '280px',
+            },
+            control: {
+              backgroundColor: 'var(--mantine-color-charcoal-8)',
+              border: '1px solid var(--mantine-color-charcoal-6)',
+              color: 'var(--mantine-color-balak-3)',
+              '&:hover': {
+                backgroundColor: 'var(--mantine-color-charcoal-7)',
+                color: 'var(--mantine-color-balak-2)',
+              },
+            },
+            indicator: {
+              backgroundColor: 'var(--mantine-color-charcoal-6)',
+              '&[data-active]': {
+                backgroundColor: 'var(--mantine-color-balak-5)',
+              },
+            },
+          }}
+        >
+          {coffeeStops.map((coffeeStop, index) => (
+            <Carousel.Slide key={coffeeStop?.sys?.id || index}>
+              <CoffeeStopCard
+                coffeeStop={coffeeStop}
+                index={index}
+                compact={true}
+              />
+            </Carousel.Slide>
+          ))}
         </Carousel>
-        
+
         {/* Custom Controls for Bigger Steps */}
         {needsNavigation && (
           <>

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import React from 'react';
 import { MapContainer, TileLayer, Polygon, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L, { DivIcon } from 'leaflet';
@@ -9,9 +9,12 @@ import { InterestSpot } from '@/contentful-types';
 // Fix for default marker icon in Next.js
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
-  iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
-  iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
-  shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+  iconRetinaUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon-2x.png',
+  iconUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-icon.png',
+  shadowUrl:
+    'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
 type MarkerVariant = 'coffee' | 'mountain';
@@ -20,12 +23,12 @@ interface CoffeeMapProps {
   coffeePoints: Array<InterestSpot>;
   areas?: Array<Array<[number, number]>>; // Polygon coordinates
   variant?: MarkerVariant;
+  height?: string;
 }
-
 
 // Coffee icon SVG
 const coffeeIconSvg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
     <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/>
     <line x1="6" y1="1" x2="6" y2="4"/>
@@ -38,17 +41,23 @@ const getDifficultyColor = (difficulty?: string | null): string => {
   if (!difficulty) return 'rgba(191, 226, 58, 1)'; // Default to balak-green
   const diff = difficulty.toLowerCase();
   if (diff.includes('easy')) return 'rgba(191, 226, 58, 1)'; // balak-500 (green)
-  if (diff.includes('medium') || diff.includes('intermediate')) return 'rgba(236, 167, 75, 1)'; // balak-orange-500
-  if (diff.includes('hard') || diff.includes('difficult')) return 'rgba(195, 116, 116, 1)'; // balak-red-500
+  if (diff.includes('medium') || diff.includes('intermediate'))
+    return 'rgba(236, 167, 75, 1)'; // balak-orange-500
+  if (diff.includes('hard') || diff.includes('difficult'))
+    return 'rgba(195, 116, 116, 1)'; // balak-red-500
   return 'rgba(191, 226, 58, 1)'; // Default to balak-green
 };
 
-const createCustomIcon = (variant: MarkerVariant = 'coffee', difficulty?: string | null): DivIcon => {
-  const bgColor = variant === 'coffee' 
-    ? 'rgba(245, 158, 11, 1)' 
-    : getDifficultyColor(difficulty);
+const createCustomIcon = (
+  variant: MarkerVariant = 'coffee',
+  difficulty?: string | null
+): DivIcon => {
+  const bgColor =
+    variant === 'coffee'
+      ? 'rgba(245, 158, 11, 1)'
+      : getDifficultyColor(difficulty);
   const iconSvg = variant === 'coffee' ? coffeeIconSvg : mountainIconSvg;
-  
+
   return new DivIcon({
     className: 'custom-marker-icon',
     html: `
@@ -56,8 +65,8 @@ const createCustomIcon = (variant: MarkerVariant = 'coffee', difficulty?: string
         background-color: ${bgColor};
         border: 2px solid #000;
         border-radius: 50%;
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -73,94 +82,87 @@ const createCustomIcon = (variant: MarkerVariant = 'coffee', difficulty?: string
 
 // Mountain icon SVG
 const mountainIconSvg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
   </svg>
 `;
 
-export default function CoffeeMap({ coffeePoints, areas, variant = 'coffee' }: CoffeeMapProps) {
-  const [userLocation, setUserLocation] = useState<[number, number] | null>(null);
-  const [locationError, setLocationError] = useState<string | null>(null);
-
-  useEffect(() => {
-    // Get user's current location
-    if (navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(
-        (position) => {
-          setUserLocation([position.coords.latitude, position.coords.longitude]);
-        },
-        (error) => {
-          console.warn('Error getting user location:', error);
-          setLocationError(error.message);
-        },
-        {
-          enableHighAccuracy: true,
-          timeout: 10000,
-          maximumAge: 0,
-        }
-      );
-    } else {
-      setLocationError('Geolocation is not supported by this browser.');
-    }
-  }, []);
-
-  // Determine center: user location > default to Spain (Madrid)
-  const center: [number, number] = userLocation 
-    ? userLocation
-    : [40.4168, -3.7038]; // Default to Spain (Madrid)
-
-  // Use higher zoom when showing user location, lower zoom for Spain overview
-  const initialZoom = userLocation ? 15 : 6;
+export default function CoffeeMap({
+  coffeePoints,
+  areas,
+  variant = 'coffee',
+  height = '400px',
+}: CoffeeMapProps) {
+  // Center map on Spain (Madrid)
+  const center: [number, number] = [40.4168, -3.7038];
+  const initialZoom = 6;
 
   return (
     <div className="py-12">
-      <MapContainer 
-      center={center} 
-      zoom={initialZoom} 
-      style={{ height: '400px', width: '100%' }}
-      className="rounded-xl"
-    >
-      <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      
-      {/* Display areas as polygons */}
-      {areas?.map((area, index) => (
-        <Polygon
-          key={index}
-          positions={area}
-          pathOptions={{ color: '#f59e0b', fillColor: '#f59e0b', fillOpacity: 0.2 }}
+      <MapContainer
+        center={center}
+        zoom={initialZoom}
+        style={{ height: height, width: '100%' }}
+        className="rounded-xl"
+      >
+        <TileLayer
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-      ))}
-      
-      {/* Display coffee points as markers */}
-      {coffeePoints.map((point, index) => {
-        const customIcon = createCustomIcon(variant, point.mountainDifficulty);
-        return (
-        <Marker key={index} position={[point.location?.lat || 0, point.location?.lon || 0]} icon={customIcon}>
-          <Popup>
-            <div className="text-center">
-              <div className="mb-2 text-xl font-bold">
-                {point.title || `${variant === 'coffee' ? 'Coffee' : 'Mountain'} Point ${index + 1}`}
-                <p className="text-sm text-gray-500">
-                {point.mountainLength}Km {point.mountainElevationGain}D+ 
-                </p>
-              </div>
-              {point.sys?.id && (
-                <a
-                  href={`/${variant === 'coffee' ? 'coffee' : 'mountain'}/${point.sys?.id}`}
-                  className="text-charcoal-900  hover:text-balak-500 underline text-sm font-medium transition-colors"
-                > 
-                  Ver detalles
-                </a>
-              )}
-            </div>
-          </Popup>
-        </Marker>
-        );
-      })}
-    </MapContainer>
+
+        {/* Display areas as polygons */}
+        {areas?.map((area, index) => (
+          <Polygon
+            key={index}
+            positions={area}
+            pathOptions={{
+              color: '#f59e0b',
+              fillColor: '#f59e0b',
+              fillOpacity: 0.2,
+            }}
+          />
+        ))}
+
+        {/* Display coffee points as markers */}
+        {coffeePoints.map((point, index) => {
+          const customIcon = createCustomIcon(
+            variant,
+            point.mountainDifficulty
+          );
+          return (
+            <Marker
+              key={index}
+              position={[point.location?.lat || 0, point.location?.lon || 0]}
+              icon={customIcon}
+            >
+              <Popup>
+                <div className="text-center">
+                  <div className="mb-1 text-xl font-bold">
+                    {point.title ||
+                      `${variant === 'coffee' ? 'Coffee' : 'Mountain'} Point ${index + 1}`}
+                    {variant === 'mountain' && (
+                      <p className="text-sm text-gray-500">
+                        {point.mountainLength}Km {point.mountainElevationGain}D+
+                      </p>
+                    )}
+                  </div>
+                  {point.sys?.id && variant === 'mountain' && (
+                    <a
+                      href={`/mountain/${point.sys?.id}`}
+                      className="text-charcoal-900  hover:text-balak-500 underline text-sm font-medium transition-colors"
+                    >
+                      Ver detalles
+                    </a>
+                  )}
+                  {point.sys?.id && variant === 'coffee' && (
+                    <p className="text-charcoal-500">Detalles proximamente</p>
+                  )}
+                </div>
+              </Popup>
+            </Marker>
+          );
+        })}
+      </MapContainer>
     </div>
   );
 }

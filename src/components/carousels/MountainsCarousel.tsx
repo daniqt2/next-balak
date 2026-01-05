@@ -12,9 +12,11 @@ interface MountainsCarouselProps {
   mountains: InterestSpot[];
 }
 
-export default function MountainsCarousel({ mountains }: MountainsCarouselProps) {
+export default function MountainsCarousel({
+  mountains,
+}: MountainsCarouselProps) {
   const [embla, setEmbla] = React.useState<any>(null);
-  
+
   if (!mountains || mountains.length === 0) {
     return null;
   }
@@ -43,55 +45,47 @@ export default function MountainsCarousel({ mountains }: MountainsCarouselProps)
 
   return (
     <div className="coffee-stops-section">
-      <SectionTitle
-        variant="tertiary"
-        title="Puertos"
-        className="section-title--mountains"
-      />
-      
+      <p className="text-lg md:text-xl font-bold text-charcoal-900 mb-4 uppercase">
+        Puertos en ruta
+      </p>
+
       <div className="relative">
         <Carousel
-        getEmblaApi={setEmbla}
-        withIndicators={mountains.length > 1}
-        withControls={false}
-        slideSize={{ base: '100%', sm: '50%', md: '20%' }}
-        slideGap="sm"
-        withKeyboardEvents={false}
-        styles={{
-          root: {
-            width: '100%',
-          },
-          container: {
-            gap: '1rem',
-          },
-          slide: {
-            padding: '0 2rem',
-            height: '290px',
-          },
-          control: {
-            backgroundColor: 'var(--mantine-color-charcoal-8)',
-            border: '1px solid var(--mantine-color-charcoal-6)',
-            color: 'var(--mantine-color-balak-3)',
-            '&:hover': {
-              backgroundColor: 'var(--mantine-color-charcoal-7)',
-              color: 'var(--mantine-color-balak-2)',
+          getEmblaApi={setEmbla}
+          withIndicators={false}
+          withControls={false}
+          slideSize={{ base: '100%', sm: '50%', md: '20%' }}
+          slideGap="sm"
+          withKeyboardEvents={false}
+          styles={{
+            root: {
+              width: '100%',
             },
-          },
-          indicator: {
-            backgroundColor: 'var(--mantine-color-charcoal-6)',
-            '&[data-active]': {
-              backgroundColor: 'var(--mantine-color-balak-5)',
+            container: {
+              gap: '1rem',
             },
-          },
-        }}
-      >
-        {mountains.map((mountain, index) => (
-          <Carousel.Slide key={mountain?.sys?.id || index}>
-            <MountainCard mountain={mountain} index={index} compact={true} />
-          </Carousel.Slide>
-        ))}
+            slide: {
+              padding: '0.5rem 1rem',
+              height: 'auto',
+            },
+            control: {
+              backgroundColor: 'var(--mantine-color-charcoal-8)',
+              border: '1px solid var(--mantine-color-charcoal-6)',
+              color: 'var(--mantine-color-balak-3)',
+              '&:hover': {
+                backgroundColor: 'var(--mantine-color-charcoal-7)',
+                color: 'var(--mantine-color-balak-2)',
+              },
+            },
+          }}
+        >
+          {mountains.map((mountain, index) => (
+            <Carousel.Slide key={mountain?.sys?.id || index}>
+              <MountainCard mountain={mountain} index={index} compact={true} />
+            </Carousel.Slide>
+          ))}
         </Carousel>
-        
+
         {/* Custom Controls for Bigger Steps */}
         {mountains.length > 5 && (
           <>

@@ -1,18 +1,14 @@
 .navbar {
-  @apply bg-gray-200 shadow;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 50;
-  width: 100%;
+  @apply bg-charcoal-900 shadow;
+  @apply fixed top-0 left-0 right-0;
+  @apply z-50 w-full;
 
   .main-wrapper {
-    @apply  mx-auto flex items-center justify-between px-6 py-3;
+    @apply  mx-auto flex items-center justify-between px-6 py-4;
   }
 
   .logo {
-    @apply text-3xl font-bold text-charcoal-800;
+    @apply text-3xl font-bold text-white/85;
 
     span {
       @apply text-lg;
@@ -24,7 +20,7 @@
   }
 
   .link {
-    @apply text-balak-500 hover:text-charcoal-800 font-medium transition-colors;
+    @apply text-balak-500 hover:text-white/85 font-medium transition-colors;
   }
 
   /* Animation states */
@@ -39,7 +35,7 @@
   transition: transform 0.3s ease-in-out;
 
   .navbar__menu-button {
-    @apply lg:hidden relative bg-gray-900 text-charcoal-800 px-6 py-3 flex items-center gap-3 hover:bg-charcoal-800 transition-all duration-200;
+    @apply lg:hidden relative bg-charcoal-800 text-white px-6 py-3 flex items-center gap-3 transition-all duration-200;
   }
 
   .navbar__menu-text {
@@ -47,7 +43,8 @@
   }
 
   .navbar_menu-option {
-    @apply text-charcoal-800/90 hover:text-charcoal-800 transition text-sm font-medium tracking-wide;
+    @apply uppercase;
+    @apply text-white hover:text-charcoal-900 transition text-sm font-medium tracking-wide;
     @apply hover:font-extrabold;
   }
 
@@ -60,6 +57,6 @@
   }
 
   .navbar__menu-button:hover .navbar__menu-line {
-    width: 1.5rem; /* w-6 equivalent */
+    @apply w-6;
   }
 }

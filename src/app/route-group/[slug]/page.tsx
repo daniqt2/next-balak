@@ -5,6 +5,7 @@ import RouteGroupRoutesGrid from '@/components/grids/RouteGroupRoutesGrid';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import RichTextRenderer from '@/components/ui/RichTextRenderer';
 import type { Route } from '@/contentful-types';
+import PageHeader from '@/components/headers/pageHeader';
 
 interface RouteGroupDetailPageProps {
   params: {
@@ -12,42 +13,41 @@ interface RouteGroupDetailPageProps {
   };
 }
 
-export default async function RouteGroupDetailPage({ params }: RouteGroupDetailPageProps) {
+export default async function RouteGroupDetailPage({
+  params,
+}: RouteGroupDetailPageProps) {
   try {
     const { slug } = await params;
     const data = await routeGroupService.getRouteGroupBySlug(slug);
     const routeGroup = data?.routeGroupCollection?.items?.[0];
 
-
     if (!routeGroup) {
       notFound();
     }
 
-
     return (
       <div className="min-h-screen" style={{ paddingTop: '64px' }}>
         <RouteGroupHero routeGroup={routeGroup} />
-        
+
         <div className="container mx-auto px-4 py-8">
           {routeGroup.description && (
-            <AnimatedSection delay={100}>
-              <div className="mb-12">
-                <h2 className="text-2xl font-bold text-white mb-4">Sobre estas rutas</h2>
-                <p className="text-gray-300 text-lg leading-relaxed max-w-4xl">
-                  {routeGroup.description}
-                </p>
-              </div>
-            </AnimatedSection>
-          )}
-
-
-          {routeGroup.routesCollection?.items && routeGroup.routesCollection.items.length > 0 && (
-            <RouteGroupRoutesGrid
-              routes={routeGroup.routesCollection.items.filter(Boolean) as Route[]}
-              subtitle={`${routeGroup.routesCollection.total} rutas`}
-              emptyMessage="No routes found in this trip"
+            <PageHeader
+              title="Sobre estas rutas"
+              description={routeGroup.description}
+              variant="secondary"
             />
           )}
+
+          {routeGroup.routesCollection?.items &&
+            routeGroup.routesCollection.items.length > 0 && (
+              <RouteGroupRoutesGrid
+                routes={
+                  routeGroup.routesCollection.items.filter(Boolean) as Route[]
+                }
+                subtitle={`Rutas:${routeGroup.routesCollection.total}`}
+                emptyMessage="No routes found in this trip"
+              />
+            )}
         </div>
       </div>
     );

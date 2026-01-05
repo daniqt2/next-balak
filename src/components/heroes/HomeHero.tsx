@@ -155,7 +155,7 @@ export default function HomeHero() {
         }}
       >
         {/* Pull-up overlay for scroll test */}
-        <div ref={overlayRef} className="absolute inset-0 bg-gray-900 z-50">
+        <div ref={overlayRef} className="absolute inset-0 bg-charcoal-900 z-50">
           {/* Scrollable stacked sections */}
           <div ref={scrollContainerRef} className="h-full w-full overflow-y-auto snap-y snap-mandatory">
             <div id="intro"><HomeScrollIntro /></div>
@@ -222,7 +222,7 @@ export default function HomeHero() {
                 <span className="nav-underline"></span>
               </a>
               <a 
-                href="/mountains" 
+                href="/puertos" 
                 className="nav-link-mobile text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Puertos</span>
@@ -292,7 +292,7 @@ export default function HomeHero() {
                 <span className="nav-underline"></span>
               </a>
               <a 
-                href="/mountains" 
+                href="/puertos" 
                 className="nav-link text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Puertos</span>
