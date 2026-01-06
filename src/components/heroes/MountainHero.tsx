@@ -2,6 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import { Mountain, MapPin, BarChart3, Clock, TrendingUp } from 'lucide-react';
 import { getMountainDifficultyText } from '@/helpers/mountain';
+import { DifficultyLevel, getDifficultyColor } from '@/lib/route-utils';
 
 interface MountainHeroProps {
   mountain: {
@@ -36,7 +37,9 @@ export default function MountainHero({ mountain }: MountainHeroProps) {
         {mountain.headerImage?.url ? (
           <Image
             src={mountain.headerImage.url}
-            alt={mountain.headerImage.title || mountain.title || 'Mountain image'}
+            alt={
+              mountain.headerImage.title || mountain.title || 'Mountain image'
+            }
             fill
             quality={90}
             sizes="100vw"
@@ -50,24 +53,22 @@ export default function MountainHero({ mountain }: MountainHeroProps) {
             </div>
           </div>
         )}
-        
+
         <div className="hero-overlay" />
-        
+
         <div className="hero-content">
           <div className="hero-content-inner">
             <div className="hero-title-section">
               <h1 className="hero-title">
                 {mountain.title || 'Puerto de Montaña'}
               </h1>
-              {mountain.description && (
-                <p className="hero-subtitle line-clamp-2">
-                  {mountain.description}
-                </p>
-              )}
 
               {mountain.mountainDifficulty && (
                 <div className="hero-difficulty-badge">
-                  <Mountain size={20} className="text-white" />
+                  <Mountain
+                    size={20}
+                    className={`${getDifficultyColor(mountain.mountainDifficulty as DifficultyLevel)}`}
+                  />
                   <span className="difficulty-text">
                     {getMountainDifficultyText(mountain.mountainDifficulty)}
                   </span>
@@ -80,7 +81,9 @@ export default function MountainHero({ mountain }: MountainHeroProps) {
                 <div className="hero-stat">
                   <BarChart3 size={24} className="stat-icon" />
                   <div className="stat-content">
-                    <span className="stat-value">{mountain.mountainLength}</span>
+                    <span className="stat-value">
+                      {mountain.mountainLength}
+                    </span>
                     <span className="stat-unit">km</span>
                   </div>
                 </div>
@@ -90,7 +93,9 @@ export default function MountainHero({ mountain }: MountainHeroProps) {
                 <div className="hero-stat">
                   <TrendingUp size={24} className="stat-icon" />
                   <div className="stat-content">
-                    <span className="stat-value">{mountain.mountainElevationGain}</span>
+                    <span className="stat-value">
+                      {mountain.mountainElevationGain}
+                    </span>
                     <span className="stat-unit">m desnivel</span>
                   </div>
                 </div>
@@ -100,7 +105,9 @@ export default function MountainHero({ mountain }: MountainHeroProps) {
                 <div className="hero-stat">
                   <Clock size={24} className="stat-icon" />
                   <div className="stat-content">
-                    <span className="stat-value">{mountain.mountainMedPercent}%</span>
+                    <span className="stat-value">
+                      {mountain.mountainMedPercent}%
+                    </span>
                     <span className="stat-unit">pendiente media</span>
                   </div>
                 </div>
@@ -111,7 +118,9 @@ export default function MountainHero({ mountain }: MountainHeroProps) {
               <div className="hero-locations">
                 <div className="location-item">
                   <MapPin size={20} className="text-balak-400" />
-                  <span className="location-text">{mountain.locationName}</span>
+                  <span className="location-text">
+                    Desde: {mountain.locationName}
+                  </span>
                 </div>
               </div>
             )}

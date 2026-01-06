@@ -44,7 +44,7 @@
 
   .navbar_menu-option {
     @apply uppercase;
-    @apply text-white hover:text-charcoal-900 transition text-sm font-medium tracking-wide;
+    @apply text-white transition text-sm font-medium tracking-wide;
     @apply hover:font-extrabold;
   }
 

@@ -14,16 +14,16 @@ interface SlotGridProps<T> {
   emptyMessage?: string;
 }
 
-export function SlotGrid<T>({ 
-  title, 
-  subtitle, 
-  items, 
+export function SlotGrid<T>({
+  title,
+  subtitle,
+  items,
   renderItem,
   loading = false,
   error = null,
   onRetry,
   className = '',
-  emptyMessage = 'No items found'
+  emptyMessage = 'No items found',
 }: SlotGridProps<T>) {
   if (loading) {
     return (
@@ -58,23 +58,19 @@ export function SlotGrid<T>({
   }
 
   return (
-    <div className={`space-y-6 ${className}`}>
+    <div className={`space-y-6 ${className} py-12`}>
       {(title || subtitle) && (
         <div className="text-center mb-8">
           {title && (
             <h2 className="text-2xl font-bold text-white mb-2">{title}</h2>
           )}
-          {subtitle && (
-            <p className="text-charcoal-400">{subtitle}</p>
-          )}
+          {subtitle && <p className="text-charcoal-400">{subtitle}</p>}
         </div>
       )}
-      
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {items.map((item, index) => (
-          <React.Fragment key={index}>
-            {renderItem(item, index)}
-          </React.Fragment>
+          <React.Fragment key={index}>{renderItem(item, index)}</React.Fragment>
         ))}
       </div>
     </div>

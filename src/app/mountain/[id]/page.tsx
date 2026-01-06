@@ -1,13 +1,22 @@
-import { mountainService } from '@/services/mountain-service';
-import { notFound } from 'next/navigation';
-import MountainHero from '@/components/heroes/MountainHero';
 import MountainImageGrid from '@/components/grids/MountainImageGrid';
+import MountainHero from '@/components/heroes/MountainHero';
 import AnimatedSection from '@/components/ui/AnimatedSection';
-import Link from 'next/link';
-import { Mountain, MapPin, BarChart3, TrendingUp, Clock, Route, ArrowRight } from 'lucide-react';
+
 import type { Route as RouteType } from '@/contentful-types';
-import '@/styles/mountainHero.css';
 import { getMountainDifficultyText } from '@/helpers/mountain';
+import { mountainService } from '@/services/mountain-service';
+import '@/styles/mountainHero.css';
+import {
+  ArrowRight,
+  BarChart3,
+  Clock,
+  MapPin,
+  Mountain,
+  Route,
+  TrendingUp,
+} from 'lucide-react';
+import Link from 'next/link';
+import { notFound } from 'next/navigation';
 
 interface MountainDetailPageProps {
   params: {
@@ -15,7 +24,9 @@ interface MountainDetailPageProps {
   };
 }
 
-export default async function MountainDetailPage({ params }: MountainDetailPageProps) {
+export default async function MountainDetailPage({
+  params,
+}: MountainDetailPageProps) {
   try {
     const { id } = await params;
     const data = await mountainService.getMountainById(id);
@@ -25,56 +36,58 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
       notFound();
     }
 
-
-    const relatedRoutes = mountain.linkedFrom?.routeCollection?.items?.filter((item): item is RouteType => item !== null) || [];
+    const relatedRoutes =
+      mountain.linkedFrom?.routeCollection?.items?.filter(
+        (item): item is RouteType => item !== null
+      ) || [];
 
     return (
       <div className="min-h-screen" style={{ paddingTop: '64px' }}>
-        {/* Hero Section */}
         <MountainHero mountain={mountain} />
-        
-        <div className="container mx-auto px-4 py-8">
-          {/* Two Column Layout */}
-          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-            {/* Main Content Column */}
-            <div className="lg:col-span-2 space-y-8">
-              {/* Location Information */}
-              {mountain.locationName && (
-                <AnimatedSection delay={100}>
-                  <div className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">Ubicación</h2>
-                    <div className="bg-charcoal-800 p-6 rounded-xl border border-gray-700">
-                      <div className="flex items-center gap-3 mb-3">
-                        <MapPin className="w-6 h-6 text-balak-400" />
-                        <h3 className="text-balak-300 font-semibold">Área</h3>
-                      </div>
-                      <p className="text-white text-lg">{mountain.locationName}</p>
-                      {mountain.location?.lat && mountain.location?.lon && (
-                        <p className="text-gray-400 text-sm mt-2">
-                          <a 
-                            href={`https://www.google.com/maps?q=${mountain.location.lat},${mountain.location.lon}`}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="text-balak-400 hover:text-balak-300 underline transition-colors"
-                          >
-                            Ver en Google Maps
-                          </a>
-                        </p>
-                      )}
-                    </div>
-                  </div>
-                </AnimatedSection>
-              )}
 
+        <div className="container mx-auto px-4 py-8">
+          <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <div className="lg:col-span-2 space-y-8">
               {/* Description */}
               {mountain.description && (
                 <AnimatedSection delay={200}>
                   <div className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-4">Sobre esta Montaña</h2>
-                    <div className="bg-charcoal-800 p-6 rounded-xl border border-gray-700">
-                      <p className="text-gray-300 text-lg leading-relaxed">
+                    <h2 className="text-2xl font-bold text-charcoal-900 mb-4 uppercase">
+                      Sobre este puerto
+                    </h2>
+                    <div>
+                      <p className="text-charcoal-500 text-lg leading-relaxed">
                         {mountain.description}
                       </p>
+                    </div>
+                  </div>
+                </AnimatedSection>
+              )}
+              {mountain.locationName && (
+                <AnimatedSection delay={100}>
+                  <div className="mb-8">
+                    <div className="bg-white p-6 rounded-xl border border-gray-700">
+                      <div className="flex items-center gap-3 mb-3">
+                        <MapPin className="w-6 h-6 text-balak-400" />
+                        <h3 className="text-charcoal-800 font-semibold">
+                          Área
+                        </h3>
+                      </div>
+                      <p className="text-charcoal-800 text-lg">
+                        Ascenso desde: <b>{mountain.locationName}</b>
+                      </p>
+                      {mountain.location?.lat && mountain.location?.lon && (
+                        <p className="text-charcoal-500 text-sm mt-2">
+                          <a
+                            href={`https://www.google.com/maps?q=${mountain.location.lat},${mountain.location.lon}`}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="text-charcoal-500 hover:text-charcoal-800 underline transition-colors"
+                          >
+                            Ver puerto en Google Maps
+                          </a>
+                        </p>
+                      )}
                     </div>
                   </div>
                 </AnimatedSection>
@@ -89,11 +102,13 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
               {relatedRoutes.length > 0 && (
                 <AnimatedSection delay={400}>
                   <div className="mb-8">
-                    <h2 className="text-2xl font-bold text-white mb-6">Rutas que Incluyen este puerto</h2>
+                    <h2 className="text-2xl font-bold text-charcoal-900 mb-6 uppercase">
+                      Rutas que lo incluyen
+                    </h2>
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                       {relatedRoutes.map((route: any, index: number) => (
-                        <Link 
-                          key={route.sys.id} 
+                        <Link
+                          key={route.sys.id}
                           href={`/route/${route.slug}`}
                           className="group block"
                         >
@@ -102,7 +117,11 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
                               <div className="relative h-32">
                                 <img
                                   src={route.headerImage.url}
-                                  alt={route.headerImage.title || route.title || 'Route image'}
+                                  alt={
+                                    route.headerImage.title ||
+                                    route.title ||
+                                    'Route image'
+                                  }
                                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                 />
                                 <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent" />
@@ -162,40 +181,50 @@ export default async function MountainDetailPage({ params }: MountainDetailPageP
               <AnimatedSection delay={150} direction="right">
                 <div className="sticky top-24 space-y-6">
                   {/* Quick Stats Card */}
-                  <div className="bg-charcoal-800 rounded-xl p-6 border border-gray-700">
-                    <h3 className="text-white font-bold text-lg mb-4 flex items-center gap-2">
+                  <div className="bg-white rounded-xl p-6 border shadow-xl">
+                    <h3 className="text-charcoal-800 font-bold text-lg mb-4 flex items-center gap-2">
                       <Mountain className="w-5 h-5 text-balak-400" />
-                      Estadísticas Rápidas
+                      DATOS
                     </h3>
                     <div className="space-y-3">
                       {mountain.mountainDifficulty && (
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-300">Dificultad</span>
-                          <span className="text-white font-medium">{getMountainDifficultyText(mountain.mountainDifficulty)}</span>
+                          <span className="text-charcoal-500">Dificultad</span>
+                          <span className="text-charcoal-800 font-medium">
+                            {getMountainDifficultyText(
+                              mountain.mountainDifficulty
+                            )}
+                          </span>
                         </div>
                       )}
                       {mountain.mountainLength && (
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-300">Longitud</span>
-                          <span className="text-white font-medium">{mountain.mountainLength} km</span>
+                          <span className="text-charcoal-500">Longitud</span>
+                          <span className="text-charcoal-800 font-medium">
+                            {mountain.mountainLength} km
+                          </span>
                         </div>
                       )}
                       {mountain.mountainElevationGain && (
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-300">Desnivel</span>
-                          <span className="text-white font-medium">{mountain.mountainElevationGain} m</span>
+                          <span className="text-charcoal-500">Desnivel</span>
+                          <span className="text-charcoal-800 font-medium">
+                            {mountain.mountainElevationGain} m
+                          </span>
                         </div>
                       )}
                       {mountain.mountainMedPercent && (
                         <div className="flex justify-between items-center">
-                          <span className="text-gray-300">Pendiente Media</span>
-                          <span className="text-white font-medium">{mountain.mountainMedPercent}%</span>
+                          <span className="text-charcoal-500">
+                            Pendiente Media
+                          </span>
+                          <span className="text-charcoal-800 font-medium">
+                            {mountain.mountainMedPercent}%
+                          </span>
                         </div>
                       )}
                     </div>
                   </div>
-
-                 
                 </div>
               </AnimatedSection>
             </div>

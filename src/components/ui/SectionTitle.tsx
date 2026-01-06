@@ -11,13 +11,13 @@ interface SectionTitleProps {
 
 type Variant = 'primary' | 'secondary' | 'tertiary' | 'quaternary';
 
-export default function SectionTitle({ 
-  title, 
-  subtitle, 
+export default function SectionTitle({
+  title,
+  subtitle,
   className = '',
   titleClassName = '',
   subtitleClassName = '',
-  variant 
+  variant,
 }: SectionTitleProps) {
   const [isVisible, setIsVisible] = useState(false);
   const titleRef = useRef<HTMLDivElement>(null);
@@ -53,38 +53,35 @@ export default function SectionTitle({
       default:
         return '#ffffff';
     }
-  }
+  };
 
   return (
-    <div 
-      ref={titleRef}
-      className={`my-12 text-left ${className}`}
-    >
+    <div ref={titleRef} className={`my-4 md:my-12 text-left ${className}`}>
       <div className="max-w-4xl">
-        <div 
+        <div
           className="flex flex-col gap-1"
           style={{
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
             opacity: isVisible ? 1 : 0,
-            transition: 'all 0.6s ease-out'
+            transition: 'all 0.6s ease-out',
           }}
         >
-          <h2 
+          <h2
             className={`text-3xl md:text-5xl font-bold leading-tight tracking-tight ${titleClassName}`}
             style={{
-              color: variantColor()
+              color: variantColor(),
             }}
           >
             {title}
           </h2>
-          
+
           {subtitle && (
-            <p 
+            <p
               className={`text-lg md:text-xl leading-relaxed max-w-3xl text-gray-400 ${subtitleClassName}`}
               style={{
                 transform: isVisible ? 'translateX(0)' : 'translateX(-10px)',
                 opacity: isVisible ? 1 : 0,
-                transition: 'all 0.6s ease-out 0.2s'
+                transition: 'all 0.6s ease-out 0.2s',
               }}
             >
               {subtitle}

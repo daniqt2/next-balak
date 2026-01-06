@@ -18,12 +18,27 @@ export default function HomeScrollIntro() {
         gsap.fromTo(
           topImgRef.current,
           { y: -80, opacity: 0, rotate: -1.5, scale: 1.05 },
-          { y: 0, opacity: 1, rotate: 0, scale: 1, duration: 0.9, ease: 'power3.out' }
+          {
+            y: 0,
+            opacity: 1,
+            rotate: 0,
+            scale: 1,
+            duration: 0.9,
+            ease: 'power3.out',
+          }
         );
         gsap.fromTo(
           bottomImgRef.current,
           { y: 80, opacity: 0, rotate: 1.5, scale: 1.05 },
-          { y: 0, opacity: 1, rotate: 0, scale: 1, duration: 0.9, ease: 'power3.out', delay: 0.1 }
+          {
+            y: 0,
+            opacity: 1,
+            rotate: 0,
+            scale: 1,
+            duration: 0.9,
+            ease: 'power3.out',
+            delay: 0.1,
+          }
         );
       }
     };
@@ -39,36 +54,38 @@ export default function HomeScrollIntro() {
   }, []);
 
   return (
-    <section ref={sectionRef} className="min-h-screen snap-start flex items-center justify-center px-6">
+    <section
+      ref={sectionRef}
+      className="min-h-screen snap-start flex items-center justify-center px-6"
+    >
       <div className="w-full max-w-6xl grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
         {/* Copy */}
         <div className="text-center lg:text-left max-w-2xl mx-auto">
-          <h2 className="text-4xl sm:text-5xl font-extrabold">Descubre nuestras rutas favoritas</h2>
+          <h2 className="text-4xl sm:text-5xl font-extrabold">
+            Descubre nuestras rutas favoritas
+          </h2>
           <p className="mt-4 text-white/70">
             y los mejores sitios para reponer fuerzas
           </p>
           <div className="mt-8 flex items-center justify-center lg:justify-start gap-4">
             <a
-              href="/route-groups"
+              href="/rutas"
               className="bg-white text-gray-900 px-6 py-3 font-semibold tracking-wide hover:bg-gray-100 transition rounded"
             >
               Ver rutas
             </a>
-            {/* <a
-              href="/route-groups"
-              className="bg-transparent border border-white/30 text-white px-6 py-3 font-semibold tracking-wide hover:bg-white/10 transition rounded"
-            >
-              Zonas para explorar
-            </a> */}
           </div>
         </div>
 
         {/* Images with wow effects */}
         <div className="relative w-full max-w-xl mx-auto">
           {/* Top image */}
-          <div ref={topImgRef} className="relative h-40 sm:h-56 lg:h-64 rounded-xl overflow-hidden shadow-2xl">
+          <div
+            ref={topImgRef}
+            className="relative h-40 sm:h-56 lg:h-64 rounded-xl overflow-hidden shadow-2xl"
+          >
             <Image
-              src="/balak-home.jpg"
+              src="/puertos.png"
               alt="Intro image top"
               fill
               priority
@@ -78,9 +95,12 @@ export default function HomeScrollIntro() {
           </div>
 
           {/* Bottom image */}
-          <div ref={bottomImgRef} className="relative h-40 sm:h-56 lg:h-64 rounded-xl overflow-hidden shadow-2xl mt-6">
+          <div
+            ref={bottomImgRef}
+            className="relative h-40 sm:h-56 lg:h-64 rounded-xl overflow-hidden shadow-2xl mt-6"
+          >
             <Image
-              src="/balak-home.jpg"
+              src="/cafesC.png"
               alt="Intro image bottom"
               fill
               className="object-cover"
@@ -92,5 +112,3 @@ export default function HomeScrollIntro() {
     </section>
   );
 }
-
-

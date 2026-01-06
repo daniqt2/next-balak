@@ -53,10 +53,10 @@ export default function MountainCard({
             {/* Metrics - Stacked */}
             <div className="flex flex-col gap-0.5">
               {length && (
-                <p className="text-charcoal-500 text-sm">{length} km</p>
+                <p className="text-charcoal-500 text-sm">{length}km</p>
               )}
               {elevation && (
-                <p className="text-charcoal-500 text-sm">+{elevation} m</p>
+                <p className="text-charcoal-500 text-sm">{elevation}m D+</p>
               )}
             </div>
           </div>

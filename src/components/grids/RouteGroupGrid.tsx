@@ -30,16 +30,23 @@ interface RouteGroupGridProps {
   fetchData?: boolean;
 }
 
-export default function RouteGroupGrid({ routes, title = "", subtitle = "", fetchData = false }: RouteGroupGridProps) {
+export default function RouteGroupGrid({
+  routes,
+  title = '',
+  subtitle = '',
+  fetchData = false,
+}: RouteGroupGridProps) {
   const { routeGroups, loading, error } = useRouteGroups(fetchData ? 20 : 0);
 
   const displayRoutes = fetchData ? routeGroups : routes;
-  
+
   if (loading) {
     return (
       <AnimatedSection delay={200}>
         <div className="text-center py-12">
-          <div className="text-balak-400 text-lg mb-4 animate-pulse">Cargando...</div>
+          <div className="text-balak-400 text-lg mb-4 animate-pulse">
+            Cargando...
+          </div>
         </div>
       </AnimatedSection>
     );
@@ -60,8 +67,12 @@ export default function RouteGroupGrid({ routes, title = "", subtitle = "", fetc
     return (
       <AnimatedSection delay={200}>
         <div className="text-center py-12">
-          <div className="text-gray-400 text-lg mb-4">No se encontraron rutas</div>
-          <p className="text-gray-500">Las rutas aparecerán aquí una vez que se agreguen.</p>
+          <div className="text-gray-400 text-lg mb-4">
+            No se encontraron rutas
+          </div>
+          <p className="text-gray-500">
+            Las rutas aparecerán aquí una vez que se agreguen.
+          </p>
         </div>
       </AnimatedSection>
     );
@@ -69,19 +80,19 @@ export default function RouteGroupGrid({ routes, title = "", subtitle = "", fetc
 
   return (
     <AnimatedSection delay={200}>
-      <div className="mb-12">
+      <div className="mb-4 md:mb-12">
         <SectionTitle
           variant="primary"
           title={title}
           subtitle={subtitle}
           className="section-title--routes"
         />
-        
+
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {displayRoutes.map((routeGroup, index) => (
-            <AnimatedSection 
-              key={routeGroup?.sys?.id || index} 
-              delay={300 + (index * 100)}
+            <AnimatedSection
+              key={routeGroup?.sys?.id || index}
+              delay={300 + index * 100}
               direction="up"
             >
               <RouteGroupDisplay routeGroup={routeGroup as RouteGroup} />

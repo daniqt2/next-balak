@@ -32,7 +32,7 @@ export default async function RouteGroupDetailPage({
         <div className="container mx-auto px-4 py-8">
           {routeGroup.description && (
             <PageHeader
-              title="Sobre estas rutas"
+              title=""
               description={routeGroup.description}
               variant="secondary"
             />
@@ -44,7 +44,7 @@ export default async function RouteGroupDetailPage({
                 routes={
                   routeGroup.routesCollection.items.filter(Boolean) as Route[]
                 }
-                subtitle={`Rutas:${routeGroup.routesCollection.total}`}
+                subtitle={`Rutas: ${routeGroup.routesCollection.total}`}
                 emptyMessage="No routes found in this trip"
               />
             )}
