@@ -35,7 +35,6 @@ export default function CoffeeSpotsPage() {
             (item): item is InterestSpot => item !== null
           ) || [];
         setCoffeeSpots(spots);
-        console.log(spots);
       } catch (error) {
         console.error('Error fetching coffee spots:', error);
       } finally {

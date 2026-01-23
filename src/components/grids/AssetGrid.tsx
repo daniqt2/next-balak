@@ -148,6 +148,8 @@ export default function AssetGrid({
       'col-span-2 row-span-1', // Wide
       'col-span-1 row-span-2', // Tall
       'col-span-1 row-span-1', // Small
+      'col-span-2 row-span-2', // Large
+      'col-span-1 row-span-1', // Small
     ];
     
     // Use a simple hash function to create consistent randomization based on asset ID
@@ -165,7 +167,7 @@ export default function AssetGrid({
       {(title || subtitle) && (
         <div className="mb-6">
           {title && (
-            <h2 className="text-2xl font-bold text-white mb-4 flex items-center gap-2">
+            <h2 className="text-2xl font-bold text-charcoal-900 mb-4 flex items-center gap-2">
               {icon}
               {title}
             </h2>
@@ -220,11 +222,11 @@ export default function AssetGrid({
                       </p>
                     </div>
                   )}
-                  {(asset.title || asset.description) && (
+                  {/* {(asset.title || asset.description) && (
                     <p className="text-white text-sm font-medium truncate">
                       {asset.title || asset.description}
                     </p>
-                  )}
+                  )} */}
                 </div>
               </>
             ) : (

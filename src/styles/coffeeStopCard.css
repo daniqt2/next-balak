@@ -37,16 +37,14 @@
 
     .image-placeholder {
       @apply w-full h-full flex items-center justify-center relative;
-      background: linear-gradient(135deg, #92400e 0%, #a16207 50%, #ca8a04 100%);
+      @apply bg-charcoal-800;
 
       .placeholder-overlay {
-        @apply absolute inset-0;
-        background: radial-gradient(circle at center, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
+        @apply hidden;
       }
 
       .placeholder-icon {
-        @apply text-amber-300;
-        opacity: 0.8;
+        @apply text-[#f59e0b];
       }
     }
 

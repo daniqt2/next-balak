@@ -1,6 +1,7 @@
 import { routeService } from '@/services/route-service';
 import { notFound } from 'next/navigation';
 import StickyStravaMap from '@/components/maps/StickyStravaMap';
+import RouteGPXMap from '@/components/maps/RouteGPXMap';
 import RouteHero from '@/components/heroes/RouteHero';
 import CoffeeStopsCarousel from '@/components/carousels/CoffeeStopsCarousel';
 import MountainsCarousel from '@/components/carousels/MountainsCarousel';
@@ -27,6 +28,7 @@ export default async function RouteDetailPage({
     if (!route) {
       notFound();
     }
+
 
     return (
       <div className="min-h-screen" style={{ paddingTop: '64px' }}>
@@ -92,6 +94,14 @@ export default async function RouteDetailPage({
                 </div>
               </AnimatedSection>
 
+              {/* GPX Map Section */}
+              {(route as any).gpx?.url && (
+                <RouteGPXMap
+                  gpxUrl={(route as any).gpx.url}
+                  fileName={(route as any).gpx.fileName}
+                />
+              )}
+
               {/* Mountains Section */}
               {route.mountainsCollection?.items &&
                 route.mountainsCollection.items.length > 0 && (
@@ -129,13 +139,12 @@ export default async function RouteDetailPage({
                       <AssetGrid
                         assets={route.mainCarouselCollection.items}
                         title="Galería de Imágenes"
-                        icon={<Camera className="w-6 h-6 text-balak-400" />}
+                        icon={<Camera className="w-6 h-6 text-balak-700" />}
                         variant="compact"
                       />
                     </AnimatedSection>
                   )}
 
-                <StickyStravaMap route={route} />
               </div>
             </AnimatedSection>
           </div>

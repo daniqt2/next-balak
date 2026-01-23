@@ -20,18 +20,6 @@ query GetRouteCollection($limit: Int, $skip: Int, $where: RouteFilter, $order: [
       startLocationName
       endLocationName
       stravaLink
-      garminLink
-      mainImage {
-        sys {
-          id
-        }
-        title
-        description
-        url
-        width
-        height
-        contentType
-      }
       headerImage {
         sys {
           id
@@ -66,19 +54,7 @@ query GetRouteBySlug($slug: String!) {
       startLocationName
       endLocationName
       stravaLink
-      garminLink
       stravaId
-      mainImage {
-        sys {
-          id
-        }
-        title
-        description
-        url
-        width
-        height
-        contentType
-      }
       headerImage {
         sys {
           id
@@ -201,15 +177,6 @@ query GetFeaturedRoutes($limit: Int = 6) {
       length
       elevation
       time
-      mainImage {
-        sys {
-          id
-        }
-        title
-        url
-        width
-        height
-      }
     }
   }
 }

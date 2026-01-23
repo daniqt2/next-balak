@@ -45,7 +45,6 @@ export class RouteService {
    * Get a single route by its slug
    */
   async getRouteBySlug(slug: string): Promise<GetRouteBySlugQuery> {
-    console.log('getRouteBySlug', slug);
     return contentfulFetcher.query<GetRouteBySlugQuery>(GET_ROUTE_BY_SLUG, {
       variables: { slug },
     });
