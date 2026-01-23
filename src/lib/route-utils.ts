@@ -46,7 +46,7 @@ export function formatRouteMetrics(route: {
     difficulty,
     gradient,
     formattedLength: `${route.length}km`,
-    formattedElevation: `${route.elevation}m D+`,
+    formattedElevation: `${route.elevation}mD+`,
   };
 }
 

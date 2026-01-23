@@ -88,7 +88,7 @@ export default function RouteCard({ route, index = 0 }: RouteCardProps) {
           {/* Difficulty tag */}
           {metrics && (
             <div className={`difficulty-tag ${getDifficultyColor(metrics.difficulty)}`}>
-              {metrics.difficulty}
+               { metrics.difficulty === 'Hard' ? 'Dificil' : metrics.difficulty === 'Medium' ? 'Media' : 'Facil'}
             </div>
           )}
           

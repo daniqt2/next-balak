@@ -179,7 +179,7 @@ export default function RouteHero({ route }: RouteHeroProps) {
                       {route.elevation}
                     </span>
                     <span className="text-balak-300 text-xs uppercase tracking-wider">
-                      m D+
+                      mD+
                     </span>
                   </div>
                 </div>

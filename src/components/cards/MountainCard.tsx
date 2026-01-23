@@ -56,7 +56,7 @@ export default function MountainCard({
                 <p className="text-charcoal-500 text-sm">{length}km</p>
               )}
               {elevation && (
-                <p className="text-charcoal-500 text-sm">{elevation}m D+</p>
+                <p className="text-charcoal-500 text-sm">{elevation}mD+</p>
               )}
             </div>
           </div>

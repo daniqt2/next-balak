@@ -4,9 +4,11 @@ import { useEffect, useRef } from 'react';
 import Logo from '@/components/ui/Logo';
 import Image from 'next/image';
 import HomeScrollIntro from '@/components/sections/HomeScrollIntro';
-import HomeScrollCards from '@/components/sections/HomeScrollCards';
+import HomeScrollCards from '@/components/sections/HomeBalak';
 import HomeScrollAbout from '@/components/sections/HomeScrollAbout';
 import { gsap } from 'gsap';
+import HomeBalak from '@/components/sections/HomeBalak';
+import { Instagram, Mail } from 'lucide-react';
 
 export default function HomeHero() {
   const heroRef = useRef<HTMLDivElement>(null);
@@ -66,8 +68,79 @@ export default function HomeHero() {
         if (sc && sc.scrollTop <= 0) pullDown();
       }
     };
+
+    // Touch handlers for mobile
+    let touchStartY = 0;
+    let touchEndY = 0;
+    let touchStartTime = 0;
+    let isScrolling = false;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+      isScrolling = false;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (!hasPulledRef.current) {
+        const touchY = e.touches[0].clientY;
+        const deltaY = touchStartY - touchY;
+        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        
+        // Only prevent default if:
+        // 1. User is at the top of the page (scrollTop === 0)
+        // 2. User is swiping up (scrolling down)
+        // 3. Overlay is not open
+        if (scrollTop === 0 && deltaY > 10) {
+          isScrolling = true;
+          e.preventDefault();
+        }
+      } else {
+        // When overlay is open, check if we're at the top of the scroll container
+        const sc = scrollContainerRef.current;
+        if (sc && sc.scrollTop <= 0) {
+          const touchY = e.touches[0].clientY;
+          const deltaY = touchStartY - touchY;
+          // If swiping down (scroll up) at the top, prevent default
+          if (deltaY < -10) {
+            e.preventDefault();
+            isScrolling = true;
+          }
+        }
+      }
+    };
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      touchEndY = e.changedTouches[0].clientY;
+      const deltaY = touchStartY - touchEndY;
+      const deltaTime = Date.now() - touchStartTime;
+      const minSwipeDistance = 50;
+      const maxSwipeTime = 500;
+
+      if (!hasPulledRef.current && isScrolling) {
+        // Swipe up (scroll down) - open overlay
+        if (deltaY > minSwipeDistance && deltaTime < maxSwipeTime) {
+          pullUp();
+        }
+      } else if (hasPulledRef.current && isScrolling) {
+        // Swipe down (scroll up) - close overlay if at top
+        if (deltaY < -minSwipeDistance && deltaTime < maxSwipeTime) {
+          const sc = scrollContainerRef.current;
+          if (sc && sc.scrollTop <= 0) {
+            pullDown();
+          }
+        }
+      }
+    };
+
     const el = heroRef.current;
-    if (el) el.addEventListener('wheel', handleWheel, { passive: true });
+    
+    if (el) {
+      el.addEventListener('wheel', handleWheel, { passive: true });
+      el.addEventListener('touchstart', handleTouchStart, { passive: true });
+      el.addEventListener('touchmove', handleTouchMove, { passive: false });
+      el.addEventListener('touchend', handleTouchEnd, { passive: true });
+    }
 
     // Deep link: open overlay if hash corresponds to section
     const hash =
@@ -80,25 +153,78 @@ export default function HomeHero() {
     }
 
     return () => {
-      if (el) el.removeEventListener('wheel', handleWheel as any);
+      if (el) {
+        el.removeEventListener('wheel', handleWheel as any);
+        el.removeEventListener('touchstart', handleTouchStart as any);
+        el.removeEventListener('touchmove', handleTouchMove as any);
+        el.removeEventListener('touchend', handleTouchEnd as any);
+      }
     };
   }, []);
 
-  // Keep hash in sync with current overlay section
+  // Attach touch handlers to scroll container for closing overlay
   useEffect(() => {
     const sc = scrollContainerRef.current;
     if (!sc) return;
-    const onScroll = () => {
-      const idx = Math.round(sc.scrollTop / sc.clientHeight);
-      const safeIdx = Math.min(Math.max(idx, 0), sectionIds.length - 1);
-      const id = sectionIds[safeIdx];
-      if (hasPulledRef.current) {
-        window.history.replaceState(null, '', `#${id}`);
+
+    let touchStartY = 0;
+    let touchEndY = 0;
+    let touchStartTime = 0;
+    let isScrolling = false;
+
+    const handleTouchStart = (e: TouchEvent) => {
+      touchStartY = e.touches[0].clientY;
+      touchStartTime = Date.now();
+      isScrolling = false;
+    };
+
+    const handleTouchMove = (e: TouchEvent) => {
+      if (hasPulledRef.current && sc.scrollTop <= 0) {
+        const touchY = e.touches[0].clientY;
+        const deltaY = touchStartY - touchY;
+        // If swiping down (scroll up) at the top, prevent default
+        if (deltaY < -10) {
+          e.preventDefault();
+          isScrolling = true;
+        }
       }
     };
-    sc.addEventListener('scroll', onScroll, { passive: true } as any);
-    return () => sc.removeEventListener('scroll', onScroll as any);
+
+    const handleTouchEnd = (e: TouchEvent) => {
+      if (hasPulledRef.current && isScrolling) {
+        touchEndY = e.changedTouches[0].clientY;
+        const deltaY = touchStartY - touchEndY;
+        const deltaTime = Date.now() - touchStartTime;
+        const minSwipeDistance = 50;
+        const maxSwipeTime = 500;
+
+        // Swipe down (scroll up) - close overlay if at top
+        if (deltaY < -minSwipeDistance && deltaTime < maxSwipeTime && sc.scrollTop <= 0) {
+          hasPulledRef.current = false;
+          gsap.to(overlayRef.current!, {
+            yPercent: 100,
+            duration: 0.8,
+            ease: 'power3.inOut',
+            onComplete: () => {
+              gsap.set(overlayRef.current!, { pointerEvents: 'none' });
+              window.history.replaceState(null, '', location.pathname);
+            },
+          });
+        }
+      }
+    };
+
+    sc.addEventListener('touchstart', handleTouchStart, { passive: true });
+    sc.addEventListener('touchmove', handleTouchMove, { passive: false });
+    sc.addEventListener('touchend', handleTouchEnd, { passive: true });
+
+    return () => {
+      sc.removeEventListener('touchstart', handleTouchStart as any);
+      sc.removeEventListener('touchmove', handleTouchMove as any);
+      sc.removeEventListener('touchend', handleTouchEnd as any);
+    };
   }, []);
+
 
   // Intersection observer for title animation
   useEffect(() => {
@@ -181,11 +307,11 @@ export default function HomeHero() {
             <div id="intro">
               <HomeScrollIntro />
             </div>
-            <div id="coffee">
-              <HomeScrollCards />
-            </div>
             <div id="about">
               <HomeScrollAbout />
+            </div>
+            <div id="coffee">
+              <HomeBalak />
             </div>
           </div>
         </div>
@@ -362,6 +488,24 @@ export default function HomeHero() {
               </div>
               <div className="text-base font-light text-gray-700">
                 & Paradas de café
+              </div>
+              <div className="flex items-center gap-3 mt-4">
+                <a
+                  href="https://instagram.com/balak.ride"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition"
+                  aria-label="Instagram"
+                >
+                  <Instagram size={16} />
+                </a>
+                <a
+                  href="mailto:balak.ride@gmail.com"
+                  className="inline-flex items-center justify-center w-8 h-8 rounded-full border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition"
+                  aria-label="Email"
+                >
+                  <Mail size={16} />
+                </a>
               </div>
             </div>
           </div>

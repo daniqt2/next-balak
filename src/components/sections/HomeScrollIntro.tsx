@@ -8,13 +8,15 @@ export default function HomeScrollIntro() {
   const sectionRef = useRef<HTMLElement>(null);
   const topImgRef = useRef<HTMLDivElement>(null);
   const bottomImgRef = useRef<HTMLDivElement>(null);
+  const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
     const el = sectionRef.current;
-    if (!el) return;
+    if (!el || hasAnimatedRef.current) return;
 
     const animateIn = () => {
-      if (topImgRef.current && bottomImgRef.current) {
+      if (topImgRef.current && bottomImgRef.current && !hasAnimatedRef.current) {
+        hasAnimatedRef.current = true;
         gsap.fromTo(
           topImgRef.current,
           { y: -80, opacity: 0, rotate: -1.5, scale: 1.05 },
@@ -45,7 +47,10 @@ export default function HomeScrollIntro() {
 
     const io = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) animateIn();
+        if (entry.isIntersecting && !hasAnimatedRef.current) {
+          animateIn();
+          io.disconnect();
+        }
       },
       { threshold: 0.5 }
     );
@@ -70,9 +75,15 @@ export default function HomeScrollIntro() {
           <div className="mt-8 flex items-center justify-center lg:justify-start gap-4">
             <a
               href="/rutas"
-              className="bg-white text-gray-900 px-6 py-3 font-semibold tracking-wide hover:bg-gray-100 transition rounded"
+              className="bg-white text-gray-900 px-6 py-3 font-semibold tracking-wide hover:bg-gray-100  transition rounded"
             >
               Ver rutas
+            </a>
+            <a
+              href="/coffee-spots"
+              className="text-white border-white border px-6 py-3 font-semibold tracking-wide transition rounded"
+            >
+              Ver cafés
             </a>
           </div>
         </div>
@@ -100,7 +111,7 @@ export default function HomeScrollIntro() {
             className="relative h-40 sm:h-56 lg:h-64 rounded-xl overflow-hidden shadow-2xl mt-6"
           >
             <Image
-              src="/cafesC.png"
+              src="/cafes.png"
               alt="Intro image bottom"
               fill
               className="object-cover"

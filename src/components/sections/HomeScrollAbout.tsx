@@ -12,9 +12,7 @@ export default function HomeScrollAbout() {
           <div className="text-white/70 text-sm tracking-wide">Nosotros</div>
           <h3 className="mt-2 text-4xl sm:text-5xl font-extrabold leading-tight">
             <span className="block">Creado por ciclistas</span>
-            <span className="block bg-gradient-to-tr from-[#bfe23a] via-[#a6c92f] to-[#86a827] bg-clip-text text-transparent">
-              para ciclistas
-            </span>
+            <b className="block">para ciclistas</b>
           </h3>
           <p className="mt-4 text-white/75 max-w-xl text-xl">
             Somos un grupo de amigos apasionados por la bici de carretera. Nos
@@ -56,7 +54,7 @@ export default function HomeScrollAbout() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/20 to-transparent" />
           </div>
 
-          <div className="absolute -bottom-6 -left-6 w-2/3 h-40 sm:h-44 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
+          <div className=" hidden md:block absolute -bottom-6 -left-6 w-2/3 h-40 sm:h-44 rounded-2xl overflow-hidden shadow-2xl border border-white/10">
             <Image
               src="/ciclista1.png"
               alt="About secondary"
