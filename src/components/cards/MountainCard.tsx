@@ -33,7 +33,7 @@ export default function MountainCard({
   const elevation = mountain.mountainElevationGain;
 
   return (
-    <Link href={`/mountain/${mountain.sys.id}`} className="group block">
+    <Link href={`/puerto/${mountain.sys.id}`} className="group block">
       <div className="bg-white rounded-xl shadow-sm p-5 transition-all duration-300 cursor-pointer hover:shadow-md w-full">
         <div className="flex items-start gap-4">
           {/* Circular Icon */}

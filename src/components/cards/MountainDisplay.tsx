@@ -33,7 +33,7 @@ export default function MountainCard({ mountain, index = 0, compact = false }: M
   };
 
   return (
-    <Link href={`/mountain/${mountain.sys.id}`} className="mountain-display">
+    <Link href={`/puerto/${mountain.sys.id}`} className="mountain-display">
       <div 
         className={`mountain-display__card ${compact ? 'mountain-display__card--compact' : 'mountain-display__card--full'}`}
       >

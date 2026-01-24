@@ -130,37 +130,6 @@ export default function AssetGrid({
     if (e.key === 'ArrowLeft') prevImage();
   };
 
-  // Create randomized sizes for masonry effect
-  const getImageSize = (index: number) => {
-    const sizes = variant === 'compact' ? [
-      'col-span-1 row-span-1', // Small
-      'col-span-1 row-span-2', // Tall
-      'col-span-2 row-span-1', // Wide
-      'col-span-1 row-span-1', // Small
-      'col-span-1 row-span-2', // Tall
-      'col-span-1 row-span-1', // Small
-    ] : [
-      'col-span-2 row-span-2', // Large
-      'col-span-1 row-span-1', // Small
-      'col-span-1 row-span-2', // Tall
-      'col-span-2 row-span-1', // Wide
-      'col-span-1 row-span-1', // Small
-      'col-span-2 row-span-1', // Wide
-      'col-span-1 row-span-2', // Tall
-      'col-span-1 row-span-1', // Small
-      'col-span-2 row-span-2', // Large
-      'col-span-1 row-span-1', // Small
-    ];
-    
-    // Use a simple hash function to create consistent randomization based on asset ID
-    const assetId = filteredAssets[index]?.sys?.id || index.toString();
-    const hash = assetId.split('').reduce((a, b) => {
-      a = ((a << 5) - a) + b.charCodeAt(0);
-      return a & a;
-    }, 0);
-    
-    return sizes[Math.abs(hash) % sizes.length];
-  };
 
   return (
     <div className={`asset-grid ${className}`}>
@@ -181,15 +150,11 @@ export default function AssetGrid({
       )}
       
 
-      <div className={`grid gap-4 auto-rows-[200px] ${
-        variant === 'compact' 
-          ? 'grid-cols-1 md:grid-cols-2 lg:grid-cols-3' 
-          : 'grid-cols-1 md:grid-cols-3 lg:grid-cols-4'
-      }`}>
+      <div className="grid grid-cols-2 gap-4">
         {shuffledAssets.map((asset, index) => (
           <div
             key={asset.sys.id}
-            className={`group relative overflow-hidden rounded-xl border border-gray-700 hover:border-balak-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-balak-500/10 cursor-pointer ${getImageSize(index)}`}
+            className="group relative overflow-hidden rounded-xl border border-gray-700 hover:border-balak-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-balak-500/10 cursor-pointer aspect-square"
             onClick={() => openModal(index)}
           >
             {asset.url ? (
@@ -199,10 +164,7 @@ export default function AssetGrid({
                   alt={asset.title || asset.description || `Image ${index + 1}`}
                   fill
                   className="object-cover group-hover:scale-105 transition-transform duration-300"
-                  sizes={variant === 'compact' 
-                    ? "(max-width: 768px) 100vw, (max-width: 1200px) 33vw, 25vw"
-                    : "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 25vw"
-                  }
+                  sizes="(max-width: 768px) 50vw, 50vw"
                   loading={index < 6 ? "eager" : "lazy"}
                   placeholder="blur"
                   blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="

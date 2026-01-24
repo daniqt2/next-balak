@@ -75,7 +75,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
             </li>
             <li>
               <Link
-                href="/route-groups"
+                href="/rutas"
                 onClick={onClose}
                 className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
               >

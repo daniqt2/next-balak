@@ -102,21 +102,6 @@ body {
   display: inline-block;
 }
 
-.nav-underline {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: linear-gradient(90deg, #111 0%, #666 100%);
-  transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);
-  transform-origin: left;
-}
-
-.nav-link:hover .nav-underline,
-.nav-link-mobile:hover .nav-underline {
-  width: 100%;
-}
 
 .nav-link:hover span,
 .nav-link-mobile:hover span {

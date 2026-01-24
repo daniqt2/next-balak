@@ -109,7 +109,7 @@ export default async function MountainDetailPage({
                       {relatedRoutes.map((route: any, index: number) => (
                         <Link
                           key={route.sys.id}
-                          href={`/route/${route.slug}`}
+                          href={`/ruta/${route.slug}`}
                           className="group block"
                         >
                           <div className="bg-charcoal-800 rounded-lg overflow-hidden border border-gray-700 hover:border-balak-500/50 transition-all duration-300 hover:shadow-lg hover:shadow-balak-500/10 hover:-translate-y-1">

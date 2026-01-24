@@ -372,32 +372,28 @@ export default function HomeHero() {
               className="text-center lg:text-left flex flex-col gap-4 text-gray-900"
             >
               <a
-                href="/route-groups"
+                href="/rutas"
                 className="nav-link-mobile text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Rutas</span>
-                <span className="nav-underline"></span>
               </a>
               <a
                 href="/puertos"
                 className="nav-link-mobile text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Puertos</span>
-                <span className="nav-underline"></span>
               </a>
               <a
                 href="/coffee-spots"
                 className="nav-link-mobile text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Cafés</span>
-                <span className="nav-underline"></span>
               </a>
               <a
                 href="/about-us"
                 className="nav-link-mobile text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Nosotros</span>
-                <span className="nav-underline"></span>
               </a>
             </nav>
           </div>
@@ -447,32 +443,32 @@ export default function HomeHero() {
               className="flex flex-col gap-5 text-gray-900 pointer-events-auto"
             >
               <a
-                href="/route-groups"
-                className="nav-link text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+                href="/rutas"
+                className="nav-link group text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Rutas</span>
-                <span className="nav-underline"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
               </a>
               <a
                 href="/puertos"
-                className="nav-link text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+                className="nav-link group text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Puertos</span>
-                <span className="nav-underline"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
               </a>
               <a
                 href="/coffee-spots"
-                className="nav-link text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+                className="nav-link group text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Cafés</span>
-                <span className="nav-underline"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
               </a>
               <a
                 href="/about-us"
-                className="nav-link text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
+                className="nav-link group text-2xl font-medium tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Nosotros</span>
-                <span className="nav-underline"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
               </a>
             </nav>
 

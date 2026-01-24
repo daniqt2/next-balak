@@ -25,7 +25,7 @@ export default function FeaturedRoutes({}: FeaturedRoutesProps) {
 
         <div className="text-center mt-8">
           <a
-            href="/route-groups"
+            href="/rutas"
             className="inline-flex items-center text-balak-400 hover:text-balak-300 font-medium transition-colors duration-200 group"
           >
             Ver Todas las Rutas

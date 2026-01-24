@@ -148,7 +148,7 @@ export default function CoffeeMap({
                   </div>
                   {point.sys?.id && variant === 'mountain' && (
                     <a
-                      href={`/mountain/${point.sys?.id}`}
+                      href={`/puerto/${point.sys?.id}`}
                       className="text-charcoal-900  hover:text-balak-500 underline text-sm font-medium transition-colors"
                     >
                       Ver detalles

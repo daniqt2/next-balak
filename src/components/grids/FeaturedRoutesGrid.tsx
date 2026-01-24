@@ -46,7 +46,7 @@ export default function FeaturedRoutesGrid() {
     <div className="space-y-12">
       {/* Featured Hero Card */}
       <AnimatedSection delay={100}>
-        <Link href={`/route/${featuredRoute.slug}`} className="group block">
+        <Link href={`/ruta/${featuredRoute.slug}`} className="group block">
           <div className="relative overflow-hidden rounded-2xl bg-gradient-to-br from-gray-800 to-gray-900 border border-gray-700 hover:border-balak-500/30 transition-all duration-500 hover:shadow-2xl hover:shadow-balak-500/10">
             {/* Background Image */}
             <div className="relative h-[400px] sm:h-[500px] lg:h-[600px]">
@@ -118,7 +118,7 @@ export default function FeaturedRoutesGrid() {
               delay={300 + (index * 100)}
               direction="up"
             >
-              <Link href={`/route/${route.slug}`} className="group block">
+              <Link href={`/ruta/${route.slug}`} className="group block">
                 <div className="relative overflow-hidden rounded-xl bg-charcoal-800 border border-gray-700 hover:border-balak-500/30 transition-all duration-300 hover:shadow-xl hover:shadow-balak-500/5 hover:-translate-y-1">
                   {/* Image */}
                   <div className="relative h-48">

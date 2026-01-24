@@ -1,11 +1,12 @@
 /* Route Cards Styles */
 .route-card {
-  @apply relative w-full h-[400px] 
+  @apply relative w-full 
          rounded-xl overflow-hidden shadow-lg border border-gray-700/50
+         bg-charcoal-900
          opacity-0 translate-y-4
          transition-all duration-700 ease-out
-         hover:shadow-xl hover:border-balak-500
-         sm:h-[450px] md:h-[500px];
+         hover:shadow-xl hover:border-balak-500/50
+         flex flex-col;
 
   &.route-card--visible {
     @apply opacity-100 translate-y-0;
@@ -27,37 +28,27 @@
     }
   }
 
-  .elevation-corner {
-    @apply absolute top-4 left-4 w-16 h-8 bg-black/20 backdrop-blur-sm rounded;
-  }
-
-  .overlay {
-    @apply absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent;
+  .difficulty-tag {
+    @apply inline-block px-2.5 py-1 rounded-md text-xs font-semibold
+           border border-white/20 backdrop-blur-sm;
   }
 
   .info {
-    @apply absolute bottom-0 left-0 right-0 p-4 sm:p-6
-           bg-charcoal-800/90;
-
-    .difficulty-tag {
-      @apply inline-block px-3 py-1 rounded-full text-xs font-semibold mb-3
-             border border-white/20;
-    }
+    @apply p-4 flex flex-col flex-1;
 
     .title {
-      @apply font-bold text-white text-lg sm:text-xl mb-3
-             drop-shadow-lg;
+      @apply font-bold text-white text-lg mb-3
+             line-clamp-2;
     }
 
     .metrics {
-      @apply flex flex-col gap-2 mb-4;
+      @apply flex flex-row gap-4 mt-auto;
 
       .metric {
-        @apply flex items-center gap-2 text-white text-sm
-               px-2 py-1 rounded;
+        @apply flex items-center gap-1.5 text-charcoal-300 text-xs;
 
         .metric-icon {
-          @apply w-4 h-4 text-balak-700;
+          @apply w-4 h-4 text-balak-400;
         }
       }
     }

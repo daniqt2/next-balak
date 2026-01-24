@@ -54,17 +54,17 @@
       .subtitle {
         @apply text-balak-700 text-lg;
       }
-
-      .route-count-badge {
-        @apply text-gray-900;
-        @apply text-xs font-bold;
-        @apply bg-balak-700  px-3 py-1 rounded-full;
-        @apply mt-auto;
-      }
     }
 
     .location {
       @apply mt-2 flex items-center text-white text-sm;
     }
+  }
+
+  .route-count-badge {
+    @apply absolute bottom-3 right-3 z-10;
+    @apply text-white/90;
+    @apply text-sm font-medium;
+    @apply tracking-wide;
   }
 }

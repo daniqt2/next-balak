@@ -13,7 +13,7 @@ export default function RouteGroupDisplay({ routeGroup, index = 0 }: RouteGroupD
   const [isVisible, setIsVisible] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
 
-  const groupLink = `/route-group/${routeGroup.slug}`;
+  const groupLink = `/coleccion-rutas/${routeGroup.slug}`;
 
   useEffect(() => {
     const card = cardRef.current;
@@ -77,10 +77,6 @@ export default function RouteGroupDisplay({ routeGroup, index = 0 }: RouteGroupD
                 </p>
               )}
             </div>
-            
-            <div className="route-count-badge">
-              {routeGroup.routesCollection?.total || 0} routes
-            </div>
           </div>
           
           {routeGroup.locationLabel && (
@@ -89,6 +85,10 @@ export default function RouteGroupDisplay({ routeGroup, index = 0 }: RouteGroupD
               {routeGroup.locationLabel}
             </div>
           )}
+        </div>
+        
+        <div className="route-count-badge">
+          {routeGroup.routesCollection?.total || 0}
         </div>
       </Link>
     </div>
