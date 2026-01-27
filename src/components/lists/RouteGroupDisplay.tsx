@@ -14,6 +14,8 @@ export default function RouteGroupDisplay({ routeGroup, index = 0 }: RouteGroupD
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const groupLink = `/coleccion-rutas/${routeGroup.slug}`;
+  const routeCount = routeGroup.routesCollection?.total || 0;
+  const isComingSoon = routeCount === 0;
 
   useEffect(() => {
     const card = cardRef.current;
@@ -42,55 +44,59 @@ export default function RouteGroupDisplay({ routeGroup, index = 0 }: RouteGroupD
 
   if (!routeGroup.headerImage?.url) return null;
 
+  const cardContent = (
+    <>
+      {!imageLoaded && <div className="skeleton" />}
+
+      <Image
+        src={routeGroup.headerImage.url}
+        alt={routeGroup.title || 'Route group image'}
+        fill
+        priority={isVisible}
+        quality={80}
+        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+        onLoad={() => setImageLoaded(true)}
+        className={`image ${imageLoaded ? 'image--loaded' : 'image--loading'}`}
+      />
+
+      <div className="overlay" />
+      {isComingSoon && <div className="coming-soon-overlay" aria-hidden="true" />}
+      {isComingSoon && <div className="coming-soon-label">Próximamente</div>}
+
+      <div className="content">
+        <div className="title-section">
+          <div>
+            <h3 className="title">{routeGroup.title}</h3>
+            {routeGroup.subtitle && <p className="subtitle">{routeGroup.subtitle}</p>}
+          </div>
+        </div>
+
+        {routeGroup.locationLabel && (
+          <div className="location">
+            <span className="mr-1">📍</span>
+            {routeGroup.locationLabel}
+          </div>
+        )}
+      </div>
+
+      {routeCount > 0 && <div className="route-count-badge">{routeCount}</div>}
+    </>
+  );
+
   return (
     <div
       ref={cardRef}
-      className={`route-group-display ${isVisible ? 'route-group-display--visible' : ''}`}
+      className={`route-group-display ${isVisible ? 'route-group-display--visible' : ''} ${isComingSoon ? 'route-group-display--coming-soon' : ''}`}
     >
-      <Link href={groupLink} className="block h-full">
-        {!imageLoaded && (
-          <div className="skeleton" />
-        )}
-
-        <Image
-          src={routeGroup.headerImage.url}
-          alt={routeGroup.title || 'Route group image'}
-          fill
-          priority={isVisible}
-          quality={80}
-          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-          onLoad={() => setImageLoaded(true)}
-          className={`image ${imageLoaded ? 'image--loaded' : 'image--loading'}`}
-        />
-        
-        <div className="overlay" />
-
-        <div className="content">
-          <div className="title-section">
-            <div>
-              <h3 className="title">
-                {routeGroup.title}
-              </h3>
-              {routeGroup.subtitle && (
-                <p className="subtitle">
-                  {routeGroup.subtitle}
-                </p>
-              )}
-            </div>
-          </div>
-          
-          {routeGroup.locationLabel && (
-            <div className="location">
-              <span className="mr-1">📍</span>
-              {routeGroup.locationLabel}
-            </div>
-          )}
+      {isComingSoon ? (
+        <div className="block h-full" aria-disabled="true">
+          {cardContent}
         </div>
-        
-        <div className="route-count-badge">
-          {routeGroup.routesCollection?.total || 0}
-        </div>
-      </Link>
+      ) : (
+        <Link href={groupLink} className="block h-full">
+          {cardContent}
+        </Link>
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
 
@@ -13,6 +13,19 @@ export default function PageTransition({ children }: PageTransitionProps) {
   const pathname = usePathname();
   const previousPathnameRef = useRef<string>('');
   const isFirstMountRef = useRef(true);
+  const [isBackNavigation, setIsBackNavigation] = useState(false);
+
+  useEffect(() => {
+    const handlePopState = () => {
+      setIsBackNavigation(true);
+    };
+
+    window.addEventListener('popstate', handlePopState);
+
+    return () => {
+      window.removeEventListener('popstate', handlePopState);
+    };
+  }, []);
 
   useEffect(() => {
     const currentPath = pathname;
@@ -33,7 +46,17 @@ export default function PageTransition({ children }: PageTransitionProps) {
       return;
     }
 
-    // Simple slide up animation for any route change
+    // Skip animation on back navigation
+    if (isBackNavigation) {
+      setIsBackNavigation(false);
+      if (containerRef.current) {
+        gsap.set(containerRef.current, { y: 0, opacity: 1 });
+      }
+      previousPathnameRef.current = currentPath;
+      return;
+    }
+
+    // Simple slide up animation for forward route changes
     if (containerRef.current) {
       // Start: page below viewport
       gsap.set(containerRef.current, {
@@ -51,7 +74,7 @@ export default function PageTransition({ children }: PageTransitionProps) {
     }
 
     previousPathnameRef.current = currentPath;
-  }, [pathname]);
+  }, [pathname, isBackNavigation]);
 
   return (
     <div 

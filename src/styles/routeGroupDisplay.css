@@ -41,6 +41,32 @@
     );
   }
 
+  &.route-group-display--coming-soon {
+    @apply opacity-80;
+    @apply cursor-default;
+  }
+
+  &.route-group-display--coming-soon .image {
+    filter: grayscale(1);
+  }
+
+  &.route-group-display--coming-soon:hover {
+    /* Disable hover effects (no border grow / no extra shadow) */
+    @apply border border-transparent;
+    @apply shadow-lg;
+    @apply opacity-80;
+  }
+
+  .coming-soon-overlay {
+    @apply absolute inset-0;
+    @apply bg-charcoal-900/40;
+  }
+
+  .coming-soon-label {
+    @apply absolute top-3 left-3 z-10;
+    @apply text-white/80 text-xs font-medium uppercase tracking-[0.18em];
+  }
+
   .content {
     @apply absolute bottom-0 left-0 right-0 p-4;
 
