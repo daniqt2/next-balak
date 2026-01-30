@@ -85,8 +85,9 @@ export default function HomeHero() {
       if (!hasPulledRef.current) {
         const touchY = e.touches[0].clientY;
         const deltaY = touchStartY - touchY;
-        const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-        
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+
         // Only prevent default if:
         // 1. User is at the top of the page (scrollTop === 0)
         // 2. User is swiping up (scrolling down)
@@ -134,7 +135,7 @@ export default function HomeHero() {
     };
 
     const el = heroRef.current;
-    
+
     if (el) {
       el.addEventListener('wheel', handleWheel, { passive: true });
       el.addEventListener('touchstart', handleTouchStart, { passive: true });
@@ -199,7 +200,11 @@ export default function HomeHero() {
         const maxSwipeTime = 500;
 
         // Swipe down (scroll up) - close overlay if at top
-        if (deltaY < -minSwipeDistance && deltaTime < maxSwipeTime && sc.scrollTop <= 0) {
+        if (
+          deltaY < -minSwipeDistance &&
+          deltaTime < maxSwipeTime &&
+          sc.scrollTop <= 0
+        ) {
           hasPulledRef.current = false;
           gsap.to(overlayRef.current!, {
             yPercent: 100,
@@ -224,7 +229,6 @@ export default function HomeHero() {
       sc.removeEventListener('touchend', handleTouchEnd as any);
     };
   }, []);
-
 
   // Intersection observer for title animation
   useEffect(() => {
@@ -480,7 +484,7 @@ export default function HomeHero() {
                 BALAK RIDE
               </div>
               <div className="text-base font-light text-gray-700">
-                Compartimos nustras rutas favoritas
+                Compartimos nuestras rutas favoritas
               </div>
               <div className="text-base font-light text-gray-700">
                 & Paradas de café
