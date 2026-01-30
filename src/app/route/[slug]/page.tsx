@@ -4,7 +4,7 @@ import StickyStravaMap from '@/components/maps/StickyStravaMap';
 import RouteGPXMap from '@/components/maps/RouteGPXMap';
 import RouteHero from '@/components/heroes/RouteHero';
 import CoffeeStopsCarousel from '@/components/carousels/CoffeeStopsCarousel';
-import MountainsCarousel from '@/components/carousels/MountainsCarousel';
+import CollVariantsCarousel from '@/components/carousels/CollVariantsCarousel';
 import AssetGrid from '@/components/grids/AssetGrid';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import '@/styles/stickyMap.css';
@@ -103,18 +103,20 @@ export default async function RouteDetailPage({
                 />
               )}
 
-              {/* Mountains Section */}
-              {route.mountainsCollection?.items &&
-                route.mountainsCollection.items.length > 0 && (
-                  <p className="my-12">
+              {/* Coll Variants Section */}
+              {(route as any).collsCollection?.items &&
+                (route as any).collsCollection.items.length > 0 && (
+                  <div className="my-12">
                     <AnimatedSection delay={600}>
-                      <MountainsCarousel
-                        mountains={
-                          route.mountainsCollection.items.filter(Boolean) as any
+                      <CollVariantsCarousel
+                        variants={
+                          (route as any).collsCollection.items.filter(
+                            Boolean
+                          ) as any
                         }
                       />
                     </AnimatedSection>
-                  </p>
+                  </div>
                 )}
 
               {/* Coffee Stops Section */}

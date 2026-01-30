@@ -6,6 +6,20 @@ import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import 'leaflet-gpx';
 
+const CHARCOAL_800 = '#1f2226';
+const BALAK_500 = '#bfe23a';
+
+const gpxPinSvg = `
+<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41">
+  <path d="M12.5 0C5.6 0 0 5.6 0 12.5C0 23.2 12.5 41 12.5 41C12.5 41 25 23.2 25 12.5C25 5.6 19.4 0 12.5 0Z"
+        fill="${CHARCOAL_800}" stroke="${BALAK_500}" stroke-width="2"/>
+  <circle cx="12.5" cy="12.5" r="5.2" fill="${BALAK_500}" />
+</svg>
+`.trim();
+
+const gpxPinIconUrl =
+  `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(gpxPinSvg)}`;
+
 // Fix for default marker icon in Next.js
 if (typeof window !== 'undefined') {
   delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -46,8 +60,8 @@ function GPXLayer({ gpxUrl, options }: GPXLayerProps) {
     const defaultOptions = {
       async: true,
       marker_options: {
-        startIconUrl: undefined,
-        endIconUrl: undefined,
+        startIconUrl: gpxPinIconUrl,
+        endIconUrl: gpxPinIconUrl,
         shadowUrl:
           'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
       },

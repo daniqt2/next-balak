@@ -4,7 +4,7 @@ import React from 'react';
 import { MapContainer, TileLayer, Polygon, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L, { DivIcon } from 'leaflet';
-import { InterestSpot } from '@/contentful-types';
+import type { Coll, InterestSpot } from '@/contentful-types';
 
 // Fix for default marker icon in Next.js
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -17,10 +17,10 @@ L.Icon.Default.mergeOptions({
     'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
 });
 
-type MarkerVariant = 'coffee' | 'mountain';
+type MarkerVariant = 'coffee' | 'mountain' | 'coll';
 
 interface CoffeeMapProps {
-  coffeePoints: Array<InterestSpot>;
+  coffeePoints: Array<InterestSpot | Coll>;
   areas?: Array<Array<[number, number]>>; // Polygon coordinates
   variant?: MarkerVariant;
   height?: string;
@@ -55,8 +55,13 @@ const createCustomIcon = (
   const bgColor =
     variant === 'coffee'
       ? 'rgba(245, 158, 11, 1)'
-      : getDifficultyColor(difficulty);
-  const iconSvg = variant === 'coffee' ? coffeeIconSvg : mountainIconSvg;
+      : variant === 'coll'
+        ? 'rgba(245, 158, 11, 1)'
+        : getDifficultyColor(difficulty);
+  const iconSvg =
+    variant === 'coffee'
+      ? coffeeIconSvg
+      : mountainIconSvg;
 
   return new DivIcon({
     className: 'custom-marker-icon',
@@ -125,36 +130,57 @@ export default function CoffeeMap({
 
         {/* Display coffee points as markers */}
         {coffeePoints.map((point, index) => {
+          const title =
+            (point as any).title ||
+            (point as any).name ||
+            `${
+              variant === 'coffee'
+                ? 'Coffee'
+                : variant === 'coll'
+                  ? 'Coll'
+                  : 'Mountain'
+            } Point ${index + 1}`;
+
+          const difficulty = (point as any).mountainDifficulty as
+            | string
+            | null
+            | undefined;
+
           const customIcon = createCustomIcon(
             variant,
-            point.mountainDifficulty
+            variant === 'mountain' ? difficulty : undefined
           );
+
           return (
             <Marker
               key={index}
-              position={[point.location?.lat || 0, point.location?.lon || 0]}
+              position={[
+                (point as any).location?.lat || 0,
+                (point as any).location?.lon || 0,
+              ]}
               icon={customIcon}
             >
               <Popup>
                 <div className="text-center">
                   <div className="mb-1 text-xl font-bold">
-                    {point.title ||
-                      `${variant === 'coffee' ? 'Coffee' : 'Mountain'} Point ${index + 1}`}
+                    {title}
                     {variant === 'mountain' && (
                       <p className="text-sm text-gray-500">
-                        {point.mountainLength}Km {point.mountainElevationGain}D+
+                        {(point as any).mountainLength}Km{' '}
+                        {(point as any).mountainElevationGain}D+
                       </p>
                     )}
                   </div>
-                  {point.sys?.id && variant === 'mountain' && (
+                  {(point as any).sys?.id &&
+                    (variant === 'mountain' || variant === 'coll') && (
                     <a
-                      href={`/puerto/${point.sys?.id}`}
+                      href={`/puerto/${(point as any).sys?.id}`}
                       className="text-charcoal-900  hover:text-balak-500 underline text-sm font-medium transition-colors"
                     >
                       Ver detalles
                     </a>
                   )}
-                  {point.sys?.id && variant === 'coffee' && (
+                  {(point as any).sys?.id && variant === 'coffee' && (
                     <p className="text-charcoal-500">Detalles proximamente</p>
                   )}
                 </div>

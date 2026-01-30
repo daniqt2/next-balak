@@ -11,6 +11,8 @@ export default function RichTextRenderer({ richTextJson, className = '' }: RichT
   }
 
   const options: Options = {
+    // Preserve manual line breaks inside text nodes
+    renderText: (text) => text.replace(/\r?\n/g, '<br/>'),
     renderNode: {
       'paragraph': (node, next) => {
         const getAllText = (content: any[]): string => {
@@ -46,7 +48,7 @@ export default function RichTextRenderer({ richTextJson, className = '' }: RichT
 
   return (
     <div 
-      className={`rich-text-renderer flex justify-center ${className}`}
+      className={`rich-text-renderer w-full ${className}`}
       dangerouslySetInnerHTML={{ __html: styledHtml }}
     />
   );

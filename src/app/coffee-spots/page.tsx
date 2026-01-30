@@ -29,7 +29,7 @@ export default function CoffeeSpotsPage() {
   useEffect(() => {
     async function fetchCoffeeSpots() {
       try {
-        const data = await coffeeService.getCoffeeSpots({ limit: 50 });
+        const data = await coffeeService.getCoffeeSpots({ limit: 10 });
         const spots =
           data?.interestSpotCollection?.items?.filter(
             (item): item is InterestSpot => item !== null
@@ -83,7 +83,7 @@ export default function CoffeeSpotsPage() {
         <AnimatedSection delay={300}>
           <div className="mb-8">
             <h2 className="text-3xl font-bold text-charcoal-900 mb-6 uppercase">
-              Todos los Puntos de Café
+              Nuestras ultimas paradas
             </h2>
             {coffeeSpots.length > 0 ? (
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">

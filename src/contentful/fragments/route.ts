@@ -55,6 +55,36 @@ export const ROUTE_FRAGMENT = gql`
         ...MountainFields
       }
     }
+    collsCollection {
+      items {
+        __typename
+        sys {
+          id
+        }
+        startLocation
+        length
+        accumulatedHeight
+        difficulty
+        slopePercentage
+        linkedFrom {
+          entryCollection(limit: 5) {
+            items {
+              __typename
+              sys {
+                id
+              }
+              ... on Coll {
+                name
+                slug
+                header {
+                  ...AssetFields
+                }
+              }
+            }
+          }
+        }
+      }
+    }
   }
   ${SYS_FRAGMENT}
   ${ASSET_FRAGMENT}

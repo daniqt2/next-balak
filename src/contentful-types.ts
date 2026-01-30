@@ -179,11 +179,21 @@ export type AssetFilter = {
 
 export type AssetLinkingCollections = {
   __typename?: 'AssetLinkingCollections';
+  collCollection?: Maybe<CollCollection>;
   customAssetCollection?: Maybe<CustomAssetCollection>;
   entryCollection?: Maybe<EntryCollection>;
   interestSpotCollection?: Maybe<InterestSpotCollection>;
   routeCollection?: Maybe<RouteCollection>;
   routeGroupCollection?: Maybe<RouteGroupCollection>;
+};
+
+
+export type AssetLinkingCollectionsCollCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
@@ -253,6 +263,395 @@ export enum AssetOrder {
   WidthAsc = 'width_ASC',
   WidthDesc = 'width_DESC'
 }
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type Coll = Entry & _Node & {
+  __typename?: 'Coll';
+  _id: Scalars['ID']['output'];
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<CollDescription>;
+  header?: Maybe<Asset>;
+  imagesCollection?: Maybe<AssetCollection>;
+  linkedFrom?: Maybe<CollLinkingCollections>;
+  location?: Maybe<Location>;
+  name?: Maybe<Scalars['String']['output']>;
+  slug?: Maybe<Scalars['String']['output']>;
+  sys: Sys;
+  variantsCollection?: Maybe<CollVariantsCollection>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type CollDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type CollHeaderArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type CollImagesCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type CollLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type CollLocationArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type CollNameArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type CollSlugArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type CollVariantsCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CollCollection = {
+  __typename?: 'CollCollection';
+  items: Array<Maybe<Coll>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type CollDescription = {
+  __typename?: 'CollDescription';
+  json: Scalars['JSON']['output'];
+  links: CollDescriptionLinks;
+};
+
+export type CollDescriptionAssets = {
+  __typename?: 'CollDescriptionAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+};
+
+export type CollDescriptionEntries = {
+  __typename?: 'CollDescriptionEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+};
+
+export type CollDescriptionLinks = {
+  __typename?: 'CollDescriptionLinks';
+  assets: CollDescriptionAssets;
+  entries: CollDescriptionEntries;
+  resources: CollDescriptionResources;
+};
+
+export type CollDescriptionResources = {
+  __typename?: 'CollDescriptionResources';
+  block: Array<CollDescriptionResourcesBlock>;
+  hyperlink: Array<CollDescriptionResourcesHyperlink>;
+  inline: Array<CollDescriptionResourcesInline>;
+};
+
+export type CollDescriptionResourcesBlock = ResourceLink & {
+  __typename?: 'CollDescriptionResourcesBlock';
+  sys: ResourceSys;
+};
+
+export type CollDescriptionResourcesHyperlink = ResourceLink & {
+  __typename?: 'CollDescriptionResourcesHyperlink';
+  sys: ResourceSys;
+};
+
+export type CollDescriptionResourcesInline = ResourceLink & {
+  __typename?: 'CollDescriptionResourcesInline';
+  sys: ResourceSys;
+};
+
+export type CollFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CollFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CollFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  header_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  imagesCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  location_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  location_within_circle?: InputMaybe<Scalars['Circle']['input']>;
+  location_within_rectangle?: InputMaybe<Scalars['Rectangle']['input']>;
+  name?: InputMaybe<Scalars['String']['input']>;
+  name_contains?: InputMaybe<Scalars['String']['input']>;
+  name_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  name_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  name_not?: InputMaybe<Scalars['String']['input']>;
+  name_not_contains?: InputMaybe<Scalars['String']['input']>;
+  name_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug?: InputMaybe<Scalars['String']['input']>;
+  slug_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slug_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  slug_not?: InputMaybe<Scalars['String']['input']>;
+  slug_not_contains?: InputMaybe<Scalars['String']['input']>;
+  slug_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+  variantsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CollLinkingCollections = {
+  __typename?: 'CollLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+};
+
+
+export type CollLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export enum CollOrder {
+  NameAsc = 'name_ASC',
+  NameDesc = 'name_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/collVariant) */
+export type CollVariant = Entry & _Node & {
+  __typename?: 'CollVariant';
+  _id: Scalars['ID']['output'];
+  accumulatedHeight?: Maybe<Scalars['Float']['output']>;
+  contentfulMetadata: ContentfulMetadata;
+  difficulty?: Maybe<Scalars['String']['output']>;
+  length?: Maybe<Scalars['Float']['output']>;
+  linkedFrom?: Maybe<CollVariantLinkingCollections>;
+  slopePercentage?: Maybe<Scalars['Float']['output']>;
+  startLocation?: Maybe<Scalars['String']['output']>;
+  sys: Sys;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/collVariant) */
+export type CollVariantAccumulatedHeightArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/collVariant) */
+export type CollVariantDifficultyArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/collVariant) */
+export type CollVariantLengthArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/collVariant) */
+export type CollVariantLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/collVariant) */
+export type CollVariantSlopePercentageArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/collVariant) */
+export type CollVariantStartLocationArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type CollVariantCollection = {
+  __typename?: 'CollVariantCollection';
+  items: Array<Maybe<CollVariant>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type CollVariantFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CollVariantFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CollVariantFilter>>>;
+  accumulatedHeight?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  accumulatedHeight_gt?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_gte?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  accumulatedHeight_lt?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_lte?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_not?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  difficulty?: InputMaybe<Scalars['String']['input']>;
+  difficulty_contains?: InputMaybe<Scalars['String']['input']>;
+  difficulty_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  difficulty_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  difficulty_not?: InputMaybe<Scalars['String']['input']>;
+  difficulty_not_contains?: InputMaybe<Scalars['String']['input']>;
+  difficulty_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  length?: InputMaybe<Scalars['Float']['input']>;
+  length_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  length_gt?: InputMaybe<Scalars['Float']['input']>;
+  length_gte?: InputMaybe<Scalars['Float']['input']>;
+  length_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  length_lt?: InputMaybe<Scalars['Float']['input']>;
+  length_lte?: InputMaybe<Scalars['Float']['input']>;
+  length_not?: InputMaybe<Scalars['Float']['input']>;
+  length_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  slopePercentage?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slopePercentage_gt?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_gte?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  slopePercentage_lt?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_lte?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_not?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  startLocation?: InputMaybe<Scalars['String']['input']>;
+  startLocation_contains?: InputMaybe<Scalars['String']['input']>;
+  startLocation_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  startLocation_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startLocation_not?: InputMaybe<Scalars['String']['input']>;
+  startLocation_not_contains?: InputMaybe<Scalars['String']['input']>;
+  startLocation_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
+export type CollVariantLinkingCollections = {
+  __typename?: 'CollVariantLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  routeCollection?: Maybe<RouteCollection>;
+};
+
+
+export type CollVariantLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type CollVariantLinkingCollectionsRouteCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<CollVariantLinkingCollectionsRouteCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export enum CollVariantLinkingCollectionsRouteCollectionOrder {
+  ElevationAsc = 'elevation_ASC',
+  ElevationDesc = 'elevation_DESC',
+  EndLocationNameAsc = 'endLocationName_ASC',
+  EndLocationNameDesc = 'endLocationName_DESC',
+  LengthAsc = 'length_ASC',
+  LengthDesc = 'length_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  StartLocationNameAsc = 'startLocationName_ASC',
+  StartLocationNameDesc = 'startLocationName_DESC',
+  StravaIdAsc = 'stravaId_ASC',
+  StravaIdDesc = 'stravaId_DESC',
+  StravaLinkAsc = 'stravaLink_ASC',
+  StravaLinkDesc = 'stravaLink_DESC',
+  SubTitleAsc = 'subTitle_ASC',
+  SubTitleDesc = 'subTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TimeAsc = 'time_ASC',
+  TimeDesc = 'time_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum CollVariantOrder {
+  AccumulatedHeightAsc = 'accumulatedHeight_ASC',
+  AccumulatedHeightDesc = 'accumulatedHeight_DESC',
+  DifficultyAsc = 'difficulty_ASC',
+  DifficultyDesc = 'difficulty_DESC',
+  LengthAsc = 'length_ASC',
+  LengthDesc = 'length_DESC',
+  SlopePercentageAsc = 'slopePercentage_ASC',
+  SlopePercentageDesc = 'slopePercentage_DESC',
+  StartLocationAsc = 'startLocation_ASC',
+  StartLocationDesc = 'startLocation_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export type CollVariantsCollection = {
+  __typename?: 'CollVariantsCollection';
+  items: Array<Maybe<Entry>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
 
 export type ContentfulMetadata = {
   __typename?: 'ContentfulMetadata';
@@ -804,6 +1203,10 @@ export type Query = {
   _nodes: Array<Maybe<_Node>>;
   asset?: Maybe<Asset>;
   assetCollection?: Maybe<AssetCollection>;
+  coll?: Maybe<Coll>;
+  collCollection?: Maybe<CollCollection>;
+  collVariant?: Maybe<CollVariant>;
+  collVariantCollection?: Maybe<CollVariantCollection>;
   customAsset?: Maybe<CustomAsset>;
   customAssetCollection?: Maybe<CustomAssetCollection>;
   entryCollection?: Maybe<EntryCollection>;
@@ -848,6 +1251,44 @@ export type QueryAssetCollectionArgs = {
   skip?: InputMaybe<Scalars['Int']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
   where?: InputMaybe<AssetFilter>;
+};
+
+
+export type QueryCollArgs = {
+  id: Scalars['String']['input'];
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type QueryCollCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<CollOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<CollFilter>;
+};
+
+
+export type QueryCollVariantArgs = {
+  id: Scalars['String']['input'];
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type QueryCollVariantCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<CollVariantOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<CollVariantFilter>;
 };
 
 
@@ -947,11 +1388,12 @@ export type ResourceSys = {
   urn: Scalars['String']['output'];
 };
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type Route = Entry & _Node & {
   __typename?: 'Route';
   _id: Scalars['ID']['output'];
   coffeStopsCollection?: Maybe<RouteCoffeStopsCollection>;
+  collsCollection?: Maybe<RouteCollsCollection>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']['output']>;
   elevation?: Maybe<Scalars['Float']['output']>;
@@ -976,7 +1418,7 @@ export type Route = Entry & _Node & {
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteCoffeStopsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -988,35 +1430,47 @@ export type RouteCoffeStopsCollectionArgs = {
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+export type RouteCollsCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<RouteCollsCollectionOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<CollVariantFilter>;
+};
+
+
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteElevationArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteEndLocationArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteEndLocationNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteGpxArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1024,7 +1478,7 @@ export type RouteGpxArgs = {
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteHeaderImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1032,7 +1486,7 @@ export type RouteHeaderImageArgs = {
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteInterestSpotsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1044,20 +1498,20 @@ export type RouteInterestSpotsCollectionArgs = {
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteLengthArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteMainCarouselCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1067,7 +1521,7 @@ export type RouteMainCarouselCollectionArgs = {
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteMountainsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1079,56 +1533,56 @@ export type RouteMountainsCollectionArgs = {
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteSlugArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStartLocationArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStartLocationNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStravaIdArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStravaLinkArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteSubTitleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteTimeArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteTitleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1175,11 +1629,42 @@ export type RouteCollection = {
   total: Scalars['Int']['output'];
 };
 
+export type RouteCollsCollection = {
+  __typename?: 'RouteCollsCollection';
+  items: Array<Maybe<CollVariant>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export enum RouteCollsCollectionOrder {
+  AccumulatedHeightAsc = 'accumulatedHeight_ASC',
+  AccumulatedHeightDesc = 'accumulatedHeight_DESC',
+  DifficultyAsc = 'difficulty_ASC',
+  DifficultyDesc = 'difficulty_DESC',
+  LengthAsc = 'length_ASC',
+  LengthDesc = 'length_DESC',
+  SlopePercentageAsc = 'slopePercentage_ASC',
+  SlopePercentageDesc = 'slopePercentage_DESC',
+  StartLocationAsc = 'startLocation_ASC',
+  StartLocationDesc = 'startLocation_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
 export type RouteFilter = {
   AND?: InputMaybe<Array<InputMaybe<RouteFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<RouteFilter>>>;
   coffeStops?: InputMaybe<CfInterestSpotNestedFilter>;
   coffeStopsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  colls?: InputMaybe<CfCollVariantNestedFilter>;
+  collsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   description?: InputMaybe<Scalars['String']['input']>;
   description_contains?: InputMaybe<Scalars['String']['input']>;
@@ -1800,6 +2285,54 @@ export type _Node = {
   _id: Scalars['ID']['output'];
 };
 
+export type CfCollVariantNestedFilter = {
+  AND?: InputMaybe<Array<InputMaybe<CfCollVariantNestedFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<CfCollVariantNestedFilter>>>;
+  accumulatedHeight?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  accumulatedHeight_gt?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_gte?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  accumulatedHeight_lt?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_lte?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_not?: InputMaybe<Scalars['Float']['input']>;
+  accumulatedHeight_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  difficulty?: InputMaybe<Scalars['String']['input']>;
+  difficulty_contains?: InputMaybe<Scalars['String']['input']>;
+  difficulty_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  difficulty_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  difficulty_not?: InputMaybe<Scalars['String']['input']>;
+  difficulty_not_contains?: InputMaybe<Scalars['String']['input']>;
+  difficulty_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  length?: InputMaybe<Scalars['Float']['input']>;
+  length_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  length_gt?: InputMaybe<Scalars['Float']['input']>;
+  length_gte?: InputMaybe<Scalars['Float']['input']>;
+  length_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  length_lt?: InputMaybe<Scalars['Float']['input']>;
+  length_lte?: InputMaybe<Scalars['Float']['input']>;
+  length_not?: InputMaybe<Scalars['Float']['input']>;
+  length_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  slopePercentage?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  slopePercentage_gt?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_gte?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  slopePercentage_lt?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_lte?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_not?: InputMaybe<Scalars['Float']['input']>;
+  slopePercentage_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  startLocation?: InputMaybe<Scalars['String']['input']>;
+  startLocation_contains?: InputMaybe<Scalars['String']['input']>;
+  startLocation_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  startLocation_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  startLocation_not?: InputMaybe<Scalars['String']['input']>;
+  startLocation_not_contains?: InputMaybe<Scalars['String']['input']>;
+  startLocation_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+};
+
 export type CfInterestSpotNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfInterestSpotNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfInterestSpotNestedFilter>>>;
@@ -1874,6 +2407,7 @@ export type CfRouteNestedFilter = {
   AND?: InputMaybe<Array<InputMaybe<CfRouteNestedFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CfRouteNestedFilter>>>;
   coffeStopsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  collsCollection_exists?: InputMaybe<Scalars['Boolean']['input']>;
   contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
   description?: InputMaybe<Scalars['String']['input']>;
   description_contains?: InputMaybe<Scalars['String']['input']>;
@@ -1974,6 +2508,8 @@ export type GetEntryCollectionQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetEntryCollectionQuery = { __typename?: 'Query', entryCollection?: { __typename?: 'EntryCollection', items: Array<
+      | { __typename: 'Coll', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
+      | { __typename: 'CollVariant', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'CustomAsset', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'InterestSpot', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'Route', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
@@ -2008,6 +2544,8 @@ export type GetEntriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetEntriesQuery = { __typename?: 'Query', entryCollection?: { __typename?: 'EntryCollection', items: Array<
+      | { __typename: 'Coll', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
+      | { __typename: 'CollVariant', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'CustomAsset', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'InterestSpot', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'Route', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }

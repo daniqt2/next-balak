@@ -45,7 +45,9 @@ export class RouteService {
    * Get a single route by its slug
    */
   async getRouteBySlug(slug: string): Promise<GetRouteBySlugQuery> {
-    return contentfulFetcher.query<GetRouteBySlugQuery>(GET_ROUTE_BY_SLUG, {
+    // Use network-only to avoid stale cached GraphQL fragments
+    // (important when adding new fields like `collsCollection`)
+    return contentfulFetcher.queryFresh<GetRouteBySlugQuery>(GET_ROUTE_BY_SLUG, {
       variables: { slug },
     });
   }
