@@ -29,7 +29,6 @@ export default async function RouteDetailPage({
       notFound();
     }
 
-
     return (
       <div className="min-h-screen" style={{ paddingTop: '64px' }}>
         {/* Hero Section */}
@@ -46,9 +45,7 @@ export default async function RouteDetailPage({
                     <h2 className="text-3xl md:text-5xl font-bold text-charcoal-900 mb-4 uppercase">
                       Descripción
                     </h2>
-                    <div 
-                      className="text-charcoal-500 text-lg leading-relaxed whitespace-pre-line"
-                    >
+                    <div className="text-charcoal-500 text-lg leading-relaxed whitespace-pre-line">
                       {route.description}
                     </div>
                   </div>
@@ -59,8 +56,7 @@ export default async function RouteDetailPage({
               <AnimatedSection delay={300}>
                 <div className="mb-12">
                   <div className="flex flex-wrap gap-4 justify-center">
-
-                  {route.length && (
+                    {route.length && (
                       <div
                         className="bg-charcoal-800 px-8 py-6 min-w-[140px] text-center"
                         style={{
@@ -76,7 +72,7 @@ export default async function RouteDetailPage({
                         </p>
                       </div>
                     )}
-                    
+
                     {route.elevation && (
                       <div
                         className="bg-charcoal-800 px-8 py-6 min-w-[140px] text-center"
@@ -149,7 +145,6 @@ export default async function RouteDetailPage({
                       />
                     </AnimatedSection>
                   )}
-
               </div>
             </AnimatedSection>
           </div>

@@ -16,10 +16,6 @@
     @apply h-96;
   }
 
-  .coffee-stop-link {
-    @apply block;
-  }
-
   .image-section {
     @apply relative w-full overflow-hidden;
 

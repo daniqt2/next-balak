@@ -3,7 +3,7 @@
 import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { Coffee, MapPin, BarChart3 } from 'lucide-react';
+import { Coffee, MapPin } from 'lucide-react';
 import type { InterestSpot } from '@/contentful-types';
 import '@/styles/coffeeStopCard.css';
 
@@ -21,8 +21,10 @@ export default function CoffeeStopCard({
   if (!coffeeStop) return null;
 
   return (
-    <div className={`coffee-stop-card ${compact ? 'compact' : ''}`}>
-      {/* <Link href={`/coffee/${coffeeStop.sys.id}`} className="coffee-stop-link"> */}
+    <Link
+      href={`/coffee/${coffeeStop.sys.id}`}
+      className={`coffee-stop-card ${compact ? 'compact' : ''}`}
+    >
       {/* Image Section */}
       <div className={`image-section ${compact ? 'compact' : ''}`}>
         {coffeeStop.headerImage?.url ? (
@@ -73,16 +75,8 @@ export default function CoffeeStopCard({
             <MapPin size={14} color="currentColor" />
             <span>{coffeeStop.locationName}</span>
           </div>
-
-          {(coffeeStop.mountainLength || coffeeStop.mountainElevationGain) && (
-            <div className="mountain-stat">
-              <BarChart3 size={14} color="currentColor" />
-              <span>{coffeeStop.mountainLength || '0'}km</span>
-            </div>
-          )}
         </div>
       </div>
-      {/* </Link> */}
-    </div>
+    </Link>
   );
 }

@@ -116,9 +116,6 @@ query GetRouteBySlug($slug: String!) {
             lat
             lon
           }
-          mountainDifficulty
-          mountainLength
-          mountainElevationGain
           locationName
           location {
             lat
@@ -144,9 +141,6 @@ query GetRouteBySlug($slug: String!) {
           }
           title
           description
-          mountainDifficulty
-          mountainLength
-          mountainElevationGain
           headerImage {
             sys {
               id

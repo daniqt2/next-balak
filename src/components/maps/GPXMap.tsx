@@ -17,8 +17,7 @@ const gpxPinSvg = `
 </svg>
 `.trim();
 
-const gpxPinIconUrl =
-  `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(gpxPinSvg)}`;
+const gpxPinIconUrl = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(gpxPinSvg)}`;
 
 // Fix for default marker icon in Next.js
 if (typeof window !== 'undefined') {
@@ -146,8 +145,8 @@ export default function GPXMap({
           gpxUrl={gpxUrl}
           options={{
             polyline_options: {
-              color: '#5a6068', // 
-              opacity: .90,
+              color: '#5a6068', //
+              opacity: 0.9,
               weight: 5,
             },
           }}

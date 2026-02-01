@@ -45,6 +45,31 @@ const GET_COLL_BY_ID = gql`
             accumulatedHeight
             slopePercentage
             difficulty
+            linkedFrom {
+              routeCollection(limit: 5, order: [sys_publishedAt_DESC]) {
+                items {
+                  sys {
+                    id
+                  }
+                  title
+                  slug
+                  subTitle
+                  length
+                  elevation
+                  time
+                  headerImage {
+                    sys {
+                      id
+                    }
+                    title
+                    url
+                    width
+                    height
+                    contentType
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -101,4 +126,3 @@ export class CollService {
 
 // Export singleton instance
 export const collService = new CollService();
-

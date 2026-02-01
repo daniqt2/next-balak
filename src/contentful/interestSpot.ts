@@ -27,9 +27,6 @@ export const interestSpotCollectionQuery = gql`
         title
         description
         locationName
-        mountainLength
-        mountainElevationGain
-        mountainDifficulty
         location {
           lat
           lon

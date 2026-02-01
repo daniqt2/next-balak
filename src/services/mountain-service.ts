@@ -19,9 +19,6 @@ const GET_MOUNTAIN_BY_ID = gql`
       title
       description
       locationName
-      mountainDifficulty
-      mountainLength
-      mountainElevationGain
       mountainMedPercent
       location {
         lat
@@ -121,12 +118,8 @@ export class MountainService {
   /**
    * Get mountains by difficulty level
    */
-  async getMountainsByDifficulty(difficulty: string): Promise<Query> {
-    return this.getMountains({
-      where: {
-        mountainDifficulty_contains: difficulty,
-      },
-    });
+  async getMountainsByDifficulty(_difficulty: string): Promise<Query> {
+    return this.getMountains();
   }
 
   /**
@@ -158,22 +151,15 @@ export class MountainService {
   /**
    * Get mountains with elevation gain above a certain threshold
    */
-  async getMountainsByElevation(minElevation: number): Promise<Query> {
-    return this.getMountains({
-      where: {
-        mountainElevationGain_gte: minElevation,
-      },
-      order: [InterestSpotOrder.MountainElevationGainDesc],
-    });
+  async getMountainsByElevation(_minElevation: number): Promise<Query> {
+    return this.getMountains();
   }
 
   /**
    * Get mountains sorted by difficulty
    */
   async getMountainsSortedByDifficulty(): Promise<Query> {
-    return this.getMountains({
-      order: [InterestSpotOrder.MountainDifficultyAsc],
-    });
+    return this.getMountains();
   }
 }
 

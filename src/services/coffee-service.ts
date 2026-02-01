@@ -89,6 +89,9 @@ const GET_COFFEE_BY_ID = gql`
       __typename
       title
       description
+      fullDescription {
+        json
+      }
       locationName
       location {
         lat
@@ -106,7 +109,7 @@ const GET_COFFEE_BY_ID = gql`
         contentType
       }
       linkedFrom {
-        routeCollection {
+        routeCollection(limit: 5, order: [sys_publishedAt_DESC]) {
           total
           items {
             sys {

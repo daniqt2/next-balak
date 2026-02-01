@@ -47,9 +47,12 @@ export class RouteService {
   async getRouteBySlug(slug: string): Promise<GetRouteBySlugQuery> {
     // Use network-only to avoid stale cached GraphQL fragments
     // (important when adding new fields like `collsCollection`)
-    return contentfulFetcher.queryFresh<GetRouteBySlugQuery>(GET_ROUTE_BY_SLUG, {
-      variables: { slug },
-    });
+    return contentfulFetcher.queryFresh<GetRouteBySlugQuery>(
+      GET_ROUTE_BY_SLUG,
+      {
+        variables: { slug },
+      }
+    );
   }
 
   /**

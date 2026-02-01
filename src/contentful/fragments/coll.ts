@@ -40,4 +40,3 @@ export const COLL_FRAGMENT = gql`
   ${ASSET_FRAGMENT}
   ${LOCATION_FRAGMENT}
 `;
-

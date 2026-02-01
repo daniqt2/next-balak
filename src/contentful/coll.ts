@@ -20,4 +20,3 @@ export const collCollectionQuery = gql`
   }
   ${COLL_FRAGMENT}
 `;
-

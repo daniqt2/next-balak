@@ -1,6 +1,7 @@
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import RichTextRenderer from '@/components/ui/RichTextRenderer';
 import AssetGrid from '@/components/grids/AssetGrid';
+import VariantRoutesCarousel from '@/components/carousels/VariantRoutesCarousel';
 
 import { collService } from '@/services/coll-service';
 import Image from 'next/image';
@@ -43,6 +44,22 @@ export default async function MountainDetailPage({
       notFound();
     }
 
+    const variants = Array.isArray((coll as any).variantsCollection?.items)
+      ? ((coll as any).variantsCollection.items.filter(Boolean) as any[])
+      : [];
+
+    const headerVariants = variants
+      .map(v => ({
+        name:
+          typeof v?.startLocation === 'string' ? v.startLocation.trim() : '',
+        difficulty:
+          typeof v?.difficulty === 'string' ? (v.difficulty as string) : null,
+      }))
+      .filter(v => Boolean(v.name));
+
+    const headerVisible = headerVariants.slice(0, 3);
+    const headerRemaining = headerVariants.length - headerVisible.length;
+
     return (
       <div className="min-h-screen" style={{ paddingTop: '64px' }}>
         {/* Hero */}
@@ -67,6 +84,33 @@ export default async function MountainDetailPage({
               <h1 className="text-white text-4xl md:text-6xl font-bold uppercase">
                 {coll.name || 'Puerto'}
               </h1>
+              {headerVisible.length > 0 && (
+                <p className="text-white/80 mt-3 text-sm md:text-base">
+                  <span className="text-white/60">Se puede subir desde:</span>{' '}
+                  {headerVisible.map((v, idx) => (
+                    <span
+                      key={`${v.name}-${idx}`}
+                      className="inline-flex items-center"
+                    >
+                      <span
+                        className={`inline-block w-2 h-2 rounded-full mr-2 ${getDifficultyDotClass(
+                          v.difficulty
+                        )}`}
+                        aria-hidden="true"
+                      />
+                      <span>{v.name}</span>
+                      {idx < headerVisible.length - 1 && (
+                        <span className="mx-2 text-white/50">·</span>
+                      )}
+                    </span>
+                  ))}
+                  {headerRemaining > 0 && (
+                    <span className="ml-2 text-white/60">
+                      +{headerRemaining}
+                    </span>
+                  )}
+                </p>
+              )}
             </div>
           </div>
         </div>
@@ -89,40 +133,6 @@ export default async function MountainDetailPage({
                 </AnimatedSection>
               )}
 
-              {/* Coll Images Gallery */}
-              {(coll as any).imagesCollection?.items &&
-                (coll as any).imagesCollection.items.filter(Boolean).length >
-                  0 && (
-                  <AnimatedSection delay={300}>
-                    <div className="mb-8">
-                      <h2 className="text-2xl font-bold text-charcoal-900 mb-6 uppercase flex items-center gap-2">
-                        <Images className="w-5 h-5 text-balak-700" />
-                        Galería
-                      </h2>
-                      <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
-                        {(coll as any).imagesCollection.items
-                          .filter(Boolean)
-                          .map((img: any) => (
-                            <div
-                              key={img.sys.id}
-                              className="relative aspect-[4/3] rounded-xl overflow-hidden bg-charcoal-100"
-                            >
-                              {img.url ? (
-                                <Image
-                                  src={img.url}
-                                  alt={img.title || coll.name || 'Imagen'}
-                                  fill
-                                  sizes="(max-width: 768px) 50vw, 33vw"
-                                  className="object-cover"
-                                />
-                              ) : null}
-                            </div>
-                          ))}
-                      </div>
-                    </div>
-                  </AnimatedSection>
-                )}
-
               {/* Variants Section */}
               {Array.isArray((coll as any).variantsCollection?.items) &&
                 (coll as any).variantsCollection.items.filter(Boolean).length >
@@ -130,69 +140,88 @@ export default async function MountainDetailPage({
                   <AnimatedSection delay={350}>
                     <div className="mb-8">
                       <h2 className="text-2xl font-bold text-charcoal-900 mb-6 uppercase">
-                        Variantes
+                        Ascenso por:
                       </h2>
 
-                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        {(coll as any).variantsCollection.items
-                          .filter(Boolean)
-                          .map((variant: any, idx: number) => (
+                      {(coll as any).variantsCollection.items
+                        .filter(Boolean)
+                        .slice(0, 2)
+                        .map((variant: any, idx: number) => {
+                          const routes =
+                            variant?.linkedFrom?.routeCollection?.items?.filter(
+                              Boolean
+                            ) || [];
+
+                          return (
                             <div
                               key={variant?.sys?.id || idx}
-                              className="bg-white rounded-xl border border-gray-200 shadow-sm p-5"
+                              className="mb-12"
                             >
-                              <div className="flex items-start gap-4">
-                                <div className="bg-balak-orange-500 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
-                                  <Mountain
-                                    className="w-6 h-6 text-white"
-                                    strokeWidth={2}
-                                  />
-                                </div>
+                              {/* Variant header + stats */}
+                              <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
+                                <div className="flex items-start justify-between gap-6 flex-wrap">
+                                  <div className="min-w-0">
+                                    <h3 className="text-xl md:text-2xl font-bold text-charcoal-900 mb-3">
+                                      {variant?.startLocation
+                                        ? `${idx === 0 ? 'A' : 'B'}. ${variant.startLocation}`
+                                        : `Variante ${idx + 1}`}
+                                    </h3>
 
-                                <div className="flex-1 min-w-0">
-                                  <h3 className="text-lg md:text-xl font-bold text-charcoal-900 mb-1 truncate">
-                                    {variant?.startLocation
-                                      ? `Ascenso desde ${variant.startLocation}`
-                                      : `Variante ${idx + 1}`}
-                                  </h3>
-
-                                  <div className="flex flex-wrap gap-x-4 gap-y-2 text-charcoal-600 text-sm mt-2">
-                                    {variant?.difficulty && (
-                                      <span className="inline-flex items-center px-1 py-0.5 rounded-full  text-charcoal-700 text-xs font-medium">
-                                        <span
-                                          className={`inline-block w-2 h-2 rounded-full mr-2 ${getDifficultyDotClass(
-                                            variant.difficulty
-                                          )}`}
-                                        />
-                                        <span className="sr-only">
-                                          {variant.difficulty}
+                                    <div className="flex flex-wrap items-center gap-x-5 gap-y-2 text-charcoal-600 text-sm">
+                                      {variant?.difficulty && (
+                                        <span className="inline-flex items-center">
+                                          <span
+                                            className={`inline-block w-2.5 h-2.5 rounded-full mr-2 ${getDifficultyDotClass(
+                                              variant.difficulty
+                                            )}`}
+                                          />
+                                          <span className="sr-only">
+                                            {variant.difficulty}
+                                          </span>
                                         </span>
-                                      </span>
-                                    )}
-                                    {variant?.length != null && (
-                                      <span className="flex items-center gap-1">
-                                        <BarChart3 className="w-4 h-4" />
-                                        {variant.length} km
-                                      </span>
-                                    )}
-                                    {variant?.accumulatedHeight != null && (
-                                      <span className="flex items-center gap-1">
-                                        <TrendingUp className="w-4 h-4" />
-                                        {variant.accumulatedHeight} mD+
-                                      </span>
-                                    )}
-                                    {variant?.slopePercentage != null && (
-                                      <span className="flex items-center gap-1">
-                                        <Percent className="w-4 h-4" />
-                                        {variant.slopePercentage}%
-                                      </span>
-                                    )}
+                                      )}
+                                      {variant?.length != null && (
+                                        <span className="flex items-center gap-2">
+                                          <BarChart3 className="w-4 h-4" />
+                                          {variant.length} km
+                                        </span>
+                                      )}
+                                      {variant?.slopePercentage != null && (
+                                        <span className="flex items-center gap-2">
+                                          <Percent className="w-4 h-4" />
+                                          {variant.slopePercentage}%
+                                        </span>
+                                      )}
+                                      {variant?.accumulatedHeight != null && (
+                                        <span className="flex items-center gap-2">
+                                          <TrendingUp className="w-4 h-4" />
+                                          {variant.accumulatedHeight} mD+
+                                        </span>
+                                      )}
+                                    </div>
                                   </div>
                                 </div>
                               </div>
+
+                              {/* Routes section */}
+                              <div className="mt-5">
+                                {routes.length > 0 ? (
+                                  <>
+                                    <p className="text-xs uppercase tracking-wide text-charcoal-500 mb-4">
+                                      Últimas rutas que incluyen este ascenso
+                                    </p>
+                                    <VariantRoutesCarousel routes={routes} />
+                                  </>
+                                ) : (
+                                  <p className="text-charcoal-500 text-sm">
+                                    No hay rutas asociadas a este ascenso
+                                    todavía.
+                                  </p>
+                                )}
+                              </div>
                             </div>
-                          ))}
-                      </div>
+                          );
+                        })}
                     </div>
                   </AnimatedSection>
                 )}

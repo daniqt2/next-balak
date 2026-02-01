@@ -27,7 +27,10 @@ function getParentColl(variant: any): { id?: string; name?: string } {
   };
 }
 
-export default function CollVariantCard({ variant, index = 0 }: CollVariantCardProps) {
+export default function CollVariantCard({
+  variant,
+  index = 0,
+}: CollVariantCardProps) {
   if (!variant) return null;
 
   const parent = getParentColl(variant);
@@ -95,4 +98,3 @@ export default function CollVariantCard({ variant, index = 0 }: CollVariantCardP
     </Link>
   );
 }
-

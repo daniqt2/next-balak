@@ -58,10 +58,7 @@ const createCustomIcon = (
       : variant === 'coll'
         ? 'rgba(245, 158, 11, 1)'
         : getDifficultyColor(difficulty);
-  const iconSvg =
-    variant === 'coffee'
-      ? coffeeIconSvg
-      : mountainIconSvg;
+  const iconSvg = variant === 'coffee' ? coffeeIconSvg : mountainIconSvg;
 
   return new DivIcon({
     className: 'custom-marker-icon',
@@ -141,15 +138,7 @@ export default function CoffeeMap({
                   : 'Mountain'
             } Point ${index + 1}`;
 
-          const difficulty = (point as any).mountainDifficulty as
-            | string
-            | null
-            | undefined;
-
-          const customIcon = createCustomIcon(
-            variant,
-            variant === 'mountain' ? difficulty : undefined
-          );
+          const customIcon = createCustomIcon(variant, undefined);
 
           return (
             <Marker
@@ -162,24 +151,16 @@ export default function CoffeeMap({
             >
               <Popup>
                 <div className="text-center">
-                  <div className="mb-1 text-xl font-bold">
-                    {title}
-                    {variant === 'mountain' && (
-                      <p className="text-sm text-gray-500">
-                        {(point as any).mountainLength}Km{' '}
-                        {(point as any).mountainElevationGain}D+
-                      </p>
-                    )}
-                  </div>
+                  <div className="mb-1 text-xl font-bold">{title}</div>
                   {(point as any).sys?.id &&
                     (variant === 'mountain' || variant === 'coll') && (
-                    <a
-                      href={`/puerto/${(point as any).sys?.id}`}
-                      className="text-charcoal-900  hover:text-balak-500 underline text-sm font-medium transition-colors"
-                    >
-                      Ver detalles
-                    </a>
-                  )}
+                      <a
+                        href={`/puerto/${(point as any).sys?.id}`}
+                        className="text-charcoal-900  hover:text-balak-500 underline text-sm font-medium transition-colors"
+                      >
+                        Ver detalles
+                      </a>
+                    )}
                   {(point as any).sys?.id && variant === 'coffee' && (
                     <p className="text-charcoal-500">Detalles proximamente</p>
                   )}

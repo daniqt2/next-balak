@@ -464,6 +464,7 @@ export type CollVariant = Entry & _Node & {
   accumulatedHeight?: Maybe<Scalars['Float']['output']>;
   contentfulMetadata: ContentfulMetadata;
   difficulty?: Maybe<Scalars['String']['output']>;
+  internalName?: Maybe<Scalars['String']['output']>;
   length?: Maybe<Scalars['Float']['output']>;
   linkedFrom?: Maybe<CollVariantLinkingCollections>;
   slopePercentage?: Maybe<Scalars['Float']['output']>;
@@ -481,6 +482,13 @@ export type CollVariantAccumulatedHeightArgs = {
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/collVariant) */
 export type CollVariantDifficultyArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/collVariant) */
+export type CollVariantInternalNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
@@ -540,6 +548,13 @@ export type CollVariantFilter = {
   difficulty_not?: InputMaybe<Scalars['String']['input']>;
   difficulty_not_contains?: InputMaybe<Scalars['String']['input']>;
   difficulty_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  internalName?: InputMaybe<Scalars['String']['input']>;
+  internalName_contains?: InputMaybe<Scalars['String']['input']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  internalName_not?: InputMaybe<Scalars['String']['input']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   length?: InputMaybe<Scalars['Float']['input']>;
   length_exists?: InputMaybe<Scalars['Boolean']['input']>;
   length_gt?: InputMaybe<Scalars['Float']['input']>;
@@ -629,6 +644,8 @@ export enum CollVariantOrder {
   AccumulatedHeightDesc = 'accumulatedHeight_DESC',
   DifficultyAsc = 'difficulty_ASC',
   DifficultyDesc = 'difficulty_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
   LengthAsc = 'length_ASC',
   LengthDesc = 'length_DESC',
   SlopePercentageAsc = 'slopePercentage_ASC',
@@ -942,14 +959,13 @@ export type InterestSpot = Entry & _Node & {
   _id: Scalars['ID']['output'];
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']['output']>;
+  fullDescription?: Maybe<InterestSpotFullDescription>;
   headerImage?: Maybe<Asset>;
   linkedFrom?: Maybe<InterestSpotLinkingCollections>;
   location?: Maybe<Location>;
   locationName?: Maybe<Scalars['String']['output']>;
-  mountainDifficulty?: Maybe<Scalars['String']['output']>;
-  mountainElevationGain?: Maybe<Scalars['Float']['output']>;
-  mountainLength?: Maybe<Scalars['Float']['output']>;
-  mountainMedPercent?: Maybe<Scalars['Float']['output']>;
+  services?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
+  stopType?: Maybe<Scalars['String']['output']>;
   sys: Sys;
   title?: Maybe<Scalars['String']['output']>;
   type?: Maybe<Array<Maybe<Scalars['String']['output']>>>;
@@ -958,6 +974,13 @@ export type InterestSpot = Entry & _Node & {
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/interestSpot) */
 export type InterestSpotDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/interestSpot) */
+export type InterestSpotFullDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
@@ -992,28 +1015,14 @@ export type InterestSpotLocationNameArgs = {
 
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/interestSpot) */
-export type InterestSpotMountainDifficultyArgs = {
+export type InterestSpotServicesArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/interestSpot) */
-export type InterestSpotMountainElevationGainArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/interestSpot) */
-export type InterestSpotMountainLengthArgs = {
-  locale?: InputMaybe<Scalars['String']['input']>;
-  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
-};
-
-
-/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/interestSpot) */
-export type InterestSpotMountainMedPercentArgs = {
+export type InterestSpotStopTypeArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
@@ -1051,6 +1060,9 @@ export type InterestSpotFilter = {
   description_not?: InputMaybe<Scalars['String']['input']>;
   description_not_contains?: InputMaybe<Scalars['String']['input']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  fullDescription_contains?: InputMaybe<Scalars['String']['input']>;
+  fullDescription_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  fullDescription_not_contains?: InputMaybe<Scalars['String']['input']>;
   headerImage_exists?: InputMaybe<Scalars['Boolean']['input']>;
   locationName?: InputMaybe<Scalars['String']['input']>;
   locationName_contains?: InputMaybe<Scalars['String']['input']>;
@@ -1062,40 +1074,17 @@ export type InterestSpotFilter = {
   location_exists?: InputMaybe<Scalars['Boolean']['input']>;
   location_within_circle?: InputMaybe<Scalars['Circle']['input']>;
   location_within_rectangle?: InputMaybe<Scalars['Rectangle']['input']>;
-  mountainDifficulty?: InputMaybe<Scalars['String']['input']>;
-  mountainDifficulty_contains?: InputMaybe<Scalars['String']['input']>;
-  mountainDifficulty_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  mountainDifficulty_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  mountainDifficulty_not?: InputMaybe<Scalars['String']['input']>;
-  mountainDifficulty_not_contains?: InputMaybe<Scalars['String']['input']>;
-  mountainDifficulty_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  mountainElevationGain?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  mountainElevationGain_gt?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_gte?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-  mountainElevationGain_lt?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_lte?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_not?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-  mountainLength?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  mountainLength_gt?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_gte?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-  mountainLength_lt?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_lte?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_not?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-  mountainMedPercent?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  mountainMedPercent_gt?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_gte?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-  mountainMedPercent_lt?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_lte?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_not?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  services_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  services_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  services_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  services_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  stopType?: InputMaybe<Scalars['String']['input']>;
+  stopType_contains?: InputMaybe<Scalars['String']['input']>;
+  stopType_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  stopType_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  stopType_not?: InputMaybe<Scalars['String']['input']>;
+  stopType_not_contains?: InputMaybe<Scalars['String']['input']>;
+  stopType_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']['input']>;
   title_contains?: InputMaybe<Scalars['String']['input']>;
@@ -1108,6 +1097,54 @@ export type InterestSpotFilter = {
   type_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   type_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   type_exists?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type InterestSpotFullDescription = {
+  __typename?: 'InterestSpotFullDescription';
+  json: Scalars['JSON']['output'];
+  links: InterestSpotFullDescriptionLinks;
+};
+
+export type InterestSpotFullDescriptionAssets = {
+  __typename?: 'InterestSpotFullDescriptionAssets';
+  block: Array<Maybe<Asset>>;
+  hyperlink: Array<Maybe<Asset>>;
+};
+
+export type InterestSpotFullDescriptionEntries = {
+  __typename?: 'InterestSpotFullDescriptionEntries';
+  block: Array<Maybe<Entry>>;
+  hyperlink: Array<Maybe<Entry>>;
+  inline: Array<Maybe<Entry>>;
+};
+
+export type InterestSpotFullDescriptionLinks = {
+  __typename?: 'InterestSpotFullDescriptionLinks';
+  assets: InterestSpotFullDescriptionAssets;
+  entries: InterestSpotFullDescriptionEntries;
+  resources: InterestSpotFullDescriptionResources;
+};
+
+export type InterestSpotFullDescriptionResources = {
+  __typename?: 'InterestSpotFullDescriptionResources';
+  block: Array<InterestSpotFullDescriptionResourcesBlock>;
+  hyperlink: Array<InterestSpotFullDescriptionResourcesHyperlink>;
+  inline: Array<InterestSpotFullDescriptionResourcesInline>;
+};
+
+export type InterestSpotFullDescriptionResourcesBlock = ResourceLink & {
+  __typename?: 'InterestSpotFullDescriptionResourcesBlock';
+  sys: ResourceSys;
+};
+
+export type InterestSpotFullDescriptionResourcesHyperlink = ResourceLink & {
+  __typename?: 'InterestSpotFullDescriptionResourcesHyperlink';
+  sys: ResourceSys;
+};
+
+export type InterestSpotFullDescriptionResourcesInline = ResourceLink & {
+  __typename?: 'InterestSpotFullDescriptionResourcesInline';
+  sys: ResourceSys;
 };
 
 export type InterestSpotLinkingCollections = {
@@ -1171,14 +1208,8 @@ export enum InterestSpotOrder {
   DescriptionDesc = 'description_DESC',
   LocationNameAsc = 'locationName_ASC',
   LocationNameDesc = 'locationName_DESC',
-  MountainDifficultyAsc = 'mountainDifficulty_ASC',
-  MountainDifficultyDesc = 'mountainDifficulty_DESC',
-  MountainElevationGainAsc = 'mountainElevationGain_ASC',
-  MountainElevationGainDesc = 'mountainElevationGain_DESC',
-  MountainLengthAsc = 'mountainLength_ASC',
-  MountainLengthDesc = 'mountainLength_DESC',
-  MountainMedPercentAsc = 'mountainMedPercent_ASC',
-  MountainMedPercentDesc = 'mountainMedPercent_DESC',
+  StopTypeAsc = 'stopType_ASC',
+  StopTypeDesc = 'stopType_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1601,14 +1632,8 @@ export enum RouteCoffeStopsCollectionOrder {
   DescriptionDesc = 'description_DESC',
   LocationNameAsc = 'locationName_ASC',
   LocationNameDesc = 'locationName_DESC',
-  MountainDifficultyAsc = 'mountainDifficulty_ASC',
-  MountainDifficultyDesc = 'mountainDifficulty_DESC',
-  MountainElevationGainAsc = 'mountainElevationGain_ASC',
-  MountainElevationGainDesc = 'mountainElevationGain_DESC',
-  MountainLengthAsc = 'mountainLength_ASC',
-  MountainLengthDesc = 'mountainLength_DESC',
-  MountainMedPercentAsc = 'mountainMedPercent_ASC',
-  MountainMedPercentDesc = 'mountainMedPercent_DESC',
+  StopTypeAsc = 'stopType_ASC',
+  StopTypeDesc = 'stopType_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -1642,6 +1667,8 @@ export enum RouteCollsCollectionOrder {
   AccumulatedHeightDesc = 'accumulatedHeight_DESC',
   DifficultyAsc = 'difficulty_ASC',
   DifficultyDesc = 'difficulty_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
   LengthAsc = 'length_ASC',
   LengthDesc = 'length_DESC',
   SlopePercentageAsc = 'slopePercentage_ASC',
@@ -2084,14 +2111,8 @@ export enum RouteInterestSpotsCollectionOrder {
   DescriptionDesc = 'description_DESC',
   LocationNameAsc = 'locationName_ASC',
   LocationNameDesc = 'locationName_DESC',
-  MountainDifficultyAsc = 'mountainDifficulty_ASC',
-  MountainDifficultyDesc = 'mountainDifficulty_DESC',
-  MountainElevationGainAsc = 'mountainElevationGain_ASC',
-  MountainElevationGainDesc = 'mountainElevationGain_DESC',
-  MountainLengthAsc = 'mountainLength_ASC',
-  MountainLengthDesc = 'mountainLength_DESC',
-  MountainMedPercentAsc = 'mountainMedPercent_ASC',
-  MountainMedPercentDesc = 'mountainMedPercent_DESC',
+  StopTypeAsc = 'stopType_ASC',
+  StopTypeDesc = 'stopType_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -2165,14 +2186,8 @@ export enum RouteMountainsCollectionOrder {
   DescriptionDesc = 'description_DESC',
   LocationNameAsc = 'locationName_ASC',
   LocationNameDesc = 'locationName_DESC',
-  MountainDifficultyAsc = 'mountainDifficulty_ASC',
-  MountainDifficultyDesc = 'mountainDifficulty_DESC',
-  MountainElevationGainAsc = 'mountainElevationGain_ASC',
-  MountainElevationGainDesc = 'mountainElevationGain_DESC',
-  MountainLengthAsc = 'mountainLength_ASC',
-  MountainLengthDesc = 'mountainLength_DESC',
-  MountainMedPercentAsc = 'mountainMedPercent_ASC',
-  MountainMedPercentDesc = 'mountainMedPercent_DESC',
+  StopTypeAsc = 'stopType_ASC',
+  StopTypeDesc = 'stopType_DESC',
   SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
   SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
   SysIdAsc = 'sys_id_ASC',
@@ -2305,6 +2320,13 @@ export type CfCollVariantNestedFilter = {
   difficulty_not?: InputMaybe<Scalars['String']['input']>;
   difficulty_not_contains?: InputMaybe<Scalars['String']['input']>;
   difficulty_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  internalName?: InputMaybe<Scalars['String']['input']>;
+  internalName_contains?: InputMaybe<Scalars['String']['input']>;
+  internalName_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  internalName_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  internalName_not?: InputMaybe<Scalars['String']['input']>;
+  internalName_not_contains?: InputMaybe<Scalars['String']['input']>;
+  internalName_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   length?: InputMaybe<Scalars['Float']['input']>;
   length_exists?: InputMaybe<Scalars['Boolean']['input']>;
   length_gt?: InputMaybe<Scalars['Float']['input']>;
@@ -2344,6 +2366,9 @@ export type CfInterestSpotNestedFilter = {
   description_not?: InputMaybe<Scalars['String']['input']>;
   description_not_contains?: InputMaybe<Scalars['String']['input']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  fullDescription_contains?: InputMaybe<Scalars['String']['input']>;
+  fullDescription_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  fullDescription_not_contains?: InputMaybe<Scalars['String']['input']>;
   headerImage_exists?: InputMaybe<Scalars['Boolean']['input']>;
   locationName?: InputMaybe<Scalars['String']['input']>;
   locationName_contains?: InputMaybe<Scalars['String']['input']>;
@@ -2355,40 +2380,17 @@ export type CfInterestSpotNestedFilter = {
   location_exists?: InputMaybe<Scalars['Boolean']['input']>;
   location_within_circle?: InputMaybe<Scalars['Circle']['input']>;
   location_within_rectangle?: InputMaybe<Scalars['Rectangle']['input']>;
-  mountainDifficulty?: InputMaybe<Scalars['String']['input']>;
-  mountainDifficulty_contains?: InputMaybe<Scalars['String']['input']>;
-  mountainDifficulty_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  mountainDifficulty_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  mountainDifficulty_not?: InputMaybe<Scalars['String']['input']>;
-  mountainDifficulty_not_contains?: InputMaybe<Scalars['String']['input']>;
-  mountainDifficulty_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
-  mountainElevationGain?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  mountainElevationGain_gt?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_gte?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-  mountainElevationGain_lt?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_lte?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_not?: InputMaybe<Scalars['Float']['input']>;
-  mountainElevationGain_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-  mountainLength?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  mountainLength_gt?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_gte?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-  mountainLength_lt?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_lte?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_not?: InputMaybe<Scalars['Float']['input']>;
-  mountainLength_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-  mountainMedPercent?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_exists?: InputMaybe<Scalars['Boolean']['input']>;
-  mountainMedPercent_gt?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_gte?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
-  mountainMedPercent_lt?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_lte?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_not?: InputMaybe<Scalars['Float']['input']>;
-  mountainMedPercent_not_in?: InputMaybe<Array<InputMaybe<Scalars['Float']['input']>>>;
+  services_contains_all?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  services_contains_none?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  services_contains_some?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  services_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  stopType?: InputMaybe<Scalars['String']['input']>;
+  stopType_contains?: InputMaybe<Scalars['String']['input']>;
+  stopType_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  stopType_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  stopType_not?: InputMaybe<Scalars['String']['input']>;
+  stopType_not_contains?: InputMaybe<Scalars['String']['input']>;
+  stopType_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   sys?: InputMaybe<SysFilter>;
   title?: InputMaybe<Scalars['String']['input']>;
   title_contains?: InputMaybe<Scalars['String']['input']>;
@@ -2531,7 +2533,7 @@ export type GetRouteBySlugQueryVariables = Exact<{
 }>;
 
 
-export type GetRouteBySlugQuery = { __typename?: 'Query', routeCollection?: { __typename?: 'RouteCollection', items: Array<{ __typename: 'Route', title?: string | null, slug?: string | null, description?: string | null, subTitle?: string | null, length?: number | null, elevation?: number | null, time?: string | null, startLocationName?: string | null, endLocationName?: string | null, stravaLink?: string | null, stravaId?: string | null, sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null }, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null, mainCarouselCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, coffeStopsCollection?: { __typename?: 'RouteCoffeStopsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, locationName?: string | null, sys: { __typename?: 'Sys', id: string }, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null } | null> } | null, interestSpotsCollection?: { __typename?: 'RouteInterestSpotsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, locationName?: string | null, mountainDifficulty?: string | null, mountainLength?: number | null, mountainElevationGain?: number | null, sys: { __typename?: 'Sys', id: string }, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null } | null> } | null, mountainsCollection?: { __typename?: 'RouteMountainsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, mountainDifficulty?: string | null, mountainLength?: number | null, mountainElevationGain?: number | null, sys: { __typename?: 'Sys', id: string }, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null } | null> } | null } | null> } | null };
+export type GetRouteBySlugQuery = { __typename?: 'Query', routeCollection?: { __typename?: 'RouteCollection', items: Array<{ __typename: 'Route', title?: string | null, slug?: string | null, description?: string | null, subTitle?: string | null, length?: number | null, elevation?: number | null, time?: string | null, startLocationName?: string | null, endLocationName?: string | null, stravaLink?: string | null, stravaId?: string | null, sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null }, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null, mainCarouselCollection?: { __typename?: 'AssetCollection', items: Array<{ __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null> } | null, coffeStopsCollection?: { __typename?: 'RouteCoffeStopsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, locationName?: string | null, sys: { __typename?: 'Sys', id: string }, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null } | null> } | null, interestSpotsCollection?: { __typename?: 'RouteInterestSpotsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, locationName?: string | null, sys: { __typename?: 'Sys', id: string }, location?: { __typename?: 'Location', lat?: number | null, lon?: number | null } | null, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null } | null> } | null, mountainsCollection?: { __typename?: 'RouteMountainsCollection', items: Array<{ __typename?: 'InterestSpot', title?: string | null, description?: string | null, sys: { __typename?: 'Sys', id: string }, headerImage?: { __typename?: 'Asset', title?: string | null, description?: string | null, url?: string | null, width?: number | null, height?: number | null, contentType?: string | null, sys: { __typename?: 'Sys', id: string } } | null } | null> } | null } | null> } | null };
 
 export type GetFeaturedRoutesQueryVariables = Exact<{
   limit?: InputMaybe<Scalars['Int']['input']>;

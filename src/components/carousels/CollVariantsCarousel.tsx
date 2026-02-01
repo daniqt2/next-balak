@@ -10,7 +10,9 @@ interface CollVariantsCarouselProps {
   variants: any[];
 }
 
-export default function CollVariantsCarousel({ variants }: CollVariantsCarouselProps) {
+export default function CollVariantsCarousel({
+  variants,
+}: CollVariantsCarouselProps) {
   const [embla, setEmbla] = React.useState<any>(null);
 
   if (!variants || variants.length === 0) {
@@ -38,7 +40,7 @@ export default function CollVariantsCarousel({ variants }: CollVariantsCarouselP
   return (
     <div className="coffee-stops-section">
       <p className="text-lg md:text-xl font-bold text-charcoal-900 mb-4 uppercase">
-        Puertos en ruta (variantes)
+        Puertos en ruta
       </p>
 
       <div className="relative">
@@ -91,4 +93,3 @@ export default function CollVariantsCarousel({ variants }: CollVariantsCarouselP
     </div>
   );
 }
-

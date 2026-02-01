@@ -14,9 +14,6 @@ export const MOUNTAIN_FRAGMENT = gql`
     location {
       ...LocationFields
     }
-    mountainDifficulty
-    mountainLength
-    mountainElevationGain
     headerImage {
       ...AssetFields
     }

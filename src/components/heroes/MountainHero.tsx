@@ -1,8 +1,6 @@
 import React from 'react';
 import Image from 'next/image';
-import { Mountain, MapPin, BarChart3, Clock, TrendingUp } from 'lucide-react';
-import { getMountainDifficultyText } from '@/helpers/mountain';
-import { DifficultyLevel, getDifficultyColor } from '@/lib/route-utils';
+import { Mountain, MapPin, Clock } from 'lucide-react';
 
 interface MountainHeroProps {
   mountain: {
@@ -12,9 +10,6 @@ interface MountainHeroProps {
     title?: string | null;
     description?: string | null;
     locationName?: string | null;
-    mountainDifficulty?: string | null;
-    mountainLength?: number | null;
-    mountainElevationGain?: number | null;
     mountainMedPercent?: number | null;
     headerImage?: {
       url?: string | null;
@@ -63,44 +58,9 @@ export default function MountainHero({ mountain }: MountainHeroProps) {
                 {mountain.title || 'Puerto de Montaña'}
               </h1>
 
-              {mountain.mountainDifficulty && (
-                <div className="hero-difficulty-badge">
-                  <Mountain
-                    size={20}
-                    className={`${getDifficultyColor(mountain.mountainDifficulty as DifficultyLevel)}`}
-                  />
-                  <span className="difficulty-text">
-                    {getMountainDifficultyText(mountain.mountainDifficulty)}
-                  </span>
-                </div>
-              )}
             </div>
 
             <div className="hero-stats">
-              {mountain.mountainLength && (
-                <div className="hero-stat">
-                  <BarChart3 size={24} className="stat-icon" />
-                  <div className="stat-content">
-                    <span className="stat-value">
-                      {mountain.mountainLength}
-                    </span>
-                    <span className="stat-unit">km</span>
-                  </div>
-                </div>
-              )}
-
-              {mountain.mountainElevationGain && (
-                <div className="hero-stat">
-                  <TrendingUp size={24} className="stat-icon" />
-                  <div className="stat-content">
-                    <span className="stat-value">
-                      {mountain.mountainElevationGain}
-                    </span>
-                    <span className="stat-unit">m desnivel</span>
-                  </div>
-                </div>
-              )}
-
               {mountain.mountainMedPercent && (
                 <div className="hero-stat">
                   <Clock size={24} className="stat-icon" />
