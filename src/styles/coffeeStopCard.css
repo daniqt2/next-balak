@@ -66,6 +66,10 @@
              bg-[#f59e0b] shadow-[0_4px_6px_-1px_rgba(0,0,0,0.3)];
     }
 
+    .coffee-stop-type-label {
+      @apply inline-block text-xs font-medium text-amber-300 mb-1;
+    }
+
     .coffee-stop-title {
       @apply text-white font-bold leading-tight tracking-tight;
 

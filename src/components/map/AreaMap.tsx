@@ -162,7 +162,12 @@ export default function CoffeeMap({
                       </a>
                     )}
                   {(point as any).sys?.id && variant === 'coffee' && (
-                    <p className="text-charcoal-500">Detalles proximamente</p>
+                    <a
+                      href={`/coffee/${(point as any).sys?.id}`}
+                      className="text-charcoal-900 hover:text-balak-500 underline text-sm font-medium transition-colors"
+                    >
+                      Ver detalles
+                    </a>
                   )}
                 </div>
               </Popup>

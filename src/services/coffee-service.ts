@@ -29,6 +29,7 @@ const GET_COFFEE_COLLECTION = gql`
           firstPublishedAt
         }
         type
+        stopType
         __typename
         title
         description
@@ -88,6 +89,7 @@ const GET_COFFEE_BY_ID = gql`
       }
       __typename
       title
+      stopType
       description
       fullDescription {
         json

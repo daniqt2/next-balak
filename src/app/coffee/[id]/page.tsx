@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import VariantRoutesCarousel from '@/components/carousels/VariantRoutesCarousel';
 import RichTextRenderer from '@/components/ui/RichTextRenderer';
+import { getStopTypeLabel } from '@/helpers/coffee';
 import Image from 'next/image';
 import { Coffee, MapPin } from 'lucide-react';
 
@@ -51,6 +52,11 @@ export default async function CoffeeSpotDetailPage({
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           <div className="absolute inset-x-0 bottom-0">
             <div className="container mx-auto px-4 pb-10">
+              {getStopTypeLabel(coffeeSpot.stopType) && (
+                <span className="inline-block px-3 py-1 rounded-full text-sm font-medium bg-white/20 text-white backdrop-blur-sm mb-3">
+                  {getStopTypeLabel(coffeeSpot.stopType)}
+                </span>
+              )}
               <h1 className="text-white text-4xl md:text-6xl font-bold uppercase">
                 {coffeeSpot.title || 'Punto de Café'}
               </h1>

@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Coffee, MapPin } from 'lucide-react';
 import type { InterestSpot } from '@/contentful-types';
+import { getStopTypeLabel } from '@/helpers/coffee';
 import '@/styles/coffeeStopCard.css';
 
 interface CoffeeStopCardProps {
@@ -57,6 +58,13 @@ export default function CoffeeStopCard({
         <div className="coffee-icon-badge">
           <Coffee size={12} color="white" />
         </div>
+
+        {/* Stop type label */}
+        {getStopTypeLabel(coffeeStop.stopType) && (
+          <span className="coffee-stop-type-label">
+            {getStopTypeLabel(coffeeStop.stopType)}
+          </span>
+        )}
 
         {/* Title */}
         <h3 className={`coffee-stop-title ${compact ? 'compact' : ''}`}>
