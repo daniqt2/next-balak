@@ -86,7 +86,9 @@ export default function RouteGroupDisplay({
         </div>
       </div>
 
-      {routeCount > 0 && <div className="route-count-badge">{routeCount}</div>}
+      {routeCount > 0 && (
+        <div className="route-count-badge">{routeCount} rutas</div>
+      )}
     </>
   );
 

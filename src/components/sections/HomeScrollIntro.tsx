@@ -15,7 +15,11 @@ export default function HomeScrollIntro() {
     if (!el || hasAnimatedRef.current) return;
 
     const animateIn = () => {
-      if (topImgRef.current && bottomImgRef.current && !hasAnimatedRef.current) {
+      if (
+        topImgRef.current &&
+        bottomImgRef.current &&
+        !hasAnimatedRef.current
+      ) {
         hasAnimatedRef.current = true;
         gsap.fromTo(
           topImgRef.current,

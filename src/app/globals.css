@@ -123,3 +123,15 @@ body {
 .nav-link-mobile {
   @apply py-3;
 }
+
+/* Home page: slow, heavy scroll down with snap */
+html.home-scroll {
+  scroll-snap-type: y mandatory;
+  scroll-behavior: smooth;
+  scroll-padding-top: 0;
+}
+
+html.home-scroll .home-snap-section {
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
