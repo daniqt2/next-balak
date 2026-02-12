@@ -6,7 +6,7 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 export default function RouteGroupsPage() {
   return (
-    <div className="min-h-screen mt-10" style={{ paddingTop: '64px' }}>
+    <div className="min-h-screen mt-6 md:mt-10" style={{ paddingTop: '64px' }}>
       <Breadcrumbs items={[{ label: 'Rutas' }]} backHref="/" />
       <PageHeader
         title="Nuestras rutas"

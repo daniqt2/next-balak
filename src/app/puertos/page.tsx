@@ -54,7 +54,7 @@ export default function MountainsPage() {
   }
 
   return (
-    <div className="min-h-screen mt-10" style={{ paddingTop: '64px' }}>
+    <div className="min-h-screen  mt-6 md:mt-10" style={{ paddingTop: '64px' }}>
       <Breadcrumbs items={[{ label: 'Puertos' }]} backHref="/" />
       <div className="container mx-auto px-4 py-8">
         <PageHeader

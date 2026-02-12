@@ -1,25 +1,25 @@
-import type { Metadata } from "next";
-import { Geist, Geist_Mono, Anton } from "next/font/google";
-import { Analytics } from "@vercel/analytics/next";
-import "./globals.css";
-import ConditionalNavbar from "../components/layout/ConditionalNavbar";
-import { MantineProvider } from "../components/layout/MantineProvider";
-import PageTransition from "../components/layout/PageTransition";
+import type { Metadata } from 'next';
+import { Geist, Geist_Mono, Anton } from 'next/font/google';
+import { Analytics } from '@vercel/analytics/next';
+import './globals.css';
+import ConditionalNavbar from '../components/layout/ConditionalNavbar';
+import { MantineProvider } from '../components/layout/MantineProvider';
+import PageTransition from '../components/layout/PageTransition';
 
 const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
+  variable: '--font-geist-sans',
+  subsets: ['latin'],
 });
 
 const geistMono = Geist_Mono({
-  variable: "--font-geist-mono",
-  subsets: ["latin"],
+  variable: '--font-geist-mono',
+  subsets: ['latin'],
 });
 
 const anton = Anton({
-  weight: "400",
-  variable: "--font-anton",
-  subsets: ["latin"],
+  weight: '400',
+  variable: '--font-anton',
+  subsets: ['latin'],
 });
 
 const siteTitle = 'BALAK RIDE';
@@ -34,6 +34,9 @@ export const metadata: Metadata = {
   description: siteDescription,
   icons: {
     icon: '/icon.svg',
+
+    shortcut: '/og-image.png',
+    apple: '/og-image.png',
   },
   metadataBase: new URL(
     process.env.NEXT_PUBLIC_SITE_URL || 'https://balak.ride'
@@ -43,11 +46,15 @@ export const metadata: Metadata = {
     description: siteDescription,
     type: 'website',
     locale: 'es_ES',
+    images: [
+      { url: '/og-image.png', width: 1200, height: 630, alt: siteTitle },
+    ],
   },
   twitter: {
     card: 'summary_large_image',
     title: siteTitle,
     description: siteDescription,
+    images: ['/og-image.png'],
   },
 };
 
@@ -63,9 +70,7 @@ export default function RootLayout({
       >
         <MantineProvider>
           <ConditionalNavbar />
-          <PageTransition>
-            {children}
-          </PageTransition>
+          <PageTransition>{children}</PageTransition>
           <Analytics />
         </MantineProvider>
       </body>
