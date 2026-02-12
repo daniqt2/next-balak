@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono, Anton } from "next/font/google";
+import { Analytics } from "@vercel/analytics/next";
 import "./globals.css";
 import ConditionalNavbar from "../components/layout/ConditionalNavbar";
 import { MantineProvider } from "../components/layout/MantineProvider";
@@ -21,11 +22,32 @@ const anton = Anton({
   subsets: ["latin"],
 });
 
+const siteTitle = 'BALAK RIDE';
+const siteDescription =
+  'Compartimos nuestras rutas favoritas y paradas de café';
+
 export const metadata: Metadata = {
-  title: "BALAK RIDE",
-  description: "Compartimos nuestras rutas favoritas y paradas de café",
+  title: {
+    default: siteTitle,
+    template: `%s | ${siteTitle}`,
+  },
+  description: siteDescription,
   icons: {
     icon: '/icon.svg',
+  },
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL || 'https://balak.ride'
+  ),
+  openGraph: {
+    title: siteTitle,
+    description: siteDescription,
+    type: 'website',
+    locale: 'es_ES',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: siteTitle,
+    description: siteDescription,
   },
 };
 
@@ -35,7 +57,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="es">
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} antialiased text-white`}
       >
@@ -44,6 +66,7 @@ export default function RootLayout({
           <PageTransition>
             {children}
           </PageTransition>
+          <Analytics />
         </MantineProvider>
       </body>
     </html>

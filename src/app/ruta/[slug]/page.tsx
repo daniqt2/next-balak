@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { routeService } from '@/services/route-service';
 import { notFound } from 'next/navigation';
 import StickyStravaMap from '@/components/maps/StickyStravaMap';
@@ -13,16 +14,34 @@ import { Camera } from 'lucide-react';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 interface RouteDetailPageProps {
-  params: Promise<{
-    slug: string;
-  }>;
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: RouteDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  try {
+    const data = await routeService.getRouteBySlug(slug);
+    const route = data?.routeCollection?.items?.[0];
+    if (!route) notFound();
+    const title = route.title ?? 'Ruta';
+    const description = `Ruta de ciclismo: ${title}. Distancia, desnivel y paradas de café.`;
+    return {
+      title,
+      description,
+      openGraph: { title: `${title} | BALAK RIDE`, description },
+    };
+  } catch {
+    notFound();
+  }
 }
 
 export default async function RouteDetailPage({
   params,
 }: RouteDetailPageProps) {
+  const { slug } = await params;
   try {
-    const { slug } = await params;
     const data = await routeService.getRouteBySlug(slug);
     const route = data?.routeCollection?.items?.[0];
 

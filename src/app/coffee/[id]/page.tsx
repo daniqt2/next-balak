@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { coffeeService } from '@/services/coffee-service';
 import { notFound } from 'next/navigation';
 import AnimatedSection from '@/components/ui/AnimatedSection';
@@ -9,16 +10,34 @@ import { Coffee, MapPin } from 'lucide-react';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 interface CoffeeSpotDetailPageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: CoffeeSpotDetailPageProps): Promise<Metadata> {
+  const { id } = await params;
+  try {
+    const data = await coffeeService.getCoffeeSpotById(id);
+    const coffeeSpot = data?.interestSpot;
+    if (!coffeeSpot) notFound();
+    const title = coffeeSpot.title ?? 'Punto de café';
+    const description = `Parada de café: ${title}. Ubicación y rutas que pasan por aquí.`;
+    return {
+      title,
+      description,
+      openGraph: { title: `${title} | BALAK RIDE`, description },
+    };
+  } catch {
+    notFound();
+  }
 }
 
 export default async function CoffeeSpotDetailPage({
   params,
 }: CoffeeSpotDetailPageProps) {
+  const { id } = await params;
   try {
-    const { id } = await params;
     const data = await coffeeService.getCoffeeSpotById(id);
     const coffeeSpot = data?.interestSpot;
     const relatedRoutes =

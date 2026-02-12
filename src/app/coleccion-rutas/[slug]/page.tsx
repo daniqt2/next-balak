@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import { routeGroupService } from '@/services/route-group-service';
 import { notFound } from 'next/navigation';
 import RouteGroupHero from '@/components/heroes/RouteGroupHero';
@@ -9,16 +10,37 @@ import PageHeader from '@/components/headers/pageHeader';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 interface RouteGroupDetailPageProps {
-  params: {
-    slug: string;
-  };
+  params: Promise<{ slug: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: RouteGroupDetailPageProps): Promise<Metadata> {
+  const { slug } = await params;
+  try {
+    const data = await routeGroupService.getRouteGroupBySlug(slug);
+    const routeGroup = data?.routeGroupCollection?.items?.[0];
+    if (!routeGroup) notFound();
+    const title = routeGroup.title ?? 'Colección';
+    const description =
+      (typeof routeGroup.description === 'string'
+        ? routeGroup.description.slice(0, 160)
+        : null) ?? `Colección de rutas: ${title}.`;
+    return {
+      title,
+      description,
+      openGraph: { title: `${title} | BALAK RIDE`, description },
+    };
+  } catch {
+    notFound();
+  }
 }
 
 export default async function RouteGroupDetailPage({
   params,
 }: RouteGroupDetailPageProps) {
+  const { slug } = await params;
   try {
-    const { slug } = await params;
     const data = await routeGroupService.getRouteGroupBySlug(slug);
     const routeGroup = data?.routeGroupCollection?.items?.[0];
 

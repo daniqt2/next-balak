@@ -33,7 +33,7 @@ export default function AboutUsPage() {
         />
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative text-center text-white z-10">
-          <h1 className="text-5xl font-bold mb-4">Nosotros</h1>
+          <h1 className="font-anton font-bold mb-4 text-7xl">Nosotros</h1>
           <p className="text-xl text-balak-200 max-w-2xl mx-auto">
             Bicis, puertos y cafés
           </p>
@@ -128,13 +128,13 @@ export default function AboutUsPage() {
                     strokeWidth={1.5}
                   />
                 </div>
-                <h2 className="text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-charcoal-800">
+                <h2 className="font-anton text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-charcoal-800">
                   ¿Qué significa BALAK?
                 </h2>
               </div>
 
               {/* Content */}
-              <div className="text-charcoal-800 text-base sm:text-lg md:text-3xl leading-relaxed space-y-8">
+              <div className="text-charcoal-800 text-base sm:text-lg md:text-2xl leading-relaxed space-y-8">
                 <p className="text-center sm:text-left">
                   BALAK nace de una palabra del maya yucateco con varios
                   significados, pero todos conectan con la misma idea: el{' '}
@@ -207,6 +207,24 @@ export default function AboutUsPage() {
                 <Mail className="w-6 h-6" />
               </a>
             </div>
+          </div>
+        </AnimatedSection>
+
+        {/* Privacy / Analytics notice */}
+        <AnimatedSection delay={500}>
+          <div className="mt-16 pt-8 border-t border-charcoal-700 text-center">
+            <p className="text-sm text-gray-500 max-w-xl mx-auto">
+              Utilizamos análisis de uso (Vercel Analytics) para entender cómo
+              se usa la web y mejorarla. No usamos cookies para este análisis.{' '}
+              <a
+                href="https://vercel.com/legal/privacy-policy"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:underline"
+              >
+                Política de privacidad de Vercel
+              </a>
+            </p>
           </div>
         </AnimatedSection>
       </div>

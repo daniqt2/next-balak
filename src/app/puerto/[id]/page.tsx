@@ -1,3 +1,4 @@
+import type { Metadata } from 'next';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import RichTextRenderer from '@/components/ui/RichTextRenderer';
 import AssetGrid from '@/components/grids/AssetGrid';
@@ -18,9 +19,27 @@ import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 interface MountainDetailPageProps {
-  params: {
-    id: string;
-  };
+  params: Promise<{ id: string }>;
+}
+
+export async function generateMetadata({
+  params,
+}: MountainDetailPageProps): Promise<Metadata> {
+  const { id } = await params;
+  try {
+    const data = await collService.getCollById(id);
+    const coll = data?.coll;
+    if (!coll) notFound();
+    const title = coll.name ?? 'Puerto';
+    const description = `Puerto de montaña: ${title}. Desnivel, dificultad y rutas que lo incluyen.`;
+    return {
+      title,
+      description,
+      openGraph: { title: `${title} | BALAK RIDE`, description },
+    };
+  } catch {
+    notFound();
+  }
 }
 
 function getDifficultyDotClass(difficulty?: string | null): string {
@@ -36,8 +55,8 @@ function getDifficultyDotClass(difficulty?: string | null): string {
 export default async function MountainDetailPage({
   params,
 }: MountainDetailPageProps) {
+  const { id } = await params;
   try {
-    const { id } = await params;
     const data = await collService.getCollById(id);
     const coll = data.coll;
 
