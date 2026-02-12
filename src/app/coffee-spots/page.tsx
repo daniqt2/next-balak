@@ -9,6 +9,7 @@ import { coffeeService } from '@/services/coffee-service';
 import CoffeeStopCard from '@/components/cards/CoffeeStopCard';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import PageHeader from '@/components/headers/pageHeader';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 // Dynamically import AreaMap with SSR disabled to avoid window is not defined error
 const AreaMap = dynamic(() => import('@/components/map/AreaMap'), {
@@ -54,7 +55,8 @@ export default function CoffeeSpotsPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ paddingTop: '64px' }}>
+    <div className="min-h-screen mt-10" style={{ paddingTop: '64px' }}>
+      <Breadcrumbs items={[{ label: 'Cafés' }]} backHref="/" />
       <div className="container mx-auto px-4 py-8">
         <PageHeader
           title="Puntos de Café"

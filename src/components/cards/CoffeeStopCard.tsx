@@ -26,7 +26,6 @@ export default function CoffeeStopCard({
       href={`/coffee/${coffeeStop.sys.id}`}
       className={`coffee-stop-card ${compact ? 'compact' : ''}`}
     >
-      {/* Image Section */}
       <div className={`image-section ${compact ? 'compact' : ''}`}>
         {coffeeStop.headerImage?.url ? (
           <Image
@@ -43,46 +42,28 @@ export default function CoffeeStopCard({
           />
         ) : (
           <div className="image-placeholder">
-            <div className="placeholder-overlay" />
             <Coffee size={48} className="placeholder-icon" />
           </div>
         )}
 
-        {/* Gradient Overlay */}
-        <div className="gradient-overlay" />
-      </div>
+        {/* Shadow from bottom so text is visible */}
+        <div className="coffee-card-shadow" />
 
-      {/* Content Section */}
-      <div className={`content-section ${compact ? 'compact' : ''}`}>
-        {/* Coffee Icon Badge */}
-        <div className="coffee-icon-badge">
-          <Coffee size={12} color="white" />
-        </div>
-
-        {/* Stop type label */}
-        {getStopTypeLabel(coffeeStop.stopType) && (
-          <span className="coffee-stop-type-label">
-            {getStopTypeLabel(coffeeStop.stopType)}
-          </span>
-        )}
-
-        {/* Title */}
-        <h3 className={`coffee-stop-title ${compact ? 'compact' : ''}`}>
-          {coffeeStop.title || `Coffee Stop ${index + 1}`}
-        </h3>
-
-        {/* Description */}
-        <p className={`coffee-stop-description ${compact ? 'compact' : ''}`}>
-          {coffeeStop.description ||
-            'A perfect spot to refuel during your ride'}
-        </p>
-
-        {/* Stats */}
-        <div className="stats-container">
-          <div className="location-stat">
-            <MapPin size={14} color="currentColor" />
-            <span>{coffeeStop.locationName}</span>
-          </div>
+        <div className={`content-overlay ${compact ? 'compact' : ''}`}>
+          {getStopTypeLabel(coffeeStop.stopType) && (
+            <span className="coffee-stop-type-label">
+              {getStopTypeLabel(coffeeStop.stopType)}
+            </span>
+          )}
+          <h3 className="coffee-stop-title font-anton">
+            {coffeeStop.title || `Coffee Stop ${index + 1}`}
+          </h3>
+          {coffeeStop.locationName && (
+            <div className="location-stat">
+              <MapPin size={14} />
+              <span>{coffeeStop.locationName}</span>
+            </div>
+          )}
         </div>
       </div>
     </Link>

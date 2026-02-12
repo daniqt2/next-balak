@@ -9,6 +9,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection';
 import type { Coll } from '@/contentful-types';
 import { collService } from '@/services/coll-service';
 import PageHeader from '@/components/headers/pageHeader';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 const AreaMap = dynamic(() => import('@/components/map/AreaMap'), {
   ssr: false,
@@ -53,7 +54,8 @@ export default function MountainsPage() {
   }
 
   return (
-    <div className="min-h-screen" style={{ paddingTop: '64px' }}>
+    <div className="min-h-screen mt-10" style={{ paddingTop: '64px' }}>
+      <Breadcrumbs items={[{ label: 'Puertos' }]} backHref="/" />
       <div className="container mx-auto px-4 py-8">
         <PageHeader
           title="Puertos de montaña"

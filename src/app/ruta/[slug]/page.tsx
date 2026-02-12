@@ -10,6 +10,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection';
 import '@/styles/stickyMap.css';
 import '@/styles/coffeeStopCard.css';
 import { Camera } from 'lucide-react';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 interface RouteDetailPageProps {
   params: Promise<{
@@ -34,6 +35,13 @@ export default async function RouteDetailPage({
         {/* Hero Section */}
         <RouteHero route={route} />
 
+        <Breadcrumbs
+          items={[
+            { label: 'Rutas', href: '/rutas' },
+            { label: route.title ?? 'Ruta' },
+          ]}
+          backHref="/rutas"
+        />
         <div className="container mx-auto px-4 py-8 mt-12">
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">

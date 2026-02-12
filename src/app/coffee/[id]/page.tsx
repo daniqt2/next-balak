@@ -6,6 +6,7 @@ import RichTextRenderer from '@/components/ui/RichTextRenderer';
 import { getStopTypeLabel } from '@/helpers/coffee';
 import Image from 'next/image';
 import { Coffee, MapPin } from 'lucide-react';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 interface CoffeeSpotDetailPageProps {
   params: {
@@ -69,6 +70,13 @@ export default async function CoffeeSpotDetailPage({
           </div>
         </div>
 
+        <Breadcrumbs
+          items={[
+            { label: 'Cafés', href: '/coffee-spots' },
+            { label: coffeeSpot.title ?? 'Punto de Café' },
+          ]}
+          backHref="/coffee-spots"
+        />
         <div className="container mx-auto px-4 py-8">
           <div className="max-w-3xl mx-auto space-y-8">
             {/* Info */}

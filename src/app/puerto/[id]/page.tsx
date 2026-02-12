@@ -15,6 +15,7 @@ import {
   Camera,
 } from 'lucide-react';
 import { notFound } from 'next/navigation';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 interface MountainDetailPageProps {
   params: {
@@ -115,6 +116,13 @@ export default async function MountainDetailPage({
           </div>
         </div>
 
+        <Breadcrumbs
+          items={[
+            { label: 'Puertos', href: '/puertos' },
+            { label: coll.name ?? 'Puerto' },
+          ]}
+          backHref="/puertos"
+        />
         <div className="container mx-auto px-4 py-8">
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
             <div className="lg:col-span-2 space-y-8">

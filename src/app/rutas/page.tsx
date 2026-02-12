@@ -2,10 +2,12 @@
 
 import PageHeader from '@/components/headers/pageHeader';
 import RouteGroupGrid from '@/components/grids/RouteGroupGrid';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 export default function RouteGroupsPage() {
   return (
-    <div className="min-h-screen" style={{ paddingTop: '64px' }}>
+    <div className="min-h-screen mt-10" style={{ paddingTop: '64px' }}>
+      <Breadcrumbs items={[{ label: 'Rutas' }]} backHref="/" />
       <PageHeader
         title="Nuestras rutas"
         description="Descubre diferentes rutas agrupadas por área o tema"

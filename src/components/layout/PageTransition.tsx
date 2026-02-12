@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { usePathname } from 'next/navigation';
 import { gsap } from 'gsap';
+import { getAndClearBackNavigation } from '@/components/ui/Breadcrumbs';
 
 interface PageTransitionProps {
   children: React.ReactNode;
@@ -36,7 +37,7 @@ export default function PageTransition({ children }: PageTransitionProps) {
       isFirstMountRef.current = false;
       previousPathnameRef.current = currentPath;
       if (containerRef.current) {
-        gsap.set(containerRef.current, { y: 0, opacity: 1 });
+        gsap.set(containerRef.current, { x: 0, y: 0, opacity: 1 });
       }
       return;
     }
@@ -46,30 +47,32 @@ export default function PageTransition({ children }: PageTransitionProps) {
       return;
     }
 
-    // Skip animation on back navigation
-    if (isBackNavigation) {
-      setIsBackNavigation(false);
-      if (containerRef.current) {
-        gsap.set(containerRef.current, { y: 0, opacity: 1 });
-      }
-      previousPathnameRef.current = currentPath;
-      return;
-    }
+    const isBack =
+      isBackNavigation || (typeof window !== 'undefined' && getAndClearBackNavigation());
+    if (isBackNavigation) setIsBackNavigation(false);
 
-    // Simple slide up animation for forward route changes
-    if (containerRef.current) {
-      // Start: page below viewport
-      gsap.set(containerRef.current, {
-        y: '100vh',
-        opacity: 0
+    if (isBack && containerRef.current) {
+      window.scrollTo(0, 0);
+      requestAnimationFrame(() => window.scrollTo(0, 0));
+      // Back: subtle fade (same feel as forward)
+      gsap.set(containerRef.current, { x: 0, y: 0, opacity: 0 });
+      gsap.to(containerRef.current, {
+        opacity: 1,
+        duration: 0.45,
+        ease: 'power2.out',
       });
-
-      // Animate: slide up and fade in
+    } else if (containerRef.current) {
+      // Forward: subtle lift (small y + fade)
+      gsap.set(containerRef.current, {
+        x: 0,
+        y: 32,
+        opacity: 0,
+      });
       gsap.to(containerRef.current, {
         y: 0,
         opacity: 1,
-        duration: 0.8,
-        ease: 'power3.out',
+        duration: 0.45,
+        ease: 'power2.out',
       });
     }
 

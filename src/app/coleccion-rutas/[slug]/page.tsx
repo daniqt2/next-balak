@@ -6,6 +6,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection';
 import RichTextRenderer from '@/components/ui/RichTextRenderer';
 import type { Route } from '@/contentful-types';
 import PageHeader from '@/components/headers/pageHeader';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
 interface RouteGroupDetailPageProps {
   params: {
@@ -29,6 +30,13 @@ export default async function RouteGroupDetailPage({
       <div className="min-h-screen" style={{ paddingTop: '64px' }}>
         <RouteGroupHero routeGroup={routeGroup} />
 
+        <Breadcrumbs
+          items={[
+            { label: 'Rutas', href: '/rutas' },
+            { label: routeGroup.title ?? 'Colección' },
+          ]}
+          backHref="/rutas"
+        />
         <div className="container mx-auto px-4 py-8">
           {routeGroup.description && (
             <PageHeader
