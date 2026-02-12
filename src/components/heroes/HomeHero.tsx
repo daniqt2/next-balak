@@ -301,8 +301,12 @@ export default function HomeHero() {
           minHeight: '100vh',
         }}
       >
-        {/* Pull-up overlay for scroll test */}
-        <div ref={overlayRef} className="absolute inset-0 bg-charcoal-900 z-50">
+        {/* Pull-up overlay: start off-screen to avoid flash of scrollable content before GSAP runs */}
+        <div
+          ref={overlayRef}
+          className="absolute inset-0 bg-charcoal-900 z-50"
+          style={{ transform: 'translateY(100%)', pointerEvents: 'none' }}
+        >
           {/* Scrollable stacked sections */}
           <div
             ref={scrollContainerRef}

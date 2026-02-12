@@ -31,12 +31,12 @@ export default function RouteGroupCard({ route }: RouteGroupCardProps) {
 
   return (
     <Link href={`/coleccion-rutas/${route.slug}`}>
-      <div 
+      <div
         className="group bg-charcoal-800 rounded-xl overflow-hidden shadow-lg border border-gray-700 hover:shadow-xl hover:border-balak-500/30 transition-all duration-300 cursor-pointer"
         style={{
           height: '100%',
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
         }}
       >
         {/* Image Section */}
@@ -55,13 +55,15 @@ export default function RouteGroupCard({ route }: RouteGroupCardProps) {
               <Route size={48} color="#f59e0b" style={{ opacity: 0.6 }} />
             </div>
           )}
-          
+
           {/* Gradient Overlay */}
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
-          
+
           {/* Difficulty Badge */}
           {metrics && (
-            <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm border ${getDifficultyColor(metrics.difficulty)}`}>
+            <div
+              className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold backdrop-blur-sm border ${getDifficultyColor(metrics.difficulty)}`}
+            >
               {metrics.difficulty}
             </div>
           )}
@@ -70,10 +72,10 @@ export default function RouteGroupCard({ route }: RouteGroupCardProps) {
         {/* Content Section */}
         <div className="p-6 flex-1 flex flex-col">
           {/* Title */}
-          <h3 className="text-white font-bold text-xl mb-2 line-clamp-2 group-hover:text-balak-300 transition-colors">
-            {route.title || 'Untitled Route'}
+          <h3 className="text-white font-anton text-xl mb-2 line-clamp-2 group-hover:text-balak-300 transition-colors">
+            {route.title || 'Untitled Route'} aaa
           </h3>
-          
+
           {/* Subtitle */}
           {route.subTitle && (
             <p className="text-charcoal-300 text-sm mb-4 line-clamp-2">
@@ -89,7 +91,7 @@ export default function RouteGroupCard({ route }: RouteGroupCardProps) {
                 <span className="text-sm">{route.length} km</span>
               </div>
             )}
-            
+
             {route.elevation && (
               <div className="flex items-center gap-2 text-charcoal-400">
                 <TrendingUp size={16} color="currentColor" />
@@ -103,10 +105,9 @@ export default function RouteGroupCard({ route }: RouteGroupCardProps) {
             <div className="flex items-center gap-2 text-charcoal-400 mb-4">
               <MapPin size={16} color="currentColor" />
               <span className="text-sm truncate">
-                {route.startLocationName && route.endLocationName 
+                {route.startLocationName && route.endLocationName
                   ? `${route.startLocationName} → ${route.endLocationName}`
-                  : route.startLocationName || route.endLocationName
-                }
+                  : route.startLocationName || route.endLocationName}
               </span>
             </div>
           )}

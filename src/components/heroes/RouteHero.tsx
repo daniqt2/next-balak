@@ -3,8 +3,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { formatRouteMetrics, getDifficultyColor } from '@/lib/route-utils';
-import RouteMetric, { RouteMetricIcons } from '../ui/RouteMetric';
 import { getMountainDifficultyText } from '@/helpers/mountain';
+import '@/styles/routeHero.css';
 
 interface RouteHeroProps {
   route: {
@@ -47,10 +47,9 @@ export default function RouteHero({ route }: RouteHeroProps) {
   return (
     <div
       ref={heroRef}
-      className="relative w-full h-[70vh] min-h-[500px] max-h-[800px] overflow-hidden"
+      className={`route-hero ${isVisible ? 'route-hero--visible' : ''}`}
     >
-      {/* Hero Image */}
-      <div className="relative w-full h-full">
+      <div className="route-hero__image-wrap">
         {route.headerImage?.url ? (
           <Image
             src={route.headerImage.url}
@@ -59,13 +58,13 @@ export default function RouteHero({ route }: RouteHeroProps) {
             priority
             quality={90}
             sizes="100vw"
-            className="object-cover transition-transform duration-700 ease-out"
+            className="route-hero__image"
           />
         ) : (
-          <div className="w-full h-full bg-gradient-to-br from-charcoal-700 via-charcoal-800 to-charcoal-900">
-            <div className="absolute inset-0 flex items-center justify-center">
+          <div className="route-hero__placeholder">
+            <div className="route-hero__placeholder-inner">
               <svg
-                className="w-32 h-32 text-balak-400 opacity-50"
+                className="route-hero__placeholder-icon"
                 fill="none"
                 stroke="currentColor"
                 viewBox="0 0 24 24"
@@ -81,67 +80,34 @@ export default function RouteHero({ route }: RouteHeroProps) {
           </div>
         )}
 
-        {/* Gradient Overlay */}
-        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+        <div className="route-hero__overlay" />
 
-        {/* Hero Content */}
-        <div className="absolute inset-0 flex items-end">
-          <div className="w-full px-4 sm:px-6 lg:px-8 pb-8 sm:pb-12 lg:pb-16">
-            {/* Route Title */}
-            <div
-              className="mb-8"
-              style={{
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                opacity: isVisible ? 1 : 0,
-                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
-              }}
-            >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-2xl leading-tight">
+        <div className="route-hero__content">
+          <div className="route-hero__content-inner">
+            <div className="route-hero__title-section">
+              <h1 className="route-hero__title">
                 {route.title || 'Route Detail'}
               </h1>
 
               {route.subTitle && (
-                <p
-                  className="text-lg sm:text-xl lg:text-2xl text-balak-200 mb-6 drop-shadow-lg max-w-3xl"
-                  style={{
-                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                    opacity: isVisible ? 1 : 0,
-                    transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.2s',
-                  }}
-                >
-                  {route.subTitle}
-                </p>
+                <p className="route-hero__subtitle">{route.subTitle}</p>
               )}
 
-              {/* Difficulty Badge */}
               {metrics && (
                 <div
-                  className={`inline-flex items-center gap-3 px-4 py-2 rounded-full bg-black/30 backdrop-blur-sm border border-white/20 shadow-lg ${getDifficultyColor(metrics.difficulty)}`}
-                  style={{
-                    transform: isVisible ? 'translateY(0)' : 'translateY(20px)',
-                    opacity: isVisible ? 1 : 0,
-                    transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.4s',
-                  }}
+                  className={`route-hero__difficulty-badge ${getDifficultyColor(metrics.difficulty)}`}
                 >
-                  <span className="font-semibold text-sm uppercase tracking-wider">
+                  <span className="route-hero__difficulty-text">
                     {getMountainDifficultyText(metrics.difficulty)}
                   </span>
                 </div>
               )}
             </div>
 
-            {/* Quick Stats */}
-            <div
-              className="flex flex-wrap gap-6 mb-8"
-              style={{
-                transform: isVisible ? 'translateY(0)' : 'translateY(30px)',
-                opacity: isVisible ? 1 : 0,
-                transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.6s',
-              }}
-            >
+            <div className="route-hero__stats">
               {route.length && (
-                <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-black/30 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-black/40 transition-all duration-200">
-                  <div className="w-6 h-6 text-balak-400 flex-shrink-0">
+                <div className="route-hero__stat">
+                  <div className="route-hero__stat-icon">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -151,20 +117,16 @@ export default function RouteHero({ route }: RouteHeroProps) {
                       />
                     </svg>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-white font-bold text-lg">
-                      {route.length}
-                    </span>
-                    <span className="text-balak-300 text-xs uppercase tracking-wider">
-                      km
-                    </span>
+                  <div className="route-hero__stat-content">
+                    <span className="route-hero__stat-value">{route.length}</span>
+                    <span className="route-hero__stat-unit">km</span>
                   </div>
                 </div>
               )}
 
               {route.elevation && (
-                <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-black/30 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-black/40 transition-all duration-200">
-                  <div className="w-6 h-6 text-balak-400 flex-shrink-0">
+                <div className="route-hero__stat">
+                  <div className="route-hero__stat-icon">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -174,20 +136,18 @@ export default function RouteHero({ route }: RouteHeroProps) {
                       />
                     </svg>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-white font-bold text-lg">
+                  <div className="route-hero__stat-content">
+                    <span className="route-hero__stat-value">
                       {route.elevation}
                     </span>
-                    <span className="text-balak-300 text-xs uppercase tracking-wider">
-                      mD+
-                    </span>
+                    <span className="route-hero__stat-unit">mD+</span>
                   </div>
                 </div>
               )}
 
               {route.time && (
-                <div className="flex items-center gap-3 px-4 py-3 rounded-lg bg-black/30 backdrop-blur-sm border border-white/20 shadow-lg hover:bg-black/40 transition-all duration-200">
-                  <div className="w-6 h-6 text-balak-400 flex-shrink-0">
+                <div className="route-hero__stat">
+                  <div className="route-hero__stat-icon">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -197,32 +157,27 @@ export default function RouteHero({ route }: RouteHeroProps) {
                       />
                     </svg>
                   </div>
-                  <div className="flex flex-col">
-                    <span className="text-white font-bold text-lg">
-                      {route.time}
-                    </span>
-                    <span className="text-balak-300 text-xs uppercase tracking-wider">
-                      duration
-                    </span>
+                  <div className="route-hero__stat-content">
+                    <span className="route-hero__stat-value">{route.time}</span>
+                    <span className="route-hero__stat-unit">duration</span>
                   </div>
                 </div>
               )}
             </div>
 
-            {/* Route Locations */}
             {(route.startLocationName || route.endLocationName) && (
-              <div className="flex items-center gap-4 flex-wrap">
+              <div className="route-hero__locations">
                 {route.startLocationName && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-balak-400 shadow-lg" />
-                    <span className="text-white font-medium text-sm drop-shadow-lg">
+                  <div className="route-hero__location">
+                    <div className="route-hero__location-dot route-hero__location-dot--start" />
+                    <span className="route-hero__location-text">
                       {route.startLocationName}
                     </span>
                   </div>
                 )}
 
                 {route.startLocationName && route.endLocationName && (
-                  <div className="w-4 h-4 text-balak-300">
+                  <div className="route-hero__location-arrow">
                     <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path
                         strokeLinecap="round"
@@ -235,9 +190,9 @@ export default function RouteHero({ route }: RouteHeroProps) {
                 )}
 
                 {route.endLocationName && (
-                  <div className="flex items-center gap-2">
-                    <div className="w-3 h-3 rounded-full bg-red-400 shadow-lg" />
-                    <span className="text-white font-medium text-sm drop-shadow-lg">
+                  <div className="route-hero__location">
+                    <div className="route-hero__location-dot route-hero__location-dot--end" />
+                    <span className="route-hero__location-text">
                       {route.endLocationName}
                     </span>
                   </div>

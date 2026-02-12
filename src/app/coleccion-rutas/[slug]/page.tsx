@@ -44,7 +44,7 @@ export default async function RouteGroupDetailPage({
                 routes={
                   routeGroup.routesCollection.items.filter(Boolean) as Route[]
                 }
-                subtitle={`Rutas: ${routeGroup.routesCollection.total}`}
+                subtitle={`${routeGroup.routesCollection.total} rutas`}
                 emptyMessage="No routes found in this trip"
               />
             )}

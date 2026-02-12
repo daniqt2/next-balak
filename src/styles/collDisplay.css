@@ -1,55 +1,82 @@
-/* Coll Display Card */
+/* Coll Display Card – full-bleed image, gradient overlay, Anton title */
 .coll-display {
   @apply block;
 
   .coll-display__card {
-    @apply bg-charcoal-800 rounded-2xl overflow-hidden border border-charcoal-700
-           flex flex-col w-full transition-all duration-300 cursor-pointer
-           shadow-[0_20px_25px_-5px_rgba(0,0,0,0.3),0_10px_10px_-5px_rgba(0,0,0,0.1)];
-
-    &:hover {
-      @apply -translate-y-1 border-[#f59e0b] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.4)];
-    }
+    @apply relative rounded-2xl overflow-hidden shadow-lg w-full cursor-pointer
+           transition-all duration-500 ease-out
+           hover:scale-[1.02] hover:shadow-2xl;
   }
 
   .coll-display__image-container {
-    @apply relative w-full h-50 overflow-hidden;
+    @apply relative w-full overflow-hidden;
+    height: 260px;
+  }
 
-    .coll-display__image {
-      @apply object-cover transition-transform duration-300;
+  @media (min-width: 768px) {
+    .coll-display__image-container {
+      height: auto;
+      aspect-ratio: 3 / 4;
     }
+  }
 
-    .coll-display__image-placeholder {
-      @apply w-full h-full flex items-center justify-center relative;
-      background: linear-gradient(135deg, #92400e 0%, #a16207 50%, #ca8a04 100%);
+  .coll-display__image {
+    @apply object-cover w-full h-full transition-transform duration-500;
+  }
 
-      .coll-display__image-placeholder-overlay {
-        @apply absolute inset-0;
-        background: radial-gradient(circle at center, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
-      }
+  .coll-display__card:hover .coll-display__image {
+    @apply scale-105;
+  }
 
-      .coll-display__image-placeholder-icon {
-        @apply text-amber-300;
-        opacity: 0.8;
-      }
-    }
+  .coll-display__image-placeholder {
+    @apply w-full h-full flex items-center justify-center relative;
+    background: linear-gradient(135deg, #92400e 0%, #a16207 50%, #ca8a04 100%);
+  }
 
-    .coll-display__gradient-overlay {
-      @apply absolute bottom-0 left-0 right-0 h-15;
-      background: linear-gradient(to top, rgba(31, 41, 55, 0.9) 0%, transparent 100%);
-    }
+  .coll-display__image-placeholder-overlay {
+    @apply absolute inset-0;
+    background: radial-gradient(circle at center, rgba(251, 191, 36, 0.1) 0%, transparent 70%);
+  }
+
+  .coll-display__image-placeholder-icon {
+    @apply text-amber-300;
+    opacity: 0.8;
+  }
+
+  .coll-display__overlay {
+    @apply absolute inset-0 pointer-events-none;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.3), transparent);
   }
 
   .coll-display__content {
-    @apply p-5 flex-1 flex flex-col bg-charcoal-800;
+    @apply absolute bottom-0 left-0 right-0 p-6 text-white pointer-events-none;
+  }
 
-    .coll-display__title {
-      @apply text-white font-bold text-lg mb-2 leading-tight tracking-tight;
-    }
+  .coll-display__title {
+    @apply font-anton uppercase leading-[0.95];
+    font-size: clamp(2rem, 4vw, 3rem);
+    letter-spacing: -0.02em;
+  }
 
-    .coll-display__description {
-      @apply text-gray-400 text-sm leading-relaxed line-clamp-3;
-    }
+  .coll-display__variants {
+    @apply mt-2 flex flex-col gap-1 text-sm text-white/80;
+  }
+
+  .coll-display__variants-label {
+    @apply text-white/80 text-sm mb-0.5;
+  }
+
+  .coll-display__variant-row {
+    @apply flex items-center gap-2;
+  }
+
+  .coll-display__variant-dot {
+    @apply shrink-0 w-2 h-2 rounded-full;
+  }
+
+  .coll-display__badge {
+    @apply absolute top-4 left-4 z-10 px-3 py-1 rounded-md
+           text-xs font-semibold uppercase tracking-wider text-white
+           backdrop-blur-sm bg-black/40;
   }
 }
-

@@ -39,6 +39,11 @@
   @apply py-10;
 }
 
+.font-anton {
+  font-family: var(--font-anton), sans-serif;
+  letter-spacing: 0.04em;
+}
+
 body {
   background-color: #ECECEC;
   font-family: 'Inter Tight', sans-serif;
@@ -87,45 +92,34 @@ body {
   animation: title-slide-up 0.8s ease-out 0.3s forwards;
 }
 
-/* Elegant Navigation Styles */
 .nav-link,
 .nav-link-mobile {
-  position: relative;
+  @apply text-4xl;
+  @apply relative overflow-hidden opacity-100;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  overflow: hidden;
-  opacity: 1; /* Ensure visibility on load */
+
+  span {
+    @apply inline-block;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  &:hover span {
+    @apply translate-x-1 tracking-[0.08em] text-[#111];
+  }
+
+  &:active span {
+    @apply translate-x-0.5 scale-[0.98];
+  }
+
+  &:hover {
+    text-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  }
 }
 
-.nav-link span,
-.nav-link-mobile span {
-  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  display: inline-block;
-}
-
-
-.nav-link:hover span,
-.nav-link-mobile:hover span {
-  transform: translateX(4px);
-  letter-spacing: 0.08em;
-  color: #111;
-}
-
-.nav-link:active span,
-.nav-link-mobile:active span {
-  transform: translateX(2px) scale(0.98);
-}
-
-/* Subtle glow effect on hover */
-.nav-link:hover,
-.nav-link-mobile:hover {
-  text-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-/* Elegant spacing and typography */
 .nav-link {
-  padding: 0.5rem 0;
+  @apply py-2;
 }
 
 .nav-link-mobile {
-  padding: 0.75rem 0;
+  @apply py-3;
 }

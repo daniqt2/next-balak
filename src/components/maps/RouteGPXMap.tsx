@@ -73,7 +73,7 @@ export default function RouteGPXMap({
           <button
             type="button"
             onClick={handleDownload}
-            className="inline-flex items-center gap-2 bg-balak-500 text-charcoal-900 px-4 py-2 font-semibold rounded-lg hover:bg-balak-500 transition-colors text-sm"
+            className="inline-flex items-center gap-2 bg-balak-500 text-charcoal-900 px-4 py-2  font-semibold rounded-lg hover:bg-balak-500 transition-colors text-sm"
           >
             <Download className="w-4 h-4" />
             Descargar GPX

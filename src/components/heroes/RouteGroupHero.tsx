@@ -114,7 +114,7 @@ export default function RouteGroupHero({ routeGroup }: RouteGroupHeroProps) {
                 transition: 'all 0.8s cubic-bezier(0.4, 0, 0.2, 1)',
               }}
             >
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-white mb-4 drop-shadow-2xl leading-tight">
+              <h1 className="font-anton text-4xl sm:text-5xl lg:text-7xl text-white mb-4 drop-shadow-2xl leading-tight">
                 {routeGroup.title || 'Cycling Trip'}
               </h1>
 

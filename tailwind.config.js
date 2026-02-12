@@ -7,6 +7,9 @@ module.exports = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        anton: ["var(--font-anton)", "sans-serif"],
+      },
       colors: {
         balak: {
           50: '#f7fbe7',

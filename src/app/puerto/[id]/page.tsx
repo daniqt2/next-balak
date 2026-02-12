@@ -81,7 +81,7 @@ export default async function MountainDetailPage({
           <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent" />
           <div className="absolute inset-x-0 bottom-0">
             <div className="container mx-auto px-4 pb-10">
-              <h1 className="text-white text-4xl md:text-6xl font-bold uppercase">
+              <h1 className="font-anton text-white text-6xl md:text-8xl font-bold uppercase">
                 {coll.name || 'Puerto'}
               </h1>
               {headerVisible.length > 0 && (

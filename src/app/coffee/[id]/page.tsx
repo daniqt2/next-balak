@@ -57,7 +57,7 @@ export default async function CoffeeSpotDetailPage({
                   {getStopTypeLabel(coffeeSpot.stopType)}
                 </span>
               )}
-              <h1 className="text-white text-4xl md:text-6xl font-bold uppercase">
+              <h1 className="font-anton text-white text-4xl md:text-6xl font-bold uppercase">
                 {coffeeSpot.title || 'Punto de Café'}
               </h1>
               {coffeeSpot.locationName && (
@@ -103,7 +103,9 @@ export default async function CoffeeSpotDetailPage({
             </AnimatedSection>
 
             {/* Description */}
-            {(coffeeSpot.fullDescription?.json || (coffeeSpot.description && (coffeeSpot.description as string).trim().length > 0)) && (
+            {(coffeeSpot.fullDescription?.json ||
+              (coffeeSpot.description &&
+                (coffeeSpot.description as string).trim().length > 0)) && (
               <AnimatedSection delay={200}>
                 <div className="bg-white rounded-2xl border border-gray-200 shadow-sm p-6">
                   <h2 className="text-xl md:text-2xl font-bold text-charcoal-900 mb-4">

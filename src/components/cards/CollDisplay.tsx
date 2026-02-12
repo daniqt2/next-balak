@@ -10,6 +10,7 @@ import '@/styles/collDisplay.css';
 interface CollDisplayProps {
   coll: Coll;
   index?: number;
+  featured?: boolean;
 }
 
 function getDifficultyDotClass(difficulty?: string | null): string {
@@ -22,30 +23,12 @@ function getDifficultyDotClass(difficulty?: string | null): string {
   return 'bg-gray-400';
 }
 
-function extractPlainText(value: any): string {
-  if (!value) return '';
-  if (typeof value === 'string') return value;
-
-  // Contentful rich text JSON has nodes like { nodeType, content: [...] }
-  if (Array.isArray(value)) {
-    return value.map(extractPlainText).join(' ');
-  }
-
-  if (typeof value === 'object') {
-    if (value.nodeType === 'text' && typeof value.value === 'string') {
-      return value.value;
-    }
-    if (Array.isArray(value.content)) {
-      return extractPlainText(value.content);
-    }
-  }
-
-  return '';
-}
-
-export default function CollDisplay({ coll, index = 0 }: CollDisplayProps) {
+export default function CollDisplay({
+  coll,
+  index = 0,
+  featured = false,
+}: CollDisplayProps) {
   const name = coll.name || `Puerto ${index + 1}`;
-  const descriptionText = extractPlainText(coll.description?.json || '');
 
   const variants = Array.isArray((coll as any).variantsCollection?.items)
     ? ((coll as any).variantsCollection.items.filter(Boolean) as any[])
@@ -53,8 +36,11 @@ export default function CollDisplay({ coll, index = 0 }: CollDisplayProps) {
 
   return (
     <Link href={`/puerto/${coll.sys.id}`} className="coll-display">
-      <div className="coll-display__card">
+      <div className="coll-display__card group">
         <div className="coll-display__image-container">
+          {featured && (
+            <span className="coll-display__badge">Destacado</span>
+          )}
           {coll.header?.url ? (
             <Image
               src={coll.header.url}
@@ -73,28 +59,27 @@ export default function CollDisplay({ coll, index = 0 }: CollDisplayProps) {
               />
             </div>
           )}
-          <div className="coll-display__gradient-overlay" />
+          <div className="coll-display__overlay" />
         </div>
 
         <div className="coll-display__content">
           <h3 className="coll-display__title">{name}</h3>
           {variants.length > 0 && (
-            <div className="mt-2 flex flex-col gap-1 text-gray-300 text-sm">
-              <p className="text-white/80">Variantes:</p>
+            <div className="coll-display__variants">
+              <span className="coll-display__variants-label">Variantes:</span>
               {variants.slice(0, 2).map((v, i) => (
-                <div key={v?.sys?.id || i} className="flex gap-2">
-                  <span className="inline-flex items-center gap-2 text-white/80 font-bold pl-2">
-                    <span
-                      className={`inline-block w-2 h-2 rounded-full ${getDifficultyDotClass(
-                        v?.difficulty
-                      )}`}
-                      aria-hidden="true"
-                    />
-                    <span>
-                      {v?.startLocation ? `${v.startLocation}:` : 'Variante:'}
-                    </span>
-                  </span>
+                <div
+                  key={v?.sys?.id || i}
+                  className="coll-display__variant-row"
+                >
+                  <span
+                    className={`coll-display__variant-dot ${getDifficultyDotClass(
+                      v?.difficulty
+                    )}`}
+                    aria-hidden
+                  />
                   <span>
+                    {v?.startLocation ? `${v.startLocation}:` : 'Variante:'}{' '}
                     {v?.length != null ? `${v.length}km` : '—'}
                     {v?.slopePercentage != null
                       ? ` · ${v.slopePercentage}%`

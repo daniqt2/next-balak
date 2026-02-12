@@ -8,7 +8,10 @@ interface RouteGroupDisplayProps {
   index?: number;
 }
 
-export default function RouteGroupDisplay({ routeGroup, index = 0 }: RouteGroupDisplayProps) {
+export default function RouteGroupDisplay({
+  routeGroup,
+  index = 0,
+}: RouteGroupDisplayProps) {
   const cardRef = useRef<HTMLDivElement>(null);
   const [isVisible, setIsVisible] = useState(false);
   const [imageLoaded, setImageLoaded] = useState(false);
@@ -60,23 +63,27 @@ export default function RouteGroupDisplay({ routeGroup, index = 0 }: RouteGroupD
       />
 
       <div className="overlay" />
-      {isComingSoon && <div className="coming-soon-overlay" aria-hidden="true" />}
+      {isComingSoon && (
+        <div className="coming-soon-overlay" aria-hidden="true" />
+      )}
       {isComingSoon && <div className="coming-soon-label">Próximamente</div>}
+
+      {routeGroup.locationLabel && (
+        <div className="location">
+          <span className="mr-1">📍</span>
+          {routeGroup.locationLabel}
+        </div>
+      )}
 
       <div className="content">
         <div className="title-section">
           <div>
             <h3 className="title">{routeGroup.title}</h3>
-            {routeGroup.subtitle && <p className="subtitle">{routeGroup.subtitle}</p>}
+            {routeGroup.subtitle && (
+              <p className="subtitle">{routeGroup.subtitle}</p>
+            )}
           </div>
         </div>
-
-        {routeGroup.locationLabel && (
-          <div className="location">
-            <span className="mr-1">📍</span>
-            {routeGroup.locationLabel}
-          </div>
-        )}
       </div>
 
       {routeCount > 0 && <div className="route-count-badge">{routeCount}</div>}
