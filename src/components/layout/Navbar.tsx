@@ -12,16 +12,16 @@ export default function Navbar() {
   useEffect(() => {
     const controlNavbar = () => {
       const currentScrollY = window.scrollY;
-      
+
       // Show navbar when scrolling up or at the top
       if (currentScrollY < lastScrollY || currentScrollY < 100) {
         setIsVisible(true);
-      } 
+      }
       // Hide navbar when scrolling down (but not at the very top)
       else if (currentScrollY > lastScrollY && currentScrollY > 100) {
         setIsVisible(false);
       }
-      
+
       setLastScrollY(currentScrollY);
     };
 
@@ -31,7 +31,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav 
+      <nav
         className={`navbar ${isVisible ? 'navbar--visible' : 'navbar--hidden'}`}
       >
         <div className="main-wrapper">
@@ -43,10 +43,18 @@ export default function Navbar() {
           {/* Desktop links */}
           <div className="hidden lg:flex items-center gap-6">
             {/* <Link href="/routes" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Rutas</Link> */}
-            <Link href="/rutas" className="navbar_menu-option">Rutas</Link>
-            <Link href="/coffee-spots" className="navbar_menu-option">Cafés</Link>
-            <Link href="/puertos" className="navbar_menu-option">Puertos</Link>
-            <Link href="/about-us" className="navbar_menu-option">Nosotros</Link>
+            <Link href="/rutas" className="navbar_menu-option">
+              Rutas
+            </Link>
+            <Link href="/puertos" className="navbar_menu-option">
+              Puertos
+            </Link>
+            <Link href="/coffee-spots" className="navbar_menu-option">
+              Donde parar
+            </Link>
+            <Link href="/about-us" className="navbar_menu-option">
+              Sobre Nosotros
+            </Link>
           </div>
 
           {/* Mobile menu button */}
