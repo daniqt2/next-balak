@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Anton } from 'next/font/google';
 import { Analytics } from '@vercel/analytics/next';
 import './globals.css';
 import ConditionalNavbar from '../components/layout/ConditionalNavbar';
+import ComingSoon from '../components/layout/ComingSoon';
 import { MantineProvider } from '../components/layout/MantineProvider';
 import PageTransition from '../components/layout/PageTransition';
 
@@ -58,6 +59,8 @@ export const metadata: Metadata = {
   },
 };
 
+const isComingSoon = process.env.NEXT_PUBLIC_COMING_SOON === 'true';
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -69,8 +72,14 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} ${anton.variable} antialiased text-white`}
       >
         <MantineProvider>
-          <ConditionalNavbar />
-          <PageTransition>{children}</PageTransition>
+          {isComingSoon ? (
+            <ComingSoon />
+          ) : (
+            <>
+              <ConditionalNavbar />
+              <PageTransition>{children}</PageTransition>
+            </>
+          )}
           <Analytics />
         </MantineProvider>
       </body>
