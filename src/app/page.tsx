@@ -19,7 +19,7 @@ export const metadata: Metadata = {
 export default function Home() {
   return (
     <HomeScrollRoot>
-      <div className="min-h-screen bg-white" data-page="home">
+      <div className="home-page-root min-h-screen bg-white" data-page="home">
         <div className="home-snap-section min-h-screen">
           <HomeHero />
         </div>

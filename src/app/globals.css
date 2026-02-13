@@ -129,9 +129,16 @@ html.home-scroll {
   scroll-snap-type: y mandatory;
   scroll-behavior: smooth;
   scroll-padding-top: 0;
+  /* Leave room above mobile browser UI so last section isn’t cut off */
+  scroll-padding-bottom: max(env(safe-area-inset-bottom), 80px);
 }
 
 html.home-scroll .home-snap-section {
   scroll-snap-align: start;
   scroll-snap-stop: always;
+}
+
+/* Bottom padding so content isn’t hidden behind mobile browser footer */
+.home-page-root {
+  padding-bottom: max(env(safe-area-inset-bottom), 80px);
 }
