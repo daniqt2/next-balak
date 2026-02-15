@@ -4,7 +4,7 @@ import RichTextRenderer from '@/components/ui/RichTextRenderer';
 import AssetGrid from '@/components/grids/AssetGrid';
 import VariantRoutesCarousel from '@/components/carousels/VariantRoutesCarousel';
 
-import { collService } from '@/services/coll-service';
+import { getCollByIdCached } from '@/lib/contentful-cache';
 import Image from 'next/image';
 import {
   BarChart3,
@@ -27,7 +27,7 @@ export async function generateMetadata({
 }: MountainDetailPageProps): Promise<Metadata> {
   const { id } = await params;
   try {
-    const data = await collService.getCollById(id);
+    const data = await getCollByIdCached(id);
     const coll = data?.coll;
     if (!coll) notFound();
     const title = coll.name ?? 'Puerto';
@@ -57,7 +57,7 @@ export default async function MountainDetailPage({
 }: MountainDetailPageProps) {
   const { id } = await params;
   try {
-    const data = await collService.getCollById(id);
+    const data = await getCollByIdCached(id);
     const coll = data.coll;
 
     if (!coll) {

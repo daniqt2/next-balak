@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { routeGroupService } from '@/services/route-group-service';
+import { getRouteGroupBySlugCached } from '@/lib/contentful-cache';
 import { notFound } from 'next/navigation';
 import RouteGroupHero from '@/components/heroes/RouteGroupHero';
 import RouteGroupRoutesGrid from '@/components/grids/RouteGroupRoutesGrid';
@@ -18,7 +18,7 @@ export async function generateMetadata({
 }: RouteGroupDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const data = await routeGroupService.getRouteGroupBySlug(slug);
+    const data = await getRouteGroupBySlugCached(slug);
     const routeGroup = data?.routeGroupCollection?.items?.[0];
     if (!routeGroup) notFound();
     const title = routeGroup.title ?? 'Colección';
@@ -41,7 +41,7 @@ export default async function RouteGroupDetailPage({
 }: RouteGroupDetailPageProps) {
   const { slug } = await params;
   try {
-    const data = await routeGroupService.getRouteGroupBySlug(slug);
+    const data = await getRouteGroupBySlugCached(slug);
     const routeGroup = data?.routeGroupCollection?.items?.[0];
 
     if (!routeGroup) {

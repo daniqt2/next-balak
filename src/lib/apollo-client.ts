@@ -1,12 +1,19 @@
 import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
-const spaceId = process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID || process.env.NUXT_PUBLIC_SPACE_ID || process.env.CONTENTFUL_SPACE_ID;
-const accessToken = process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN || process.env.NUXT_ACCESS_TOKEN || process.env.CONTENTFUL_ACCESS_TOKEN;
+// Use NEXT_PUBLIC_* so both server and client work; optionally set CONTENTFUL_* (no NEXT_PUBLIC_) on server for token security
+const spaceId =
+  process.env.NEXT_PUBLIC_CONTENTFUL_SPACE_ID ||
+  process.env.CONTENTFUL_SPACE_ID ||
+  process.env.NUXT_PUBLIC_SPACE_ID;
+const accessToken =
+  process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ||
+  process.env.CONTENTFUL_ACCESS_TOKEN ||
+  process.env.NUXT_ACCESS_TOKEN;
 
 if (!spaceId || !accessToken) {
   throw new Error(
-    'Missing required environment variables: NEXT_PUBLIC_CONTENTFUL_SPACE_ID and NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN'
+    'Missing Contentful env: set NEXT_PUBLIC_CONTENTFUL_SPACE_ID and NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN'
   );
 }
 

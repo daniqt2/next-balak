@@ -1419,7 +1419,7 @@ export type ResourceSys = {
   urn: Scalars['String']['output'];
 };
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type Route = Entry & _Node & {
   __typename?: 'Route';
   _id: Scalars['ID']['output'];
@@ -1449,7 +1449,7 @@ export type Route = Entry & _Node & {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteCoffeStopsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1461,7 +1461,7 @@ export type RouteCoffeStopsCollectionArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteCollsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1473,35 +1473,35 @@ export type RouteCollsCollectionArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteDescriptionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteElevationArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteEndLocationArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteEndLocationNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteGpxArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1509,7 +1509,7 @@ export type RouteGpxArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteHeaderImageArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1517,7 +1517,7 @@ export type RouteHeaderImageArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteInterestSpotsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1529,20 +1529,20 @@ export type RouteInterestSpotsCollectionArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteLengthArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteLinkedFromArgs = {
   allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteMainCarouselCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1552,7 +1552,7 @@ export type RouteMainCarouselCollectionArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteMountainsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1564,56 +1564,56 @@ export type RouteMountainsCollectionArgs = {
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteSlugArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStartLocationArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStartLocationNameArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStravaIdArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteStravaLinkArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteSubTitleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteTimeArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
 
-/** cycling routes [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteTitleArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;

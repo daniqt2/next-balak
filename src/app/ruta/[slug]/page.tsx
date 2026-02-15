@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { routeService } from '@/services/route-service';
+import { getRouteBySlugCached } from '@/lib/contentful-cache';
 import { notFound } from 'next/navigation';
 import StickyStravaMap from '@/components/maps/StickyStravaMap';
 import RouteGPXMap from '@/components/maps/RouteGPXMap';
@@ -22,7 +22,7 @@ export async function generateMetadata({
 }: RouteDetailPageProps): Promise<Metadata> {
   const { slug } = await params;
   try {
-    const data = await routeService.getRouteBySlug(slug);
+    const data = await getRouteBySlugCached(slug);
     const route = data?.routeCollection?.items?.[0];
     if (!route) notFound();
     const title = route.title ?? 'Ruta';
@@ -42,7 +42,7 @@ export default async function RouteDetailPage({
 }: RouteDetailPageProps) {
   const { slug } = await params;
   try {
-    const data = await routeService.getRouteBySlug(slug);
+    const data = await getRouteBySlugCached(slug);
     const route = data?.routeCollection?.items?.[0];
 
     if (!route) {

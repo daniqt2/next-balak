@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { coffeeService } from '@/services/coffee-service';
+import { getCoffeeSpotByIdCached } from '@/lib/contentful-cache';
 import { notFound } from 'next/navigation';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import VariantRoutesCarousel from '@/components/carousels/VariantRoutesCarousel';
@@ -18,7 +18,7 @@ export async function generateMetadata({
 }: CoffeeSpotDetailPageProps): Promise<Metadata> {
   const { id } = await params;
   try {
-    const data = await coffeeService.getCoffeeSpotById(id);
+    const data = await getCoffeeSpotByIdCached(id);
     const coffeeSpot = data?.interestSpot;
     if (!coffeeSpot) notFound();
     const title = coffeeSpot.title ?? 'Punto de café';
@@ -38,7 +38,7 @@ export default async function CoffeeSpotDetailPage({
 }: CoffeeSpotDetailPageProps) {
   const { id } = await params;
   try {
-    const data = await coffeeService.getCoffeeSpotById(id);
+    const data = await getCoffeeSpotByIdCached(id);
     const coffeeSpot = data?.interestSpot;
     const relatedRoutes =
       coffeeSpot?.linkedFrom?.routeCollection?.items?.filter(Boolean) || [];

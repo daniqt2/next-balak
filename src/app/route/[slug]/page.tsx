@@ -1,4 +1,4 @@
-import { routeService } from '@/services/route-service';
+import { getRouteBySlugCached } from '@/lib/contentful-cache';
 import { notFound } from 'next/navigation';
 import StickyStravaMap from '@/components/maps/StickyStravaMap';
 import RouteGPXMap from '@/components/maps/RouteGPXMap';
@@ -22,7 +22,7 @@ export default async function RouteDetailPage({
 }: RouteDetailPageProps) {
   try {
     const { slug } = await params;
-    const data = await routeService.getRouteBySlug(slug);
+    const data = await getRouteBySlugCached(slug);
     const route = data?.routeCollection?.items?.[0];
 
     if (!route) {
