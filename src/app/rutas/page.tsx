@@ -1,3 +1,4 @@
+import type { RouteGroup } from '@/contentful-types';
 import { getRouteGroupsCached } from '@/lib/contentful-cache';
 import PageHeader from '@/components/headers/pageHeader';
 import RouteGroupGrid from '@/components/grids/RouteGroupGrid';
@@ -6,7 +7,9 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs';
 export default async function RouteGroupsPage() {
   const data = await getRouteGroupsCached({ limit: 20 });
   const routes =
-    data?.routeGroupCollection?.items?.filter(Boolean) ?? [];
+    data?.routeGroupCollection?.items?.filter(
+      (r): r is RouteGroup => r != null
+    ) ?? [];
 
   return (
     <div className="min-h-screen mt-6 md:mt-10" style={{ paddingTop: '64px' }}>
