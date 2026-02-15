@@ -1,11 +1,9 @@
 /**
  * Server-side Contentful fetchers. Call these from Server Components only.
- * Fetches run on the server (no browser → Contentful), so one request per server render.
- *
- * Caching (unstable_cache) is disabled for now – some responses failed to serialize.
- * You can re-enable by wrapping each call in unstable_cache(..., keyParts, { revalidate, tags })
- * and ensuring the returned value is JSON-serializable (e.g. JSON.parse(JSON.stringify(data))).
+ * Uses Next.js unstable_cache so one cached result is shared for all users (5 min revalidate).
+ * Return values are JSON-serialized so the cache can store them.
  */
+import { unstable_cache } from 'next/cache';
 import { collService } from '@/services/coll-service';
 import { coffeeService } from '@/services/coffee-service';
 import { routeGroupService } from '@/services/route-group-service';
@@ -14,32 +12,69 @@ import type { CollServiceOptions } from '@/services/coll-service';
 import type { CoffeeServiceOptions } from '@/services/coffee-service';
 import type { RouteGroupServiceOptions } from '@/services/route-group-service';
 
+const REVALIDATE_SECONDS = 300; // 5 minutes – shared across all users on Vercel Data Cache
+
+function serialize<T>(data: T): T {
+  return JSON.parse(JSON.stringify(data)) as T;
+}
+
 export async function getCollsCached(options: CollServiceOptions = {}) {
-  return collService.getColls(options);
+  const { limit = 10, skip = 0 } = options;
+  return unstable_cache(
+    async () => serialize(await collService.getColls(options)),
+    ['contentful', 'colls', String(limit), String(skip)],
+    { revalidate: REVALIDATE_SECONDS, tags: ['contentful', 'colls'] }
+  )();
 }
 
 export async function getCollByIdCached(id: string) {
-  return collService.getCollById(id);
+  return unstable_cache(
+    async () => serialize(await collService.getCollById(id)),
+    ['contentful', 'coll', id],
+    { revalidate: REVALIDATE_SECONDS, tags: ['contentful', 'coll', id] }
+  )();
 }
 
 export async function getCoffeeSpotsCached(options: CoffeeServiceOptions = {}) {
-  return coffeeService.getCoffeeSpots(options);
+  const { limit = 10, skip = 0 } = options;
+  return unstable_cache(
+    async () => serialize(await coffeeService.getCoffeeSpots(options)),
+    ['contentful', 'coffee-spots', String(limit), String(skip)],
+    { revalidate: REVALIDATE_SECONDS, tags: ['contentful', 'coffee-spots'] }
+  )();
 }
 
 export async function getCoffeeSpotByIdCached(id: string) {
-  return coffeeService.getCoffeeSpotById(id);
+  return unstable_cache(
+    async () => serialize(await coffeeService.getCoffeeSpotById(id)),
+    ['contentful', 'coffee', id],
+    { revalidate: REVALIDATE_SECONDS, tags: ['contentful', 'coffee', id] }
+  )();
 }
 
 export async function getRouteGroupsCached(
   options: RouteGroupServiceOptions = {}
 ) {
-  return routeGroupService.getRouteGroups(options);
+  const { limit = 20, skip = 0 } = options;
+  return unstable_cache(
+    async () => serialize(await routeGroupService.getRouteGroups(options)),
+    ['contentful', 'route-groups', String(limit), String(skip)],
+    { revalidate: REVALIDATE_SECONDS, tags: ['contentful', 'route-groups'] }
+  )();
 }
 
 export async function getRouteGroupBySlugCached(slug: string) {
-  return routeGroupService.getRouteGroupBySlug(slug);
+  return unstable_cache(
+    async () => serialize(await routeGroupService.getRouteGroupBySlug(slug)),
+    ['contentful', 'route-group', slug],
+    { revalidate: REVALIDATE_SECONDS, tags: ['contentful', 'route-group', slug] }
+  )();
 }
 
 export async function getRouteBySlugCached(slug: string) {
-  return routeService.getRouteBySlug(slug);
+  return unstable_cache(
+    async () => serialize(await routeService.getRouteBySlug(slug)),
+    ['contentful', 'route', slug],
+    { revalidate: REVALIDATE_SECONDS, tags: ['contentful', 'route', slug] }
+  )();
 }
