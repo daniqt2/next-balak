@@ -4,7 +4,7 @@ import StickyStravaMap from '@/components/maps/StickyStravaMap';
 import RouteGPXMap from '@/components/maps/RouteGPXMap';
 import RouteHero from '@/components/heroes/RouteHero';
 import CoffeeStopsCarousel from '@/components/carousels/CoffeeStopsCarousel';
-import CollVariantsCarousel from '@/components/carousels/CollVariantsCarousel';
+import CollVariantsList from '@/components/lists/CollVariantsList';
 import AssetGrid from '@/components/grids/AssetGrid';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import '@/styles/stickyMap.css';
@@ -28,6 +28,31 @@ export default async function RouteDetailPage({
     if (!route) {
       notFound();
     }
+
+    const collItems = (route as any).collsCollection?.items ?? [];
+    const collMarkers = collItems
+      .map((item: any) => {
+        const coll = item?.linkedFrom?.entryCollection?.items?.find(
+          (e: any) => e?.__typename === 'Coll'
+        );
+        const loc = coll?.location;
+        if (loc?.lat == null || loc?.lon == null) return null;
+        return { lat: loc.lat, lon: loc.lon, label: coll?.name ?? 'Puerto' };
+      })
+      .filter(Boolean) as { lat: number; lon: number; label: string }[];
+
+    const coffeeItems = route.coffeStopsCollection?.items ?? [];
+    const coffeeStopMarkers = coffeeItems
+      .map((item: any) => {
+        const loc = item?.location;
+        if (loc?.lat == null || loc?.lon == null) return null;
+        return {
+          lat: loc.lat,
+          lon: loc.lon,
+          label: item?.title ?? 'Parada café',
+        };
+      })
+      .filter(Boolean) as { lat: number; lon: number; label: string }[];
 
     return (
       <div className="min-h-screen" style={{ paddingTop: '64px' }}>
@@ -98,6 +123,8 @@ export default async function RouteDetailPage({
                 <RouteGPXMap
                   gpxUrl={(route as any).gpx.url}
                   fileName={(route as any).gpx.fileName}
+                  collMarkers={collMarkers}
+                  coffeeStopMarkers={coffeeStopMarkers}
                 />
               )}
 
@@ -106,7 +133,7 @@ export default async function RouteDetailPage({
                 (route as any).collsCollection.items.length > 0 && (
                   <div className="my-12">
                     <AnimatedSection delay={600}>
-                      <CollVariantsCarousel
+                      <CollVariantsList
                         variants={
                           (route as any).collsCollection.items.filter(
                             Boolean

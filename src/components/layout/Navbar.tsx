@@ -50,7 +50,7 @@ export default function Navbar() {
               Puertos
             </Link>
             <Link href="/coffee-spots" className="navbar_menu-option">
-              Donde parar
+              Paradas
             </Link>
             <Link href="/about-us" className="navbar_menu-option">
               Sobre Nosotros

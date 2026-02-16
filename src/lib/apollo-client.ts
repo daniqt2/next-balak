@@ -1,4 +1,9 @@
-import { ApolloClient, InMemoryCache, createHttpLink } from '@apollo/client';
+import {
+  ApolloClient,
+  ApolloLink,
+  InMemoryCache,
+  createHttpLink,
+} from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
 
 // Use NEXT_PUBLIC_* so both server and client work; optionally set CONTENTFUL_* (no NEXT_PUBLIC_) on server for token security
@@ -10,6 +15,10 @@ const accessToken =
   process.env.NEXT_PUBLIC_CONTENTFUL_ACCESS_TOKEN ||
   process.env.CONTENTFUL_ACCESS_TOKEN ||
   process.env.NUXT_ACCESS_TOKEN;
+
+export const isContentfulPreview =
+  process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW === 'true' ||
+  process.env.CONTENTFUL_PREVIEW === 'true';
 
 if (!spaceId || !accessToken) {
   throw new Error(
@@ -30,8 +39,15 @@ const authLink = setContext((_, { headers }) => {
   };
 });
 
+const previewVariableLink = new ApolloLink((operation, forward) => {
+  if (isContentfulPreview) {
+    operation.variables = { ...operation.variables, preview: true };
+  }
+  return forward(operation);
+});
+
 export const apolloClient = new ApolloClient({
-  link: authLink.concat(httpLink),
+  link: previewVariableLink.concat(authLink).concat(httpLink),
   cache: new InMemoryCache(),
   defaultOptions: {
     watchQuery: {

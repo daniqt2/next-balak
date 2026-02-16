@@ -40,7 +40,11 @@ export default function CollVariantCard({
   const content = (
     <div className="bg-white rounded-xl shadow-sm p-5 transition-all duration-300 cursor-pointer hover:shadow-md w-full">
       <div className="flex items-start gap-4">
-        <div className="bg-balak-orange-500 rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0">
+        <div
+          className={`rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 ${getDifficultyDotClass(
+            variant.difficulty
+          )}`}
+        >
           <Mountain size={24} strokeWidth={2} color="white" />
         </div>
 
@@ -75,7 +79,7 @@ export default function CollVariantCard({
               </span>
             )}
             {variant.difficulty && (
-              <span className="inline-flex items-center px-2 py-0.5 rounded-full bg-charcoal-100 text-charcoal-700 text-xs font-medium">
+              <span className="inline-flex items-center px-2 py-0.5 rounded-full  text-charcoal-700 text-xs font-medium">
                 <span
                   className={`inline-block w-2 h-2 rounded-full mr-2 ${getDifficultyDotClass(
                     variant.difficulty

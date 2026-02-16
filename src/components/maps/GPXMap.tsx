@@ -1,23 +1,25 @@
 'use client';
 
 import { useEffect } from 'react';
-import { MapContainer, TileLayer, useMap } from 'react-leaflet';
+import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import 'leaflet-gpx';
 
-const CHARCOAL_800 = '#1f2226';
-const BALAK_500 = '#bfe23a';
+// Map marker assets (public/icons/)
+const START_DOT_ICON_URL = '/icons/map-dot-start.svg';   // balak-green (init)
+const END_DOT_ICON_URL = '/icons/map-dot-finish.svg';    // balak-red (finish)
+const MOUNTAIN_ICON_URL = '/icons/map-marker-mountain.svg';
+const COFFEE_ICON_URL = '/icons/map-marker-coffee.svg';
 
-const gpxPinSvg = `
-<svg xmlns="http://www.w3.org/2000/svg" width="25" height="41" viewBox="0 0 25 41">
-  <path d="M12.5 0C5.6 0 0 5.6 0 12.5C0 23.2 12.5 41 12.5 41C12.5 41 25 23.2 25 12.5C25 5.6 19.4 0 12.5 0Z"
-        fill="${CHARCOAL_800}" stroke="${BALAK_500}" stroke-width="2"/>
-  <circle cx="12.5" cy="12.5" r="5.2" fill="${BALAK_500}" />
-</svg>
-`.trim();
-
-const gpxPinIconUrl = `data:image/svg+xml;charset=UTF-8,${encodeURIComponent(gpxPinSvg)}`;
+function createIcon(iconUrl: string, size: [number, number] = [32, 32]) {
+  return L.icon({
+    iconUrl,
+    iconSize: size,
+    iconAnchor: [size[0] / 2, size[1]],
+    popupAnchor: [0, -size[1]],
+  });
+}
 
 // Fix for default marker icon in Next.js
 if (typeof window !== 'undefined') {
@@ -32,13 +34,17 @@ if (typeof window !== 'undefined') {
   });
 }
 
+const mountainIcon = createIcon(MOUNTAIN_ICON_URL);
+const coffeeIcon = createIcon(COFFEE_ICON_URL);
+
 interface GPXLayerProps {
   gpxUrl: string;
   options?: {
     async?: boolean;
+    markers?: { startIcon?: string; endIcon?: string };
     marker_options?: {
-      startIconUrl?: string;
-      endIconUrl?: string;
+      iconSize?: [number, number];
+      iconAnchor?: [number, number];
       shadowUrl?: string;
     };
     polyline_options?: {
@@ -55,14 +61,21 @@ function GPXLayer({ gpxUrl, options }: GPXLayerProps) {
   useEffect(() => {
     if (!map || !gpxUrl) return;
 
-    // Default options
+    // leaflet-gpx uses options.markers.startIcon / endIcon (URLs), not marker_options
     const defaultOptions = {
       async: true,
+      markers: {
+        startIcon: START_DOT_ICON_URL,
+        endIcon: END_DOT_ICON_URL,
+        ...options?.markers,
+      },
       marker_options: {
-        startIconUrl: gpxPinIconUrl,
-        endIconUrl: gpxPinIconUrl,
-        shadowUrl:
-          'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+        iconSize: [24, 24],
+        iconAnchor: [12, 12],
+        shadowUrl: undefined,
+        shadowSize: undefined,
+        shadowAnchor: undefined,
+        ...options?.marker_options,
       },
       polyline_options: {
         color: '#bfe23a', // balak-500
@@ -102,12 +115,16 @@ function GPXLayer({ gpxUrl, options }: GPXLayerProps) {
   return null;
 }
 
+export type MapMarker = { lat: number; lon: number; label: string };
+
 interface GPXMapProps {
   gpxUrl: string;
   height?: string;
   className?: string;
   center?: [number, number];
   zoom?: number;
+  collMarkers?: MapMarker[];
+  coffeeStopMarkers?: MapMarker[];
 }
 
 export default function GPXMap({
@@ -116,6 +133,8 @@ export default function GPXMap({
   className = '',
   center = [40.4168, -3.7038], // Default to Spain (Madrid)
   zoom = 10,
+  collMarkers = [],
+  coffeeStopMarkers = [],
 }: GPXMapProps) {
   if (!gpxUrl) {
     return (
@@ -145,12 +164,38 @@ export default function GPXMap({
           gpxUrl={gpxUrl}
           options={{
             polyline_options: {
-              color: '#5a6068', //
+              color: '#5a6068',
               opacity: 0.9,
               weight: 5,
             },
           }}
         />
+        {collMarkers.map(
+          (m, i) =>
+            m.lat != null &&
+            m.lon != null && (
+              <Marker key={`coll-${i}`} position={[m.lat, m.lon]} icon={mountainIcon}>
+                <Popup>
+                  <span className="font-semibold text-charcoal-900">
+                    {m.label || 'Puerto'}
+                  </span>
+                </Popup>
+              </Marker>
+            )
+        )}
+        {coffeeStopMarkers.map(
+          (m, i) =>
+            m.lat != null &&
+            m.lon != null && (
+              <Marker key={`coffee-${i}`} position={[m.lat, m.lon]} icon={coffeeIcon}>
+                <Popup>
+                  <span className="font-semibold text-charcoal-900">
+                    {m.label || 'Parada café'}
+                  </span>
+                </Popup>
+              </Marker>
+            )
+        )}
       </MapContainer>
     </div>
   );

@@ -13,6 +13,8 @@ const GPXMap = dynamic(() => import('./GPXMap'), {
   ),
 });
 
+export type MapMarker = { lat: number; lon: number; label: string };
+
 interface RouteGPXMapProps {
   gpxUrl: string;
   fileName?: string | null;
@@ -20,6 +22,8 @@ interface RouteGPXMapProps {
   delay?: number;
   height?: string;
   className?: string;
+  collMarkers?: MapMarker[];
+  coffeeStopMarkers?: MapMarker[];
 }
 
 export default function RouteGPXMap({
@@ -29,6 +33,8 @@ export default function RouteGPXMap({
   delay = 200,
   height = '500px',
   className = '',
+  collMarkers,
+  coffeeStopMarkers,
 }: RouteGPXMapProps) {
   if (!gpxUrl) {
     return null;
@@ -79,7 +85,13 @@ export default function RouteGPXMap({
             Descargar GPX
           </button>
         </div>
-        <GPXMap gpxUrl={gpxUrl} height={height} className="mb-6" />
+        <GPXMap
+          gpxUrl={gpxUrl}
+          height={height}
+          className="mb-6"
+          collMarkers={collMarkers}
+          coffeeStopMarkers={coffeeStopMarkers}
+        />
       </div>
     </AnimatedSection>
   );

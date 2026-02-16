@@ -3,6 +3,7 @@ import { SYS_FRAGMENT } from './sys';
 import { ASSET_FRAGMENT, ASSET_BASIC_FRAGMENT } from './asset';
 import { COFFEE_STOP_FRAGMENT } from './coffeeStop';
 import { MOUNTAIN_FRAGMENT } from './mountain';
+import { LOCATION_FRAGMENT } from './location';
 
 export const ROUTE_FRAGMENT = gql`
   fragment RouteFields on Route {
@@ -76,6 +77,9 @@ export const ROUTE_FRAGMENT = gql`
               ... on Coll {
                 name
                 slug
+                location {
+                  ...LocationFields
+                }
                 header {
                   ...AssetFields
                 }
@@ -91,6 +95,7 @@ export const ROUTE_FRAGMENT = gql`
   ${ASSET_BASIC_FRAGMENT}
   ${COFFEE_STOP_FRAGMENT}
   ${MOUNTAIN_FRAGMENT}
+  ${LOCATION_FRAGMENT}
 `;
 
 export const ROUTE_BASIC_FRAGMENT = gql`

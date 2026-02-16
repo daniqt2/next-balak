@@ -18,7 +18,8 @@ export default function RouteGroupDisplay({
 
   const groupLink = `/coleccion-rutas/${routeGroup.slug}`;
   const routeCount = routeGroup.routesCollection?.total || 0;
-  const isComingSoon = routeCount === 0;
+  const isComingSoon =
+    routeCount === 0 && process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW !== 'true';
 
   useEffect(() => {
     const card = cardRef.current;
