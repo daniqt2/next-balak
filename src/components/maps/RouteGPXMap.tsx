@@ -7,7 +7,10 @@ import { Download } from 'lucide-react';
 const GPXMap = dynamic(() => import('./GPXMap'), {
   ssr: false,
   loading: () => (
-    <div className="w-full rounded-xl bg-charcoal-800 flex items-center justify-center">
+    <div
+      className="w-full rounded-xl bg-charcoal-800 flex items-center justify-center"
+      style={{ minHeight: 400, height: '500px' }}
+    >
       <div className="text-gray-300 py-12">Cargando mapa...</div>
     </div>
   ),

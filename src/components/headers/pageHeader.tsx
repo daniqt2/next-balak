@@ -15,7 +15,7 @@ export default function PageHeader({
       : 'text-[clamp(2rem,3.2vw,3rem)] tracking-[-0.02em] leading-[0.95]';
 
   return (
-    <div className="container mx-auto px-4 pt-12 md:pt-32 pb-6">
+    <div className="container mx-auto px-4 pt-6 md:pt-32 pb-6">
       <AnimatedSection delay={100}>
         <div className="text-left">
           <h1
