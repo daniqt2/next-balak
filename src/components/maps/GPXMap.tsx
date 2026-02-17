@@ -24,11 +24,29 @@ function MapSizeSync() {
   return null;
 }
 
-// Map marker assets (public/icons/)
-const START_DOT_ICON_URL = '/icons/map-dot-start.svg';   // balak-green (init)
-const END_DOT_ICON_URL = '/icons/map-dot-finish.svg';    // balak-red (finish)
-const MOUNTAIN_ICON_URL = '/icons/map-marker-mountain.svg';
-const COFFEE_ICON_URL = '/icons/map-marker-coffee.svg';
+// Start/end dots as data URLs so the map works even if public/icons isn’t available (e.g. deploy)
+const START_DOT_ICON_URL =
+  'data:image/svg+xml,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#bfe23a" stroke="#586b20" stroke-width="2"/></svg>'
+  );
+const END_DOT_ICON_URL =
+  'data:image/svg+xml,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#C37474" stroke="#5f3434" stroke-width="2"/></svg>'
+  );
+
+// Mountain and coffee as data URLs so map works even if public/icons isn’t available in production
+const MOUNTAIN_ICON_URL =
+  'data:image/svg+xml,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="#3f444b" stroke="white" stroke-width="2"/><path d="M7 22 L14 12 L17 16 L19 13 L25 22 Z" fill="white"/></svg>'
+  );
+const COFFEE_ICON_URL =
+  'data:image/svg+xml,' +
+  encodeURIComponent(
+    '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 32 32"><circle cx="16" cy="16" r="15" fill="#ECA74B" stroke="white" stroke-width="2"/><path d="M10 9h10v7c0 2-1.5 3-3 3h-4c-1.5 0-3-1-3-3V9z" fill="none" stroke="white" stroke-width="1.5" stroke-linejoin="round"/><path d="M20 11h2c1 0 2 .8 2 2s-1 2-2 2h-2" fill="none" stroke="white" stroke-width="1.5" stroke-linecap="round"/></svg>'
+  );
 
 function createIcon(iconUrl: string, size: [number, number] = [32, 32]) {
   return L.icon({

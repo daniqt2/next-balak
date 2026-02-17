@@ -1,19 +1,35 @@
 'use client';
 
+import React from 'react';
 import dynamic from 'next/dynamic';
 import { Download } from 'lucide-react';
 
-const GPXMap = dynamic(() => import('./GPXMap'), {
-  ssr: false,
-  loading: () => (
+function MapLoadFallback() {
+  return (
     <div
-      className="w-full rounded-xl bg-charcoal-800 flex items-center justify-center"
+      className="w-full rounded-xl bg-charcoal-800 flex items-center justify-center text-gray-300 py-12 px-4"
       style={{ minHeight: 400, height: '500px' }}
     >
-      <div className="text-gray-300 py-12">Cargando mapa...</div>
+      No se pudo cargar el mapa. Refresca la página o inténtalo más tarde.
     </div>
-  ),
-});
+  );
+}
+
+const GPXMap = dynamic(
+  () =>
+    import('./GPXMap').catch(() => ({ default: MapLoadFallback })),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="w-full rounded-xl bg-charcoal-800 flex items-center justify-center"
+        style={{ minHeight: 400, height: '500px' }}
+      >
+        <div className="text-gray-300 py-12">Cargando mapa...</div>
+      </div>
+    ),
+  }
+);
 
 export type MapMarker = { lat: number; lon: number; label: string };
 
