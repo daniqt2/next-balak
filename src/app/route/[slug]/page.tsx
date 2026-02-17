@@ -119,13 +119,24 @@ export default async function RouteDetailPage({
               </AnimatedSection>
 
               {/* GPX Map Section */}
-              {(route as any).gpx?.url && (
+              {(route as any).gpx?.url ? (
                 <RouteGPXMap
                   gpxUrl={(route as any).gpx.url}
                   fileName={(route as any).gpx.fileName}
                   collMarkers={collMarkers}
                   coffeeStopMarkers={coffeeStopMarkers}
                 />
+              ) : (
+                <AnimatedSection delay={200}>
+                  <div className="mb-8">
+                    <h2 className="text-3xl md:text-5xl font-bold text-charcoal-900 uppercase mb-4">
+                      Mapa de la Ruta
+                    </h2>
+                    <div className="w-full rounded-xl bg-charcoal-800 flex items-center justify-center text-gray-400 py-12 px-4 min-h-[300px]">
+                      No hay archivo GPX vinculado para esta ruta en Contentful.
+                    </div>
+                  </div>
+                </AnimatedSection>
               )}
 
               {/* Coll Variants Section */}

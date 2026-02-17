@@ -1,35 +1,20 @@
 'use client';
 
-import React from 'react';
 import dynamic from 'next/dynamic';
+import AnimatedSection from '@/components/ui/AnimatedSection';
 import { Download } from 'lucide-react';
 
-function MapLoadFallback() {
-  return (
+const GPXMap = dynamic(() => import('./GPXMap'), {
+  ssr: false,
+  loading: () => (
     <div
-      className="w-full rounded-xl bg-charcoal-800 flex items-center justify-center text-gray-300 py-12 px-4"
+      className="w-full rounded-xl bg-charcoal-800 flex items-center justify-center text-gray-300"
       style={{ minHeight: 400, height: '500px' }}
     >
-      No se pudo cargar el mapa. Refresca la página o inténtalo más tarde.
+      <span className="text-lg">Cargando mapa...</span>
     </div>
-  );
-}
-
-const GPXMap = dynamic(
-  () =>
-    import('./GPXMap').catch(() => ({ default: MapLoadFallback })),
-  {
-    ssr: false,
-    loading: () => (
-      <div
-        className="w-full rounded-xl bg-charcoal-800 flex items-center justify-center"
-        style={{ minHeight: 400, height: '500px' }}
-      >
-        <div className="text-gray-300 py-12">Cargando mapa...</div>
-      </div>
-    ),
-  }
-);
+  ),
+});
 
 export type MapMarker = { lat: number; lon: number; label: string };
 
@@ -37,6 +22,7 @@ interface RouteGPXMapProps {
   gpxUrl: string;
   fileName?: string | null;
   title?: string;
+  delay?: number;
   height?: string;
   className?: string;
   collMarkers?: MapMarker[];
@@ -47,6 +33,7 @@ export default function RouteGPXMap({
   gpxUrl,
   fileName,
   title = 'Mapa de la Ruta',
+  delay = 200,
   height = '500px',
   className = '',
   collMarkers,
@@ -86,27 +73,29 @@ export default function RouteGPXMap({
   }
 
   return (
-    <div className={`mb-8 ${className}`}>
-      <div className="flex items-center justify-between mb-4">
-        <h2 className="text-3xl md:text-5xl font-bold text-charcoal-900 uppercase">
-          {title}
-        </h2>
-        <button
-          type="button"
-          onClick={handleDownload}
-          className="inline-flex items-center gap-2 bg-balak-500 text-charcoal-900 px-4 py-2  font-semibold rounded-lg hover:bg-balak-500 transition-colors text-sm"
-        >
-          <Download className="w-4 h-4" />
-          Descargar GPX
-        </button>
+    <AnimatedSection delay={delay}>
+      <div className={`mb-8 ${className}`}>
+        <div className="flex items-center justify-between mb-4">
+          <h2 className="text-3xl md:text-5xl font-bold text-charcoal-900 uppercase">
+            {title}
+          </h2>
+          <button
+            type="button"
+            onClick={handleDownload}
+            className="inline-flex items-center gap-2 bg-balak-500 text-charcoal-900 px-4 py-2  font-semibold rounded-lg hover:bg-balak-500 transition-colors text-sm"
+          >
+            <Download className="w-4 h-4" />
+            Descargar GPX
+          </button>
+        </div>
+        <GPXMap
+          gpxUrl={gpxUrl}
+          height={height}
+          className="mb-6"
+          collMarkers={collMarkers}
+          coffeeStopMarkers={coffeeStopMarkers}
+        />
       </div>
-      <GPXMap
-        gpxUrl={gpxUrl}
-        height={height}
-        className="mb-6"
-        collMarkers={collMarkers}
-        coffeeStopMarkers={coffeeStopMarkers}
-      />
-    </div>
+    </AnimatedSection>
   );
 }
