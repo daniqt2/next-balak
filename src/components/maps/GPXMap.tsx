@@ -1,33 +1,26 @@
 'use client';
 
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, useMap, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 import L from 'leaflet';
 import 'leaflet-gpx';
 
-/** Call invalidateSize when map is shown — fixes blank map on iOS when below the fold or in scroll */
-function MapSizeSync({ containerRef }: { containerRef: React.RefObject<HTMLDivElement | null> }) {
+/** Redraw map after container has size — fixes blank map on mobile / when below the fold */
+function MapSizeSync() {
   const map = useMap();
   useEffect(() => {
-    if (!map || !containerRef?.current) return;
+    if (!map) return;
+    const t1 = window.setTimeout(() => map.invalidateSize(), 100);
+    const t2 = window.setTimeout(() => map.invalidateSize(), 600);
     const onResize = () => map.invalidateSize();
-    const t = window.setTimeout(() => map.invalidateSize(), 200);
-    const el = containerRef.current;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        if (entries[0]?.isIntersecting) map.invalidateSize();
-      },
-      { threshold: 0.05, rootMargin: '80px' }
-    );
-    observer.observe(el);
     window.addEventListener('resize', onResize);
     return () => {
-      window.clearTimeout(t);
-      observer.disconnect();
+      window.clearTimeout(t1);
+      window.clearTimeout(t2);
       window.removeEventListener('resize', onResize);
     };
-  }, [map, containerRef]);
+  }, [map]);
   return null;
 }
 
@@ -161,8 +154,6 @@ export default function GPXMap({
   collMarkers = [],
   coffeeStopMarkers = [],
 }: GPXMapProps) {
-  const containerRef = useRef<HTMLDivElement>(null);
-
   if (!gpxUrl) {
     return (
       <div
@@ -175,19 +166,15 @@ export default function GPXMap({
   }
 
   return (
-    <div
-      ref={containerRef}
-      className={className}
-      style={{ minHeight: height, height }}
-    >
+    <div className={className} style={{ minHeight: height, height }}>
       <MapContainer
         center={center}
         zoom={zoom}
-        style={{ height, width: '100%', minHeight: height }}
+        style={{ height, width: '100%' }}
         className="rounded-xl z-0"
         scrollWheelZoom={true}
       >
-        <MapSizeSync containerRef={containerRef} />
+        <MapSizeSync />
         <TileLayer
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
