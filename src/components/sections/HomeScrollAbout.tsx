@@ -15,7 +15,7 @@ export default function HomeScrollAbout() {
             <b className="block">para ciclistas</b>
           </h3>
           <p className="mt-4 text-white/75 max-w-xl text-xl">
-            Somos un grupo de amigos apasionados por la bici de carretera. Nos
+            Somos un grupo de 3 amigos apasionados por la bici de carretera. Nos
             encanta subir puertos míticos que todo ciclista sueña con tachar de
             su lista, pero también descubrir esas carreteras escondidas que casi
             nadie conoce.

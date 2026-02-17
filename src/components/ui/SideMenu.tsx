@@ -41,7 +41,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
         }}
         onClick={onClose}
       />
-      
+
       {/* Side Menu */}
       <div
         className="fixed right-0 top-0 h-full w-full max-w-md bg-charcoal-900 shadow-2xl z-50 transform transition-transform duration-300 ease-out"
@@ -88,7 +88,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
                 onClick={onClose}
                 className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
               >
-                Cafés
+                Paradas
               </Link>
             </li>
             <li>
@@ -115,7 +115,7 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
                 onClick={onClose}
                 className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
               >
-                Nosotros
+                Sobre Nosotros
               </Link>
             </li>
           </ul>
@@ -124,4 +124,3 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
     </>
   );
 }
-

@@ -27,25 +27,24 @@ export default function HomeBalak() {
           <p className="text-center sm:text-left">
             Por un lado,{' '}
             <em className="text-balak-400 font-semibold not-italic">balak</em>{' '}
-            aparece como un verbo relacionado con volver o regresar. No como
-            retroceder, sino como dar la vuelta, cerrar un ciclo y empezar otro.
-            Algo muy parecido a lo que pasa cada vez que te subes a la bici:
-            sales, te pierdes un poco y siempre vuelves distinto.
+            Se relaciona con volver, regresar, dar la vuelta. No como
+            retroceder, sino como cerrar un ciclo y empezar otro. Como cuando
+            sales en bici: te pierdes un poco y siempre vuelves distinto.
           </p>
 
           <p className="text-center sm:text-left">
             También está ligado al acto de{' '}
-            <span className="text-balak-400 font-semibold">rodar</span>. En
-            expresiones tradicionales se usa para hablar de la rotación y del
-            giro continuo, como el de una rueda. Y ahí fue donde todo encajó: la
-            bici no avanza sin girar, y nosotros tampoco.
+            <span className="text-balak-400 font-semibold">rodar</span>. al giro
+            constante de una rueda. Y ahí fue donde todo encajó: la bici no
+            avanza sin girar, y nosotros tampoco.
           </p>
 
           <p className="text-center sm:text-left">
             Eso es lo que representa BALAK:{' '}
             <span className="text-balak-400 font-semibold">rodar</span> sin
-            prisa, repetir rutas, volver a los mismos sitios y dar vueltas sin
-            un destino exacto. No moverse por obligación, sino porque apetece.
+            prisa, volver a los mismos lugares, repetir rutas y dar vueltas sin
+            un destino fijo. Movernos porque queremos, no porque tengamos que
+            hacerlo.
           </p>
         </div>
       </div>

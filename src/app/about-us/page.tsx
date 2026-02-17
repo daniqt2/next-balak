@@ -33,10 +33,34 @@ export default function AboutUsPage() {
         />
         <div className="absolute inset-0 bg-black/40"></div>
         <div className="relative text-center text-white z-10">
-          <h1 className="font-anton font-bold mb-4 text-7xl">Nosotros</h1>
+          <h1 className="font-anton mb-4 text-7xl">NOSOTROS</h1>
           <p className="text-xl text-balak-200 max-w-2xl mx-auto">
-            Bicis, puertos y cafés
+            RUTAS · PUERTOS · CAFÉ
           </p>
+        </div>
+      </div>
+
+      {/* Contact icons — below header, before first paragraph */}
+      <div className="container mx-auto px-4 pt-8 pb-4">
+        <div className="flex items-center justify-center gap-6">
+          <a
+            href="https://instagram.com/balak.ride"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 text-charcoal-800 hover:text-balak-600 transition-colors"
+            aria-label="Instagram"
+          >
+            <Instagram className="w-6 h-6" />
+            <span className="text-sm font-medium">@balak.ride</span>
+          </a>
+          <a
+            href="mailto:balak.ride@gmail.com"
+            className="flex items-center gap-2 text-charcoal-800 hover:text-balak-600 transition-colors"
+            aria-label="Email"
+          >
+            <Mail className="w-6 h-6" />
+            <span className="text-sm font-medium">Contactar</span>
+          </a>
         </div>
       </div>
 
@@ -45,26 +69,19 @@ export default function AboutUsPage() {
         <AnimatedSection delay={100}>
           <div className="text-left mb-16">
             <p className="text-lg text-charcoal-800 max-w-4xl mx-auto leading-relaxed">
-              Somos un grupo de amigos <b>apasionados por la bici</b>,
-              especialmente de carretera. Nos motiva subir{' '}
-              <b>puertos míticos</b> que todo ciclista sueña con tachar de su
-              lista, pero también perdernos por <b>carreteras secundarias</b> y
-              descubrir lugares a los que casi nadie llega pedaleando.
+              Somos un grupo de 3 amigos apasionados por la bici, sobre todo de
+              carretera. Nos gusta subir puertos míticos, perdernos por
+              carreteras secundarias y descubrir sitios que merece la pena
+              conocer pedaleando.
               <br />
               <br />
-              Nos gusta conocer sitios en bici y disfrutar de todo lo que rodea
-              a una ruta: las charlas a mitad de subida, las risas en la cima y
-              las paradas improvisadas en cafés donde la ruta, casi siempre, se
-              alarga un poco más.
+              En <b>Balak</b> compartimos rutas reales, probadas por nosotros:
+              los puertos que nos retan y los lugares donde siempre paramos a
+              recuperar.
               <br />
               <br />
-              <b>Balak</b> nace para compartir todo eso: las rutas que nos
-              inspiran, los puertos que nos ponen a prueba y los lugares donde
-              recuperamos fuerzas antes de seguir pedaleando.
-              <br />
-              <br />
-              Si para ti la bici es también una forma de explorar, viajar y
-              vivir con calma, aquí vas a sentirte como en casa.
+              Si para ti la bici es una forma de explorar y disfrutar el camino,
+              estás en casa.
             </p>
           </div>
         </AnimatedSection>
