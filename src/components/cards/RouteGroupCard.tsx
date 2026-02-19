@@ -2,7 +2,7 @@ import React from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Route, MapPin, Clock, TrendingUp } from 'lucide-react';
-import { formatRouteMetrics, getDifficultyColor } from '@/lib/route-utils';
+import { formatMetric, formatRouteMetrics, getDifficultyColor } from '@/lib/route-utils';
 
 interface RouteGroupCardProps {
   route: {
@@ -88,14 +88,14 @@ export default function RouteGroupCard({ route }: RouteGroupCardProps) {
             {route.length && (
               <div className="flex items-center gap-2 text-charcoal-400">
                 <Route size={16} color="currentColor" />
-                <span className="text-sm">{route.length} km</span>
+                <span className="text-sm">{formatMetric(route.length)} km</span>
               </div>
             )}
 
             {route.elevation && (
               <div className="flex items-center gap-2 text-charcoal-400">
                 <TrendingUp size={16} color="currentColor" />
-                <span className="text-sm">{route.elevation} m</span>
+                <span className="text-sm">{formatMetric(route.elevation)} m</span>
               </div>
             )}
           </div>

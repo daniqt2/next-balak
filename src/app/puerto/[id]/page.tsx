@@ -17,6 +17,7 @@ import {
 } from 'lucide-react';
 import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import { formatMetric } from '@/lib/route-utils';
 
 interface MountainDetailPageProps {
   params: Promise<{ id: string }>;
@@ -210,19 +211,25 @@ export default async function MountainDetailPage({
                                       {variant?.length != null && (
                                         <span className="flex items-center gap-2">
                                           <BarChart3 className="w-4 h-4" />
-                                          {variant.length} km
+                                          {formatMetric(variant.length)} km
                                         </span>
                                       )}
                                       {variant?.slopePercentage != null && (
                                         <span className="flex items-center gap-2">
                                           <Percent className="w-4 h-4" />
-                                          {variant.slopePercentage}%
+                                          {formatMetric(
+                                            variant.slopePercentage
+                                          )}
+                                          %
                                         </span>
                                       )}
                                       {variant?.accumulatedHeight != null && (
                                         <span className="flex items-center gap-2">
                                           <TrendingUp className="w-4 h-4" />
-                                          {variant.accumulatedHeight} mD+
+                                          {formatMetric(
+                                            variant.accumulatedHeight
+                                          )}{' '}
+                                          mD+
                                         </span>
                                       )}
                                     </div>

@@ -24,6 +24,12 @@ const GET_ROUTE_GROUP_COLLECTION = gql`
           publishedAt
           firstPublishedAt
         }
+        contentfulMetadata {
+          tags {
+            id
+            name
+          }
+        }
         __typename
         title
         slug

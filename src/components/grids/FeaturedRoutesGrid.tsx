@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useRoutes } from '@/hooks/useRoutes';
-import { getDifficultyColor, calculateDifficulty } from '@/lib/route-utils';
+import { formatMetric, getDifficultyColor, calculateDifficulty } from '@/lib/route-utils';
 import SmallElevationGraph from '../ui/SmallElevationGraph';
 import AnimatedSection from '../ui/AnimatedSection';
 import Link from 'next/link';
@@ -95,7 +95,7 @@ export default function FeaturedRoutesGrid() {
                     </div>
                     <div className="flex items-center gap-2 text-white">
                       <TrendingUp size={20} className="text-balak-400" />
-                      <span className="font-medium">{featuredRoute.length ? `${featuredRoute.length} km` : 'N/A'}</span>
+                      <span className="font-medium">{featuredRoute.length != null ? `${formatMetric(featuredRoute.length)} km` : 'N/A'}</span>
                     </div>
                     <div className="flex items-center gap-2 text-white">
                       <MapPin size={20} className="text-balak-400" />
@@ -168,7 +168,7 @@ export default function FeaturedRoutesGrid() {
                     
                     {/* Quick Stats */}
                     <div className="flex items-center justify-between text-sm text-gray-400">
-                      <span>{route.length ? `${route.length} km` : 'N/A'}</span>
+                      <span>{route.length != null ? `${formatMetric(route.length)} km` : 'N/A'}</span>
                       <span>{route.time || 'N/A'}</span>
                     </div>
                   </div>

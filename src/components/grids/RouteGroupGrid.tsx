@@ -125,7 +125,7 @@ export default function RouteGroupGrid({
   subtitle = '',
   fetchData = false,
 }: RouteGroupGridProps) {
-  const hasServerRoutes = routes && routes.length > 0 && !fetchData;
+  const hasServerRoutes = routes && Array.isArray(routes) && !fetchData;
 
   if (hasServerRoutes) {
     return (

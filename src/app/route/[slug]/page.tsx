@@ -10,6 +10,7 @@ import AnimatedSection from '@/components/ui/AnimatedSection';
 import '@/styles/stickyMap.css';
 import '@/styles/coffeeStopCard.css';
 import { Camera } from 'lucide-react';
+import { formatMetric } from '@/lib/route-utils';
 
 interface RouteDetailPageProps {
   params: Promise<{
@@ -90,7 +91,7 @@ export default async function RouteDetailPage({
                         }}
                       >
                         <p className="text-4xl md:text-5xl font-bold text-white mb-1">
-                          {route.length}
+                          {formatMetric(route.length)}
                         </p>
                         <p className="text-white/80 text-sm uppercase tracking-wide">
                           KM
@@ -107,7 +108,7 @@ export default async function RouteDetailPage({
                         }}
                       >
                         <p className="text-4xl md:text-5xl font-bold text-white mb-1">
-                          {route.elevation}
+                          {formatMetric(route.elevation)}
                         </p>
                         <p className="text-white/80 text-sm uppercase tracking-wide">
                           MD+

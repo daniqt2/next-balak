@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
-import { formatRouteMetrics, getDifficultyColor } from '@/lib/route-utils';
+import { formatMetric, formatRouteMetrics, getDifficultyColor } from '@/lib/route-utils';
 import { getMountainDifficultyText } from '@/helpers/mountain';
 import '@/styles/routeHero.css';
 
@@ -118,7 +118,7 @@ export default function RouteHero({ route }: RouteHeroProps) {
                     </svg>
                   </div>
                   <div className="route-hero__stat-content">
-                    <span className="route-hero__stat-value">{route.length}</span>
+                    <span className="route-hero__stat-value">{formatMetric(route.length)}</span>
                     <span className="route-hero__stat-unit">km</span>
                   </div>
                 </div>
@@ -138,7 +138,7 @@ export default function RouteHero({ route }: RouteHeroProps) {
                   </div>
                   <div className="route-hero__stat-content">
                     <span className="route-hero__stat-value">
-                      {route.elevation}
+                      {formatMetric(route.elevation)}
                     </span>
                     <span className="route-hero__stat-unit">mD+</span>
                   </div>

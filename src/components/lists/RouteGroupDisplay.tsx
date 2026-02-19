@@ -2,6 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import type { RouteGroup } from '@/contentful-types';
+import { getRouteGroupDisplayLabels } from '@/lib/route-group-tags';
 
 interface RouteGroupDisplayProps {
   routeGroup: RouteGroup;
@@ -18,6 +19,9 @@ export default function RouteGroupDisplay({
 
   const groupLink = `/coleccion-rutas/${routeGroup.slug}`;
   const routeCount = routeGroup.routesCollection?.total || 0;
+  const tagLabels = getRouteGroupDisplayLabels(
+    routeGroup.contentfulMetadata?.tags ?? []
+  );
   const isComingSoon =
     routeCount === 0 && process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW !== 'true';
 
@@ -82,6 +86,18 @@ export default function RouteGroupDisplay({
             <h3 className="title">{routeGroup.title}</h3>
             {routeGroup.subtitle && (
               <p className="subtitle">{routeGroup.subtitle}</p>
+            )}
+            {tagLabels.length > 0 && (
+              <div className="flex flex-wrap gap-1.5 mt-2">
+                {tagLabels.map((label) => (
+                  <span
+                    key={label}
+                    className="inline-block rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
+                  >
+                    {label}
+                  </span>
+                ))}
+              </div>
             )}
           </div>
         </div>

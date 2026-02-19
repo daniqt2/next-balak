@@ -1,6 +1,6 @@
 'use client';
 
-import React from 'react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { ChevronRight } from 'lucide-react';
 import CollVariantCard from '@/components/cards/CollVariantCard';
 
@@ -9,6 +9,30 @@ interface CollVariantsListProps {
 }
 
 export default function CollVariantsList({ variants }: CollVariantsListProps) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [showRightFade, setShowRightFade] = useState(true);
+
+  const updateFade = useCallback(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const { scrollLeft, scrollWidth, clientWidth } = el;
+    const hasMoreRight = scrollLeft + clientWidth < scrollWidth - 2;
+    setShowRightFade(hasMoreRight);
+  }, []);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    updateFade();
+    el.addEventListener('scroll', updateFade);
+    const ro = new ResizeObserver(updateFade);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener('scroll', updateFade);
+      ro.disconnect();
+    };
+  }, [variants?.length, updateFade]);
+
   if (!variants || variants.length === 0) {
     return null;
   }
@@ -28,7 +52,10 @@ export default function CollVariantsList({ variants }: CollVariantsListProps) {
       </div>
       {/* Desktop: horizontal flow with arrows */}
       <div className="relative -mx-1 px-1 hidden md:block">
-        <div className="flex flex-nowrap items-stretch gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory">
+        <div
+          ref={scrollRef}
+          className="flex flex-nowrap items-stretch gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory"
+        >
           {variants.map((variant, index) => (
             <React.Fragment key={variant?.sys?.id ?? index}>
               <div className="flex-shrink-0 w-fit min-w-0 snap-start">
@@ -48,10 +75,12 @@ export default function CollVariantsList({ variants }: CollVariantsListProps) {
             </React.Fragment>
           ))}
         </div>
-        <div
-          className="pointer-events-none absolute right-0 top-0 bottom-2 w-16 bg-gradient-to-l from-charcoal-100/95 to-transparent"
-          aria-hidden
-        />
+        {showRightFade && (
+          <div
+            className="pointer-events-none absolute right-0 top-0 bottom-2 w-16 bg-gradient-to-l from-charcoal-100/95 to-transparent"
+            aria-hidden
+          />
+        )}
       </div>
     </div>
   );

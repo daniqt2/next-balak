@@ -4,6 +4,13 @@
 
 export type DifficultyLevel = 'Easy' | 'Medium' | 'Hard';
 
+/** Format a numeric metric to 1 decimal for display; whole numbers show without .0 (e.g. 148 not 148.0) */
+export function formatMetric(value: number | null | undefined): string {
+  if (value == null || typeof value !== 'number') return '';
+  const n = Number(value);
+  return n % 1 === 0 ? String(Math.round(n)) : n.toFixed(1);
+}
+
 export interface RouteMetrics {
   difficulty: DifficultyLevel;
   gradient: number;
@@ -45,8 +52,8 @@ export function formatRouteMetrics(route: {
   return {
     difficulty,
     gradient,
-    formattedLength: `${route.length}km`,
-    formattedElevation: `${route.elevation}mD+`,
+    formattedLength: `${formatMetric(route.length)}km`,
+    formattedElevation: `${formatMetric(route.elevation)}mD+`,
   };
 }
 

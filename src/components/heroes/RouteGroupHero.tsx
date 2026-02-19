@@ -3,6 +3,7 @@
 import React, { useEffect, useRef, useState } from 'react';
 import Image from 'next/image';
 import { MapPin, Route, Clock } from 'lucide-react';
+import { formatMetric } from '@/lib/route-utils';
 
 interface RouteGroupHeroProps {
   routeGroup: {
@@ -173,7 +174,7 @@ export default function RouteGroupHero({ routeGroup }: RouteGroupHeroProps) {
                       Distancia total
                     </p>
                     <p className="text-white text-lg font-semibold">
-                      {totalDistance} km
+                      {formatMetric(totalDistance)} km
                     </p>
                   </div>
                 </div>

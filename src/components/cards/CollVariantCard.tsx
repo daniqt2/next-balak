@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import { Mountain, TrendingUp, BarChart3, Percent } from 'lucide-react';
+import { formatMetric } from '@/lib/route-utils';
 
 type CollVariantCardProps = {
   variant: any;
@@ -63,19 +64,19 @@ export default function CollVariantCard({
             {variant.length != null && (
               <span className="flex items-center gap-1">
                 <BarChart3 className="w-4 h-4" />
-                {variant.length}km
+                {formatMetric(variant.length)}km
               </span>
             )}
             {variant.accumulatedHeight != null && (
               <span className="flex items-center gap-1">
                 <TrendingUp className="w-4 h-4" />
-                {variant.accumulatedHeight}mD+
+                {formatMetric(variant.accumulatedHeight)}mD+
               </span>
             )}
             {variant.slopePercentage != null && (
               <span className="flex items-center gap-1">
                 <Percent className="w-4 h-4" />
-                {variant.slopePercentage}%
+                {formatMetric(variant.slopePercentage)}%
               </span>
             )}
             {variant.difficulty && (

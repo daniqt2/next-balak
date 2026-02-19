@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Mountain } from 'lucide-react';
 
 import type { Coll } from '@/contentful-types';
+import { formatMetric } from '@/lib/route-utils';
 import '@/styles/collDisplay.css';
 
 interface CollDisplayProps {
@@ -80,9 +81,9 @@ export default function CollDisplay({
                   />
                   <span>
                     {v?.startLocation ? `${v.startLocation}:` : 'Variante:'}{' '}
-                    {v?.length != null ? `${v.length}km` : '—'}
+                    {v?.length != null ? `${formatMetric(v.length)}km` : '—'}
                     {v?.slopePercentage != null
-                      ? ` · ${v.slopePercentage}%`
+                      ? ` · ${formatMetric(v.slopePercentage)}%`
                       : ''}
                   </span>
                 </div>
