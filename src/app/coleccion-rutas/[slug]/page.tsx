@@ -9,6 +9,9 @@ import type { Route } from '@/contentful-types';
 import PageHeader from '@/components/headers/pageHeader';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
+/** Revalidate every 10 min so new routes in the collection appear without redeploy */
+export const revalidate = 600;
+
 interface RouteGroupDetailPageProps {
   params: Promise<{ slug: string }>;
 }

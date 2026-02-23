@@ -14,6 +14,9 @@ import { Camera } from 'lucide-react';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import { formatMetric } from '@/lib/route-utils';
 
+/** Revalidate every 10 min so route updates appear without redeploy */
+export const revalidate = 600;
+
 interface RouteDetailPageProps {
   params: Promise<{ slug: string }>;
 }

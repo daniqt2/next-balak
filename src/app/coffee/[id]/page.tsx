@@ -106,23 +106,37 @@ export default async function CoffeeSpotDetailPage({
                   Info
                 </h2>
 
-                {coffeeSpot.locationName && (
+                {(coffeeSpot.locationName ||
+                  (coffeeSpot.location?.lat != null &&
+                    coffeeSpot.location?.lon != null)) && (
                   <div className="flex items-start gap-3">
-                    <MapPin className="w-5 h-5 text-balak-500 mt-0.5" />
-                    <div className="min-w-0">
-                      <p className="text-charcoal-900 font-semibold">
-                        {coffeeSpot.locationName}
-                      </p>
-                      {coffeeSpot.location?.lat && coffeeSpot.location?.lon && (
-                        <a
-                          href={`https://www.google.com/maps?q=${coffeeSpot.location.lat},${coffeeSpot.location.lon}`}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="text-charcoal-500 hover:text-charcoal-900 underline transition-colors text-sm"
-                        >
-                          Ver en Google Maps
-                        </a>
+                    <MapPin className="w-5 h-5 text-balak-500 mt-0.5 flex-shrink-0" />
+                    <div className="min-w-0 space-y-1">
+                      {coffeeSpot.locationName && (
+                        <p className="text-charcoal-900 font-semibold">
+                          {coffeeSpot.locationName}
+                        </p>
                       )}
+                      {(() => {
+                        const hasCoords =
+                          coffeeSpot.location?.lat != null &&
+                          coffeeSpot.location?.lon != null;
+                        const mapsHref = hasCoords
+                          ? `https://www.google.com/maps?q=${coffeeSpot.location!.lat},${coffeeSpot.location!.lon}`
+                          : coffeeSpot.locationName
+                            ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(coffeeSpot.locationName)}`
+                            : null;
+                        return mapsHref ? (
+                          <a
+                            href={mapsHref}
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            className="inline-flex items-center gap-1.5 text-balak-600 hover:text-balak-700 underline transition-colors text-sm font-medium"
+                          >
+                            Ver en Google Maps
+                          </a>
+                        ) : null;
+                      })()}
                     </div>
                   </div>
                 )}

@@ -4,14 +4,15 @@ import PageHeader from '@/components/headers/pageHeader';
 import RouteGroupsWithFilters from '@/components/rutas/RouteGroupsWithFilters';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
+/** Revalidate every 10 min so new routes/collections appear without redeploy */
+export const revalidate = 600;
+
 export default async function RouteGroupsPage() {
   const data = await getRouteGroupsCached({ limit: 20 });
   const routeGroups =
     data?.routeGroupCollection?.items?.filter(
       (r): r is RouteGroup => r != null
     ) ?? [];
-
-  console.log('routeGroups!!!!!!', routeGroups);
 
   return (
     <div className="min-h-screen mt-6 md:mt-10" style={{ paddingTop: '64px' }}>

@@ -142,3 +142,27 @@ html.home-scroll .home-snap-section {
 .home-page-root {
   padding-bottom: max(env(safe-area-inset-bottom), 80px);
 }
+
+/* Puertos en ruta: visible scrollbar so users know they can scroll */
+.coll-variants-list-scroll {
+  scrollbar-width: auto;
+  scrollbar-color: #9ca3af transparent;
+}
+
+.coll-variants-list-scroll::-webkit-scrollbar {
+  height: 8px;
+}
+
+.coll-variants-list-scroll::-webkit-scrollbar-track {
+  background: #f3f4f6;
+  border-radius: 4px;
+}
+
+.coll-variants-list-scroll::-webkit-scrollbar-thumb {
+  background: #9ca3af;
+  border-radius: 4px;
+}
+
+.coll-variants-list-scroll::-webkit-scrollbar-thumb:hover {
+  background: #6b7280;
+}

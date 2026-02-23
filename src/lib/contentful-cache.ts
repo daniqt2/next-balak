@@ -2,9 +2,12 @@
  * Server-side Contentful fetchers. Call these from Server Components only.
  * Fetches run on the server (no browser → Contentful), so one request per server render.
  *
- * Caching (unstable_cache) is disabled for now – some responses failed to serialize.
- * You can re-enable by wrapping each call in unstable_cache(..., keyParts, { revalidate, tags })
- * and ensuring the returned value is JSON-serializable (e.g. JSON.parse(JSON.stringify(data))).
+ * Cache behaviour:
+ * - No unstable_cache (disabled due to serialization issues).
+ * - Apollo Client uses InMemoryCache with fetchPolicy 'cache-first' by default, so
+ *   responses are cached for the lifetime of the Node process (until restart/redeploy).
+ * - Route and route-group fetches use 'network-only' so new/updated routes appear
+ *   without restarting the server.
  */
 import { collService } from '@/services/coll-service';
 import { coffeeService } from '@/services/coffee-service';

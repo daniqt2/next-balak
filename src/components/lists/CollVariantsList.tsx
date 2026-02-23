@@ -38,8 +38,8 @@ export default function CollVariantsList({ variants }: CollVariantsListProps) {
   }
 
   return (
-    <div className="coll-variants-section rounded-xl bg-charcoal-800 p-4 md:p-5">
-      <h2 className="text-lg md:text-xl font-bold text-white mb-4 uppercase">
+    <section className="coll-variants-section">
+      <h2 className="text-lg md:text-xl font-bold text-charcoal-900 mb-3 uppercase tracking-wide">
         Puertos en ruta
       </h2>
       {/* Mobile: vertical stack, full-width cards */}
@@ -50,11 +50,11 @@ export default function CollVariantsList({ variants }: CollVariantsListProps) {
           </div>
         ))}
       </div>
-      {/* Desktop: horizontal flow with arrows */}
+      {/* Desktop: horizontal scroll with visible scrollbar */}
       <div className="relative -mx-1 px-1 hidden md:block">
         <div
           ref={scrollRef}
-          className="flex flex-nowrap items-stretch gap-2 overflow-x-auto pb-2 scroll-smooth snap-x snap-mandatory"
+          className="coll-variants-list-scroll flex flex-nowrap items-stretch gap-2 overflow-x-scroll pb-2 scroll-smooth snap-x snap-mandatory"
         >
           {variants.map((variant, index) => (
             <React.Fragment key={variant?.sys?.id ?? index}>
@@ -82,6 +82,6 @@ export default function CollVariantsList({ variants }: CollVariantsListProps) {
           />
         )}
       </div>
-    </div>
+    </section>
   );
 }

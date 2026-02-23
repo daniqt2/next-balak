@@ -6,6 +6,7 @@ import { formatMetric } from '@/lib/route-utils';
 type CollVariantCardProps = {
   variant: any;
   index?: number;
+  compact?: boolean;
 };
 
 function getDifficultyDotClass(difficulty?: string | null): string {
@@ -31,6 +32,7 @@ function getParentColl(variant: any): { id?: string; name?: string } {
 export default function CollVariantCard({
   variant,
   index = 0,
+  compact = false,
 }: CollVariantCardProps) {
   if (!variant) return null;
 
@@ -39,43 +41,53 @@ export default function CollVariantCard({
   const href = parent.id ? `/puerto/${parent.id}` : undefined;
 
   const content = (
-    <div className="bg-white rounded-xl shadow-sm p-5 transition-all duration-300 cursor-pointer hover:shadow-md w-full">
-      <div className="flex items-start gap-4">
+    <div
+      className={`bg-white rounded-xl shadow-sm transition-all duration-300 cursor-pointer hover:shadow-md w-full ${
+        compact ? 'p-3' : 'p-5'
+      }`}
+    >
+      <div className={`flex items-start ${compact ? 'gap-2' : 'gap-4'}`}>
         <div
-          className={`rounded-full w-12 h-12 flex items-center justify-center flex-shrink-0 ${getDifficultyDotClass(
+          className={`rounded-full flex items-center justify-center flex-shrink-0 ${getDifficultyDotClass(
             variant.difficulty
-          )}`}
+          )} ${compact ? 'w-6 h-6' : 'w-8 h-8'}`}
         >
-          <Mountain size={24} strokeWidth={2} color="white" />
+          <Mountain size={compact ? 14 : 18} strokeWidth={2} color="white" />
         </div>
 
         <div className="flex-1 min-w-0">
-          <h3 className="text-xl md:text-2xl font-bold text-charcoal-900 mb-1 truncate">
+          <h3
+            className={`font-bold text-charcoal-900 mb-1 truncate ${
+              compact ? 'text-base md:text-lg' : 'text-xl md:text-2xl'
+            }`}
+          >
             {title}
           </h3>
 
           {variant.startLocation && (
-            <p className="text-charcoal-500 text-sm mb-2 truncate">
+            <p className="text-charcoal-500 mb-1 wrap text-xs md:text-sm">
               Ascenso desde: {variant.startLocation}
             </p>
           )}
 
-          <div className="flex flex-wrap gap-x-4 gap-y-1 text-charcoal-500 text-sm">
+          <div
+            className={`flex flex-wrap gap-x-3 gap-y-1 text-charcoal-500 ${compact ? 'text-xs' : 'text-sm'}`}
+          >
             {variant.length != null && (
               <span className="flex items-center gap-1">
-                <BarChart3 className="w-4 h-4" />
+                <BarChart3 className={compact ? 'w-3 h-3' : 'w-4 h-4'} />
                 {formatMetric(variant.length)}km
               </span>
             )}
             {variant.accumulatedHeight != null && (
               <span className="flex items-center gap-1">
-                <TrendingUp className="w-4 h-4" />
+                <TrendingUp className={compact ? 'w-3 h-3' : 'w-4 h-4'} />
                 {formatMetric(variant.accumulatedHeight)}mD+
               </span>
             )}
             {variant.slopePercentage != null && (
               <span className="flex items-center gap-1">
-                <Percent className="w-4 h-4" />
+                <Percent className={compact ? 'w-3 h-3' : 'w-4 h-4'} />
                 {formatMetric(variant.slopePercentage)}%
               </span>
             )}
