@@ -25,12 +25,13 @@ export default function RouteGroupsWithFilters({
   return (
     <div className="space-y-6">
       <div className="flex flex-wrap items-center gap-2">
-        {ROUTE_GROUP_FILTERS.map(({ id, label }) => (
+        {ROUTE_GROUP_FILTERS.map(({ id, label }, index) => (
           <button
             key={id ?? 'all'}
             type="button"
             onClick={() => setSelectedTagId(id)}
-            className={`rounded-full px-4 py-2 text-sm font-medium transition-colors ${
+            style={{ animationDelay: `${index * 80}ms` }}
+            className={`rounded-full px-4 py-2 text-sm font-medium transition-colors animate-fade-in-up ${
               selectedTagId === id
                 ? 'bg-balak-500 text-charcoal-900'
                 : 'bg-charcoal-700 text-charcoal-200 hover:bg-charcoal-600'

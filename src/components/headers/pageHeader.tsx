@@ -25,7 +25,9 @@ export default function PageHeader({
       : 'text-[clamp(2rem,3.2vw,3rem)] tracking-[-0.02em] leading-[0.95]';
 
   const descriptionClassName =
-    'mt-3 text-charcoal-500 text-base md:text-2xl max-w-[80%]';
+    variant === 'secondary'
+      ? 'mt-3 text-charcoal-500 text-sm md:text-base max-w-[80%]'
+      : 'mt-3 text-charcoal-500 text-base md:text-2xl max-w-[80%]';
 
   return (
     <div className="container mx-auto px-4 pt-6 md:pt-32 pb-6">
