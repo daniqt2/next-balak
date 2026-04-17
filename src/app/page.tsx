@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import HomeHero from '@/components/heroes/HomeHero';
 import HomeScrollRoot from '@/components/home/HomeScrollRoot';
 import HomeScrollIntro from '@/components/sections/HomeScrollIntro';
+import HomeGpxTeaser from '@/components/sections/HomeGpxTeaser';
 import HomeBalak from '@/components/sections/HomeBalak';
 import HomeScrollAbout from '@/components/sections/HomeScrollAbout';
 
@@ -25,6 +26,9 @@ export default function Home() {
         </div>
         <div id="intro" className="home-snap-section min-h-screen bg-charcoal-900">
           <HomeScrollIntro />
+        </div>
+        <div id="gpx" className="home-snap-section min-h-screen bg-charcoal-900">
+          <HomeGpxTeaser />
         </div>
         <div id="balak" className="home-snap-section min-h-screen bg-charcoal-900">
           <HomeBalak />

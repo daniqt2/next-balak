@@ -112,6 +112,14 @@ export default function HomeHero() {
                 <span>Puertos</span>
                 <ChevronRight className="home-hero__nav-chevron" />
               </a>
+              <a
+                href="https://gpx.balakride.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span>Editor GPX</span>
+                <ChevronRight className="home-hero__nav-chevron" />
+              </a>
               <a href="/coffee-spots">
                 <span>Donde parar</span>
                 <ChevronRight className="home-hero__nav-chevron" />
@@ -164,6 +172,15 @@ export default function HomeHero() {
                 className="nav-link group text-2xl font-anton tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Puertos</span>
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
+              </a>
+              <a
+                href="https://gpx.balakride.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="nav-link group text-2xl font-anton tracking-wider cursor-pointer relative inline-block"
+              >
+                <span className="relative z-10">Editor GPX</span>
                 <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
               </a>
               <a

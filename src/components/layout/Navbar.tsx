@@ -46,6 +46,14 @@ export default function Navbar() {
             <Link href="/rutas" className="navbar_menu-option">
               Rutas
             </Link>
+            <a
+              href="https://gpx.balakride.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="navbar_menu-option"
+            >
+              Editor GPX
+            </a>
             <Link href="/puertos" className="navbar_menu-option">
               Puertos
             </Link>

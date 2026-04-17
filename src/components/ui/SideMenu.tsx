@@ -83,6 +83,17 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
               </Link>
             </li>
             <li>
+              <a
+                href="https://gpx.balakride.com/"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={onClose}
+                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
+              >
+                Editor GPX
+              </a>
+            </li>
+            <li>
               <Link
                 href="/coffee-spots"
                 onClick={onClose}
