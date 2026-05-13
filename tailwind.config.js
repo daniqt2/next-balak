@@ -76,12 +76,12 @@ module.exports = {
       },
       keyframes: {
         'fade-in-up': {
-          '0%': { opacity: '0', transform: 'translateY(8px)' },
+          '0%': { opacity: '0', transform: 'translateY(12px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
       animation: {
-        'fade-in-up': 'fade-in-up 0.3s ease-out both',
+        'fade-in-up': 'fade-in-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both',
       },
     },
   },

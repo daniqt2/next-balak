@@ -8,6 +8,7 @@ import RichTextRenderer from '@/components/ui/RichTextRenderer';
 import type { Route } from '@/contentful-types';
 import PageHeader from '@/components/headers/pageHeader';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import RouteGroupMultiGPXMap from '@/components/maps/RouteGroupMultiGPXMap';
 
 /** Revalidate every 10 min so new routes in the collection appear without redeploy */
 export const revalidate = 600;
@@ -70,6 +71,20 @@ export default async function RouteGroupDetailPage({
               variant="secondary"
             />
           )}
+
+          {(() => {
+            const routeTracks = (routeGroup.routesCollection?.items ?? [])
+              .filter(Boolean)
+              .filter((r) => r?.gpx?.url)
+              .map((r) => ({
+                slug: r!.slug!,
+                title: r!.title!,
+                gpxUrl: r!.gpx!.url!,
+              }));
+            return routeTracks.length > 0 ? (
+              <RouteGroupMultiGPXMap routes={routeTracks} height="480px" />
+            ) : null;
+          })()}
 
           {routeGroup.routesCollection?.items &&
             routeGroup.routesCollection.items.length > 0 && (

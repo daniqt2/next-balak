@@ -28,6 +28,12 @@ const GET_COFFEE_COLLECTION = gql`
           publishedAt
           firstPublishedAt
         }
+        contentfulMetadata {
+          tags {
+            id
+            name
+          }
+        }
         type
         stopType
         __typename
@@ -48,31 +54,6 @@ const GET_COFFEE_COLLECTION = gql`
           width
           height
           contentType
-        }
-        linkedFrom {
-          routeCollection {
-            total
-            items {
-              sys {
-                id
-              }
-              title
-              slug
-              subTitle
-              length
-              elevation
-              time
-              headerImage {
-                sys {
-                  id
-                }
-                title
-                url
-                width
-                height
-              }
-            }
-          }
         }
       }
     }

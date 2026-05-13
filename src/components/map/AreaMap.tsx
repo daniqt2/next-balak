@@ -28,7 +28,7 @@ interface CoffeeMapProps {
 
 // Coffee icon SVG
 const coffeeIconSvg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="M17 8h1a4 4 0 1 1 0 8h-1"/>
     <path d="M3 8h14v9a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V8z"/>
     <line x1="6" y1="1" x2="6" y2="4"/>
@@ -52,12 +52,7 @@ const createCustomIcon = (
   variant: MarkerVariant = 'coffee',
   difficulty?: string | null
 ): DivIcon => {
-  const bgColor =
-    variant === 'coffee'
-      ? 'rgba(245, 158, 11, 1)'
-      : variant === 'coll'
-        ? 'rgba(245, 158, 11, 1)'
-        : getDifficultyColor(difficulty);
+  const bgColor = '#16181b';
   const iconSvg = variant === 'coffee' ? coffeeIconSvg : mountainIconSvg;
 
   return new DivIcon({
@@ -65,7 +60,7 @@ const createCustomIcon = (
     html: `
       <div style="
         background-color: ${bgColor};
-        border: 2px solid #000;
+        border: 2px solid #3f444b;
         border-radius: 50%;
         width: 30px;
         height: 30px;
@@ -84,7 +79,7 @@ const createCustomIcon = (
 
 // Mountain icon SVG
 const mountainIconSvg = `
-  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#000" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+  <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#ffffff" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
     <path d="m8 3 4 8 5-5 5 15H2L8 3z"/>
   </svg>
 `;
@@ -108,8 +103,8 @@ export default function CoffeeMap({
         className="rounded-xl"
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
+          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
         />
 
         {/* Display areas as polygons */}
@@ -152,11 +147,26 @@ export default function CoffeeMap({
               <Popup>
                 <div className="text-center">
                   <div className="mb-1 text-xl font-bold">{title}</div>
+                  {(variant === 'mountain' || variant === 'coll') && (() => {
+                    const variants: any[] = (point as any).variantsCollection?.items?.filter(Boolean) ?? [];
+                    if (variants.length === 0) return null;
+                    return (
+                      <div className="mb-2 space-y-0.5 text-left">
+                        {variants.map((v: any, i: number) => (
+                          <div key={i} className="flex gap-2 text-sm text-charcoal-700">
+                            <span className="font-medium min-w-[24px]">v{i + 1}.</span>
+                            {v.length != null && <span>{v.length} km</span>}
+                            {v.slopePercentage != null && <span>· {v.slopePercentage}%</span>}
+                          </div>
+                        ))}
+                      </div>
+                    );
+                  })()}
                   {(point as any).sys?.id &&
                     (variant === 'mountain' || variant === 'coll') && (
                       <a
                         href={`/puerto/${(point as any).sys?.id}`}
-                        className="text-charcoal-900  hover:text-balak-500 underline text-sm font-medium transition-colors"
+                        className="text-charcoal-900 hover:text-balak-500 underline text-sm font-medium transition-colors"
                       >
                         Ver detalles
                       </a>

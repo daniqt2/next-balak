@@ -15,7 +15,7 @@ export const COLL_FRAGMENT = gql`
     description {
       json
     }
-    variantsCollection(limit: 2) {
+    variantsCollection(limit: 10) {
       items {
         __typename
         sys {

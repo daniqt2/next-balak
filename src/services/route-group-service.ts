@@ -128,6 +128,9 @@ const GET_ROUTE_GROUP_BY_SLUG = gql`
             time
             startLocationName
             endLocationName
+            gpx {
+              url
+            }
             headerImage {
               sys {
                 id
