@@ -12,6 +12,7 @@ import '@/styles/stickyMap.css';
 import '@/styles/coffeeStopCard.css';
 import { Camera } from 'lucide-react';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
+import RouteJumpNav from '@/components/ui/RouteJumpNav';
 import { formatMetric } from '@/lib/route-utils';
 
 /** Revalidate every 10 min so route updates appear without redeploy */
@@ -91,13 +92,19 @@ export default async function RouteDetailPage({
           backHref="/rutas"
         />
         <div className="container mx-auto px-4 py-8 mt-16">
+          {/* Jump nav */}
+          <RouteJumpNav sections={[
+            ...((route as any).gpx?.url ? [{ id: 'mapa', label: 'Mapa' }] : []),
+            ...((route as any).collsCollection?.items?.length ? [{ id: 'puertos', label: 'Puertos' }] : []),
+          ]} />
+
           {/* Two Column Layout */}
           <div className="grid grid-cols-1 lg:grid-cols-3 gap-10">
             {/* Main Content Column */}
             <div className="lg:col-span-2 space-y-16">
               {route.description && (
                 <AnimatedSection delay={100}>
-                  <div>
+                  <div id="descripcion">
                     <h2 className="text-3xl md:text-5xl font-bold text-charcoal-900 mb-4 uppercase">
                       Descripción
                     </h2>
@@ -150,6 +157,7 @@ export default async function RouteDetailPage({
               </AnimatedSection>
 
               {/* GPX Map Section */}
+              <div id="mapa" />
               {(route as any).gpx?.url ? (
                 <RouteGPXMap
                   gpxUrl={(route as any).gpx.url}
@@ -173,8 +181,8 @@ export default async function RouteDetailPage({
               {/* Coll Variants Section */}
               {(route as any).collsCollection?.items &&
                 (route as any).collsCollection.items.length > 0 && (
-                  <div className="my-12">
-                    <AnimatedSection delay={600}>
+                  <div id="puertos" className="my-12">
+                    <AnimatedSection delay={200}>
                       <CollVariantsList
                         variants={
                           (route as any).collsCollection.items.filter(
@@ -189,13 +197,15 @@ export default async function RouteDetailPage({
               {/* Coffee Stops Section */}
               {route.coffeStopsCollection?.items &&
                 route.coffeStopsCollection.items.length > 0 && (
-                  <AnimatedSection delay={500}>
-                    <CoffeeStopsCarousel
-                      coffeeStops={
-                        route.coffeStopsCollection.items.filter(Boolean) as any
-                      }
-                    />
-                  </AnimatedSection>
+                  <div id="paradas">
+                    <AnimatedSection delay={200}>
+                      <CoffeeStopsCarousel
+                        coffeeStops={
+                          route.coffeStopsCollection.items.filter(Boolean) as any
+                        }
+                      />
+                    </AnimatedSection>
+                  </div>
                 )}
             </div>
 
@@ -205,14 +215,16 @@ export default async function RouteDetailPage({
                 {/* Image Gallery in Sidebar */}
                 {route.mainCarouselCollection?.items &&
                   route.mainCarouselCollection.items.length > 0 && (
-                    <AnimatedSection delay={300}>
-                      <AssetGrid
-                        assets={route.mainCarouselCollection.items}
-                        title="Galería de Imágenes"
-                        icon={<Camera className="w-6 h-6 text-balak-700" />}
-                        variant="compact"
-                      />
-                    </AnimatedSection>
+                    <div id="galeria" className="hidden">
+                      <AnimatedSection delay={300}>
+                        <AssetGrid
+                          assets={route.mainCarouselCollection.items}
+                          title="Galería de Imágenes"
+                          icon={<Camera className="w-6 h-6 text-balak-700" />}
+                          variant="compact"
+                        />
+                      </AnimatedSection>
+                    </div>
                   )}
               </div>
             </AnimatedSection>
