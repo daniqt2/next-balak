@@ -52,6 +52,10 @@ const GET_ROUTE_GROUP_COLLECTION = gql`
           lat
           lon
         }
+        locationArea {
+          lat
+          lon
+        }
         routesCollection {
           total
           items {
@@ -147,6 +151,21 @@ const GET_ROUTE_GROUP_BY_SLUG = gql`
   }
 `;
 
+const GET_ROUTE_GROUPS_FOR_MAP = gql`
+  query GetRouteGroupsForMap($limit: Int) {
+    routeGroupCollection(limit: $limit) {
+      items {
+        sys { id }
+        contentfulMetadata { tags { id name } }
+        title
+        slug
+        locationArea { lat lon }
+        headerImage { url title }
+      }
+    }
+  }
+`;
+
 export interface RouteGroupServiceOptions {
   limit?: number;
   skip?: number;
@@ -168,6 +187,12 @@ export class RouteGroupService {
         where,
         order,
       },
+    });
+  }
+
+  async getRouteGroupsForMap(limit = 200): Promise<Query> {
+    return contentfulFetcher.query<Query>(GET_ROUTE_GROUPS_FOR_MAP, {
+      variables: { limit },
     });
   }
 

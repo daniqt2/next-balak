@@ -90,6 +90,19 @@ const GET_COLL_BY_ID = gql`
   }
 `;
 
+const GET_COLLS_FOR_MAP = gql`
+  query GetCollsForMap($limit: Int) {
+    collCollection(limit: $limit) {
+      items {
+        sys { id }
+        name
+        location { lat lon }
+        header { url title }
+      }
+    }
+  }
+`;
+
 export interface CollServiceOptions {
   limit?: number;
   skip?: number;
@@ -111,6 +124,12 @@ export class CollService {
         where,
         order,
       },
+    });
+  }
+
+  async getCollsForMap(limit = 200): Promise<Query> {
+    return contentfulFetcher.query<Query>(GET_COLLS_FOR_MAP, {
+      variables: { limit },
     });
   }
 

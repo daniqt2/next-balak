@@ -1,16 +1,32 @@
 'use client';
 
 import React, { useMemo, useState } from 'react';
+import dynamic from 'next/dynamic';
 import type { RouteGroup } from '@/contentful-types';
 import RouteGroupGrid from '@/components/grids/RouteGroupGrid';
 import { ROUTE_GROUP_FILTERS, hasRouteGroupTag } from '@/lib/route-group-tags';
 
+const RouteGroupAreasMap = dynamic(
+  () => import('@/components/map/RouteGroupAreasMap'),
+  {
+    ssr: false,
+    loading: () => (
+      <div
+        className="w-full rounded-xl bg-charcoal-800 animate-pulse"
+        style={{ height: '380px' }}
+      />
+    ),
+  }
+);
+
 interface RouteGroupsWithFiltersProps {
   routeGroups: RouteGroup[];
+  mapRouteGroups: RouteGroup[];
 }
 
 export default function RouteGroupsWithFilters({
   routeGroups,
+  mapRouteGroups,
 }: RouteGroupsWithFiltersProps) {
   const [selectedTagId, setSelectedTagId] = useState<string | null>(null);
 
@@ -22,8 +38,16 @@ export default function RouteGroupsWithFilters({
     );
   }, [routeGroups, selectedTagId, selectedFilter]);
 
+  const filteredMapGroups = useMemo(() => {
+    if (!selectedTagId || !selectedFilter) return mapRouteGroups;
+    return mapRouteGroups.filter(r =>
+      hasRouteGroupTag(r?.contentfulMetadata?.tags, selectedFilter.id!, selectedFilter.label)
+    );
+  }, [mapRouteGroups, selectedTagId, selectedFilter]);
+
   return (
     <div className="space-y-6">
+      <RouteGroupAreasMap routeGroups={filteredMapGroups} />
       <div className="flex flex-wrap items-center gap-2">
         {ROUTE_GROUP_FILTERS.map(({ id, label }, index) => (
           <button

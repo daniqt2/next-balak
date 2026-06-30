@@ -3,8 +3,8 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import { Mountain } from 'lucide-react';
-
 import type { Coll } from '@/contentful-types';
+import Logo from '@/components/ui/Logo';
 import { formatMetric } from '@/lib/route-utils';
 import '@/styles/collDisplay.css';
 
@@ -53,11 +53,8 @@ export default function CollDisplay({
             />
           ) : (
             <div className="coll-display__image-placeholder">
-              <div className="coll-display__image-placeholder-overlay" />
-              <Mountain
-                size={48}
-                className="coll-display__image-placeholder-icon"
-              />
+              <Mountain size={20} color="#bfe23a" style={{ marginBottom: '6px', opacity: 0.9 }} />
+              <Logo width={100} height={18} color="#555555" className="coll-display__image-placeholder-logo" />
             </div>
           )}
           <div className="coll-display__overlay" />
@@ -80,7 +77,7 @@ export default function CollDisplay({
                     aria-hidden
                   />
                   <span>
-                    {v?.startLocation ? `${v.startLocation}:` : 'Variante:'}{' '}
+                    {v?.startLocation && !/^-?\d+\./.test(v.startLocation) ? `${v.startLocation}:` : 'Variante:'}{' '}
                     {v?.length != null ? `${formatMetric(v.length)}km` : '—'}
                     {v?.slopePercentage != null
                       ? ` · ${formatMetric(v.slopePercentage)}%`

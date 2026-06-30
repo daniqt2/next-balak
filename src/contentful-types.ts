@@ -108,6 +108,13 @@ export type AssetCollection = {
   total: Scalars['Int']['output'];
 };
 
+export type AssetCursorCollection = {
+  __typename?: 'AssetCursorCollection';
+  items: Array<Maybe<Asset>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
 export type AssetFilter = {
   AND?: InputMaybe<Array<InputMaybe<AssetFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<AssetFilter>>>;
@@ -180,11 +187,17 @@ export type AssetFilter = {
 export type AssetLinkingCollections = {
   __typename?: 'AssetLinkingCollections';
   collCollection?: Maybe<CollCollection>;
+  collCursorCollection?: Maybe<CollCursorCollection>;
   customAssetCollection?: Maybe<CustomAssetCollection>;
+  customAssetCursorCollection?: Maybe<CustomAssetCursorCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  entryCursorCollection?: Maybe<EntryCursorCollection>;
   interestSpotCollection?: Maybe<InterestSpotCollection>;
+  interestSpotCursorCollection?: Maybe<InterestSpotCursorCollection>;
   routeCollection?: Maybe<RouteCollection>;
+  routeCursorCollection?: Maybe<RouteCursorCollection>;
   routeGroupCollection?: Maybe<RouteGroupCollection>;
+  routeGroupCursorCollection?: Maybe<RouteGroupCursorCollection>;
 };
 
 
@@ -193,6 +206,16 @@ export type AssetLinkingCollectionsCollCollectionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type AssetLinkingCollectionsCollCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -206,11 +229,31 @@ export type AssetLinkingCollectionsCustomAssetCollectionArgs = {
 };
 
 
+export type AssetLinkingCollectionsCustomAssetCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
 export type AssetLinkingCollectionsEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type AssetLinkingCollectionsEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -224,6 +267,16 @@ export type AssetLinkingCollectionsInterestSpotCollectionArgs = {
 };
 
 
+export type AssetLinkingCollectionsInterestSpotCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
 export type AssetLinkingCollectionsRouteCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -233,11 +286,31 @@ export type AssetLinkingCollectionsRouteCollectionArgs = {
 };
 
 
+export type AssetLinkingCollectionsRouteCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
 export type AssetLinkingCollectionsRouteGroupCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type AssetLinkingCollectionsRouteGroupCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -272,12 +345,14 @@ export type Coll = Entry & _Node & {
   description?: Maybe<CollDescription>;
   header?: Maybe<Asset>;
   imagesCollection?: Maybe<AssetCollection>;
+  imagesCursorCollection?: Maybe<AssetCursorCollection>;
   linkedFrom?: Maybe<CollLinkingCollections>;
   location?: Maybe<Location>;
   name?: Maybe<Scalars['String']['output']>;
   slug?: Maybe<Scalars['String']['output']>;
   sys: Sys;
   variantsCollection?: Maybe<CollVariantsCollection>;
+  variantsCursorCollection?: Maybe<CollVariantsCursorCollection>;
 };
 
 
@@ -302,6 +377,17 @@ export type CollImagesCollectionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type CollImagesCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -342,12 +428,30 @@ export type CollVariantsCollectionArgs = {
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/coll) */
+export type CollVariantsCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export type CollCollection = {
   __typename?: 'CollCollection';
   items: Array<Maybe<Coll>>;
   limit: Scalars['Int']['output'];
   skip: Scalars['Int']['output'];
   total: Scalars['Int']['output'];
+};
+
+export type CollCursorCollection = {
+  __typename?: 'CollCursorCollection';
+  items: Array<Maybe<Coll>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
 };
 
 export type CollDescription = {
@@ -431,6 +535,7 @@ export type CollFilter = {
 export type CollLinkingCollections = {
   __typename?: 'CollLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  entryCursorCollection?: Maybe<EntryCursorCollection>;
 };
 
 
@@ -439,6 +544,16 @@ export type CollLinkingCollectionsEntryCollectionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type CollLinkingCollectionsEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -528,6 +643,13 @@ export type CollVariantCollection = {
   total: Scalars['Int']['output'];
 };
 
+export type CollVariantCursorCollection = {
+  __typename?: 'CollVariantCursorCollection';
+  items: Array<Maybe<CollVariant>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
 export type CollVariantFilter = {
   AND?: InputMaybe<Array<InputMaybe<CollVariantFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CollVariantFilter>>>;
@@ -586,7 +708,9 @@ export type CollVariantFilter = {
 export type CollVariantLinkingCollections = {
   __typename?: 'CollVariantLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  entryCursorCollection?: Maybe<EntryCursorCollection>;
   routeCollection?: Maybe<RouteCollection>;
+  routeCursorCollection?: Maybe<RouteCursorCollection>;
 };
 
 
@@ -595,6 +719,16 @@ export type CollVariantLinkingCollectionsEntryCollectionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type CollVariantLinkingCollectionsEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -608,7 +742,49 @@ export type CollVariantLinkingCollectionsRouteCollectionArgs = {
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+
+export type CollVariantLinkingCollectionsRouteCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<CollVariantLinkingCollectionsRouteCursorCollectionOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export enum CollVariantLinkingCollectionsRouteCollectionOrder {
+  ElevationAsc = 'elevation_ASC',
+  ElevationDesc = 'elevation_DESC',
+  EndLocationNameAsc = 'endLocationName_ASC',
+  EndLocationNameDesc = 'endLocationName_DESC',
+  LengthAsc = 'length_ASC',
+  LengthDesc = 'length_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  StartLocationNameAsc = 'startLocationName_ASC',
+  StartLocationNameDesc = 'startLocationName_DESC',
+  StravaIdAsc = 'stravaId_ASC',
+  StravaIdDesc = 'stravaId_DESC',
+  StravaLinkAsc = 'stravaLink_ASC',
+  StravaLinkDesc = 'stravaLink_DESC',
+  SubTitleAsc = 'subTitle_ASC',
+  SubTitleDesc = 'subTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TimeAsc = 'time_ASC',
+  TimeDesc = 'time_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum CollVariantLinkingCollectionsRouteCursorCollectionOrder {
   ElevationAsc = 'elevation_ASC',
   ElevationDesc = 'elevation_DESC',
   EndLocationNameAsc = 'endLocationName_ASC',
@@ -670,6 +846,13 @@ export type CollVariantsCollection = {
   total: Scalars['Int']['output'];
 };
 
+export type CollVariantsCursorCollection = {
+  __typename?: 'CollVariantsCursorCollection';
+  items: Array<Maybe<Entry>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
 export type ContentfulMetadata = {
   __typename?: 'ContentfulMetadata';
   concepts: Array<Maybe<TaxonomyConcept>>;
@@ -710,6 +893,12 @@ export type ContentfulTag = {
   __typename?: 'ContentfulTag';
   id?: Maybe<Scalars['String']['output']>;
   name?: Maybe<Scalars['String']['output']>;
+};
+
+export type CursorPages = {
+  __typename?: 'CursorPages';
+  next?: Maybe<Scalars['String']['output']>;
+  prev?: Maybe<Scalars['String']['output']>;
 };
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/customAsset) */
@@ -768,6 +957,13 @@ export type CustomAssetCollection = {
   total: Scalars['Int']['output'];
 };
 
+export type CustomAssetCursorCollection = {
+  __typename?: 'CustomAssetCursorCollection';
+  items: Array<Maybe<CustomAsset>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
 export type CustomAssetFilter = {
   AND?: InputMaybe<Array<InputMaybe<CustomAssetFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<CustomAssetFilter>>>;
@@ -800,6 +996,7 @@ export type CustomAssetFilter = {
 export type CustomAssetLinkingCollections = {
   __typename?: 'CustomAssetLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  entryCursorCollection?: Maybe<EntryCursorCollection>;
 };
 
 
@@ -808,6 +1005,16 @@ export type CustomAssetLinkingCollectionsEntryCollectionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type CustomAssetLinkingCollectionsEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -837,6 +1044,13 @@ export type EntryCollection = {
   limit: Scalars['Int']['output'];
   skip: Scalars['Int']['output'];
   total: Scalars['Int']['output'];
+};
+
+export type EntryCursorCollection = {
+  __typename?: 'EntryCursorCollection';
+  items: Array<Maybe<Entry>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
 };
 
 export type EntryFilter = {
@@ -1049,6 +1263,13 @@ export type InterestSpotCollection = {
   total: Scalars['Int']['output'];
 };
 
+export type InterestSpotCursorCollection = {
+  __typename?: 'InterestSpotCursorCollection';
+  items: Array<Maybe<InterestSpot>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
 export type InterestSpotFilter = {
   AND?: InputMaybe<Array<InputMaybe<InterestSpotFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<InterestSpotFilter>>>;
@@ -1150,7 +1371,9 @@ export type InterestSpotFullDescriptionResourcesInline = ResourceLink & {
 export type InterestSpotLinkingCollections = {
   __typename?: 'InterestSpotLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  entryCursorCollection?: Maybe<EntryCursorCollection>;
   routeCollection?: Maybe<RouteCollection>;
+  routeCursorCollection?: Maybe<RouteCursorCollection>;
 };
 
 
@@ -1159,6 +1382,16 @@ export type InterestSpotLinkingCollectionsEntryCollectionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type InterestSpotLinkingCollectionsEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -1172,7 +1405,49 @@ export type InterestSpotLinkingCollectionsRouteCollectionArgs = {
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+
+export type InterestSpotLinkingCollectionsRouteCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<InterestSpotLinkingCollectionsRouteCursorCollectionOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export enum InterestSpotLinkingCollectionsRouteCollectionOrder {
+  ElevationAsc = 'elevation_ASC',
+  ElevationDesc = 'elevation_DESC',
+  EndLocationNameAsc = 'endLocationName_ASC',
+  EndLocationNameDesc = 'endLocationName_DESC',
+  LengthAsc = 'length_ASC',
+  LengthDesc = 'length_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  StartLocationNameAsc = 'startLocationName_ASC',
+  StartLocationNameDesc = 'startLocationName_DESC',
+  StravaIdAsc = 'stravaId_ASC',
+  StravaIdDesc = 'stravaId_DESC',
+  StravaLinkAsc = 'stravaLink_ASC',
+  StravaLinkDesc = 'stravaLink_DESC',
+  SubTitleAsc = 'subTitle_ASC',
+  SubTitleDesc = 'subTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TimeAsc = 'time_ASC',
+  TimeDesc = 'time_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export enum InterestSpotLinkingCollectionsRouteCursorCollectionOrder {
   ElevationAsc = 'elevation_ASC',
   ElevationDesc = 'elevation_DESC',
   EndLocationNameAsc = 'endLocationName_ASC',
@@ -1234,19 +1509,27 @@ export type Query = {
   _nodes: Array<Maybe<_Node>>;
   asset?: Maybe<Asset>;
   assetCollection?: Maybe<AssetCollection>;
+  assetCursorCollection?: Maybe<AssetCursorCollection>;
   coll?: Maybe<Coll>;
   collCollection?: Maybe<CollCollection>;
+  collCursorCollection?: Maybe<CollCursorCollection>;
   collVariant?: Maybe<CollVariant>;
   collVariantCollection?: Maybe<CollVariantCollection>;
+  collVariantCursorCollection?: Maybe<CollVariantCursorCollection>;
   customAsset?: Maybe<CustomAsset>;
   customAssetCollection?: Maybe<CustomAssetCollection>;
+  customAssetCursorCollection?: Maybe<CustomAssetCursorCollection>;
   entryCollection?: Maybe<EntryCollection>;
+  entryCursorCollection?: Maybe<EntryCursorCollection>;
   interestSpot?: Maybe<InterestSpot>;
   interestSpotCollection?: Maybe<InterestSpotCollection>;
+  interestSpotCursorCollection?: Maybe<InterestSpotCursorCollection>;
   route?: Maybe<Route>;
   routeCollection?: Maybe<RouteCollection>;
+  routeCursorCollection?: Maybe<RouteCursorCollection>;
   routeGroup?: Maybe<RouteGroup>;
   routeGroupCollection?: Maybe<RouteGroupCollection>;
+  routeGroupCursorCollection?: Maybe<RouteGroupCursorCollection>;
 };
 
 
@@ -1285,6 +1568,18 @@ export type QueryAssetCollectionArgs = {
 };
 
 
+export type QueryAssetCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<AssetOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<AssetFilter>;
+};
+
+
 export type QueryCollArgs = {
   id: Scalars['String']['input'];
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1299,6 +1594,18 @@ export type QueryCollCollectionArgs = {
   order?: InputMaybe<Array<InputMaybe<CollOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<CollFilter>;
+};
+
+
+export type QueryCollCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<CollOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
   where?: InputMaybe<CollFilter>;
 };
@@ -1323,6 +1630,18 @@ export type QueryCollVariantCollectionArgs = {
 };
 
 
+export type QueryCollVariantCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<CollVariantOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<CollVariantFilter>;
+};
+
+
 export type QueryCustomAssetArgs = {
   id: Scalars['String']['input'];
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1342,12 +1661,36 @@ export type QueryCustomAssetCollectionArgs = {
 };
 
 
+export type QueryCustomAssetCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<CustomAssetOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<CustomAssetFilter>;
+};
+
+
 export type QueryEntryCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Array<InputMaybe<EntryOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<EntryFilter>;
+};
+
+
+export type QueryEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<EntryOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
   where?: InputMaybe<EntryFilter>;
 };
@@ -1372,6 +1715,18 @@ export type QueryInterestSpotCollectionArgs = {
 };
 
 
+export type QueryInterestSpotCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<InterestSpotOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<InterestSpotFilter>;
+};
+
+
 export type QueryRouteArgs = {
   id: Scalars['String']['input'];
   locale?: InputMaybe<Scalars['String']['input']>;
@@ -1386,6 +1741,18 @@ export type QueryRouteCollectionArgs = {
   order?: InputMaybe<Array<InputMaybe<RouteOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<RouteFilter>;
+};
+
+
+export type QueryRouteCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<RouteOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
   where?: InputMaybe<RouteFilter>;
 };
@@ -1409,6 +1776,18 @@ export type QueryRouteGroupCollectionArgs = {
   where?: InputMaybe<RouteGroupFilter>;
 };
 
+
+export type QueryRouteGroupCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<RouteGroupOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<RouteGroupFilter>;
+};
+
 export type ResourceLink = {
   sys: ResourceSys;
 };
@@ -1424,7 +1803,9 @@ export type Route = Entry & _Node & {
   __typename?: 'Route';
   _id: Scalars['ID']['output'];
   coffeStopsCollection?: Maybe<RouteCoffeStopsCollection>;
+  coffeStopsCursorCollection?: Maybe<RouteCoffeStopsCursorCollection>;
   collsCollection?: Maybe<RouteCollsCollection>;
+  collsCursorCollection?: Maybe<RouteCollsCursorCollection>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']['output']>;
   elevation?: Maybe<Scalars['Float']['output']>;
@@ -1433,10 +1814,13 @@ export type Route = Entry & _Node & {
   gpx?: Maybe<Asset>;
   headerImage?: Maybe<Asset>;
   interestSpotsCollection?: Maybe<RouteInterestSpotsCollection>;
+  interestSpotsCursorCollection?: Maybe<RouteInterestSpotsCursorCollection>;
   length?: Maybe<Scalars['Float']['output']>;
   linkedFrom?: Maybe<RouteLinkingCollections>;
   mainCarouselCollection?: Maybe<AssetCollection>;
+  mainCarouselCursorCollection?: Maybe<AssetCursorCollection>;
   mountainsCollection?: Maybe<RouteMountainsCollection>;
+  mountainsCursorCollection?: Maybe<RouteMountainsCursorCollection>;
   slug?: Maybe<Scalars['String']['output']>;
   startLocation?: Maybe<Location>;
   startLocationName?: Maybe<Scalars['String']['output']>;
@@ -1462,12 +1846,38 @@ export type RouteCoffeStopsCollectionArgs = {
 
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+export type RouteCoffeStopsCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<RouteCoffeStopsCursorCollectionOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<InterestSpotFilter>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteCollsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Array<InputMaybe<RouteCollsCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<CollVariantFilter>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+export type RouteCollsCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<RouteCollsCursorCollectionOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
   where?: InputMaybe<CollVariantFilter>;
 };
@@ -1530,6 +1940,19 @@ export type RouteInterestSpotsCollectionArgs = {
 
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+export type RouteInterestSpotsCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<RouteInterestSpotsCursorCollectionOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<InterestSpotFilter>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteLengthArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1553,12 +1976,36 @@ export type RouteMainCarouselCollectionArgs = {
 
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+export type RouteMainCarouselCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
 export type RouteMountainsCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   order?: InputMaybe<Array<InputMaybe<RouteMountainsCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<InterestSpotFilter>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/route) */
+export type RouteMountainsCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<RouteMountainsCursorCollectionOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
   where?: InputMaybe<InterestSpotFilter>;
 };
@@ -1646,6 +2093,32 @@ export enum RouteCoffeStopsCollectionOrder {
   TitleDesc = 'title_DESC'
 }
 
+export type RouteCoffeStopsCursorCollection = {
+  __typename?: 'RouteCoffeStopsCursorCollection';
+  items: Array<Maybe<InterestSpot>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
+export enum RouteCoffeStopsCursorCollectionOrder {
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  LocationNameAsc = 'locationName_ASC',
+  LocationNameDesc = 'locationName_DESC',
+  StopTypeAsc = 'stopType_ASC',
+  StopTypeDesc = 'stopType_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 export type RouteCollection = {
   __typename?: 'RouteCollection';
   items: Array<Maybe<Route>>;
@@ -1684,6 +2157,43 @@ export enum RouteCollsCollectionOrder {
   SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
   SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
 }
+
+export type RouteCollsCursorCollection = {
+  __typename?: 'RouteCollsCursorCollection';
+  items: Array<Maybe<CollVariant>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
+export enum RouteCollsCursorCollectionOrder {
+  AccumulatedHeightAsc = 'accumulatedHeight_ASC',
+  AccumulatedHeightDesc = 'accumulatedHeight_DESC',
+  DifficultyAsc = 'difficulty_ASC',
+  DifficultyDesc = 'difficulty_DESC',
+  InternalNameAsc = 'internalName_ASC',
+  InternalNameDesc = 'internalName_DESC',
+  LengthAsc = 'length_ASC',
+  LengthDesc = 'length_DESC',
+  SlopePercentageAsc = 'slopePercentage_ASC',
+  SlopePercentageDesc = 'slopePercentage_DESC',
+  StartLocationAsc = 'startLocation_ASC',
+  StartLocationDesc = 'startLocation_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC'
+}
+
+export type RouteCursorCollection = {
+  __typename?: 'RouteCursorCollection';
+  items: Array<Maybe<Route>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
 
 export type RouteFilter = {
   AND?: InputMaybe<Array<InputMaybe<RouteFilter>>>;
@@ -1799,10 +2309,12 @@ export type RouteGroup = Entry & _Node & {
   headerImage?: Maybe<Asset>;
   linkedFrom?: Maybe<RouteGroupLinkingCollections>;
   location?: Maybe<Location>;
+  locationArea?: Maybe<Location>;
   locationLabel?: Maybe<Scalars['String']['output']>;
   locationLength?: Maybe<Scalars['Int']['output']>;
   mapIframe?: Maybe<RouteGroupMapIframe>;
   routesCollection?: Maybe<RouteGroupRoutesCollection>;
+  routesCursorCollection?: Maybe<RouteGroupRoutesCursorCollection>;
   slug?: Maybe<Scalars['String']['output']>;
   subtitle?: Maybe<Scalars['String']['output']>;
   sys: Sys;
@@ -1840,6 +2352,13 @@ export type RouteGroupLocationArgs = {
 
 
 /** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/routeGroup) */
+export type RouteGroupLocationAreaArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/routeGroup) */
 export type RouteGroupLocationLabelArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1867,6 +2386,19 @@ export type RouteGroupRoutesCollectionArgs = {
   order?: InputMaybe<Array<InputMaybe<RouteGroupRoutesCollectionOrder>>>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<RouteFilter>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/routeGroup) */
+export type RouteGroupRoutesCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<RouteGroupRoutesCursorCollectionOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
   where?: InputMaybe<RouteFilter>;
 };
@@ -1907,6 +2439,13 @@ export type RouteGroupCollection = {
   total: Scalars['Int']['output'];
 };
 
+export type RouteGroupCursorCollection = {
+  __typename?: 'RouteGroupCursorCollection';
+  items: Array<Maybe<RouteGroup>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
 export type RouteGroupFilter = {
   AND?: InputMaybe<Array<InputMaybe<RouteGroupFilter>>>;
   OR?: InputMaybe<Array<InputMaybe<RouteGroupFilter>>>;
@@ -1919,6 +2458,9 @@ export type RouteGroupFilter = {
   description_not_contains?: InputMaybe<Scalars['String']['input']>;
   description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
   headerImage_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  locationArea_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  locationArea_within_circle?: InputMaybe<Scalars['Circle']['input']>;
+  locationArea_within_rectangle?: InputMaybe<Scalars['Rectangle']['input']>;
   locationLabel?: InputMaybe<Scalars['String']['input']>;
   locationLabel_contains?: InputMaybe<Scalars['String']['input']>;
   locationLabel_exists?: InputMaybe<Scalars['Boolean']['input']>;
@@ -1977,6 +2519,7 @@ export type RouteGroupFilter = {
 export type RouteGroupLinkingCollections = {
   __typename?: 'RouteGroupLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  entryCursorCollection?: Maybe<EntryCursorCollection>;
 };
 
 
@@ -1985,6 +2528,16 @@ export type RouteGroupLinkingCollectionsEntryCollectionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type RouteGroupLinkingCollectionsEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -2098,6 +2651,44 @@ export enum RouteGroupRoutesCollectionOrder {
   TitleDesc = 'title_DESC'
 }
 
+export type RouteGroupRoutesCursorCollection = {
+  __typename?: 'RouteGroupRoutesCursorCollection';
+  items: Array<Maybe<Route>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
+export enum RouteGroupRoutesCursorCollectionOrder {
+  ElevationAsc = 'elevation_ASC',
+  ElevationDesc = 'elevation_DESC',
+  EndLocationNameAsc = 'endLocationName_ASC',
+  EndLocationNameDesc = 'endLocationName_DESC',
+  LengthAsc = 'length_ASC',
+  LengthDesc = 'length_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  StartLocationNameAsc = 'startLocationName_ASC',
+  StartLocationNameDesc = 'startLocationName_DESC',
+  StravaIdAsc = 'stravaId_ASC',
+  StravaIdDesc = 'stravaId_DESC',
+  StravaLinkAsc = 'stravaLink_ASC',
+  StravaLinkDesc = 'stravaLink_DESC',
+  SubTitleAsc = 'subTitle_ASC',
+  SubTitleDesc = 'subTitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TimeAsc = 'time_ASC',
+  TimeDesc = 'time_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 export type RouteInterestSpotsCollection = {
   __typename?: 'RouteInterestSpotsCollection';
   items: Array<Maybe<InterestSpot>>;
@@ -2125,10 +2716,38 @@ export enum RouteInterestSpotsCollectionOrder {
   TitleDesc = 'title_DESC'
 }
 
+export type RouteInterestSpotsCursorCollection = {
+  __typename?: 'RouteInterestSpotsCursorCollection';
+  items: Array<Maybe<InterestSpot>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
+export enum RouteInterestSpotsCursorCollectionOrder {
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  LocationNameAsc = 'locationName_ASC',
+  LocationNameDesc = 'locationName_DESC',
+  StopTypeAsc = 'stopType_ASC',
+  StopTypeDesc = 'stopType_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
 export type RouteLinkingCollections = {
   __typename?: 'RouteLinkingCollections';
   entryCollection?: Maybe<EntryCollection>;
+  entryCursorCollection?: Maybe<EntryCursorCollection>;
   routeGroupCollection?: Maybe<RouteGroupCollection>;
+  routeGroupCursorCollection?: Maybe<RouteGroupCursorCollection>;
 };
 
 
@@ -2137,6 +2756,16 @@ export type RouteLinkingCollectionsEntryCollectionArgs = {
   locale?: InputMaybe<Scalars['String']['input']>;
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type RouteLinkingCollectionsEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
@@ -2150,7 +2779,41 @@ export type RouteLinkingCollectionsRouteGroupCollectionArgs = {
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
 };
 
+
+export type RouteLinkingCollectionsRouteGroupCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<RouteLinkingCollectionsRouteGroupCursorCollectionOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
 export enum RouteLinkingCollectionsRouteGroupCollectionOrder {
+  LocationLabelAsc = 'locationLabel_ASC',
+  LocationLabelDesc = 'locationLabel_DESC',
+  LocationLengthAsc = 'locationLength_ASC',
+  LocationLengthDesc = 'locationLength_DESC',
+  SlugAsc = 'slug_ASC',
+  SlugDesc = 'slug_DESC',
+  SubtitleAsc = 'subtitle_ASC',
+  SubtitleDesc = 'subtitle_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  TypeAsc = 'type_ASC',
+  TypeDesc = 'type_DESC'
+}
+
+export enum RouteLinkingCollectionsRouteGroupCursorCollectionOrder {
   LocationLabelAsc = 'locationLabel_ASC',
   LocationLabelDesc = 'locationLabel_DESC',
   LocationLengthAsc = 'locationLength_ASC',
@@ -2182,6 +2845,32 @@ export type RouteMountainsCollection = {
 };
 
 export enum RouteMountainsCollectionOrder {
+  DescriptionAsc = 'description_ASC',
+  DescriptionDesc = 'description_DESC',
+  LocationNameAsc = 'locationName_ASC',
+  LocationNameDesc = 'locationName_DESC',
+  StopTypeAsc = 'stopType_ASC',
+  StopTypeDesc = 'stopType_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC'
+}
+
+export type RouteMountainsCursorCollection = {
+  __typename?: 'RouteMountainsCursorCollection';
+  items: Array<Maybe<InterestSpot>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
+export enum RouteMountainsCursorCollectionOrder {
   DescriptionAsc = 'description_ASC',
   DescriptionDesc = 'description_DESC',
   LocationNameAsc = 'locationName_ASC',

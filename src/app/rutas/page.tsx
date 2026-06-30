@@ -1,5 +1,5 @@
 import type { RouteGroup } from '@/contentful-types';
-import { getRouteGroupsCached } from '@/lib/contentful-cache';
+import { getRouteGroupsCached, getRouteGroupsForMapCached } from '@/lib/contentful-cache';
 import PageHeader from '@/components/headers/pageHeader';
 import RouteGroupsWithFilters from '@/components/rutas/RouteGroupsWithFilters';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
@@ -8,9 +8,18 @@ import Breadcrumbs from '@/components/ui/Breadcrumbs';
 export const revalidate = 600;
 
 export default async function RouteGroupsPage() {
-  const data = await getRouteGroupsCached({ limit: 20 });
+  const [gridData, mapData] = await Promise.all([
+    getRouteGroupsCached({ limit: 20 }),
+    getRouteGroupsForMapCached(),
+  ]);
+
   const routeGroups =
-    data?.routeGroupCollection?.items?.filter(
+    gridData?.routeGroupCollection?.items?.filter(
+      (r): r is RouteGroup => r != null
+    ) ?? [];
+
+  const mapRouteGroups =
+    mapData?.routeGroupCollection?.items?.filter(
       (r): r is RouteGroup => r != null
     ) ?? [];
 
@@ -22,7 +31,7 @@ export default async function RouteGroupsPage() {
         description="Descubre diferentes rutas agrupadas por área o tema"
       />
       <div className="container mx-auto px-4 pb-8 sm:pb-10 md:pb-12">
-        <RouteGroupsWithFilters routeGroups={routeGroups} />
+        <RouteGroupsWithFilters routeGroups={routeGroups} mapRouteGroups={mapRouteGroups} />
       </div>
     </div>
   );

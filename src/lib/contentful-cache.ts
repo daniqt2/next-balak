@@ -21,6 +21,10 @@ export async function getCollsCached(options: CollServiceOptions = {}) {
   return collService.getColls(options);
 }
 
+export async function getCollsForMapCached() {
+  return collService.getCollsForMap();
+}
+
 export async function getCollByIdCached(id: string) {
   return collService.getCollById(id);
 }
@@ -37,6 +41,10 @@ export async function getRouteGroupsCached(
   options: RouteGroupServiceOptions = {}
 ) {
   return routeGroupService.getRouteGroups(options);
+}
+
+export async function getRouteGroupsForMapCached() {
+  return routeGroupService.getRouteGroupsForMap();
 }
 
 export async function getRouteGroupBySlugCached(slug: string) {

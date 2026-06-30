@@ -22,9 +22,10 @@ const AreaMap = dynamic(() => import('@/components/map/AreaMap'), {
 
 interface PuertosClientProps {
   colls: Coll[];
+  mapColls: Coll[];
 }
 
-export default function PuertosClient({ colls }: PuertosClientProps) {
+export default function PuertosClient({ colls, mapColls }: PuertosClientProps) {
   return (
     <div className="min-h-screen mt-6 md:mt-10" style={{ paddingTop: '64px' }}>
       <Breadcrumbs items={[{ label: 'Puertos' }]} backHref="/" />
@@ -34,7 +35,7 @@ export default function PuertosClient({ colls }: PuertosClientProps) {
           description="Descubre los puertos de montaña más desafiantes y espectaculares incluidos en nuestras rutas de ciclismo"
         />
 
-        <AreaMap coffeePoints={colls as any} variant="coll" height="500px" />
+        <AreaMap coffeePoints={mapColls as any} variant="coll" height="500px" />
 
         <AnimatedSection delay={300}>
           <div className="mb-8">
@@ -42,7 +43,7 @@ export default function PuertosClient({ colls }: PuertosClientProps) {
               Nuestros ultimos puertos
             </h2>
             {colls.length > 0 ? (
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
                 {colls.map((coll, index) => (
                   <div
                     key={coll?.sys.id}

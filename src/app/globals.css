@@ -166,3 +166,15 @@ html.home-scroll .home-snap-section {
 .coll-variants-list-scroll::-webkit-scrollbar-thumb:hover {
   background: #6b7280;
 }
+
+/* RouteGroupAreasMap popup — full-bleed image with overlay */
+.areas-map-popup .leaflet-popup-content-wrapper {
+  padding: 0;
+  overflow: hidden;
+  border-radius: 12px;
+}
+
+.areas-map-popup .leaflet-popup-content {
+  margin: 0;
+  width: auto !important;
+}

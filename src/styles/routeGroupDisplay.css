@@ -68,29 +68,29 @@
   }
 
   .location {
-    @apply absolute top-3 left-3 z-10 flex items-center text-white text-lg;
+    @apply absolute top-2 left-2 z-10 flex items-center text-white text-xs;
   }
 
   .content {
-    @apply absolute bottom-0 left-0 right-0 p-4;
+    @apply absolute bottom-0 left-0 right-0 p-3;
 
     .title-section {
       @apply flex items-center justify-between;
 
       .title {
-        @apply text-white font-anton uppercase text-7xl mb-1;
+        @apply text-white font-anton uppercase text-2xl mb-0.5 leading-tight;
       }
 
       .subtitle {
-        @apply text-balak-700 text-lg;
+        @apply text-balak-700 text-xs;
       }
     }
   }
 
   .route-count-badge {
-    @apply absolute bottom-3 right-3 z-10;
+    @apply absolute bottom-2 right-2 z-10;
     @apply text-white/90;
-    @apply text-sm font-medium;
+    @apply text-xs font-medium;
     @apply tracking-wide;
   }
 }
