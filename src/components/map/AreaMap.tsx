@@ -3,6 +3,12 @@
 import React from 'react';
 import { MapContainer, TileLayer, Polygon, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import {
+  BASEMAP_ATTRIBUTION,
+  BASEMAP_URL,
+  BASEMAP_SUBDOMAINS,
+  BASEMAP_MAX_ZOOM,
+} from '@/lib/basemap';
 import L, { DivIcon } from 'leaflet';
 import type { Coll, InterestSpot } from '@/contentful-types';
 
@@ -103,8 +109,10 @@ export default function CoffeeMap({
         className="rounded-xl"
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution={BASEMAP_ATTRIBUTION}
+          url={BASEMAP_URL}
+          subdomains={BASEMAP_SUBDOMAINS}
+          maxZoom={BASEMAP_MAX_ZOOM}
         />
 
         {/* Display areas as polygons */}

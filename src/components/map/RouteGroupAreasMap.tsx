@@ -3,8 +3,24 @@
 import React, { useEffect } from 'react';
 import { MapContainer, TileLayer, Circle, Popup, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import {
+  BASEMAP_ATTRIBUTION,
+  BASEMAP_URL,
+  BASEMAP_SUBDOMAINS,
+  BASEMAP_MAX_ZOOM,
+} from '@/lib/basemap';
 import L from 'leaflet';
 import type { RouteGroup } from '@/contentful-types';
+import { ROUTE_GROUP_TAG_GRAVEL } from '@/lib/route-group-tags';
+
+const CIRCLE_ROAD   = '#bfe23a'; // balak green
+const CIRCLE_GRAVEL = '#e8a94d'; // amber
+
+function getCircleColor(rg: RouteGroup): string {
+  const tags = rg.contentfulMetadata?.tags ?? [];
+  const isGravel = tags.some(t => t?.id === ROUTE_GROUP_TAG_GRAVEL);
+  return isGravel ? CIRCLE_GRAVEL : CIRCLE_ROAD;
+}
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -57,18 +73,22 @@ export default function RouteGroupAreasMap({
       scrollWheelZoom={false}
     >
       <TileLayer
-        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-        url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+        attribution={BASEMAP_ATTRIBUTION}
+        url={BASEMAP_URL}
+        subdomains={BASEMAP_SUBDOMAINS}
+        maxZoom={BASEMAP_MAX_ZOOM}
       />
       <FitBounds points={points} />
-      {withArea.map(rg => (
+      {withArea.map(rg => {
+        const color = getCircleColor(rg);
+        return (
         <Circle
           key={rg.sys.id}
           center={[rg.locationArea!.lat!, rg.locationArea!.lon!]}
           radius={20000}
           pathOptions={{
-            color: '#bfe23a',
-            fillColor: '#bfe23a',
+            color,
+            fillColor: color,
             fillOpacity: 0.15,
             weight: 2,
           }}
@@ -99,14 +119,15 @@ export default function RouteGroupAreasMap({
                 <p style={{ color: '#fff', fontWeight: 700, fontSize: '13px', margin: '0 0 4px', lineHeight: 1.2 }}>
                   {rg.title}
                 </p>
-                <span style={{ color: '#bfe23a', fontSize: '11px', fontWeight: 600 }}>
+                <span style={{ color, fontSize: '11px', fontWeight: 600 }}>
                   Ver colección →
                 </span>
               </div>
             </a>
           </Popup>
         </Circle>
-      ))}
+        );
+      })}
     </MapContainer>
   );
 }

@@ -3,6 +3,12 @@
 import { useEffect, useRef } from 'react';
 import { MapContainer, TileLayer, useMap } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
+import {
+  BASEMAP_ATTRIBUTION,
+  BASEMAP_URL,
+  BASEMAP_SUBDOMAINS,
+  BASEMAP_MAX_ZOOM,
+} from '@/lib/basemap';
 import L from 'leaflet';
 import 'leaflet-gpx';
 
@@ -136,8 +142,10 @@ export default function MultiGPXMap({
         scrollWheelZoom={true}
       >
         <TileLayer
-          attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>'
-          url="https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png"
+          attribution={BASEMAP_ATTRIBUTION}
+          url={BASEMAP_URL}
+          subdomains={BASEMAP_SUBDOMAINS}
+          maxZoom={BASEMAP_MAX_ZOOM}
         />
         <MultiGPXLayers routes={routes} />
       </MapContainer>
