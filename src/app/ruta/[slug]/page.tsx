@@ -215,7 +215,7 @@ export default async function RouteDetailPage({
                 {/* Image Gallery in Sidebar */}
                 {route.mainCarouselCollection?.items &&
                   route.mainCarouselCollection.items.length > 0 && (
-                    <div id="galeria" className="hidden">
+                    <div id="galeria">
                       <AnimatedSection delay={300}>
                         <AssetGrid
                           assets={route.mainCarouselCollection.items}
