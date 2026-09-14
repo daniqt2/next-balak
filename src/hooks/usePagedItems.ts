@@ -1,44 +1,49 @@
 'use client';
 
 import { useCallback, useEffect, useRef, useState } from 'react';
-import type { RouteGroup } from '@/contentful-types';
 
-interface UseRouteGroupPagesOptions {
-  /** Groups rendered on the server for the first paint. */
-  initialGroups: RouteGroup[];
-  /** How many groups exist in Contentful overall. */
+interface UsePagedItemsOptions<T> {
+  /** Items rendered on the server for the first paint. */
+  initialItems: T[];
+  /** How many items exist upstream overall. */
   total: number;
-  /** Groups per page. */
+  /** Items per page — batches are fetched two pages at a time. */
   pageSize: number;
+  /** Endpoint accepting ?skip=&limit= and returning { items, total }. */
+  endpoint: string;
+  /** Stable identity, used to drop duplicates across batches. */
+  idOf: (item: T) => string;
 }
 
-interface BatchResponse {
-  items: RouteGroup[];
+interface BatchResponse<T> {
+  items: T[];
   total: number;
 }
 
 /**
- * Keeps every loaded route group in memory so page changes are instant, and
- * pulls the next batch in the background before it is needed.
+ * Keeps every loaded item in memory so page changes are instant, and pulls the
+ * next batch in the background before it is needed.
  *
  * Filters run over the loaded array, so the remaining batches are also fetched
  * on idle after the first paint — otherwise filtering would silently only
  * search the first page.
  */
-export function useRouteGroupPages({
-  initialGroups,
+export function usePagedItems<T>({
+  initialItems,
   total,
   pageSize,
-}: UseRouteGroupPagesOptions) {
-  const [groups, setGroups] = useState<RouteGroup[]>(initialGroups);
+  endpoint,
+  idOf,
+}: UsePagedItemsOptions<T>) {
+  const [items, setItems] = useState<T[]>(initialItems);
   const [isLoadingMore, setIsLoadingMore] = useState(false);
   /** Guards against firing the same skip twice (StrictMode double-effect included). */
   const requestedSkips = useRef(new Set<number>([0]));
 
-  const hasAll = groups.length >= total;
+  const hasAll = items.length >= total;
 
   const loadNextBatch = useCallback(async () => {
-    const skip = groups.length;
+    const skip = items.length;
     if (skip >= total || requestedSkips.current.has(skip)) return;
 
     requestedSkips.current.add(skip);
@@ -46,26 +51,26 @@ export function useRouteGroupPages({
 
     try {
       const response = await fetch(
-        `/api/route-groups?skip=${skip}&limit=${pageSize * 2}`
+        `${endpoint}?skip=${skip}&limit=${pageSize * 2}`
       );
       if (!response.ok) throw new Error(`HTTP ${response.status}`);
 
-      const batch: BatchResponse = await response.json();
+      const batch: BatchResponse<T> = await response.json();
       if (!batch.items?.length) return;
 
-      setGroups((current) => {
-        const seen = new Set(current.map((g) => g.sys.id));
-        return [...current, ...batch.items.filter((g) => !seen.has(g.sys.id))];
+      setItems((current) => {
+        const seen = new Set(current.map(idOf));
+        return [...current, ...batch.items.filter((i) => !seen.has(idOf(i)))];
       });
     } catch (error) {
       // A failed prefetch is not fatal: the user still has every loaded page.
       // Drop the guard so a later attempt can retry this skip.
       requestedSkips.current.delete(skip);
-      console.error('[useRouteGroupPages] prefetch failed', error);
+      console.error(`[usePagedItems] prefetch failed for ${endpoint}`, error);
     } finally {
       setIsLoadingMore(false);
     }
-  }, [groups.length, total, pageSize]);
+  }, [items.length, total, pageSize, endpoint, idOf]);
 
   // Pull the rest in once the first paint is done, one batch at a time.
   useEffect(() => {
@@ -89,5 +94,5 @@ export function useRouteGroupPages({
     };
   }, [hasAll, loadNextBatch]);
 
-  return { groups, hasAll, isLoadingMore, loadNextBatch };
+  return { items, hasAll, isLoadingMore, loadNextBatch };
 }

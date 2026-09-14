@@ -3,9 +3,10 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import type { RouteGroup } from '@/contentful-types';
-import RouteGroupPagedGrid from '@/components/rutas/RouteGroupPagedGrid';
+import PagedGrid from '@/components/ui/PagedGrid';
+import RouteGroupDisplay from '@/components/lists/RouteGroupDisplay';
 import AnimatedSection from '@/components/ui/AnimatedSection';
-import { useRouteGroupPages } from '@/hooks/useRouteGroupPages';
+import { usePagedItems } from '@/hooks/usePagedItems';
 import { ROUTE_GROUP_FILTERS, hasRouteGroupTag } from '@/lib/route-group-tags';
 
 const PAGE_SIZE = 8;
@@ -43,10 +44,12 @@ export default function RouteGroupsWithFilters({
 }: RouteGroupsWithFiltersProps) {
   const [selectedTagId, setSelectedTagId] = useState<string | null>(null);
 
-  const { groups } = useRouteGroupPages({
-    initialGroups: routeGroups,
+  const { items: groups } = usePagedItems<RouteGroup>({
+    initialItems: routeGroups,
     total,
     pageSize: PAGE_SIZE,
+    endpoint: '/api/route-groups',
+    idOf: (group) => group.sys.id,
   });
 
   const selectedFilter = ROUTE_GROUP_FILTERS.find((f) => f.id === selectedTagId);
@@ -118,10 +121,16 @@ export default function RouteGroupsWithFilters({
           No hay colecciones con este filtro.
         </p>
       ) : (
-        <RouteGroupPagedGrid
-          groups={filtered}
+        <PagedGrid<RouteGroup>
+          items={filtered}
           pageSize={PAGE_SIZE}
           resetKey={selectedTagId ?? 'all'}
+          gridClassName="grid grid-cols-2 lg:grid-cols-4 gap-4"
+          keyFor={(group) => group.sys.id}
+          renderItem={(group) => (
+            <RouteGroupDisplay routeGroup={group} revealOnScroll={false} />
+          )}
+          label="Paginación de colecciones"
         />
       )}
     </div>

@@ -79,19 +79,22 @@ module.exports = {
           '0%': { opacity: '0', transform: 'translateY(12px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
-        'page-in-right': {
-          '0%': { opacity: '0', transform: 'translateX(6%)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
+        /* Dissolve: the outgoing page fades away on top of the incoming one,
+           which sits underneath already opaque. Because only one layer changes
+           opacity there is no mid-point dip and no blank frame. */
+        'page-fade-out': {
+          '0%': { opacity: '1' },
+          '100%': { opacity: '0' },
         },
-        'page-in-left': {
-          '0%': { opacity: '0', transform: 'translateX(-6%)' },
-          '100%': { opacity: '1', transform: 'translateX(0)' },
+        'page-fade-in': {
+          '0%': { opacity: '0.4', transform: 'scale(0.995)' },
+          '100%': { opacity: '1', transform: 'scale(1)' },
         },
       },
       animation: {
         'fade-in-up': 'fade-in-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both',
-        'page-in-right': 'page-in-right 0.45s cubic-bezier(0.22, 1, 0.36, 1) both',
-        'page-in-left': 'page-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'page-fade-out': 'page-fade-out 0.55s cubic-bezier(0.4, 0, 0.2, 1) both',
+        'page-fade-in': 'page-fade-in 0.55s cubic-bezier(0.4, 0, 0.2, 1) both',
       },
     },
   },

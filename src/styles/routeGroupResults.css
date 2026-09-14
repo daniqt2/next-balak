@@ -92,8 +92,8 @@
 
 /* The slide is decorative — skip it when the user asked for less motion. */
 @media (prefers-reduced-motion: reduce) {
-  .animate-page-in-right,
-  .animate-page-in-left {
+  .animate-page-fade-in,
+  .animate-page-fade-out {
     animation: none;
   }
 }

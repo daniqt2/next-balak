@@ -3,6 +3,9 @@
 import dynamic from 'next/dynamic';
 import { Mountain } from 'lucide-react';
 
+import PagedGrid from '@/components/ui/PagedGrid';
+import { usePagedItems } from '@/hooks/usePagedItems';
+
 import CollDisplay from '@/components/cards/CollDisplay';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import type { Coll } from '@/contentful-types';
@@ -20,12 +23,27 @@ const AreaMap = dynamic(() => import('@/components/map/AreaMap'), {
   ),
 });
 
+const PAGE_SIZE = 8;
+
 interface PuertosClientProps {
   colls: Coll[];
   mapColls: Coll[];
+  /** How many puertos exist overall, so the rest can be prefetched. */
+  total: number;
 }
 
-export default function PuertosClient({ colls, mapColls }: PuertosClientProps) {
+export default function PuertosClient({
+  colls,
+  mapColls,
+  total,
+}: PuertosClientProps) {
+  const { items } = usePagedItems<Coll>({
+    initialItems: colls,
+    total,
+    pageSize: PAGE_SIZE,
+    endpoint: '/api/colls',
+    idOf: (coll) => coll.sys.id,
+  });
   return (
     <div className="min-h-screen mt-6 md:mt-10" style={{ paddingTop: '64px' }}>
       <Breadcrumbs items={[{ label: 'Puertos' }]} backHref="/" />
@@ -42,20 +60,27 @@ export default function PuertosClient({ colls, mapColls }: PuertosClientProps) {
             <h2 className="text-2xl font-bold text-charcoal-900 mb-6 uppercase">
               Nuestros ultimos puertos
             </h2>
-            {colls.length > 0 ? (
-              <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-4">
-                {colls.map((coll, index) => (
-                  <div
-                    key={coll?.sys.id}
-                    className="fade-in-up-item"
-                    style={{
-                      animationDelay: `${index * 100}ms`,
-                    }}
-                  >
-                    {coll ? <CollDisplay coll={coll} index={index} /> : null}
-                  </div>
-                ))}
-              </div>
+            {items.length > 0 ? (
+              <>
+                <p className="mb-6 text-sm text-charcoal-600">
+                  {items.length}{' '}
+                  {items.length === 1
+                    ? 'puerto encontrado'
+                    : 'puertos encontrados'}
+                </p>
+
+                <PagedGrid<Coll>
+                  items={items}
+                  pageSize={PAGE_SIZE}
+                  resetKey="all"
+                  gridClassName="grid grid-cols-2 lg:grid-cols-4 gap-4"
+                  keyFor={(coll) => coll.sys.id}
+                  renderItem={(coll, index) => (
+                    <CollDisplay coll={coll} index={index} />
+                  )}
+                  label="Paginación de puertos"
+                />
+              </>
             ) : (
               <div className="text-center py-12">
                 <Mountain className="w-16 h-16 text-gray-600 mx-auto mb-4" />

@@ -6,6 +6,8 @@ import { Coffee, ChevronDown, X } from 'lucide-react';
 
 import type { InterestSpot } from '@/contentful-types';
 import CoffeeStopCard from '@/components/cards/CoffeeStopCard';
+import PagedGrid from '@/components/ui/PagedGrid';
+import { usePagedItems } from '@/hooks/usePagedItems';
 import AnimatedSection from '@/components/ui/AnimatedSection';
 import PageHeader from '@/components/headers/pageHeader';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
@@ -21,50 +23,55 @@ const AreaMap = dynamic(() => import('@/components/map/AreaMap'), {
   ),
 });
 
-const PAGE_SIZE = 10;
+const PAGE_SIZE = 9;
 
 interface CoffeeSpotsClientProps {
   coffeeSpots: InterestSpot[];
+  /** Full set for the map, independent of the grid's paging. */
+  mapSpots: InterestSpot[];
+  /** How many paradas exist overall, so the rest can be prefetched. */
+  total: number;
 }
 
 export default function CoffeeSpotsClient({
   coffeeSpots,
+  mapSpots,
+  total,
 }: CoffeeSpotsClientProps) {
   const [selectedTags, setSelectedTags] = useState<string[]>([]);
-  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const { items: spots } = usePagedItems<InterestSpot>({
+    initialItems: coffeeSpots,
+    total,
+    pageSize: PAGE_SIZE,
+    endpoint: '/api/coffee-spots',
+    idOf: (spot) => spot.sys.id,
+  });
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   // Derive unique tags from all spots
   const allTags = useMemo(() => {
     const map = new Map<string, string>();
-    coffeeSpots.forEach(spot => {
+    spots.forEach(spot => {
       spot.contentfulMetadata?.tags?.forEach(tag => {
         if (tag?.id && tag?.name) map.set(tag.id, tag.name);
       });
     });
     return Array.from(map.entries()).map(([id, name]) => ({ id, name }));
-  }, [coffeeSpots]);
+  }, [spots]);
 
   const hasTags = allTags.length > 0;
 
   // Filter spots by selected tags (OR logic — match any selected)
   const filtered = useMemo(() => {
-    if (selectedTags.length === 0) return coffeeSpots;
-    return coffeeSpots.filter(spot =>
+    if (selectedTags.length === 0) return spots;
+    return spots.filter(spot =>
       spot.contentfulMetadata?.tags?.some(
         tag => tag?.id && selectedTags.includes(tag.id)
       )
     );
-  }, [coffeeSpots, selectedTags]);
-
-  const visible = filtered.slice(0, visibleCount);
-  const hasMore = visibleCount < filtered.length;
-
-  // Reset pagination when filter changes
-  useEffect(() => {
-    setVisibleCount(PAGE_SIZE);
-  }, [selectedTags]);
+  }, [spots, selectedTags]);
 
   // Close dropdown on outside click
   useEffect(() => {
@@ -99,7 +106,7 @@ export default function CoffeeSpotsClient({
           description="Descubre los mejores lugares para tomar café durante tus rutas de ciclismo"
         />
 
-        <AreaMap coffeePoints={coffeeSpots} />
+        <AreaMap coffeePoints={mapSpots} />
 
         <AnimatedSection delay={300}>
           <div className="mb-8">
@@ -163,34 +170,26 @@ export default function CoffeeSpotsClient({
               )}
             </div>
 
-            {visible.length > 0 ? (
+            {filtered.length > 0 ? (
               <>
-                <div
-                  key={selectedTags.join(',')}
-                  className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
-                >
-                  {visible.map((coffeeSpot, index) => (
-                    <div
-                      key={coffeeSpot?.sys.id}
-                      className="animate-fade-in-up"
-                      style={{ animationDelay: `${Math.min(index * 40, 160)}ms` }}
-                    >
-                      <CoffeeStopCard coffeeStop={coffeeSpot} index={index} />
-                    </div>
-                  ))}
-                </div>
+                <p className="mb-6 text-sm text-charcoal-600">
+                  {filtered.length}{' '}
+                  {filtered.length === 1
+                    ? 'parada encontrada'
+                    : 'paradas encontradas'}
+                </p>
 
-                {hasMore && (
-                  <div className="mt-10 flex justify-center">
-                    <button
-                      type="button"
-                      onClick={() => setVisibleCount(c => c + PAGE_SIZE)}
-                      className="rounded-lg bg-balak-500 px-8 py-3 font-semibold text-charcoal-900 hover:bg-balak-400 transition-colors"
-                    >
-                      Cargar más ({filtered.length - visibleCount} restantes)
-                    </button>
-                  </div>
-                )}
+                <PagedGrid<InterestSpot>
+                  items={filtered}
+                  pageSize={PAGE_SIZE}
+                  resetKey={selectedTags.join(',') || 'all'}
+                  gridClassName="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+                  keyFor={(spot) => spot.sys.id}
+                  renderItem={(spot, index) => (
+                    <CoffeeStopCard coffeeStop={spot} index={index} />
+                  )}
+                  label="Paginación de paradas"
+                />
               </>
             ) : (
               <div className="text-center py-12">
