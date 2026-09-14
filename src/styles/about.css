@@ -1,0 +1,95 @@
+/* Sobre nosotros: intro split, trait row, philosophy and community band. */
+
+.about-cta {
+  @apply inline-flex items-center gap-2 rounded-full px-6 py-3;
+  @apply bg-charcoal-900 text-sm font-semibold uppercase tracking-[0.12em] text-white;
+  @apply transition-colors hover:bg-charcoal-700;
+}
+
+.about-cta--ghost {
+  @apply border border-charcoal-400 bg-transparent text-charcoal-800;
+  @apply hover:border-charcoal-900 hover:bg-charcoal-900 hover:text-white;
+}
+
+.about-photo {
+  @apply relative aspect-[4/3] w-full overflow-hidden rounded-2xl shadow-xl;
+  @apply bg-charcoal-800;
+
+  /* Scrim under the caption — the photo's sky is too bright for white text. */
+  &::after {
+    content: '';
+    @apply absolute inset-x-0 bottom-0 h-2/5 pointer-events-none;
+    background: linear-gradient(
+      to top,
+      rgba(15, 16, 18, 0.75),
+      rgba(15, 16, 18, 0.25) 45%,
+      transparent
+    );
+  }
+}
+
+.about-photo__caption {
+  @apply absolute bottom-5 right-5 z-10 text-right;
+  @apply text-xs font-semibold uppercase leading-relaxed tracking-[0.18em] text-white;
+}
+
+/* Trait row — dividers only between columns, and only once they sit side by side. */
+.about-traits {
+  @apply mt-16 grid gap-10 border-t border-charcoal-300/60 pt-12 md:grid-cols-3 md:gap-8;
+}
+
+.about-trait {
+  @apply flex items-start gap-4 md:px-6;
+
+  & + & {
+    @apply md:border-l md:border-charcoal-300/60;
+  }
+}
+
+.about-trait__badge {
+  @apply flex h-14 w-14 shrink-0 items-center justify-center rounded-full;
+  /* Dark glyph on balak green: white would sit at ~1.7:1 on this lime. */
+  @apply bg-balak-500 text-charcoal-900;
+}
+
+.about-trait__title {
+  @apply text-sm font-semibold uppercase tracking-[0.14em] text-charcoal-900;
+}
+
+.about-trait__text {
+  @apply mt-2 text-sm leading-relaxed text-charcoal-600;
+}
+
+.about-philosophy {
+  @apply mt-16 grid gap-8 border-t border-charcoal-300/60 pt-12;
+  @apply lg:grid-cols-[minmax(0,20rem)_minmax(0,1fr)] lg:gap-16;
+}
+
+.about-highlight {
+  @apply rounded bg-charcoal-900 px-1.5 py-0.5 font-semibold text-balak-400;
+}
+
+.about-community {
+  @apply mt-16 flex flex-col gap-6 rounded-2xl px-6 py-8 md:px-10 md:py-10;
+  @apply bg-charcoal-900 text-white;
+  @apply md:flex-row md:items-center md:justify-between;
+
+  /* Eyebrow and headline invert against the dark panel. */
+  p:first-child {
+    @apply text-white/60;
+  }
+
+  .about-community__title {
+    @apply text-white;
+  }
+
+  /* Solid white primary, transparent outline secondary. */
+  .about-cta {
+    @apply bg-white text-charcoal-900 hover:bg-balak-500 hover:text-charcoal-900;
+  }
+
+  .about-cta--ghost {
+    @apply border border-white/50 bg-transparent text-white;
+    @apply hover:border-white hover:bg-white hover:text-charcoal-900;
+  }
+}

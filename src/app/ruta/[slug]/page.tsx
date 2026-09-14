@@ -108,7 +108,7 @@ export default async function RouteDetailPage({
                     <h2 className="text-3xl md:text-5xl font-bold text-charcoal-900 mb-4 uppercase">
                       Descripción
                     </h2>
-                    <div className="text-charcoal-500 text-lg leading-relaxed whitespace-pre-line">
+                    <div className="text-charcoal-600 text-lg leading-relaxed whitespace-pre-line">
                       {route.description}
                     </div>
                   </div>

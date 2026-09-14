@@ -83,8 +83,8 @@ export default function HomeHero() {
         <div className="home-hero__mobile">
           <div className="home-hero__mobile-hero">
             <Image
-              src="/balak-home.jpg"
-              alt="Cycling route landscape"
+              src="/balak-home-road-v3.jpg"
+              alt="Dos ciclistas rodando por una carretera de montaña"
               fill
               priority
               quality={95}
@@ -112,12 +112,8 @@ export default function HomeHero() {
                 <span>Puertos</span>
                 <ChevronRight className="home-hero__nav-chevron" />
               </a>
-              <a
-                href="https://gpx.balakride.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <span>Editor GPX</span>
+              <a href="/colaboradores">
+                <span>Colaboradores</span>
                 <ChevronRight className="home-hero__nav-chevron" />
               </a>
               <a href="/coffee-spots">
@@ -136,8 +132,8 @@ export default function HomeHero() {
           <div className="home-hero__desktop-image-wrap">
             <div className="home-hero__desktop-image-inner">
               <Image
-                src="/balak-home.jpg"
-                alt="Cycling route landscape"
+                src="/balak-home-road-v3.jpg"
+                alt="Dos ciclistas rodando por una carretera de montaña"
                 fill
                 priority
                 quality={95}
@@ -153,7 +149,7 @@ export default function HomeHero() {
                 <Logo
                   width="100%"
                   height="auto"
-                  color="#111"
+                  color="#fff"
                   className="scale-[2.2] xl:scale-[2.8] origin-left drop-shadow-sm"
                 />
               </div>
@@ -165,37 +161,35 @@ export default function HomeHero() {
                 className="nav-link group text-2xl font-anton tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Rutas</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-balak-500 to-balak-500/40 transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
               </a>
               <a
                 href="/puertos"
                 className="nav-link group text-2xl font-anton tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Puertos</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-balak-500 to-balak-500/40 transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
               </a>
               <a
-                href="https://gpx.balakride.com/"
-                target="_blank"
-                rel="noopener noreferrer"
+                href="/colaboradores"
                 className="nav-link group text-2xl font-anton tracking-wider cursor-pointer relative inline-block"
               >
-                <span className="relative z-10">Editor GPX</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
+                <span className="relative z-10">Colaboradores</span>
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-balak-500 to-balak-500/40 transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
               </a>
               <a
                 href="/coffee-spots"
                 className="nav-link group text-2xl font-anton tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Donde parar</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-balak-500 to-balak-500/40 transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
               </a>
               <a
                 href="/about-us"
                 className="nav-link group text-2xl font-anton tracking-wider cursor-pointer relative inline-block"
               >
                 <span className="relative z-10">Sobre Nosotros</span>
-                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-[#111] to-[#666] transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
+                <span className="absolute bottom-0 left-0 w-0 h-[2px] bg-gradient-to-r from-balak-500 to-balak-500/40 transition-[width] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)] origin-left group-hover:w-full"></span>
               </a>
             </nav>
 

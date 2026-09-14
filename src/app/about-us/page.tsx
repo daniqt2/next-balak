@@ -1,243 +1,201 @@
-'use client';
-
-import AnimatedSection from '@/components/ui/AnimatedSection';
-import { useRouteCount } from '@/hooks/useRouteCount';
-import {
-  Camera,
-  Coffee,
-  Heart,
-  Instagram,
-  Mail,
-  Mountain,
-  Users,
-} from 'lucide-react';
+import type { Metadata } from 'next';
 import Image from 'next/image';
+import Link from 'next/link';
+import { ArrowRight, Camera, Coffee, Instagram, Mail, Mountain } from 'lucide-react';
+import AnimatedSection from '@/components/ui/AnimatedSection';
+import Breadcrumbs from '@/components/ui/Breadcrumbs';
+
+export const metadata: Metadata = {
+  title: 'Nosotros',
+  description:
+    'Somos un grupo de amigos apasionados por la bici. Rutas reales, puertos míticos y las mejores paradas de café.',
+};
+
+const TRAITS = [
+  {
+    icon: Camera,
+    title: 'Experiencias reales',
+    text: 'Todas las rutas que compartimos las hemos hecho nosotros. Hemos pasado por las cafeterías y los baches de cada ruta.',
+  },
+  {
+    icon: Mountain,
+    title: 'Caza-puertos',
+    text: 'Siempre buscando carreteras escondidas y subidas que aún no están en Strava.',
+  },
+  {
+    icon: Coffee,
+    title: 'Cafeteros',
+    text: 'Los que saben exactamente dónde está el mejor café… y el pastel más grande.',
+  },
+];
 
 export default function AboutUsPage() {
-  const { count: routeCount, loading: routeCountLoading } = useRouteCount();
-
   return (
     <div className="min-h-screen" style={{ paddingTop: '64px' }}>
-      {/* Hero Section */}
-      <div className="relative h-96 flex items-center justify-center overflow-hidden">
-        <Image
-          src="/about-optimized.jpg"
-          alt="Grupo de amigos ciclistas"
-          fill
-          className="object-cover"
-          priority
-          sizes="100vw"
-          quality={85}
-          placeholder="blur"
-          blurDataURL="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAYEBQYFBAYGBQYHBwYIChAKCgkJChQODwwQFxQYGBcUFhYaHSUfGhsjHBYWICwgIyYnKSopGR8tMC0oMCUoKSj/2wBDAQcHBwoIChMKChMoGhYaKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCgoKCj/wAARCAAIAAoDASIAAhEBAxEB/8QAFQABAQAAAAAAAAAAAAAAAAAAAAv/xAAhEAACAQMDBQAAAAAAAAAAAAABAgMABAUGIWGRkqGx0f/EABUBAQEAAAAAAAAAAAAAAAAAAAMF/8QAGhEAAgIDAAAAAAAAAAAAAAAAAAECEgMRkf/aAAwDAQACEQMRAD8AltJagyeH0AthI5xdrLcNM91BF5pX2HaH9bcfaSXWGaRmknyJckliyjqTzSlT54b6bk+h0R//2Q=="
-        />
-        <div className="absolute inset-0 bg-black/40"></div>
-        <div className="relative text-center text-white z-10">
-          <h1 className="font-anton mb-4 text-7xl">NOSOTROS</h1>
-          <p className="text-xl text-balak-200 max-w-2xl mx-auto">
-            RUTAS · PUERTOS · CAFÉ
-          </p>
-        </div>
-      </div>
+      <Breadcrumbs items={[{ label: 'Sobre nosotros' }]} backHref="/" />
 
-      {/* Contact icons — below header, before first paragraph */}
-      <div className="container mx-auto px-4 pt-8 pb-4">
-        <div className="flex items-center justify-center gap-6">
-          <a
-            href="https://instagram.com/balak.ride"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="flex items-center gap-2 text-charcoal-800 hover:text-balak-600 transition-colors"
-            aria-label="Instagram"
-          >
-            <Instagram className="w-6 h-6" />
-            <span className="text-sm font-medium">@balak.ride</span>
-          </a>
-          <a
-            href="mailto:balak.ride@gmail.com"
-            className="flex items-center gap-2 text-charcoal-800 hover:text-balak-600 transition-colors"
-            aria-label="Email"
-          >
-            <Mail className="w-6 h-6" />
-            <span className="text-sm font-medium">Contactar</span>
-          </a>
-        </div>
-      </div>
-
-      <div className="container mx-auto px-4 py-16">
-        {/* Mission Section */}
+      <div className="container mx-auto px-4 pb-16 md:pb-24">
+        {/* Intro: copy left, team photo right */}
         <AnimatedSection delay={100}>
-          <div className="text-left mb-16">
-            <p className="text-lg text-charcoal-800 max-w-4xl mx-auto leading-relaxed">
-              Somos un grupo de 3 amigos apasionados por la bici, sobre todo de
-              carretera. Nos gusta subir puertos míticos, perdernos por
-              carreteras secundarias y descubrir sitios que merece la pena
-              conocer pedaleando.
-              <br />
-              <br />
-              En <b>Balak</b> compartimos rutas reales, probadas por nosotros:
-              los puertos que nos retan y los lugares donde siempre paramos a
-              recuperar.
-              <br />
-              <br />
-              Si para ti la bici es una forma de explorar y disfrutar el camino,
-              estás en casa.
-            </p>
-          </div>
-        </AnimatedSection>
+          <div className="grid gap-10 lg:grid-cols-2 lg:items-center lg:gap-16">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.22em] text-charcoal-600">
+                Sobre nosotros
+              </p>
+              <h1 className="mt-4 font-anton uppercase text-charcoal-900 text-[clamp(2.6rem,5vw,4.25rem)] leading-[0.9] tracking-[-0.02em]">
+                Ciclismo real,
+                <br />
+                sin filtros.
+              </h1>
 
-        {/* Team Section */}
-        <AnimatedSection delay={300}>
-          <div className="mb-16">
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-8 py-12">
-              <div className="text-center">
-                <div className="w-32 h-32 bg-balak-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Camera className="w-16 h-16 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-charcoal-800 mb-2">
-                  Experiencias Reales
-                </h3>
-                <p className="text-charcoal-800">
-                  Todas las rutas que compartimos las hemos hecho nosotros.
-                  Hemos pasado por las cafeterías y los baches de cada ruta..
+              <div className="mt-6 space-y-4 text-base md:text-lg leading-relaxed text-charcoal-600">
+                <p>
+                  Somos un grupo de 3 amigos apasionados por la bici, sobre todo
+                  de carretera. Nos gusta subir puertos míticos, perdernos por
+                  carreteras secundarias y descubrir sitios que merece la pena
+                  conocer pedaleando.
+                </p>
+                <p>
+                  En <strong className="font-semibold text-charcoal-900">Balak</strong>{' '}
+                  compartimos rutas reales, probadas por nosotros: los puertos
+                  que nos retan y los lugares donde siempre paramos a recuperar.
+                  Si para ti la bici es una forma de explorar y disfrutar el
+                  camino, estás en casa.
                 </p>
               </div>
 
-              <div className="text-center">
-                <div className="w-32 h-32 bg-balak-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Mountain className="w-16 h-16 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-charcoal-900 mb-2">
-                  Caza-Puertos
-                </h3>
-                <p className="text-charcoal-800">
-                  Siempre buscando carreteras escondidas y subidas que aún no
-                  están en Strava.
-                </p>
-              </div>
-
-              <div className="text-center">
-                <div className="w-32 h-32 bg-balak-600 rounded-full mx-auto mb-4 flex items-center justify-center">
-                  <Coffee className="w-16 h-16 text-white" />
-                </div>
-                <h3 className="text-xl font-semibold text-charcoal-900 mb-2">
-                  Cafeteros
-                </h3>
-                <p className="text-charcoal-800">
-                  Los que saben exactamente dónde está el mejor café… y el
-                  pastel más grande.
-                </p>
-              </div>
+              <Link href="/rutas" className="about-cta mt-8">
+                Nuestras rutas
+                <ArrowRight size={18} aria-hidden="true" />
+              </Link>
             </div>
+
+            <figure className="about-photo">
+              <Image
+                src="/balak-team-full.jpg"
+                alt="El equipo de BALAK RIDE con sus bicicletas en la Valle del Lozoya"
+                fill
+                priority
+                quality={90}
+                sizes="(max-width: 1024px) 100vw, 50vw"
+                className="object-cover"
+              />
+              <figcaption className="about-photo__caption">
+                Rutas
+                <br />
+                Puertos
+                <br />
+                Café
+              </figcaption>
+            </figure>
           </div>
         </AnimatedSection>
 
-        {/* What is BALAK Section */}
+        {/* What defines us */}
         <AnimatedSection delay={200}>
-          <div className="mb-16">
-            <div className="max-w-3xl mx-auto">
-              {/* Icon and Title */}
-              <div className="text-center mb-12">
-                <div className="flex justify-center mb-6">
-                  <Mountain
-                    size={64}
-                    className="text-balak-400"
-                    strokeWidth={1.5}
-                  />
+          <div className="about-traits">
+            {TRAITS.map(({ icon: Icon, title, text }) => (
+              <div key={title} className="about-trait">
+                <span className="about-trait__badge" aria-hidden="true">
+                  <Icon size={26} strokeWidth={1.75} />
+                </span>
+                <div>
+                  <h2 className="about-trait__title">{title}</h2>
+                  <p className="about-trait__text">{text}</p>
                 </div>
-                <h2 className="font-anton text-4xl sm:text-5xl md:text-6xl font-extrabold leading-tight text-charcoal-800">
-                  ¿Qué significa BALAK?
-                </h2>
               </div>
+            ))}
+          </div>
+        </AnimatedSection>
 
-              {/* Content */}
-              <div className="text-charcoal-800 text-base sm:text-lg md:text-2xl leading-relaxed space-y-8">
-                <p className="text-center sm:text-left">
-                  BALAK nace de una palabra del maya yucateco con varios
-                  significados, pero todos conectan con la misma idea: el{' '}
-                  <span className="text-balak-400 font-semibold bg-charcoal-800 p-1">
-                    movimiento
-                  </span>
-                  .
-                </p>
+        {/* Philosophy: the meaning of BALAK */}
+        <AnimatedSection delay={200}>
+          <div className="about-philosophy">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.22em] text-charcoal-600">
+                Nuestra filosofía
+              </p>
+              <h2 className="mt-4 font-anton uppercase text-charcoal-900 text-[clamp(2rem,3.6vw,3.25rem)] leading-[0.92] tracking-[-0.02em]">
+                ¿Qué significa
+                <br />
+                Balak?
+              </h2>
+            </div>
 
-                <p className="text-center sm:text-left">
-                  Por un lado,{' '}
-                  <em className="text-balak-400 font-semibold not-italic bg-charcoal-800 p-1">
-                    balak
-                  </em>{' '}
-                  aparece como un verbo relacionado con volver o regresar. No
-                  como retroceder, sino como dar la vuelta, cerrar un ciclo y
-                  empezar otro. Algo muy parecido a lo que pasa cada vez que te
-                  subes a la bici: sales, te pierdes un poco y siempre vuelves
-                  distinto.
-                </p>
-
-                <p className="text-center sm:text-left">
-                  También está ligado al acto de{' '}
-                  <span className="text-balak-400 font-semibold bg-charcoal-800 p-1">
-                    rodar
-                  </span>
-                  . En expresiones tradicionales se usa para hablar de la
-                  rotación y del giro continuo, como el de una rueda. Y ahí fue
-                  donde todo encajó: la bici no avanza sin girar, y nosotros
-                  tampoco.
-                </p>
-
-                <p className="text-center sm:text-left">
-                  Eso es lo que representa BALAK:{' '}
-                  <span className="text-balak-400 font-semibold bg-charcoal-800 p-1">
-                    rodar
-                  </span>{' '}
-                  sin prisa, repetir rutas, volver a los mismos sitios y dar
-                  vueltas sin un destino exacto. No moverse por obligación, sino
-                  porque apetece.
-                </p>
-              </div>
+            <div className="space-y-5 text-base md:text-lg leading-relaxed text-charcoal-600">
+              <p>
+                BALAK nace de una palabra del maya yucateco con varios
+                significados, pero todos conectan con la misma idea: el{' '}
+                <span className="about-highlight">movimiento</span>.
+              </p>
+              <p>
+                Por un lado, <span className="about-highlight">balak</span>{' '}
+                aparece como un verbo relacionado con volver o regresar. No como
+                retroceder, sino como dar la vuelta, cerrar un ciclo y empezar
+                otro. Algo muy parecido a lo que pasa cada vez que te subes a la
+                bici: sales, te pierdes un poco y siempre vuelves distinto.
+              </p>
+              <p>
+                También está ligado al acto de{' '}
+                <span className="about-highlight">rodar</span>. En expresiones
+                tradicionales se usa para hablar de la rotación y del giro
+                continuo, como el de una rueda. Y ahí fue donde todo encajó: la
+                bici no avanza sin girar, y nosotros tampoco.
+              </p>
+              <p>
+                Eso es lo que representa BALAK:{' '}
+                <span className="about-highlight">rodar</span> sin prisa,
+                repetir rutas, volver a los mismos sitios y dar vueltas sin un
+                destino exacto. No moverse por obligación, sino porque apetece.
+              </p>
             </div>
           </div>
         </AnimatedSection>
 
-        {/* Contact Section */}
-        <AnimatedSection delay={400}>
-          <div className="text-center bg-charcoal-800 rounded-xl p-12">
-            <h2 className="text-3xl font-bold text-white mb-6">
-              ¡Conecta con Nosotros!
-            </h2>
-            <p className="text-xl text-gray-300 mb-8 max-w-2xl mx-auto">
-              Síguenos en Instagram para ver nuestras aventuras en tiempo real y
-              contáctanos si tienes alguna pregunta.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
+        {/* Community band */}
+        <AnimatedSection delay={300}>
+          <div className="about-community">
+            <div>
+              <p className="text-xs font-medium uppercase tracking-[0.22em]">
+                Conecta con nosotros
+              </p>
+              <p className="about-community__title mt-2 font-anton uppercase text-[clamp(1.6rem,2.8vw,2.5rem)] leading-[0.95]">
+                Más rutas, mejores historias.
+              </p>
+            </div>
+
+            <div className="flex flex-wrap items-center gap-3">
               <a
                 href="https://instagram.com/balak.ride"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="lex items-center gap-3 border border-balak-400 text-balak-400 hover:bg-balak-400 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300"
+                className="about-cta"
               >
-                <Instagram className="w-6 h-6" />
+                <Instagram size={18} aria-hidden="true" />
+                Síguenos en Instagram
               </a>
               <a
                 href="mailto:balak.ride@gmail.com"
-                className="flex items-center gap-3 border border-balak-400 text-balak-400 hover:bg-balak-400 hover:text-white px-8 py-4 rounded-lg font-semibold transition-all duration-300"
+                className="about-cta about-cta--ghost"
               >
-                <Mail className="w-6 h-6" />
+                <Mail size={18} aria-hidden="true" />
+                Contactar
               </a>
             </div>
           </div>
         </AnimatedSection>
 
         {/* Privacy / Analytics notice */}
-        <AnimatedSection delay={500}>
-          <div className="mt-16 pt-8 border-t border-charcoal-700 text-center">
-            <p className="text-sm text-gray-500 max-w-xl mx-auto">
-              Utilizamos análisis de uso (Vercel Analytics) para entender cómo
-              se usa la web y mejorarla. No usamos cookies para este análisis.{' '}
+        <AnimatedSection delay={400}>
+          <div className="mt-14 border-t border-charcoal-300/60 pt-8 text-center">
+            <p className="mx-auto max-w-xl text-sm text-charcoal-500">
+              Utilizamos análisis de uso (Vercel Analytics) para entender cómo se
+              usa la web y mejorarla. No usamos cookies para este análisis.{' '}
               <a
                 href="https://vercel.com/legal/privacy-policy"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="hover:underline"
+                className="underline underline-offset-4 hover:text-charcoal-800"
               >
                 Política de privacidad de Vercel
               </a>

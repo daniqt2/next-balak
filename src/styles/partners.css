@@ -1,0 +1,88 @@
+/* Colaboradores: photo left, brand + copy right, split by a hairline rule. */
+
+.partner-row {
+  @apply grid gap-6 py-10 lg:grid-cols-[minmax(0,1.35fr)_minmax(0,1fr)] lg:gap-14 lg:py-14;
+  @apply border-t border-charcoal-300/60;
+}
+
+/* Every panel is filled so all partners read at the same size. Transparent
+   PNG lockups get white; anything else gets #070707, the ground already baked
+   into those assets, so the panel edge is seamless. */
+.partner-row__media {
+  @apply relative aspect-[16/10] w-full overflow-hidden;
+  background-color: #070707;
+}
+
+.partner-row__media--png {
+  @apply bg-white;
+}
+
+/* Every lockup scales into this box. It is deliberately squatter than any
+   real logo (ratio ~1.87:1 against the 16/10 panel), so width is always the
+   limiting dimension and every logo renders at exactly the same width —
+   height then follows each logo's own aspect ratio. */
+.partner-row__logo {
+  @apply absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2;
+  @apply h-[60%] w-[70%];
+}
+
+.partner-row__placeholder {
+  @apply absolute inset-0 border border-charcoal-300/60 bg-white;
+}
+
+/* Marker colour follows its panel: dark on the white PNG ground, light on
+   the dark one. */
+.partner-row__number {
+  @apply absolute bottom-4 left-4 z-10 flex items-center gap-3;
+  @apply text-sm font-medium tabular-nums text-white/90;
+}
+
+.partner-row__rule {
+  @apply block h-px w-8 bg-white/70;
+}
+
+.partner-row__media--png {
+  .partner-row__number {
+    @apply text-charcoal-700;
+  }
+
+  .partner-row__rule {
+    @apply bg-charcoal-400;
+  }
+}
+
+.partner-row__body {
+  @apply flex flex-col justify-center;
+}
+
+.partner-row__eyebrow {
+  @apply text-sm font-semibold uppercase tracking-[0.22em] text-charcoal-900;
+}
+
+/* Stands in for a brand lockup — Partner has no logo asset. */
+.partner-row__wordmark {
+  @apply mt-3 font-anton uppercase leading-[0.9] text-charcoal-900;
+  @apply text-[clamp(2rem,3.2vw,3rem)];
+}
+
+.partner-row__description {
+  @apply mt-5 max-w-prose text-sm md:text-base leading-relaxed text-charcoal-600;
+}
+
+.partner-row__links {
+  @apply mt-8 flex flex-wrap items-center gap-x-8 gap-y-3;
+}
+
+.partner-row__link {
+  @apply inline-flex items-center gap-2 text-sm font-medium text-charcoal-800;
+  @apply transition-colors hover:text-charcoal-900;
+
+  span {
+    @apply underline underline-offset-4 decoration-charcoal-400;
+    @apply transition-colors;
+  }
+
+  &:hover span {
+    @apply decoration-balak-500;
+  }
+}

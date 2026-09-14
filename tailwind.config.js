@@ -79,9 +79,19 @@ module.exports = {
           '0%': { opacity: '0', transform: 'translateY(12px)' },
           '100%': { opacity: '1', transform: 'translateY(0)' },
         },
+        'page-in-right': {
+          '0%': { opacity: '0', transform: 'translateX(6%)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
+        'page-in-left': {
+          '0%': { opacity: '0', transform: 'translateX(-6%)' },
+          '100%': { opacity: '1', transform: 'translateX(0)' },
+        },
       },
       animation: {
         'fade-in-up': 'fade-in-up 0.5s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'page-in-right': 'page-in-right 0.45s cubic-bezier(0.22, 1, 0.36, 1) both',
+        'page-in-left': 'page-in-left 0.45s cubic-bezier(0.22, 1, 0.36, 1) both',
       },
     },
   },

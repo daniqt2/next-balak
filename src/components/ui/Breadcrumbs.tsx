@@ -51,8 +51,8 @@ export default function Breadcrumbs({
 
   const linkClass = isLight
     ? 'text-white/80 hover:text-white transition-colors'
-    : 'text-charcoal-500 hover:text-charcoal-900 transition-colors';
-  const mutedClass = isLight ? 'text-white/80' : 'text-charcoal-500';
+    : 'text-charcoal-600 hover:text-charcoal-900 transition-colors';
+  const mutedClass = isLight ? 'text-white/80' : 'text-charcoal-600';
   const currentClass = isLight
     ? 'font-medium text-white'
     : 'font-medium text-charcoal-900';
@@ -61,12 +61,12 @@ export default function Breadcrumbs({
     : 'text-charcoal-400 shrink-0';
   const wrapperClass = isLight
     ? 'flex items-center gap-2 text-sm text-white/80'
-    : 'flex items-center gap-2 text-sm text-charcoal-500';
+    : 'flex items-center gap-2 text-sm text-charcoal-600';
 
   return (
     <nav
       aria-label="Breadcrumb"
-      className="w-full pl-4 pr-4 py-2 sm:py-3 flex justify-start"
+      className="w-full px-4 pt-6 pb-3 sm:pt-8 sm:pb-4 flex justify-start"
     >
       <div className={wrapperClass}>
         {backHref != null && (

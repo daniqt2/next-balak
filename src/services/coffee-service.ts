@@ -135,7 +135,12 @@ export class CoffeeService {
    */
 
   async getCoffeeSpots(options: CoffeeServiceOptions = {}): Promise<Query> {
-    const { limit = 10, skip = 0, where, order } = options;
+    const {
+      limit = 10,
+      skip = 0,
+      where,
+      order = [InterestSpotOrder.SysPublishedAtDesc],
+    } = options;
 
     const finalWhere: InterestSpotFilter = {
       ...where,

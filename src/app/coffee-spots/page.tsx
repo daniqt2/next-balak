@@ -2,6 +2,9 @@ import { getCoffeeSpotsCached } from '@/lib/contentful-cache';
 import CoffeeSpotsClient from '@/components/coffee-spots/CoffeeSpotsClient';
 import type { InterestSpot } from '@/contentful-types';
 
+/** Revalidate every 10 min so new content appears without redeploy */
+export const revalidate = 600;
+
 export default async function CoffeeSpotsPage() {
   const data = await getCoffeeSpotsCached({ limit: 100 });
   const coffeeSpots =

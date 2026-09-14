@@ -1,5 +1,6 @@
 import { contentfulFetcher } from '@/lib/contentful-fetcher';
-import type { CollFilter, CollOrder, Query } from '@/contentful-types';
+import { CollOrder } from '@/contentful-types';
+import type { CollFilter, Query } from '@/contentful-types';
 import { gql } from '@apollo/client';
 
 import { collCollectionQuery } from '@/contentful/coll';
@@ -115,7 +116,12 @@ export class CollService {
    * Get a collection of colls with optional filtering and pagination
    */
   async getColls(options: CollServiceOptions = {}): Promise<Query> {
-    const { limit = 10, skip = 0, where, order } = options;
+    const {
+      limit = 10,
+      skip = 0,
+      where,
+      order = [CollOrder.SysPublishedAtDesc],
+    } = options;
 
     return contentfulFetcher.query<Query>(collCollectionQuery, {
       variables: {

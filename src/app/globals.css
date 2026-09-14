@@ -6,6 +6,8 @@
 @import "../styles/routeGroupResults.css";
 @import "../styles/mountainHero.css";
 @import "../styles/coffeeSpotHero.css";
+@import "../styles/partners.css";
+@import "../styles/about.css";
 
 @tailwind base;
 @tailwind components;
@@ -49,6 +51,28 @@ body {
   font-family: 'Inter Tight', sans-serif;
   position: relative;
   min-height: 100vh;
+}
+
+/* Global textured backdrop: fixed to the viewport so it never stretches,
+   tiles or scrolls away. #ECECEC above stays as the fallback colour.
+   Held at 55% so the contour lines sit behind text instead of competing with
+   it — at full strength their stroke weight matches small type and the two
+   patterns interfere. */
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  opacity: 0.55;
+  pointer-events: none;
+  background-image: url('/fondobalak-a.png');
+  background-image: image-set(
+    url('/fondobalak-a.webp') type('image/webp'),
+    url('/fondobalak-a.png') type('image/png')
+  );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 @keyframes fade-in {
@@ -104,7 +128,7 @@ body {
   }
 
   &:hover span {
-    @apply translate-x-1 tracking-[0.08em] text-[#111];
+    @apply translate-x-1 tracking-[0.08em] text-balak-400;
   }
 
   &:active span {
@@ -112,7 +136,7 @@ body {
   }
 
   &:hover {
-    text-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    text-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
   }
 }
 
@@ -141,6 +165,34 @@ html.home-scroll .home-snap-section {
 /* Bottom padding so content isn’t hidden behind mobile browser footer */
 .home-page-root {
   padding-bottom: max(env(safe-area-inset-bottom), 80px);
+}
+
+/* Dark home sections: same topo texture, inverted to light marks so it reads
+   against charcoal. The asset is white-on-transparent, so opacity alone sets
+   how strongly it shows. */
+.section-texture {
+  @apply relative isolate;
+}
+
+.section-texture::before {
+  content: '';
+  @apply absolute inset-0 pointer-events-none;
+  z-index: 0;
+  opacity: 0.18;
+  background-image: url('/fondobalak-a-light.png');
+  background-image: image-set(
+    url('/fondobalak-a-light.webp') type('image/webp'),
+    url('/fondobalak-a-light.png') type('image/png')
+  );
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Keep section content above the texture layer. */
+.section-texture > * {
+  @apply relative;
+  z-index: 1;
 }
 
 /* Puertos en ruta: visible scrollbar so users know they can scroll */

@@ -22,8 +22,9 @@ export type Scalars = {
 };
 
 /** Represents a binary file in a space. An asset can be any file type. */
-export type Asset = {
+export type Asset = _Node & {
   __typename?: 'Asset';
+  _id: Scalars['ID']['output'];
   contentType?: Maybe<Scalars['String']['output']>;
   contentfulMetadata: ContentfulMetadata;
   description?: Maybe<Scalars['String']['output']>;
@@ -194,6 +195,8 @@ export type AssetLinkingCollections = {
   entryCursorCollection?: Maybe<EntryCursorCollection>;
   interestSpotCollection?: Maybe<InterestSpotCollection>;
   interestSpotCursorCollection?: Maybe<InterestSpotCursorCollection>;
+  partnerCollection?: Maybe<PartnerCollection>;
+  partnerCursorCollection?: Maybe<PartnerCursorCollection>;
   routeCollection?: Maybe<RouteCollection>;
   routeCursorCollection?: Maybe<RouteCursorCollection>;
   routeGroupCollection?: Maybe<RouteGroupCollection>;
@@ -268,6 +271,25 @@ export type AssetLinkingCollectionsInterestSpotCollectionArgs = {
 
 
 export type AssetLinkingCollectionsInterestSpotCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type AssetLinkingCollectionsPartnerCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type AssetLinkingCollectionsPartnerCursorCollectionArgs = {
   limit?: InputMaybe<Scalars['Int']['input']>;
   locale?: InputMaybe<Scalars['String']['input']>;
   pageNext?: InputMaybe<Scalars['String']['input']>;
@@ -1503,6 +1525,155 @@ export type Location = {
   lon?: Maybe<Scalars['Float']['output']>;
 };
 
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/partner) */
+export type Partner = Entry & _Node & {
+  __typename?: 'Partner';
+  _id: Scalars['ID']['output'];
+  contentfulMetadata: ContentfulMetadata;
+  description?: Maybe<Scalars['String']['output']>;
+  image?: Maybe<Asset>;
+  instagram?: Maybe<Scalars['String']['output']>;
+  linkedFrom?: Maybe<PartnerLinkingCollections>;
+  sys: Sys;
+  title?: Maybe<Scalars['String']['output']>;
+  web?: Maybe<Scalars['String']['output']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/partner) */
+export type PartnerDescriptionArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/partner) */
+export type PartnerImageArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/partner) */
+export type PartnerInstagramArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/partner) */
+export type PartnerLinkedFromArgs = {
+  allowedLocales?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/partner) */
+export type PartnerTitleArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+/** [See type definition](https://app.contentful.com/spaces/ugkekn878kho/content_types/partner) */
+export type PartnerWebArgs = {
+  locale?: InputMaybe<Scalars['String']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export type PartnerCollection = {
+  __typename?: 'PartnerCollection';
+  items: Array<Maybe<Partner>>;
+  limit: Scalars['Int']['output'];
+  skip: Scalars['Int']['output'];
+  total: Scalars['Int']['output'];
+};
+
+export type PartnerCursorCollection = {
+  __typename?: 'PartnerCursorCollection';
+  items: Array<Maybe<Partner>>;
+  limit: Scalars['Int']['output'];
+  pages: CursorPages;
+};
+
+export type PartnerFilter = {
+  AND?: InputMaybe<Array<InputMaybe<PartnerFilter>>>;
+  OR?: InputMaybe<Array<InputMaybe<PartnerFilter>>>;
+  contentfulMetadata?: InputMaybe<ContentfulMetadataFilter>;
+  description?: InputMaybe<Scalars['String']['input']>;
+  description_contains?: InputMaybe<Scalars['String']['input']>;
+  description_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  description_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  description_not?: InputMaybe<Scalars['String']['input']>;
+  description_not_contains?: InputMaybe<Scalars['String']['input']>;
+  description_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  image_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  instagram?: InputMaybe<Scalars['String']['input']>;
+  instagram_contains?: InputMaybe<Scalars['String']['input']>;
+  instagram_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  instagram_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  instagram_not?: InputMaybe<Scalars['String']['input']>;
+  instagram_not_contains?: InputMaybe<Scalars['String']['input']>;
+  instagram_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  sys?: InputMaybe<SysFilter>;
+  title?: InputMaybe<Scalars['String']['input']>;
+  title_contains?: InputMaybe<Scalars['String']['input']>;
+  title_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  title_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  title_not?: InputMaybe<Scalars['String']['input']>;
+  title_not_contains?: InputMaybe<Scalars['String']['input']>;
+  title_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  web?: InputMaybe<Scalars['String']['input']>;
+  web_contains?: InputMaybe<Scalars['String']['input']>;
+  web_exists?: InputMaybe<Scalars['Boolean']['input']>;
+  web_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+  web_not?: InputMaybe<Scalars['String']['input']>;
+  web_not_contains?: InputMaybe<Scalars['String']['input']>;
+  web_not_in?: InputMaybe<Array<InputMaybe<Scalars['String']['input']>>>;
+};
+
+export type PartnerLinkingCollections = {
+  __typename?: 'PartnerLinkingCollections';
+  entryCollection?: Maybe<EntryCollection>;
+  entryCursorCollection?: Maybe<EntryCursorCollection>;
+};
+
+
+export type PartnerLinkingCollectionsEntryCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type PartnerLinkingCollectionsEntryCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+export enum PartnerOrder {
+  InstagramAsc = 'instagram_ASC',
+  InstagramDesc = 'instagram_DESC',
+  SysFirstPublishedAtAsc = 'sys_firstPublishedAt_ASC',
+  SysFirstPublishedAtDesc = 'sys_firstPublishedAt_DESC',
+  SysIdAsc = 'sys_id_ASC',
+  SysIdDesc = 'sys_id_DESC',
+  SysPublishedAtAsc = 'sys_publishedAt_ASC',
+  SysPublishedAtDesc = 'sys_publishedAt_DESC',
+  SysPublishedVersionAsc = 'sys_publishedVersion_ASC',
+  SysPublishedVersionDesc = 'sys_publishedVersion_DESC',
+  TitleAsc = 'title_ASC',
+  TitleDesc = 'title_DESC',
+  WebAsc = 'web_ASC',
+  WebDesc = 'web_DESC'
+}
+
 export type Query = {
   __typename?: 'Query';
   _node?: Maybe<_Node>;
@@ -1524,6 +1695,9 @@ export type Query = {
   interestSpot?: Maybe<InterestSpot>;
   interestSpotCollection?: Maybe<InterestSpotCollection>;
   interestSpotCursorCollection?: Maybe<InterestSpotCursorCollection>;
+  partner?: Maybe<Partner>;
+  partnerCollection?: Maybe<PartnerCollection>;
+  partnerCursorCollection?: Maybe<PartnerCursorCollection>;
   route?: Maybe<Route>;
   routeCollection?: Maybe<RouteCollection>;
   routeCursorCollection?: Maybe<RouteCursorCollection>;
@@ -1724,6 +1898,37 @@ export type QueryInterestSpotCursorCollectionArgs = {
   preview?: InputMaybe<Scalars['Boolean']['input']>;
   useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
   where?: InputMaybe<InterestSpotFilter>;
+};
+
+
+export type QueryPartnerArgs = {
+  id: Scalars['String']['input'];
+  locale?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+};
+
+
+export type QueryPartnerCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<PartnerOrder>>>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  skip?: InputMaybe<Scalars['Int']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<PartnerFilter>;
+};
+
+
+export type QueryPartnerCursorCollectionArgs = {
+  limit?: InputMaybe<Scalars['Int']['input']>;
+  locale?: InputMaybe<Scalars['String']['input']>;
+  order?: InputMaybe<Array<InputMaybe<PartnerOrder>>>;
+  pageNext?: InputMaybe<Scalars['String']['input']>;
+  pagePrev?: InputMaybe<Scalars['String']['input']>;
+  preview?: InputMaybe<Scalars['Boolean']['input']>;
+  useFallbackLocale?: InputMaybe<Scalars['Boolean']['input']>;
+  where?: InputMaybe<PartnerFilter>;
 };
 
 
@@ -3203,6 +3408,7 @@ export type GetEntryCollectionQuery = { __typename?: 'Query', entryCollection?: 
       | { __typename: 'CollVariant', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'CustomAsset', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'InterestSpot', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
+      | { __typename: 'Partner', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'Route', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'RouteGroup', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
      | null> } | null };
@@ -3239,6 +3445,7 @@ export type GetEntriesQuery = { __typename?: 'Query', entryCollection?: { __type
       | { __typename: 'CollVariant', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'CustomAsset', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'InterestSpot', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
+      | { __typename: 'Partner', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'Route', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
       | { __typename: 'RouteGroup', sys: { __typename?: 'Sys', id: string, publishedAt?: string | null, firstPublishedAt?: string | null } }
      | null> } | null };

@@ -59,3 +59,57 @@
 .route-group-results .empty-state .empty-message {
   @apply text-gray-400 text-lg;
 }
+
+/* ── Pagination ─────────────────────────────────────────────────────────── */
+
+.pagination-arrow {
+  @apply flex h-9 w-9 items-center justify-center rounded-full;
+  @apply border border-charcoal-300 text-charcoal-700;
+  @apply transition-colors;
+
+  &:hover:not(:disabled) {
+    @apply border-charcoal-900 bg-charcoal-900 text-white;
+  }
+
+  &:disabled {
+    @apply opacity-30 cursor-not-allowed;
+  }
+}
+
+.pagination-dot {
+  @apply flex h-9 min-w-9 items-center justify-center rounded-full px-3;
+  @apply text-sm font-medium text-charcoal-600;
+  @apply border border-transparent transition-colors;
+
+  &:hover {
+    @apply border-charcoal-300 text-charcoal-900;
+  }
+
+  &.pagination-dot--active {
+    @apply bg-charcoal-900 text-white;
+  }
+}
+
+/* The slide is decorative — skip it when the user asked for less motion. */
+@media (prefers-reduced-motion: reduce) {
+  .animate-page-in-right,
+  .animate-page-in-left {
+    animation: none;
+  }
+}
+
+/* ── Filter pills ───────────────────────────────────────────────────────── */
+
+.filter-pill {
+  @apply rounded-full border border-charcoal-300 bg-transparent px-5 py-2;
+  @apply text-sm font-medium text-charcoal-700;
+  @apply transition-colors;
+
+  &:hover {
+    @apply border-charcoal-500 text-charcoal-900;
+  }
+
+  &.filter-pill--active {
+    @apply border-charcoal-900 bg-charcoal-900 text-white;
+  }
+}

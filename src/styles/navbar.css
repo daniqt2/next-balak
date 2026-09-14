@@ -35,7 +35,7 @@
   transition: transform 0.3s ease-in-out;
 
   .navbar__menu-button {
-    @apply lg:hidden relative bg-charcoal-800 text-white px-6 py-3 flex items-center gap-3 transition-all duration-200;
+    @apply relative bg-charcoal-800 text-white px-6 py-3 flex items-center gap-3 transition-all duration-200;
   }
 
   .navbar__menu-text {
@@ -46,6 +46,27 @@
     @apply uppercase;
     @apply text-white transition text-xl tracking-wide;
     @apply hover:font-extrabold;
+    @apply relative pb-1;
+
+    /* Active underline: wipes open from the centre outwards. Swap
+       transform-origin to `left` for a left-to-right wipe instead. */
+    &::after {
+      content: '';
+      @apply absolute inset-x-0 bottom-0 h-0.5 bg-balak-500;
+      transform: scaleX(0);
+      transform-origin: center;
+      transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    &.is-active::after {
+      transform: scaleX(1);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .navbar_menu-option::after {
+      transition: none;
+    }
   }
 
   .navbar__menu-icon {

@@ -175,10 +175,21 @@ export interface RouteGroupServiceOptions {
 
 export class RouteGroupService {
   /**
-   * Get a collection of route groups with optional filtering and pagination
+   * Get a collection of route groups with optional filtering and pagination.
+   *
+   * Most recently published or updated first. The order matters beyond
+   * presentation: batches are
+   * fetched with skip/limit, and Contentful only guarantees a stable sort across
+   * those requests when an explicit order is given — without one an entry can
+   * shift between batches and be missed.
    */
   async getRouteGroups(options: RouteGroupServiceOptions = {}): Promise<Query> {
-    const { limit = 10, skip = 0, where, order } = options;
+    const {
+      limit = 10,
+      skip = 0,
+      where,
+      order = [RouteGroupOrder.SysPublishedAtDesc],
+    } = options;
 
     return contentfulFetcher.query<Query>(GET_ROUTE_GROUP_COLLECTION, {
       variables: {

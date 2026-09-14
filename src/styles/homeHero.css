@@ -12,7 +12,7 @@
 
   img {
     @apply object-cover;
-    object-position: 80% center;
+    object-position: 60% 40%;
   }
 
   .home-hero__overlay {
@@ -76,20 +76,34 @@
 }
 
 .home-hero__desktop-image-inner {
-  @apply relative w-full h-full;
+  @apply absolute inset-y-0 right-0 h-full;
+  /* Sidebar is 25% wide; the extra 7% slides under it so the fade has room to
+     blend instead of ending on a hard edge. */
+  width: 82%;
 }
 
 .home-hero__desktop-image-inner img {
   @apply object-cover;
-  object-position: center right;
+  /* The hero is far wider than the 3:2 photo, so the crop is vertical. Sitting
+     above centre keeps the road and the ridgeline in frame, not just the
+     riders' backs. */
+  object-position: center 38%;
+  filter: brightness(0.8) saturate(0.85);
 }
 
 .home-hero__desktop-overlay {
-  @apply absolute inset-0 bg-gradient-to-l from-black/[0.02] via-transparent to-transparent;
+  @apply absolute inset-0;
+  background: linear-gradient(
+    to right,
+    rgba(22, 24, 27, 0.98) 0%,
+    rgba(22, 24, 27, 0.75) 9%,
+    rgba(22, 24, 27, 0.3) 22%,
+    transparent 45%
+  );
 }
 
 .home-hero__desktop-sidebar {
-  @apply absolute inset-0 w-[25%] bg-white flex flex-col justify-between p-12 xl:p-16 z-10 pointer-events-none overflow-visible;
+  @apply absolute inset-0 w-[25%] bg-charcoal-900 flex flex-col justify-between p-12 xl:p-16 z-10 pointer-events-none overflow-visible;
 }
 
 .home-hero__desktop-sidebar > * {
@@ -102,11 +116,11 @@
 }
 
 .home-hero__desktop-nav {
-  @apply flex flex-col gap-5 text-gray-900 pointer-events-auto;
+  @apply flex flex-col gap-5 text-white pointer-events-auto;
 }
 
 .home-hero__desktop-title-wrap {
-  @apply flex flex-col gap-2 text-gray-900 pointer-events-auto;
+  @apply flex flex-col gap-2 text-white pointer-events-auto;
   animation: fade-in 0.6s ease-out 0.3s forwards;
   opacity: 0;
 }
@@ -119,7 +133,7 @@
 }
 
 .home-hero__desktop-title-text {
-  @apply text-base font-light text-gray-700;
+  @apply text-base font-light text-white/70;
 }
 
 .home-hero__desktop-social-wrap {
@@ -127,5 +141,5 @@
 }
 
 .home-hero__desktop-social-link {
-  @apply inline-flex items-center justify-center w-8 h-8 rounded-full border border-gray-900 text-gray-900 hover:bg-gray-900 hover:text-white transition;
+  @apply inline-flex items-center justify-center w-8 h-8 rounded-full border border-white/60 text-white hover:bg-white hover:text-charcoal-900 transition;
 }

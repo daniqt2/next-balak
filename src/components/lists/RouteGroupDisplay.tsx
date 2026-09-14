@@ -7,14 +7,21 @@ import { getRouteGroupDisplayLabels } from '@/lib/route-group-tags';
 interface RouteGroupDisplayProps {
   routeGroup: RouteGroup;
   index?: number;
+  /**
+   * Fade the card in when it scrolls into view. Turn this off where a parent
+   * already animates the whole batch (the paged grid slides pages in), so the
+   * two animations don't fight and leave cards stuck at opacity 0.
+   */
+  revealOnScroll?: boolean;
 }
 
 export default function RouteGroupDisplay({
   routeGroup,
   index = 0,
+  revealOnScroll = true,
 }: RouteGroupDisplayProps) {
   const cardRef = useRef<HTMLDivElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const [isVisible, setIsVisible] = useState(!revealOnScroll);
   const [imageLoaded, setImageLoaded] = useState(false);
 
   const groupLink = `/coleccion-rutas/${routeGroup.slug}`;
@@ -26,6 +33,8 @@ export default function RouteGroupDisplay({
     routeCount === 0 && process.env.NEXT_PUBLIC_CONTENTFUL_PREVIEW !== 'true';
 
   useEffect(() => {
+    if (!revealOnScroll) return;
+
     const card = cardRef.current;
     if (!card) return;
 
@@ -46,7 +55,7 @@ export default function RouteGroupDisplay({
     return () => {
       observer.unobserve(card);
     };
-  }, [index]);
+  }, [index, revealOnScroll]);
 
   if (!routeGroup) return null;
 
@@ -68,6 +77,17 @@ export default function RouteGroupDisplay({
       />
 
       <div className="overlay" />
+
+      {tagLabels.length > 0 && !isComingSoon && (
+        <div className="tags">
+          {tagLabels.map((label) => (
+            <span key={label} className="tag">
+              {label}
+            </span>
+          ))}
+        </div>
+      )}
+
       {isComingSoon && (
         <div className="coming-soon-overlay" aria-hidden="true" />
       )}
@@ -86,18 +106,6 @@ export default function RouteGroupDisplay({
             <h3 className="title">{routeGroup.title}</h3>
             {routeGroup.subtitle && (
               <p className="subtitle">{routeGroup.subtitle}</p>
-            )}
-            {tagLabels.length > 0 && (
-              <div className="flex flex-wrap gap-1.5 mt-2">
-                {tagLabels.map((label) => (
-                  <span
-                    key={label}
-                    className="inline-block rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-medium text-white backdrop-blur-sm"
-                  >
-                    {label}
-                  </span>
-                ))}
-              </div>
             )}
           </div>
         </div>

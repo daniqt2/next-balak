@@ -19,6 +19,9 @@ import { notFound } from 'next/navigation';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 import { formatMetric } from '@/lib/route-utils';
 
+/** Revalidate every 10 min so new content appears without redeploy */
+export const revalidate = 600;
+
 interface MountainDetailPageProps {
   params: Promise<{ id: string }>;
 }
@@ -155,7 +158,7 @@ export default async function MountainDetailPage({
                     </h2>
                     <RichTextRenderer
                       richTextJson={(coll as any).description.json}
-                      className="text-charcoal-500 text-lg leading-relaxed"
+                      className="text-charcoal-600 text-lg leading-relaxed"
                     />
                   </div>
                 </AnimatedSection>

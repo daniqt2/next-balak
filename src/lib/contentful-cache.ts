@@ -10,10 +10,12 @@
  *   without restarting the server.
  */
 import { collService } from '@/services/coll-service';
+import { partnerService } from '@/services/partner-service';
 import { coffeeService } from '@/services/coffee-service';
 import { routeGroupService } from '@/services/route-group-service';
 import { routeService } from '@/services/route-service';
 import type { CollServiceOptions } from '@/services/coll-service';
+import type { PartnerServiceOptions } from '@/services/partner-service';
 import type { CoffeeServiceOptions } from '@/services/coffee-service';
 import type { RouteGroupServiceOptions } from '@/services/route-group-service';
 
@@ -27,6 +29,10 @@ export async function getCollsForMapCached() {
 
 export async function getCollByIdCached(id: string) {
   return collService.getCollById(id);
+}
+
+export async function getPartnersCached(options: PartnerServiceOptions = {}) {
+  return partnerService.getPartners(options);
 }
 
 export async function getCoffeeSpotsCached(options: CoffeeServiceOptions = {}) {

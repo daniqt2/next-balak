@@ -3,8 +3,12 @@
 import React, { useMemo, useState } from 'react';
 import dynamic from 'next/dynamic';
 import type { RouteGroup } from '@/contentful-types';
-import RouteGroupGrid from '@/components/grids/RouteGroupGrid';
+import RouteGroupPagedGrid from '@/components/rutas/RouteGroupPagedGrid';
+import AnimatedSection from '@/components/ui/AnimatedSection';
+import { useRouteGroupPages } from '@/hooks/useRouteGroupPages';
 import { ROUTE_GROUP_FILTERS, hasRouteGroupTag } from '@/lib/route-group-tags';
+
+const PAGE_SIZE = 8;
 
 const RouteGroupAreasMap = dynamic(
   () => import('@/components/map/RouteGroupAreasMap'),
@@ -20,34 +24,74 @@ const RouteGroupAreasMap = dynamic(
 );
 
 interface RouteGroupsWithFiltersProps {
+  eyebrow: string;
+  title: string;
+  description: string;
   routeGroups: RouteGroup[];
   mapRouteGroups: RouteGroup[];
+  /** How many route groups exist overall, so the rest can be prefetched. */
+  total: number;
 }
 
 export default function RouteGroupsWithFilters({
+  eyebrow,
+  title,
+  description,
   routeGroups,
   mapRouteGroups,
+  total,
 }: RouteGroupsWithFiltersProps) {
   const [selectedTagId, setSelectedTagId] = useState<string | null>(null);
 
-  const selectedFilter = ROUTE_GROUP_FILTERS.find(f => f.id === selectedTagId);
+  const { groups } = useRouteGroupPages({
+    initialGroups: routeGroups,
+    total,
+    pageSize: PAGE_SIZE,
+  });
+
+  const selectedFilter = ROUTE_GROUP_FILTERS.find((f) => f.id === selectedTagId);
+
   const filtered = useMemo(() => {
-    if (!selectedTagId || !selectedFilter) return routeGroups;
-    return routeGroups.filter(r =>
-      hasRouteGroupTag(r?.contentfulMetadata?.tags, selectedFilter.id!, selectedFilter.label)
+    if (!selectedTagId || !selectedFilter) return groups;
+    return groups.filter((r) =>
+      hasRouteGroupTag(
+        r?.contentfulMetadata?.tags,
+        selectedFilter.id!,
+        selectedFilter.label
+      )
     );
-  }, [routeGroups, selectedTagId, selectedFilter]);
+  }, [groups, selectedTagId, selectedFilter]);
 
   const filteredMapGroups = useMemo(() => {
     if (!selectedTagId || !selectedFilter) return mapRouteGroups;
-    return mapRouteGroups.filter(r =>
-      hasRouteGroupTag(r?.contentfulMetadata?.tags, selectedFilter.id!, selectedFilter.label)
+    return mapRouteGroups.filter((r) =>
+      hasRouteGroupTag(
+        r?.contentfulMetadata?.tags,
+        selectedFilter.id!,
+        selectedFilter.label
+      )
     );
   }, [mapRouteGroups, selectedTagId, selectedFilter]);
 
   return (
-    <div className="space-y-6">
-      <RouteGroupAreasMap routeGroups={filteredMapGroups} />
+    <div className="space-y-10">
+      {/* Title sits beside the map so the first card row stays above the fold */}
+      <div className="grid gap-8 lg:grid-cols-[minmax(0,24rem)_minmax(0,1fr)] lg:items-start lg:gap-12">
+        <AnimatedSection delay={100}>
+          <p className="text-xs font-medium uppercase tracking-[0.2em] text-charcoal-600">
+            {eyebrow}
+          </p>
+          <h1 className="mt-3 font-anton uppercase text-charcoal-900 text-[clamp(2.6rem,4.5vw,3.75rem)] leading-[0.9] tracking-[-0.02em]">
+            {title}
+          </h1>
+          <p className="mt-4 text-base md:text-lg text-charcoal-600">
+            {description}
+          </p>
+        </AnimatedSection>
+
+        <RouteGroupAreasMap routeGroups={filteredMapGroups} />
+      </div>
+
       <div className="flex flex-wrap items-center gap-2">
         {ROUTE_GROUP_FILTERS.map(({ id, label }, index) => (
           <button
@@ -55,26 +99,29 @@ export default function RouteGroupsWithFilters({
             type="button"
             onClick={() => setSelectedTagId(id)}
             style={{ animationDelay: `${index * 80}ms` }}
-            className={`rounded-full px-4 py-2 text-sm font-medium transition-colors animate-fade-in-up ${
-              selectedTagId === id
-                ? 'bg-balak-500 text-charcoal-900'
-                : 'bg-charcoal-700 text-charcoal-200 hover:bg-charcoal-600'
+            className={`filter-pill animate-fade-in-up ${
+              selectedTagId === id ? 'filter-pill--active' : ''
             }`}
           >
             {label}
           </button>
         ))}
       </div>
+
+      <p className="text-sm text-charcoal-600">
+        {filtered.length}{' '}
+        {filtered.length === 1 ? 'colección encontrada' : 'colecciones encontradas'}
+      </p>
+
       {filtered.length === 0 ? (
-        <p className="text-charcoal-500 text-center py-8">
+        <p className="text-charcoal-600 text-center py-8">
           No hay colecciones con este filtro.
         </p>
       ) : (
-        <RouteGroupGrid
-          routes={filtered}
-          fetchData={false}
-          title=""
-          subtitle=""
+        <RouteGroupPagedGrid
+          groups={filtered}
+          pageSize={PAGE_SIZE}
+          resetKey={selectedTagId ?? 'all'}
         />
       )}
     </div>

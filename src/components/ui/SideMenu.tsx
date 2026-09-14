@@ -9,6 +9,22 @@ interface SideMenuProps {
   onClose: () => void;
 }
 
+/** `desktop: true` keeps an item visible at lg+, where the top bar takes over. */
+const MENU_ITEMS = [
+  { href: '/', label: 'Inicio' },
+  { href: '/rutas', label: 'Rutas' },
+  {
+    href: 'https://gpx.balakride.com/',
+    label: 'Editor GPX',
+    external: true,
+    desktop: true,
+  },
+  { href: '/coffee-spots', label: 'Paradas' },
+  { href: '/puertos', label: 'Puertos' },
+  { href: '/about-us', label: 'Sobre Nosotros' },
+  { href: '/colaboradores', label: 'Colaboradores' },
+];
+
 export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
   const [isVisible, setIsVisible] = useState(false);
 
@@ -61,74 +77,35 @@ export default function SideMenu({ isOpen, onClose }: SideMenuProps) {
           </button>
         </div>
 
-        {/* Menu Items */}
+        {/* Menu Items. Everything except the GPX editor also lives in the top
+            bar, which is hidden below lg — so those are mobile-only here. */}
         <nav className="p-6">
           <ul className="space-y-1">
-            <li>
-              <Link
-                href="/"
-                onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
-              >
-                Inicio
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/rutas"
-                onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
-              >
-                Rutas
-              </Link>
-            </li>
-            <li>
-              <a
-                href="https://gpx.balakride.com/"
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
-              >
-                Editor GPX
-              </a>
-            </li>
-            <li>
-              <Link
-                href="/coffee-spots"
-                onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
-              >
-                Paradas
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="/puertos"
-                onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
-              >
-                Puertos
-              </Link>
-            </li>
-            {/* <li>
-              <Link
-                href="/route-groups"
-                onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
-              >
-                Colecciones
-              </Link>
-            </li> */}
-            <li>
-              <Link
-                href="/about-us"
-                onClick={onClose}
-                className="block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors"
-              >
-                Sobre Nosotros
-              </Link>
-            </li>
+            {MENU_ITEMS.map(({ href, label, external, desktop }) => {
+              const className = `block px-4 py-3 text-lg text-white hover:bg-charcoal-800 rounded-lg transition-colors${
+                desktop ? '' : ' lg:hidden'
+              }`;
+
+              return (
+                <li key={href}>
+                  {external ? (
+                    <a
+                      href={href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={onClose}
+                      className={className}
+                    >
+                      {label}
+                    </a>
+                  ) : (
+                    <Link href={href} onClick={onClose} className={className}>
+                      {label}
+                    </Link>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </nav>
       </div>

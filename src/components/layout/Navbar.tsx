@@ -1,10 +1,34 @@
 'use client';
 
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import SideMenu from '@/components/ui/SideMenu';
 
+/**
+ * `match` lists the path prefixes that light up a link, so detail routes keep
+ * their section active (e.g. /puerto/xxx highlights Puertos).
+ */
+const NAV_ITEMS = [
+  {
+    href: '/rutas',
+    label: 'Rutas',
+    match: ['/rutas', '/ruta', '/route', '/route-groups', '/coleccion-rutas'],
+  },
+  { href: '/puertos', label: 'Puertos', match: ['/puertos', '/puerto'] },
+  { href: '/coffee-spots', label: 'Paradas', match: ['/coffee-spots', '/coffee'] },
+  { href: '/about-us', label: 'Sobre Nosotros', match: ['/about-us'] },
+  { href: '/colaboradores', label: 'Colaboradores', match: ['/colaboradores'] },
+];
+
+function isActive(pathname: string, match: string[]) {
+  return match.some(
+    (prefix) => pathname === prefix || pathname.startsWith(`${prefix}/`)
+  );
+}
+
 export default function Navbar() {
+  const pathname = usePathname();
   const [isVisible, setIsVisible] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [lastScrollY, setLastScrollY] = useState(0);
@@ -42,30 +66,23 @@ export default function Navbar() {
 
           {/* Desktop links */}
           <div className="hidden lg:flex items-center gap-6">
-            {/* <Link href="/routes" className="text-white/90 hover:text-white transition text-sm font-medium tracking-wide">Rutas</Link> */}
-            <Link href="/rutas" className="navbar_menu-option">
-              Rutas
-            </Link>
-            <Link href="/puertos" className="navbar_menu-option">
-              Puertos
-            </Link>
-            <Link href="/coffee-spots" className="navbar_menu-option">
-              Paradas
-            </Link>
-            <Link href="/about-us" className="navbar_menu-option">
-              Sobre Nosotros
-            </Link>
-            <Link
-              href="https://gpx.balakride.com/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="navbar_menu-option"
-            >
-              Editor GPX
-            </Link>
+            {NAV_ITEMS.map(({ href, label, match }) => {
+              const active = isActive(pathname, match);
+
+              return (
+                <Link
+                  key={href}
+                  href={href}
+                  aria-current={active ? 'page' : undefined}
+                  className={`navbar_menu-option${active ? ' is-active' : ''}`}
+                >
+                  {label}
+                </Link>
+              );
+            })}
           </div>
 
-          {/* Mobile menu button */}
+          {/* Menu button (all widths) */}
           <button
             onClick={() => setIsMenuOpen(true)}
             className="navbar__menu-button"

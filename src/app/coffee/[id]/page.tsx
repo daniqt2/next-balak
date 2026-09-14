@@ -9,6 +9,9 @@ import Image from 'next/image';
 import { Coffee, MapPin } from 'lucide-react';
 import Breadcrumbs from '@/components/ui/Breadcrumbs';
 
+/** Revalidate every 10 min so new content appears without redeploy */
+export const revalidate = 600;
+
 interface CoffeeSpotDetailPageProps {
   params: Promise<{ id: string }>;
 }
