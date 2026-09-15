@@ -40,7 +40,7 @@ export default function PartnerRow({ partner, index }: PartnerRowProps) {
                 src={partner.image.url}
                 alt={partner.image.title || partner.title || 'Colaborador'}
                 fill
-                quality={90}
+                quality={80}
                 sizes="(max-width: 1024px) 70vw, 40vw"
                 className="object-contain"
               />

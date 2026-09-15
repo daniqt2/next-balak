@@ -27,7 +27,7 @@ export default function MountainCard({ mountain, index = 0, compact = false }: M
             src={mountain.headerImage.url}
             alt={mountain.headerImage.title || mountain.title || 'Mountain image'}
             fill
-            quality={85}
+            quality={80}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="mountain-display__image"
           />

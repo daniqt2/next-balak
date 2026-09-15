@@ -87,8 +87,8 @@ export default function HomeHero() {
               alt="Dos ciclistas rodando por una carretera de montaña"
               fill
               priority
-              quality={95}
-              sizes="100vw"
+              quality={80}
+              sizes={"(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"}
             />
             <div className="home-hero__overlay" />
             <div className="home-hero__title-wrap">
@@ -136,8 +136,8 @@ export default function HomeHero() {
                 alt="Dos ciclistas rodando por una carretera de montaña"
                 fill
                 priority
-                quality={95}
-                sizes="100vw"
+                quality={80}
+                sizes={"(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"}
               />
               <div className="home-hero__desktop-overlay" />
             </div>

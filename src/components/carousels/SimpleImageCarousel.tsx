@@ -71,7 +71,7 @@ export function SimpleImageCarousel({
               fill
               className="object-cover"
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-              quality={85}
+              quality={80}
             />
           </div>
         </Carousel.Slide>

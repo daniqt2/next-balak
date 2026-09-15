@@ -99,7 +99,7 @@ export function ImageCardCarousel({
                 fill
                 className="object-cover"
                 sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                quality={85}
+                quality={80}
               />
               
               {/* Overlay with content */}
@@ -149,7 +149,7 @@ export function ImageCardCarousel({
               fill
               className="object-contain"
               sizes="90vw"
-              quality={95}
+              quality={80}
             />
           </div>
           

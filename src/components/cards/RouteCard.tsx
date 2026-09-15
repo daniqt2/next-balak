@@ -67,7 +67,7 @@ export default function RouteCard({ route, index = 0 }: RouteCardProps) {
             alt={route.title || 'Route image'}
             fill
             priority={isVisible}
-            quality={85}
+            quality={80}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             onLoad={() => setImageLoaded(true)}
             className={`image ${imageLoaded ? 'image--loaded' : 'image--loading'} group-hover:scale-105 transition-transform duration-300`}

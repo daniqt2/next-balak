@@ -46,7 +46,7 @@ export default function RouteGroupCard({ route }: RouteGroupCardProps) {
               src={route.headerImage.url}
               alt={route.headerImage.title || route.title || 'Route image'}
               fill
-              quality={85}
+              quality={80}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="object-cover transition-transform duration-300 group-hover:scale-105"
             />

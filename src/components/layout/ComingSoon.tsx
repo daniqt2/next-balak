@@ -9,7 +9,7 @@ export default function ComingSoon() {
         fill
         className="object-cover"
         priority
-        sizes="100vw"
+        sizes={"(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"}
       />
       <div className="absolute inset-0 bg-black/60" aria-hidden />
       <div className="relative z-10 mx-4 w-full max-w-md rounded-2xl bg-white px-8 py-10 shadow-xl text-center">

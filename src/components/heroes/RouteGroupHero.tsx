@@ -68,8 +68,8 @@ export default function RouteGroupHero({ routeGroup }: RouteGroupHeroProps) {
               'Route group image'
             }
             fill
-            quality={85}
-            sizes="100vw"
+            quality={80}
+            sizes={"(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"}
             style={{
               objectFit: 'cover',
               transition: 'transform 0.3s ease',

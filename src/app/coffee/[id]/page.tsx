@@ -64,7 +64,7 @@ export default async function CoffeeSpotDetailPage({
               }
               fill
               priority
-              sizes="100vw"
+              sizes={"(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"}
               className="object-cover"
             />
           ) : (

@@ -96,7 +96,7 @@ export function ImageGallery({
                   fill
                   className="object-cover"
                   sizes="(max-width: 768px) 100vw, (max-width: 1200px) 80vw, 70vw"
-                  quality={85}
+                  quality={80}
                 />
                 {image.title && (
                   <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
@@ -131,7 +131,7 @@ export function ImageGallery({
                 fill
                 className="object-cover"
                 sizes="80px"
-                quality={60}
+                quality={80}
               />
             </div>
           ))}
@@ -161,7 +161,7 @@ export function ImageGallery({
               fill
               className="object-contain"
               sizes="90vw"
-              quality={95}
+              quality={80}
             />
           </div>
           

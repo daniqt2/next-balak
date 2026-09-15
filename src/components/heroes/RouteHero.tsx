@@ -56,8 +56,8 @@ export default function RouteHero({ route }: RouteHeroProps) {
             alt={route.headerImage.title || route.title || 'Route image'}
             fill
             priority
-            quality={90}
-            sizes="100vw"
+            quality={80}
+            sizes={"(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"}
             className="route-hero__image"
           />
         ) : (

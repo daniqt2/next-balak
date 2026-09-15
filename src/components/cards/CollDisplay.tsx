@@ -47,7 +47,7 @@ export default function CollDisplay({
               src={coll.header.url}
               alt={coll.header.title || name}
               fill
-              quality={85}
+              quality={80}
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               className="coll-display__image"
             />

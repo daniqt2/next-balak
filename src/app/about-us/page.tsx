@@ -76,7 +76,7 @@ export default function AboutUsPage() {
                 alt="El equipo de BALAK RIDE con sus bicicletas en la Valle del Lozoya"
                 fill
                 priority
-                quality={90}
+                quality={80}
                 sizes="(max-width: 1024px) 100vw, 50vw"
                 className="object-cover"
               />

@@ -36,8 +36,8 @@ export default function MountainHero({ mountain }: MountainHeroProps) {
               mountain.headerImage.title || mountain.title || 'Mountain image'
             }
             fill
-            quality={90}
-            sizes="100vw"
+            quality={80}
+            sizes={"(max-width: 768px) 100vw, (max-width: 1280px) 100vw, 1280px"}
             className="hero-image"
             priority
           />

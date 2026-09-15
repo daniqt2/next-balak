@@ -36,7 +36,7 @@ export default function CoffeeStopCard({
               'Coffee stop image'
             }
             fill
-            quality={85}
+            quality={80}
             sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             className="coffee-image"
           />
